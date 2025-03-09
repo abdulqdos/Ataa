@@ -9,11 +9,12 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-reem: 'Reem Kufi', sans-serif;
 }
 
 
 
 @theme {
-    --primary: #2563EB; /* لون أساسي موجود */
-    /*--secondary-color: var(--my-custom-color); !* استخدام اللون المخصص *!*/
+    --primary: #106665; /* لون أساسي موجود */
+    --secondary: #3e9e9a; /* استخدام اللون المخصص */
 }

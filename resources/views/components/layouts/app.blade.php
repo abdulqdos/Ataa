@@ -6,26 +6,27 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         @vite(['resources/css/app.css' , 'resources/js/app.js'])
+        @livewireStyles
         <title> {{ $title ?? 'العنوان الافتراضي' }}</title>
     </head>
     <body>
         <nav class="bg-[var(--primary)]">
             <!-- for all devices exists mobile -->
             <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-10 hidden lg:block">
-                <div class="relative flex h-16 items-center justify-between">
+                <div class="relative flex   items-center justify-between">
 
                     <!-- Logo -->
-                    <div class="flex shrink-0 items-center sm:absolute sm:right-0 sm:ml-6 sm:justify-center sm:items-center">
-                        <img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="شركتك">
+                    <div class="flex flex-row justify-center items-center shrink-0 gap-3 sm:absolute sm:right-0 sm:ml-6 sm:justify-center sm:items-center ">
+                        <img src="{{ asset('images/logo.svg') }}" alt="Ataa" class="max-w-12" />
                     </div>
 
                     <!-- Links -->
                     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center mr-40">
-                        <div class="lg:flex space-x-4 hidden">
-                            <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">الرئيسية</a>
-                            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">الفريق</a>
-                            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">المشاريع</a>
-                            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">التقويم</a>
+                        <div class="lg:flex space-x-3 hidden">
+                            <x-layouts.volunteers.nav href="/" :active="false">الرئيسية </x-layouts.volunteers.nav>
+                            <x-layouts.volunteers.nav href="/" :active="false">الرئيسية </x-layouts.volunteers.nav>
+                            <x-layouts.volunteers.nav href="/" :active="false">الرئيسية </x-layouts.volunteers.nav>
+                            <x-layouts.volunteers.nav href="/" :active="request()->is('/')">الرئيسية </x-layouts.volunteers.nav>
                         </div>
                     </div>
 
@@ -63,13 +64,13 @@
                         @guest
                             <div class="flex space-x-4">
                                 <!-- login -->
-                                <a href="#" class="text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md">
+                                <x-layouts.volunteers.nav href="{{ route('login') }}" :active="request()->is('login')">
                                     تسجيل الدخول
-                                </a>
+                                </x-layouts.volunteers.nav>
                                 <!-- register -->
-                                <a href="#" class="text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md">
+                                <x-layouts.volunteers.nav href="#" :active="false">
                                     إنشاء حساب
-                                </a>
+                                </x-layouts.volunteers.nav>
                             </div>
                         @endguest
 
@@ -94,7 +95,7 @@
 
                     <!-- logo on mobile -->
                     <div class="flex shrink-0 items-center sm:absolute sm:left-0 sm:ml-6 sm:justify-center sm:items-center mr-[40%]">
-                        <img class="h-8 w-auto" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="شركتك">
+                        <img src="{{ asset('images/logo.svg') }}" alt="Ataa" class="max-w-14" />
                     </div>
 
                     <!-- profile -->
@@ -130,7 +131,7 @@
 
                         @guest
                             <div class="flex space-x-4">
-                                <a href="#" class="text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md">تسجيل الدخول</a>
+                                <x-layouts.volunteers.nav href="{{ route('login') }}" :active="request()->is('login')">تسجيل الدخول</x-layouts.volunteers.nav>
                             </div>
                         @endguest
                     </div>
@@ -151,7 +152,7 @@
         <main>
             {{ $slot }}
         </main>
-
+        @livewireScripts
     </body>
 
     <script>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="375" height="375" viewBox="0 0 375 375">
+<defs>
+<clipPath id="clip_0">
+<path transform="matrix(.24,0,0,.24,0,0)" d="M0 0H1562.5V1562.5H0Z" clip-rule="evenodd"/>
+</clipPath>
+<clipPath id="clip_1">
+<path transform="matrix(.24,0,0,.24,0,0)" d="M0 0H1562.5V1562.5H0Z" clip-rule="evenodd"/>
+</clipPath>
+<clipPath id="clip_2">
+<path transform="matrix(.24,0,0,.24,0,0)" d="M0 0H1562.5V1562.5H0Z" clip-rule="evenodd"/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip_0)">
+<path transform="matrix(.75,0,0,.75,0,0)" d="M0 0H500V500H0Z" fill="#ffffff"/>
+</g>
+<g clip-path="url(#clip_1)">
+<path transform="matrix(.75,0,0,.75,0,0)" d="M0 0H500V500H0Z" fill="#106665"/>
+</g>
+<g clip-path="url(#clip_2)">
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="175.26563">&#x0621;</tspan></text>
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="220.32163">&#xfe8e;</tspan></text>
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="253.60163">&#xfec4;</tspan></text>
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="330.65763">&#xfecb;</tspan></text>
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="385.44163"> </tspan></text>
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="416.6736">&#xfe94;</tspan></text>
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="475.42564">&#xfebc;</tspan></text>
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="553.6336">&#xfee8;</tspan></text>
+<text fill="#ffffff" xml:space="preserve" transform="matrix(.6289507 0 0 .6289507 -76.52733 139.38527)" font-size="128" font-family="KacstArt"><tspan y="107" x="588.9616">&#xfee3;</tspan></text>
+</g>
+</svg>

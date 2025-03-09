@@ -63,14 +63,16 @@
 
                         @guest
                             <div class="flex space-x-4">
-                                <!-- login -->
-                                <x-layouts.volunteers.nav href="{{ route('login') }}" :active="request()->is('login')">
-                                    تسجيل الدخول
-                                </x-layouts.volunteers.nav>
                                 <!-- register -->
-                                <x-layouts.volunteers.nav href="#" :active="false">
+                                <a href="{{ route('login') }}" class="bg-transparent text-sm text-white py-1 px-3 rounded-full hover:bg-white hover:text-[var(--primary)] border border-white transition duration-300 ">
                                     إنشاء حساب
-                                </x-layouts.volunteers.nav>
+                                </a>
+
+                                <!-- login -->
+                                <a href="{{ route('login') }}" class="bg-white text-sm text-[var(--primary)] py-1 px-3 rounded-full hover:font-semibold hover:bg-white/90 transition duration-300 ">
+                                    تسجيل الدخول
+                                </a>
+
                             </div>
                         @endguest
 

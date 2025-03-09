@@ -14,7 +14,7 @@ it('must be a guest' , function () {
 
 it('return the correct component' , function () {
     Livewire::test('authentication.login')
-        ->assertSee('Login');
+        ->assertViewIs('livewire.authentication.login');
 });
 
 

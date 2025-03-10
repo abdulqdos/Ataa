@@ -15,6 +15,6 @@
 
 
 @theme {
-    --primary: #106665; /* لون أساسي موجود */
-    --secondary: #3e9e9a; /* استخدام اللون المخصص */
+    --primary: #106665; /* primary color */
+    --secondary: #2d8c8a; /* secondary color */
 }

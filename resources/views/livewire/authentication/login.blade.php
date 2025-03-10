@@ -35,7 +35,7 @@
                         <div>
                             <div class="flex justify-between items-center">
                                 <label for="password" class="block text-sm mb-2 text-gray-800">كلمة المرور</label>
-                                <a class="inline-flex items-center gap-x-1 text-sm text-[var(--primary)] decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="#">نسيت كلمة المرور؟</a>
+                                <a class="inline-flex items-center gap-x-1 text-sm text-[var(--primary)] decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="{{ route('password.forgot') }}">نسيت كلمة المرور؟</a>
                             </div>
 
                             <div class="relative">

@@ -1,8 +1,8 @@
 <div class="flex items-center justify-center mx-auto bg-gray-200">
-    <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm mx-auto my-4 min-w-96">
+    <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm mx-auto my-4 lg:min-w-96 min-w-[300px]">
         <div class="p-4 sm:p-7">
             <div class="text-center">
-                <h1 class="block text-2xl font-bold text-[var(--primary)]">تسجيل الدخول</h1>
+                <h1 class="block lg:text-2xl font-bold text-[var(--primary)] text-lg">تسجيل الدخول</h1>
                 <p class="mt-2 text-sm text-gray-600">
                     ليس لديك حساب؟
                     <a class="text-[var(--secondary)] decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="../examples/html/signup.html">

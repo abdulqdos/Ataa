@@ -1,6 +1,6 @@
 <div class="flex items-center justify-center mx-auto bg-gray-200">
-    <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm mx-auto my-4 min-w-96 p-6">
-        <h2 class="text-lg font-semibold mb-4 text-[var(--primary)]">إعادة تعيين كلمة المرور</h2>
+    <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm mx-auto my-4 min-w-[300px] lg:min-w-96 p-6">
+        <h2 class="text-lg lg:text-2xl font-semibold mb-4 text-[var(--primary)] text-center">إعادة تعيين كلمة المرور</h2>
 
         @if (session()->has('success'))
             <div class="bg-[var(--secondary)] text-[var(--primary)] border-1 border-[var(--primary)] p-2 rounded mb-3">

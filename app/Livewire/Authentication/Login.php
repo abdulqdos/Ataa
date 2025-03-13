@@ -18,12 +18,20 @@ class Login extends Component
 
     #[validate('required|min:8|max:20')]
     public $password;
+
+    protected $messages = [
+        'email.required' => 'البريد الإلكتروني مطلوب.',
+        'email.email' => 'الرجاء إدخال بريد إلكتروني صالح.',
+        'password.required' => 'كلمة المرور مطلوبة.',
+        'password.min' => 'يجب أن تكون كلمة المرور على الأقل 8 أحرف.',
+        'password.max' => 'يجب ألا تزيد كلمة المرور عن 20 حرفًا.',
+    ];
     public function authenticate()
     {
         $this->validate();
         if (!Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             throw ValidationException::withMessages([
-                'password' => ['Sorry, the email or password is incorrect.'],
+                'password' => ['كلمة المرور أو الايميل غير صحيح .'],
             ]);
         }
 

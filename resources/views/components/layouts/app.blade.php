@@ -55,9 +55,9 @@
 
                                     <!--menu dropdown -->
                                     <div id="profile-menu-devices" class="absolute left-0 z-10 mt-2 w-48 origin-top-left rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden hidden" role="menu" aria-orientation="vertical" aria-labelledby="profile-toggle" tabindex="-1">
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">الملف الشخصي</a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">الإعدادات</a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">تسجيل الخروج</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 transition duration-300" role="menuitem" tabindex="-1">الملف الشخصي</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 transition duration-300" role="menuitem" tabindex="-1">الإعدادات</a>
+                                        <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 transition duration-300" role="menuitem" tabindex="-1">تسجيل الخروج</a>
                                     </div>
                                 </div>
                             </div>
@@ -149,10 +149,10 @@
             <!-- menu dropdown -->
             <div id="mobile-menu" class="sm:hidden hidden">
                 <div class="space-y-1 px-2 pt-2 pb-3">
-                    <x-layouts.volunteers.x-responsive-nav href="/" :active="request()->is('/')"> الرئيسية </x-layouts.volunteers.x-responsive-nav>
-                    <x-layouts.volunteers.x-responsive-nav href="/" :active="false"> الفريق </x-layouts.volunteers.x-responsive-nav>
-                    <x-layouts.volunteers.x-responsive-nav href="/" :active="false"> المشاريع </x-layouts.volunteers.x-responsive-nav>
-                    <x-layouts.volunteers.x-responsive-nav href="/" :active="false"> التقويم </x-layouts.volunteers.x-responsive-nav>
+                    <x-layouts.volunteers.responsive-nav href="/" :active="true"> الرئيسية </x-layouts.volunteers.responsive-nav>
+                    <x-layouts.volunteers.responsive-nav href="/" :active="false"> الفريق </x-layouts.volunteers.responsive-nav>
+                    <x-layouts.volunteers.responsive-nav href="/" :active="false"> المشاريع </x-layouts.volunteers.responsive-nav>
+                    <x-layouts.volunteers.responsive-nav href="/" :active="false"> التقويم </x-layouts.volunteers.responsive-nav>
                 </div>
             </div>
         </nav>

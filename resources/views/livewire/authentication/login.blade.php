@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[var(--primary)] text-white hover:bg-[var(--secondary)] disabled:opacity-50 disabled:pointer-events-none transition duration-300 cursor-pointer">تسجيل الدخول</button>
+                        <x-layouts.large-button>تسجيل الدخول</x-layouts.large-button>
                     </div>
                 </form>
             </div>

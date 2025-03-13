@@ -14,8 +14,13 @@ Route::middleware('guest')->group(function () {
     Route::get('/login' , Login::class)->name('login');
     Route::get('/signup' ,Signup::class)->name('signup');
     Route::get('/forgot-password', ForgotPassword::class)->name('password.forgot');
+    Route::get('/reset-password/{token}/{email}', ResetPassword::class)->name('password.reset');
+});
 
-    Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/logout' , function () {
+        Auth::logout();
+        return redirect('/login');
+    })->name('logout');
 });
 

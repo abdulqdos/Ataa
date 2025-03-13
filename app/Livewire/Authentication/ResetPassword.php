@@ -2,6 +2,7 @@
 namespace App\Livewire\Authentication ;
 
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
@@ -12,12 +13,28 @@ class ResetPassword extends Component
 {
     #[title('كلمة السر االجديدة')]
     public $email;
+
     public $token;
+    #[Validate('required|min:8|max:20|confirmed')]
     public $password;
+
+    #[Validate('required|min:8|max:20')]
     public $password_confirmation;
 
-    public function mount($token)
+    protected $messages = [
+        'password.required' => 'كلمة المرور مطلوبة.',
+        'password.min' => 'يجب أن تكون كلمة المرور على الأقل 8 أحرف.',
+        'password.max' => 'يجب ألا تزيد كلمة المرور عن 20 حرفًا.',
+        'password.confirmed' => 'كلمة المرور والتأكيد غير متطابقتين.',
+
+        'password_confirmation.required' => 'تأكيد كلمة المرور مطلوب.',
+        'password_confirmation.min' => 'يجب أن يكون تأكيد كلمة المرور على الأقل 8 أحرف.',
+        'password_confirmation.max' => 'يجب ألا يزيد تأكيد كلمة المرور عن 20 حرفًا.',
+    ];
+
+    public function mount($token,$email)
     {
+        $this->email = $email;
         $this->token = $token;
     }
 

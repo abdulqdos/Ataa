@@ -12,7 +12,16 @@ use Livewire\Attributes\Title;
 class ForgotPassword extends Component
 {
     #[title('إستعادة كلمة السر')]
+
+    #[validate('required|email')]
     public $email;
+
+
+    protected $messages = [
+        'email.required' => 'البريد الإلكتروني مطلوب.',
+        'email.email' => 'الرجاء إدخال بريد إلكتروني صالح.',
+    ];
+
     public function sendResetLink()
     {
         $this->validate([

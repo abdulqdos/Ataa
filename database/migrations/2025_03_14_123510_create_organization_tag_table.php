@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Organization;
+use App\Models\Tag;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,14 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('organization_tag', function (Blueprint $table) {
             $table->id();
-            $table->string('identity_number')->nullable();
-            $table->text('address')->nullable();
-            $table->enum('sector', ['Health', 'Education', 'Environment', 'Charity', 'Religious', 'Other'])->nullable();
+            $table->foreignIdFor(Organization::class , 'organization_id');
+            $table->foreignIdFor(Tag::class , 'tag_id');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('organization_tag');
     }
 };

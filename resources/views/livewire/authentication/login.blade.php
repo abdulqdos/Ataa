@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center mx-auto bg-gray-200">
+<div class="flex items-center justify-center mx-auto bg-gray-100">
     <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm mx-auto my-4 lg:min-w-96 min-w-[300px]">
         <div class="p-4 sm:p-7">
             <div class="text-center">

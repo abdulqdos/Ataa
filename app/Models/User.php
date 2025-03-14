@@ -45,4 +45,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function setUserableIdAttribute($value)
+    {
+        $this->attributes['userable_id'] = $value;
+
+        if (is_null($value)) {
+            $this->attributes['userable_type'] = 'admin';
+        }
+    }
+
+
+    public function userable()
+    {
+        return $this->morphTo();
+    }
 }

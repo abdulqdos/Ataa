@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('organizations', function (Blueprint $table) {
+            $table->foreignId('sector_id')->constrained('sectors')->onDelete('cascade');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::table('organizations', function (Blueprint $table) {
+            //
+        });
     }
 };

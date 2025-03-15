@@ -1,15 +1,12 @@
-<div class="bg-gray-100 py-36">
+<div class="bg-gray-100 min-h-full my-40">
     <section>
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen ">
-            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl my-3">
-                مرحبًا بك في عطاء! قم بإنشاء حساب جديد للانضمام إلى مجتمعنا.
-            </h1>
 
             <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
                 <!-- inputs -->
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight md:text-2xl text-[var(--primary)]">
-                        إنشاء حساب
+                    <h1 class="text-lg font-bold leading-tight tracking-tight md:text-xl text-[var(--primary)] text-center">
+                        مرحبًا بك في عطاء! قم بإنشاء حساب جديد للانضمام إلى مجتمعنا.
                     </h1>
                     <form class="space-y-4 md:space-y-6" wire:submit.prevent="register">
                         <!-- user name -->
@@ -141,8 +138,46 @@
                                 @enderror
                             </div>
                         @elseif($userType === 'organization')
-                            <hr class="bg-gray-300" />
-                             <p> اني مؤسسسسة </p>
+                            <div class="grid md:grid-cols-2 md:gap-6">
+                                <div class="relative z-0 w-full mb-5 group">
+                                    <input type="text" name="name" id="name" wire:model="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[var(--secondary)] peer" placeholder=" " required />
+                                    <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-[var(--secondary)] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 ">إسم المؤسسة</label>
+                                </div>
+                                <div class="relative z-0 w-full mb-5 group">
+                                    <label for="underline_select" class="sr-only">Underline select</label>
+                                    <select id="underline_select" wire:model="city" class="block py-2.5 px-0 w-full text-sm text-[var(--secondary)] bg-transparent border-0 border-b-2 border-[var(--secondary)] appearance-none  focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                        <option selected>المدينة</option>
+                                        @foreach($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row gap-6 items-center -mt-5">
+                                @error('name')
+                                    <x-layouts.x-error-messge :message="$message" />
+                                @enderror
+                                @error('city')
+                                    <x-layouts.x-error-messge :message="$message" />
+                                @enderror
+                            </div>
+
+                            <div class="relative z-0 w-full mb-5 group">
+                                <label for="sector" class="sr-only">القطاع</label>
+                                <select id="sector" wire:model="sector" class="block py-2.5 px-0 w-full text-sm text-[var(--secondary)] bg-transparent border-0 border-b-2 border-[var(--secondary)] appearance-none  focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                    <option selected>القطاع</option>
+                                    @foreach($sectors as $sector)
+                                        <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="flex flex-row gap-6 items-center -mt-5">
+                                @error('sector')
+                                    <x-layouts.x-error-messge :message="$message" />
+                                @enderror
+                            </div>
                         @endif
 
 

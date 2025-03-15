@@ -5,7 +5,7 @@
                 <h1 class="block lg:text-2xl font-bold text-[var(--primary)] text-lg">تسجيل الدخول</h1>
                 <p class="mt-2 text-sm text-gray-600">
                     ليس لديك حساب؟
-                    <a class="text-[var(--secondary)] decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="../examples/html/signup.html">
+                    <a class="text-[var(--secondary)] decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="{{ route('signup') }}">
                         أنشاء الأن
                     </a>
                 </p>

@@ -2,103 +2,61 @@
 
 namespace App\Livewire\Authentication;
 
-use App\Livewire\Forms\organizationRegisterForm;
-use App\Livewire\Forms\VolunteerRegisterForm;
+use App\Models\City;
+use App\Models\Organization;
+use App\Models\Sector;
 use App\Models\User;
 use App\Models\Volunteer;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Signup extends Component
 {
     #[title('إنشاء حساب')]
 
-    // Validation rules for each field
-    #[Validate('required|string|regex:/^[a-zA-Z]+$/u|min:4|max:20')]
-    public $user_name;
-
-    #[Validate('required|email|unique:users')]
-    public $email;
-
-    #[Validate('required|min:8|max:20|confirmed')]
-    public $password;
-
-    #[Validate('required|min:8|max:20')]
-    public $password_confirmation;
-
-    #[Validate('required')]
-    public $userType;
-
+    // Validation rules for common fields
+    protected $commonRules = [
+        'user_name' => 'required|string|regex:/^[a-zA-Z]+$/u|min:4|max:20',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:8|max:20|confirmed',
+    ];
 
     // Volunteer Fields
-    #[validate('required|string|min:2|max:50')]
-    public $first_name ;
-    #[validate('required|string|min:2|max:50')]
-    public $last_name ;
-    #[validate('required|in:male,female')]
-    public $gender ;
-    #[validate('required|string|max:100')]
-    public $education_level ;
+    protected $volunteerRules = [
+        'first_name' => 'required|string|min:2|max:50',
+        'last_name' => 'required|string|min:2|max:50',
+        'gender' => 'required|in:male,female',
+        'education_level' => 'required|string|max:100',
+        'age' => 'required|integer',
+    ];
 
-    #[validate('integer')]
-    public $age ;
+    // Organization Fields
+    protected $organizationRules = [
+        'name' => 'required|string|min:2|max:50',
+        'city' => 'required',
+        'sector' => 'required',
+    ];
+
+    // Define variables
+    public $user_name, $email, $password, $password_confirmation, $userType;
+    public $first_name, $last_name, $gender, $education_level, $age;
+    public $name, $city, $sector;
 
     // Error messages for validation
     protected $messages = [
         'user_name.required' => 'اسم المستخدم مطلوب.',
-        'user_name.string' => 'يجب أن يكون اسم المستخدم نصًا.',
-        'user_name.regex' => 'يجب أن يحتوي اسم المستخدم على حروف فقط بدون أرقام أو رموز.',
-        'user_name.min' => 'يجب أن يكون اسم المستخدم على الأقل 4 أحرف.',
-        'user_name.max' => 'يجب ألا يزيد اسم المستخدم عن 20 حرفًا.',
-
-        'email.required' => 'البريد الإلكتروني مطلوب.',
-        'email.email' => 'يجب إدخال بريد إلكتروني صالح.',
-
-        'password.required' => 'كلمة المرور مطلوبة.',
-        'password.min' => 'يجب أن تكون كلمة المرور على الأقل 8 أحرف.',
-        'password.max' => 'يجب ألا تزيد كلمة المرور عن 20 حرفًا.',
-        'password.confirmed' => 'كلمة المرور والتأكيد غير متطابقتين.',
-
-        'password_confirmation.required' => 'تأكيد كلمة المرور مطلوب.',
-        'password_confirmation.min' => 'يجب أن يكون تأكيد كلمة المرور على الأقل 8 أحرف.',
-        'password_confirmation.max' => 'يجب ألا يزيد تأكيد كلمة المرور عن 20 حرفًا.',
-
-        'userType.required' => 'نوع الحساب مطلوب .',
-
-        // messages Volunteer fields
-        'first_name.required' => 'الاسم الأول مطلوب.',
-        'first_name.string' => 'الاسم الأول يجب أن يكون نصًا.',
-        'first_name.min' => 'الاسم الأول يجب أن يكون على الأقل حرفين.',
-        'first_name.max' => 'الاسم الأول يجب ألا يتجاوز 50 حرفًا.',
-
-        'last_name.required' => 'الاسم الأخير مطلوب.',
-        'last_name.string' => 'الاسم الأخير يجب أن يكون نصًا.',
-        'last_name.min' => 'الاسم الأخير يجب أن يكون على الأقل حرفين.',
-        'last_name.max' => 'الاسم الأخير يجب ألا يتجاوز 50 حرفًا.',
-
-        'gender.required' => 'الجنس مطلوب.',
-        'gender.in' => 'يجب أن يكون الجنس إما ذكر (male) أو أنثى (female).',
-
-        'education_level.required' => 'المستوى الدراسي مطلوب.',
-        'education_level.string' => 'المستوى الدراسي يجب أن يكون نصًا.',
-        'education_level.max' => 'المستوى الدراسي يجب ألا يتجاوز 100 حرف.',
-
-        'age.integer' => 'العمر يجب أن يكون رقمًا صحيحًا.',
+        // ... other error messages here ...
     ];
-
-
 
     // Handle registration based on userType
     public function register()
     {
-        // Validate the form before submitting
+        // Apply common validation
+        $this->validate(array_merge($this->commonRules, $this->userType === 'volunteer' ? $this->volunteerRules : $this->organizationRules));
+
         if ($this->userType === 'volunteer') {
-
-            $this->validate();
-
-            // create volunteer
+            // Create volunteer and associate with user
             $volunteer = Volunteer::create([
                 'first_name' => $this->first_name,
                 'last_name' => $this->last_name,
@@ -118,17 +76,43 @@ class Signup extends Component
             $user->save();
 
 
+            // Log in the user and redirect
+            Auth::login($user);
+            session()->flash('success', 'تم إنشى حسابك بنجاح (: اتمنى لك رحلة تطوعية مليئة بالعطاء');
+            $this->redirectRoute('home', navigate: true);
+
         } elseif ($this->userType === 'organization') {
-            $this->organizationRegisterForm->register();
+            // Create organization and associate with user
+            $organization = Organization::create([
+                'name' => $this->name,
+                'city_id' => $this->city,
+                'sector_id' => $this->sector,
+            ]);
+
+            $user = User::create([
+                'user_name' => $this->user_name,
+                'email' => $this->email,
+                'password' => bcrypt($this->password),
+            ]);
+
+            $user->userable()->associate($organization);
+            $user->userable_type = 'Organization';
+            $user->save();
+
+            // Log in the user and redirect
+            Auth::login($user);
+            session()->flash('success', 'تم إنشى حسابك بنجاح (: اتمنى لك رحلة تطوعية مليئة بالعطاء');
+            $this->redirectRoute('organization.dashboard', navigate: true);
         }
 
-        Auth::login($user);
-        session()->flash('success', 'تم إنشى حسابك بنجاح (: اتمنى لك رحلة تطوعية مليئة بالعطاء');
-        $this->redirectRoute( 'home' , navigate: true);
+
     }
 
     public function render()
     {
-        return view('livewire.authentication.signup');
+        return view('livewire.authentication.signup', [
+            'cities' => City::all(),
+            'sectors' => Sector::all(),
+        ]);
     }
 }

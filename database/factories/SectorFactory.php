@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\city>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Sector>
  */
-class CityFactory extends Factory
+class SectorFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class CityFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->city(),
+            'name' => fake()->firstName(),
         ];
     }
 }

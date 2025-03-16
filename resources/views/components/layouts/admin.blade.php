@@ -4,22 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة تحكم المشرف | مشروع عطاء</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/js/app.js' , 'resources/css/app.css'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#106665',
-                        secondary: '#2d8c8a',
-                        primaryLight: '#1a7e7d',
-                        secondaryLight: '#3da3a1',
-                    }
-                }
-            }
-        }
-    </script>
+
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
 
@@ -51,8 +38,8 @@
 <body class="bg-gray-100">
 <div class="flex h-screen overflow-hidden">
     <!-- Sidebar (Desktop) -->
-    <div id="sidebar" class="sidebar bg-primary text-white w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
-        <div class="p-4 flex items-center justify-center border-b border-secondary">
+    <div id="sidebar" class="sidebar bg-[var(--primary)] text-white w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
+        <div class="p-4 flex items-center justify-center border-b border-[var(--secondary)]">
             <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=عطاء&background=ffffff&color=106665&bold=true" alt="شعار عطاء">
             <div class="text-xl font-bold mr-2">مشروع عطاء</div>
         </div>
@@ -61,42 +48,23 @@
             <div class="text-md font-bold px-4 pb-4">أدمن النظام</div>
         </div>
         <nav class="mt-2">
-            <a href="#" class="sidebar-item active-link flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-tachometer-alt w-6"></i>
-                <span>لوحة التحكم</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-building w-6"></i>
-                <span>المؤسسات</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-users w-6"></i>
-                <span>المتطوعون</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-clipboard-list w-6"></i>
-                <span>الطلبات</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-flag w-6"></i>
-                <span>الإبلاغات</span>
-            </a>
-            <div class="border-t border-secondary mt-4 pt-4">
-                <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                    <i class="fas fa-cog w-6"></i>
-                    <span>الإعدادات</span>
-                </a>
-                <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                    <i class="fas fa-sign-out-alt w-6"></i>
-                    <span>تسجيل خروج</span>
-                </a>
+            <x-layouts.admin.nav href="{{ route('admin.dashboard') }}" :active="request()->is('admin/dashboard')" i="fas fa-tachometer-alt w-6">لوحة التحكم</x-layouts.admin.nav>
+            <x-layouts.admin.nav href="#" :active="false" i="fas fa-building w-6">المؤسسات</x-layouts.admin.nav>
+            <x-layouts.admin.nav href="#" :active="false" i="fas fa-users w-6">المتطوعون</x-layouts.admin.nav>
+            <x-layouts.admin.nav href="#" :active="false" i="fas fa-clipboard-list w-6">الطلبات</x-layouts.admin.nav>
+            <x-layouts.admin.nav href="#" :active="false" i="fas fa-flag w-6">الإبلاغات</x-layouts.admin.nav>
+
+
+            <div class="border-t border-[var(--secondary)] mt-4 pt-4">
+                <x-layouts.admin.nav href="#" :active="false" i="fas fa-cog w-6">الإعدادات</x-layouts.admin.nav>
+                <x-layouts.admin.nav href="{{ route('logout') }}" :active="false" i="fas fa-sign-out-alt w-6">تسجيل خروج</x-layouts.admin.nav>
             </div>
         </nav>
     </div>
 
     <!-- Mobile Sidebar (Hidden by default) -->
-    <div id="mobileSidebar" class="sidebar fixed top-0 right-0 h-full bg-primary text-white w-64 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
-        <div class="p-4 flex items-center justify-between border-b border-secondary">
+    <div id="mobileSidebar" class="sidebar fixed top-0 right-0 h-full bg-[var(--primary)] text-white w-64 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="p-4 flex items-center justify-between border-b border-[var(--secondary)]">
             <div class="flex items-center">
                 <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=عطاء&background=ffffff&color=106665&bold=true" alt="شعار عطاء">
                 <div class="text-xl font-bold mr-2">مشروع عطاء</div>
@@ -110,35 +78,16 @@
             <div class="text-md font-bold px-4 pb-4">أدمن النظام</div>
         </div>
         <nav class="mt-2">
-            <a href="#" class="sidebar-item active-link flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-tachometer-alt w-6"></i>
-                <span>لوحة التحكم</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-building w-6"></i>
-                <span>المؤسسات</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-users w-6"></i>
-                <span>المتطوعون</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-clipboard-list w-6"></i>
-                <span>الطلبات</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-flag w-6"></i>
-                <span>الإبلاغات</span>
-            </a>
-            <div class="border-t border-secondary mt-4 pt-4">
-                <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                    <i class="fas fa-cog w-6"></i>
-                    <span>الإعدادات</span>
-                </a>
-                <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                    <i class="fas fa-sign-out-alt w-6"></i>
-                    <span>تسجيل خروج</span>
-                </a>
+            <x-layouts.admin.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('/')"> لوحة التحكم </x-layouts.admin.nav-mobile>
+            <x-layouts.admin.nav-mobile i="fas fa-building w-6" href="#" :active="false"> المؤسسات </x-layouts.admin.nav-mobile>
+            <x-layouts.admin.nav-mobile i="fas fa-users w-6" href="#" :active="false"> المتطوعون </x-layouts.admin.nav-mobile>
+            <x-layouts.admin.nav-mobile i="fas fa-clipboard-list w-6" href="#" :active="false"> الطلبات </x-layouts.admin.nav-mobile>
+            <x-layouts.admin.nav-mobile i="fas fa-flag w-6" href="#" :active="false"> الإبلاغات </x-layouts.admin.nav-mobile>
+
+
+            <div class="border-t border-[var(--secondary)] mt-4 pt-4">
+                <x-layouts.admin.nav-mobile i="fas fa-cog w-6" href="#" :active="false"> الإعدادات </x-layouts.admin.nav-mobile>
+                <x-layouts.admin.nav-mobile i="fas fa-sign-out-alt w-6" href="/logout" :active="false"> تسجيل خروج </x-layouts.admin.nav-mobile>
             </div>
         </nav>
     </div>
@@ -149,7 +98,7 @@
         <header class="bg-white shadow-sm z-10">
             <div class="flex items-center justify-between h-16 px-4">
                 <div>
-                    <button id="toggleSidebar" class="text-gray-500 hover:text-primary md:hidden">
+                    <button id="toggleSidebar" class="text-gray-500 hover:text-[var(--primary)] md:hidden">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -161,7 +110,7 @@
                         </button>
                     </div>
                     <div class="flex items-center">
-                        <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center">
+                        <div class="h-8 w-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center">
                             <span class="text-sm font-medium">أد</span>
                         </div>
                         <span class="mr-2 text-sm font-medium text-gray-700">أدمن النظام</span>
@@ -179,31 +128,31 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                     <div class="bg-white rounded-lg shadow p-5">
                         <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-primary bg-opacity-10 text-primary">
+                            <div class="p-3 rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
                                 <i class="fas fa-users text-xl"></i>
                             </div>
                             <div class="mr-4">
                                 <h2 class="text-sm font-medium text-gray-600">إجمالي المتطوعين</h2>
-                                <p class="text-2xl font-bold text-primary">5,320</p>
+                                <p class="text-2xl font-bold text-[var(--primary)]">5,320</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-lg shadow p-5">
                         <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-secondary bg-opacity-10 text-secondary">
+                            <div class="p-3 rounded-full bg-[var(--secondary)]/10 text-[var(--secondary)] ">
                                 <i class="fas fa-building text-xl"></i>
                             </div>
                             <div class="mr-4">
                                 <h2 class="text-sm font-medium text-gray-600">إجمالي المؤسسات</h2>
-                                <p class="text-2xl font-bold text-secondary">128</p>
+                                <p class="text-2xl font-bold text-[var(--secondary)]">128</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-lg shadow p-5">
                         <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-blue-500 bg-opacity-10 text-blue-500">
+                            <div class="p-3 rounded-full bg-blue-500/10 text-blue-500">
                                 <i class="fas fa-hands-helping text-xl"></i>
                             </div>
                             <div class="mr-4">
@@ -215,7 +164,7 @@
 
                     <div class="bg-white rounded-lg shadow p-5">
                         <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-yellow-500 bg-opacity-10 text-yellow-500">
+                            <div class="p-3 rounded-full bg-yellow-500/10 text-yellow-500">
                                 <i class="fas fa-clipboard-list text-xl"></i>
                             </div>
                             <div class="mr-4">
@@ -294,9 +243,9 @@
                                             <p class="text-xs text-gray-500">طلب تسجيل مؤسسة جديدة</p>
                                         </div>
                                     </div>
-                                    <div class="flex space-x-2 space-x-reverse">
-                                        <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg">قبول</button>
-                                        <button class="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded-lg">رفض</button>
+                                    <div class="flex gap-2  space-x-reverse">
+                                        <button class="px-3 py-1 bg-[var(--primary)] text-white text-xs rounded-lg hover:bg-[var(--primaryLight)] transition duration-300 cursor-pointer">قبول</button>
+                                        <button class="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded-lg hover:bg-gray-300  transition duration-300 cursor-pointer">رفض</button>
                                     </div>
                                 </li>
                                 <li class="flex items-center justify-between pb-4 border-b border-gray-100">
@@ -308,7 +257,7 @@
                                         </div>
                                     </div>
                                     <div class="flex space-x-2 space-x-reverse">
-                                        <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg">استعراض</button>
+                                        <button class="px-3 py-1 bg-[var(--primary)] text-white text-xs rounded-lg">استعراض</button>
                                     </div>
                                 </li>
                                 <li class="flex items-center justify-between pb-4 border-b border-gray-100">
@@ -321,9 +270,9 @@
                                             <p class="text-xs text-gray-500">طلب إعادة تفعيل حساب</p>
                                         </div>
                                     </div>
-                                    <div class="flex space-x-2 space-x-reverse">
-                                        <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg">قبول</button>
-                                        <button class="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded-lg">رفض</button>
+                                    <div class="flex gap-2  space-x-reverse">
+                                        <button class="px-3 py-1 bg-[var(--primary)] text-white text-xs rounded-lg hover:bg-[var(--primaryLight)] transition duration-300 cursor-pointer">قبول</button>
+                                        <button class="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded-lg hover:bg-gray-300  transition duration-300 cursor-pointer">رفض</button>
                                     </div>
                                 </li>
                                 <li class="flex items-center justify-between">
@@ -337,7 +286,7 @@
                                         </div>
                                     </div>
                                     <div class="flex space-x-2 space-x-reverse">
-                                        <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg">استعراض</button>
+                                        <button class="px-3 py-1 bg-[var(--primary)] text-white text-xs rounded-lg">استعراض</button>
                                     </div>
                                 </li>
                             </ul>
@@ -351,7 +300,7 @@
                     <div class="bg-white rounded-lg shadow">
                         <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                             <h2 class="text-lg font-medium">أحدث المؤسسات</h2>
-                            <a href="#" class="text-primary hover:text-primaryLight text-sm">عرض الكل</a>
+                            <a href="#" class="text-[var(--primary)] hover:text-[var(--primaryLight)] text-sm">عرض الكل</a>
                         </div>
                         <div class="p-4">
                             <table class="w-full text-right">
@@ -397,7 +346,7 @@
                     <div class="bg-white rounded-lg shadow">
                         <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                             <h2 class="text-lg font-medium">أحدث المتطوعين</h2>
-                            <a href="#" class="text-primary hover:text-primaryLight text-sm">عرض الكل</a>
+                            <a href="#" class="text-[var(--primary)] hover:text-[var(--primary)] text-sm">عرض الكل</a>
                         </div>
                         <div class="p-4">
                             <table class="w-full text-right">
@@ -411,7 +360,7 @@
                                 <tbody>
                                 <tr class="border-b border-gray-100">
                                     <td class="py-3 pr-4 flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center mr-2">
+                                        <div class="h-8 w-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center mr-2">
                                             <span class="text-xs font-medium">أم</span>
                                         </div>
                                         <span>أحمد محمد</span>
@@ -421,7 +370,7 @@
                                 </tr>
                                 <tr class="border-b border-gray-100">
                                     <td class="py-3 pr-4 flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-secondary text-white flex items-center justify-center mr-2">
+                                        <div class="h-8 w-8 rounded-full bg-[var(--secondary)] text-white flex items-center justify-center mr-2">
                                             <span class="text-xs font-medium">سأ</span>
                                         </div>
                                         <span>سارة أحمد</span>
@@ -431,7 +380,7 @@
                                 </tr>
                                 <tr class="border-b border-gray-100">
                                     <td class="py-3 pr-4 flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center mr-2">
+                                        <div class="h-8 w-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center mr-2">
                                             <span class="text-xs font-medium">مع</span>
                                         </div>
                                         <span>محمد علي</span>
@@ -441,7 +390,7 @@
                                 </tr>
                                 <tr class="border-b border-gray-100">
                                     <td class="py-3 pr-4 flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-secondary text-white flex items-center justify-center mr-2">
+                                        <div class="h-8 w-8 rounded-full bg-[var(--secondary)] text-white flex items-center justify-center mr-2">
                                             <span class="text-xs font-medium">فخ</span>
                                         </div>
                                         <span>فاطمة خالد</span>
@@ -451,7 +400,7 @@
                                 </tr>
                                 <tr>
                                     <td class="py-3 pr-4 flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center mr-2">
+                                        <div class="h-8 w-8 rounded-full bg-[var(--primary)]  text-white flex items-center justify-center mr-2">
                                             <span class="text-xs font-medium">عخ</span>
                                         </div>
                                         <span>عمر خالد</span>
@@ -469,7 +418,7 @@
                 <div class="bg-white rounded-lg shadow">
                     <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-lg font-medium">أحدث الإبلاغات</h2>
-                        <a href="#" class="text-primary hover:text-primaryLight text-sm">عرض الكل</a>
+                        <a href="#" class="text-[var(--primary)]  hover:text-[var(--primaryLight)]  text-sm">عرض الكل</a>
                     </div>
                     <div class="p-4">
                         <table class="w-full text-right">
@@ -489,7 +438,7 @@
                                 <td class="py-3 hidden md:table-cell">15-03-2025</td>
                                 <td class="py-3 hidden md:table-cell"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full">قيد المراجعة</span></td>
                                 <td class="py-3">
-                                    <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg">استعراض</button>
+                                    <button class="px-3 py-1 bg-[var(--primary)]  text-white text-xs rounded-lg">استعراض</button>
                                 </td>
                             </tr>
                             <tr class="border-b border-gray-100">
@@ -507,7 +456,7 @@
                                 <td class="py-3 hidden md:table-cell">12-03-2025</td>
                                 <td class="py-3 hidden md:table-cell"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full">قيد المراجعة</span></td>
                                 <td class="py-3">
-                                    <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg">استعراض</button>
+                                    <button class="px-3 py-1 bg-[var(--primary)]  text-white text-xs rounded-lg">استعراض</button>
                                 </td>
                             </tr>
                             <tr>
@@ -526,6 +475,7 @@
             </div>
         </main>
     </div>
+
 </div>
 
 <script>

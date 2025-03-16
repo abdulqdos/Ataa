@@ -6,20 +6,7 @@
     <title>لوحة تحكم المؤسسات | مشروع عطاء</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     @vite(['resources/js/app.js' , 'resources/css/app.css'])
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#106665',
-                        secondary: '#2d8c8a',
-                        primaryLight: '#1a7e7d',
-                        secondaryLight: '#3da3a1',
-                    }
-                }
-            }
-        }
-    </script>
+
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
 
@@ -60,27 +47,14 @@
             <div class="text-md font-bold px-4 pb-4">مؤسسة الخير التطوعية</div>
         </div>
         <nav class="mt-2">
-            <a href="#" class="sidebar-item active-link flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-tachometer-alt w-6"></i>
-                <span>لوحة التحكم</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-hands-helping w-6"></i>
-                <span>فرص تطوعية</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-users w-6"></i>
-                <span>المتطوعون</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-clipboard-list w-6"></i>
-                <span>الطلبات</span>
-            </a>
+
+            <x-layouts.organiations.nav i="fas fa-tachometer-alt w-6" href="{{ route('organization.dashboard') }}" :active="request()->is('organization/dashboard')">لوحة التحكم</x-layouts.organiations.nav>
+            <x-layouts.organiations.nav i="fas fa-hands-helping w-6" href="#" :active="false">الفرص التطوعية</x-layouts.organiations.nav>
+            <x-layouts.organiations.nav i="fas fa-users w-6" href="#" :active="false">المتطوعون</x-layouts.organiations.nav>
+            <x-layouts.organiations.nav i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات</x-layouts.organiations.nav>
+
             <div class="border-t border-[var(--secondary)] mt-4 pt-4">
-                <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                    <i class="fas fa-sign-out-alt w-6"></i>
-                    <span>تسجيل خروج</span>
-                </a>
+                <x-layouts.organiations.nav i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تجيل الخروج</x-layouts.organiations.nav>
             </div>
         </nav>
     </div>
@@ -98,27 +72,15 @@
             <div class="text-md font-bold px-4 pb-4">مؤسسة الخير التطوعية</div>
         </div>
         <nav class="mt-2">
-            <a href="#" class="sidebar-item active-link flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-tachometer-alt w-6"></i>
-                <span>لوحة التحكم</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-hands-helping w-6"></i>
-                <span>فرص تطوعية</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-users w-6"></i>
-                <span>المتطوعون</span>
-            </a>
-            <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                <i class="fas fa-clipboard-list w-6"></i>
-                <span>الطلبات</span>
-            </a>
+
+            <x-layouts.organiations.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('organization/dashboard')"> لوحة التحكم </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="#" :active="false">الفرص التطوعية </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-users w-6" href="#" :active="false">المتطوعون </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات </x-layouts.organiations.nav-mobile>
+
             <div class="border-t border-[var(--secondary)] mt-4 pt-4">
-                <a href="#" class="sidebar-item flex items-center px-4 py-3 text-sm">
-                    <i class="fas fa-sign-out-alt w-6"></i>
-                    <span>تسجيل خروج</span>
-                </a>
+                <x-layouts.organiations.nav-mobile i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تسجيل الخروج </x-layouts.organiations.nav-mobile>
+
             </div>
         </nav>
     </div>

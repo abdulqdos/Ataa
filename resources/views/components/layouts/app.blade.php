@@ -30,22 +30,13 @@
                         <img class="h-10 w-auto" src="https://ui-avatars.com/api/?name=عطاء&background=106665&color=fff&size=70&bold=true" alt="شعار عطاء">
                         <span class="mr-2 text-xl font-bold text-[var(--primary)]">عطاء</span>
                     </div>
-                    <div class="hidden sm:mr-6 sm:flex sm:space-x-8 sm:space-x-reverse">
-                        <a href="/" class="border-[var(--primary)] text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            الرئيسية
-                        </a>
-                        <a href="#" class="border-transparent text-gray-500 hover:border-[var(--primary)] hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            فرص التطوع
-                        </a>
-                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            المؤسسات
-                        </a>
-                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            عن المشروع
-                        </a>
-                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            تواصل معنا
-                        </a>
+                    <div class="hidden sm:gap-6 sm:flex  sm:space-x-reverse sm:mr-6">
+                        <x-layouts.volunteers.nav href="/" :active="request()->is('/')">الرئيسية</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false">فرص التطوع</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false">المؤسسات</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false"> المتطوعون</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false">عن عطاء</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false" >تواصل معنا</x-layouts.volunteers.nav>
                     </div>
                 </div>
 
@@ -94,11 +85,12 @@
         <!-- Mobile menu, show/hide based on menu state. -->
         <div class="sm:hidden hidden" id="mobile-menu">
             <div class="pt-2 pb-3 space-y-1 bg-gray-50">
-                <a href="/" class="bg-[var(--primary)] text-white block pr-3 pl-4 py-2 text-base font-medium border-r-4 border-[var(--primary)]">الرئيسية</a>
-                <a href="#" class="text-gray-600  hover:border-gray-300 hover:text-gray-800 block pr-3 pl-4 py-2 border-r-4 border-transparent text-base font-medium hover:bg-[var(--primary)] transition duration-300">فرص التطوع</a>
-                <a href="#" class="text-gray-600  hover:border-gray-300 hover:text-gray-800 block pr-3 pl-4 py-2 border-r-4 border-transparent text-base font-medium hover:bg-[var(--primary)] transition duration-300">المؤسسات</a>
-                <a href="#" class="text-gray-600  hover:border-gray-300 hover:text-gray-800 block pr-3 pl-4 py-2 border-r-4 border-transparent text-base font-medium hover:bg-[var(--primary)] transition duration-300">عن المشروع</a>
-                <a href="#" class="text-gray-600  hover:border-gray-300 hover:text-gray-800 block pr-3 pl-4 py-2 border-r-4 border-transparent text-base font-medium hover:bg-[var(--primary)] transition duration-300">تواصل معنا</a>
+                <x-layouts.volunteers.nav-mobile href="/" :active="request()->is('/')"> الرئيسية </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false"> فرص التطوع </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false">المؤسسات </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false">المتطوعون </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false">عن عطاء </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false">تواصل معنا </x-layouts.volunteers.nav-mobile>
             </div>
 
             <!-- Mobile auth section - For Non-authenticated users -->

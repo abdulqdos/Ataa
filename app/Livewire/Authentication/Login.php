@@ -34,11 +34,13 @@ class Login extends Component
                 'password' => ['كلمة المرور أو الايميل غير صحيح .'],
             ]);
         }
-
         $user = Auth::user();
-
         Auth::login($user);
+        $this->goToPage($user);
 
+    }
+
+    public function goToPage($user) {
         if($user->role === 'volunteer')
         {
             $this->redirect('/');
@@ -48,6 +50,7 @@ class Login extends Component
             $this->redirect(route('admin.dashboard'));
         }
     }
+
     public function render()
     {
         return view('livewire.authentication.login');

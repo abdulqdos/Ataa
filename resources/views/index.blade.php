@@ -15,9 +15,9 @@
                 </p>
                 <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
                     <div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
-                        <a href="#" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-[var(--primary)] bg-white hover:bg-gray-100 transition duration-300 cursor-pointer sm:px-8">
+                        <x-layouts.volunteers.middle-secondary-btn href="#">
                             تصفح الفرص التطوعية
-                        </a>
+                        </x-layouts.volunteers.middle-secondary-btn>
                         <a href="#" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[var(--secondary)] hover:bg-[var(--secondaryLight)] transition duration-800 cursor-pointer sm:px-8">
                             سجل كمتطوع
                         </a>
@@ -146,9 +146,7 @@
                 </div>
 
                 <div class="text-center mt-12">
-                    <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[var(--primary)] hover:bg-[var(--primaryLight)]">
-                        عرض جميع الفرص التطوعية
-                    </a>
+                    <x-layouts.volunteers.middle-primary-btn href="#"> عرض جميع الفرص التطوعية</x-layouts.volunteers.middle-primary-btn>
                 </div>
             </div>
         </div>

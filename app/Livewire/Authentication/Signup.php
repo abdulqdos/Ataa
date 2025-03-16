@@ -39,15 +39,57 @@ class Signup extends Component
     ];
 
     // Define variables
-    public $user_name, $email, $password, $password_confirmation, $userType;
+    public $userType = "volunteer";
+    public $user_name, $email, $password, $password_confirmation ;
     public $first_name, $last_name, $gender, $education_level, $age;
     public $name, $city, $sector;
 
     // Error messages for validation
     protected $messages = [
         'user_name.required' => 'اسم المستخدم مطلوب.',
-        // ... other error messages here ...
+        'user_name.string' => 'يجب أن يكون اسم المستخدم نصًا.',
+        'user_name.regex' => 'يجب أن يحتوي اسم المستخدم على حروف إنجليزية فقط.',
+        'user_name.min' => 'يجب أن يكون اسم المستخدم على الأقل 4 أحرف.',
+        'user_name.max' => 'يجب ألا يزيد اسم المستخدم عن 20 حرفًا.',
+
+        'email.required' => 'البريد الإلكتروني مطلوب.',
+        'email.email' => 'يرجى إدخال بريد إلكتروني صالح.',
+        'email.unique' => 'البريد الإلكتروني مسجل مسبقًا.',
+
+        'password.required' => 'كلمة المرور مطلوبة.',
+        'password.min' => 'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.',
+        'password.max' => 'يجب ألا تزيد كلمة المرور عن 20 حرفًا.',
+        'password.confirmed' => 'تأكيد كلمة المرور غير متطابق.',
+
+        'first_name.required' => 'الاسم الأول مطلوب.',
+        'first_name.string' => 'يجب أن يكون الاسم الأول نصًا.',
+        'first_name.min' => 'يجب أن يتكون الاسم الأول من حرفين على الأقل.',
+        'first_name.max' => 'يجب ألا يزيد الاسم الأول عن 50 حرفًا.',
+
+        'last_name.required' => 'الاسم الأخير مطلوب.',
+        'last_name.string' => 'يجب أن يكون الاسم الأخير نصًا.',
+        'last_name.min' => 'يجب أن يتكون الاسم الأخير من حرفين على الأقل.',
+        'last_name.max' => 'يجب ألا يزيد الاسم الأخير عن 50 حرفًا.',
+
+        'gender.required' => 'الجنس مطلوب.',
+        'gender.in' => 'يجب اختيار الجنس بين ذكر أو أنثى.',
+
+        'education_level.required' => 'المستوى التعليمي مطلوب.',
+        'education_level.string' => 'يجب أن يكون المستوى التعليمي نصًا.',
+        'education_level.max' => 'يجب ألا يزيد المستوى التعليمي عن 100 حرف.',
+
+        'age.required' => 'العمر مطلوب.',
+        'age.integer' => 'يجب أن يكون العمر رقمًا صحيحًا.',
+
+        'name.required' => 'اسم المؤسسة مطلوب.',
+        'name.string' => 'يجب أن يكون اسم المؤسسة نصًا.',
+        'name.min' => 'يجب أن يتكون اسم المؤسسة من حرفين على الأقل.',
+        'name.max' => 'يجب ألا يزيد اسم المؤسسة عن 50 حرفًا.',
+
+        'city.required' => 'يجب اختيار المدينة.',
+        'sector.required' => 'يجب اختيار القطاع.',
     ];
+
 
     // Handle registration based on userType
     public function register()

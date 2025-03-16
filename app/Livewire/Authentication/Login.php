@@ -39,11 +39,13 @@ class Login extends Component
 
         Auth::login($user);
 
-        if($user->userable_type === 'Volunteer')
+        if($user->role === 'volunteer')
         {
             $this->redirect('/');
-        } else {
+        } else if($user->role === 'organization') {
             $this->redirect(route('organization.dashboard'));
+        } else {
+            $this->redirect(route('admin.dashboard'));
         }
     }
     public function render()

@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[layout('components.layouts.oraganization')]
+#[layout('components.layouts.organization')]
 class OrganizationComponent extends Component
 {
     public function render()

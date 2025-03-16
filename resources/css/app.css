@@ -17,5 +17,7 @@
 @theme {
     --primary: #106665; /* primary color */
     --secondary: #2d8c8a; /* secondary color */
+    --primaryLight: #1a7e7d;
+    --secondaryLight: #3da3a1;
     --gold: #ff9f1c;
 }

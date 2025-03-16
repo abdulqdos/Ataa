@@ -21,8 +21,7 @@ class User extends Authenticatable
         'user_name',
         'email',
         'password',
-        'userable_type',
-        'userable_id',
+        'role'
     ];
 
     /**
@@ -48,18 +47,4 @@ class User extends Authenticatable
         ];
     }
 
-    public function setUserableIdAttribute($value)
-    {
-        $this->attributes['userable_id'] = $value;
-
-        if (is_null($value)) {
-            $this->attributes['userable_type'] = 'admin';
-        }
-    }
-
-
-    public function userable()
-    {
-        return $this->morphTo();
-    }
 }

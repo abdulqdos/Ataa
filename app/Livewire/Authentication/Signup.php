@@ -56,25 +56,23 @@ class Signup extends Component
         $this->validate(array_merge($this->commonRules, $this->userType === 'volunteer' ? $this->volunteerRules : $this->organizationRules));
 
         if ($this->userType === 'volunteer') {
-            // Create volunteer and associate with user
-            $volunteer = Volunteer::create([
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,
-                'gender' => $this->gender,
-                'education_level' => $this->education_level,
-                'age' => $this->age,
-            ]);
 
             $user = User::create([
                 'user_name' => $this->user_name,
                 'email' => $this->email,
                 'password' => bcrypt($this->password),
+                'role' => 'volunteer',
             ]);
 
-            $user->userable()->associate($volunteer);
-            $user->userable_type = 'Volunteer';
-            $user->save();
-
+            // Create volunteer and associate with user
+            Volunteer::create([
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'gender' => $this->gender,
+                'education_level' => $this->education_level,
+                'age' => $this->age,
+                'user_id' => $user->id,
+            ]);
 
             // Log in the user and redirect
             Auth::login($user);
@@ -82,22 +80,21 @@ class Signup extends Component
             $this->redirectRoute('home', navigate: true);
 
         } elseif ($this->userType === 'organization') {
-            // Create organization and associate with user
-            $organization = Organization::create([
-                'name' => $this->name,
-                'city_id' => $this->city,
-                'sector_id' => $this->sector,
-            ]);
 
+            // Create organization and associate with user
             $user = User::create([
                 'user_name' => $this->user_name,
                 'email' => $this->email,
                 'password' => bcrypt($this->password),
+                'role' => 'organization',
             ]);
 
-            $user->userable()->associate($organization);
-            $user->userable_type = 'Organization';
-            $user->save();
+            Organization::create([
+                'name' => $this->name,
+                'city_id' => $this->city,
+                'sector_id' => $this->sector,
+                'user_id' => $user->id,
+            ]);
 
             // Log in the user and redirect
             Auth::login($user);

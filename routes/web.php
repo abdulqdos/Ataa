@@ -5,6 +5,7 @@ use App\Livewire\Authentication\Login;
 use App\Livewire\Authentication\ResetPassword;
 use App\Livewire\Authentication\Signup;
 use App\Livewire\Organization\Dashboard;
+use App\Livewire\Admin\Dashboard as AdminDashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,3 +28,4 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/organization/dashboard' , Dashboard::class)->name('organization.dashboard');
+Route::get('/admin/dashboard' , AdminDashboard::class)->name('admin.dashboard');

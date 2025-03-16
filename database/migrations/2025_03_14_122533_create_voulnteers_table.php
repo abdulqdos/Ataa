@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('gender' , ['male' , 'female'])->nullable();
             $table->string('education_level')->nullable();
             $table->integer('age')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
 

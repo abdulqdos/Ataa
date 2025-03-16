@@ -1,4 +1,4 @@
-<div class="bg-gray-100 min-h-full my-40">
+<div class="min-h-full my-40">
     <section>
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen ">
 

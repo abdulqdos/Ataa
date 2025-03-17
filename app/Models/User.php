@@ -24,6 +24,10 @@ class User extends Authenticatable
         'role'
     ];
 
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -19,10 +19,26 @@ it('return the correct component' , function () {
 
 
 
-it('assert redirect' , function () {
+it('assert redirect to admin page' , function () {
     $user = User::factory()->create([
         'email' => 'email@example.com',
         'password' => bcrypt('password'),
+        'role' => 'admin',
+    ]);
+
+    Livewire::test(Login::class)
+        ->set('email', $user->email)
+        ->set('password', 'password')
+        ->call('authenticate')
+        ->assertRedirect('/admin/dashboard');
+});
+
+
+it('assert redirect to volunteer page' , function () {
+    $user = User::factory()->create([
+        'email' => 'email@example.com',
+        'password' => bcrypt('password'),
+        'role' => 'volunteer',
     ]);
 
     Livewire::test(Login::class)
@@ -30,6 +46,20 @@ it('assert redirect' , function () {
         ->set('password', 'password')
         ->call('authenticate')
         ->assertRedirect('/');
+});
+
+it('assert redirect to organization page' , function () {
+    $user = User::factory()->create([
+        'email' => 'email@example.com',
+        'password' => bcrypt('password'),
+        'role' => 'organization',
+    ]);
+
+    Livewire::test(Login::class)
+        ->set('email', $user->email)
+        ->set('password', 'password')
+        ->call('authenticate')
+        ->assertRedirect('/organization/dashboard');
 });
 
 it('email is valid' , function ($badEmail) {

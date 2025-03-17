@@ -34,6 +34,7 @@ class Login extends Component
                 'password' => ['كلمة المرور أو الايميل غير صحيح .'],
             ]);
         }
+
         $user = Auth::user();
         Auth::login($user);
         $this->goToPage($user);

@@ -98,55 +98,60 @@ class Signup extends Component
         $this->validate(array_merge($this->commonRules, $this->userType === 'volunteer' ? $this->volunteerRules : $this->organizationRules));
 
         if ($this->userType === 'volunteer') {
-
-            $user = User::create([
-                'user_name' => $this->user_name,
-                'email' => $this->email,
-                'password' => bcrypt($this->password),
-                'role' => 'volunteer',
-            ]);
-
-            // Create volunteer and associate with user
-            Volunteer::create([
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,
-                'gender' => $this->gender,
-                'education_level' => $this->education_level,
-                'age' => $this->age,
-                'user_id' => $user->id,
-            ]);
-
-            // Log in the user and redirect
-            Auth::login($user);
+            $this->signupVolunteer();
             session()->flash('success', 'تم إنشى حسابك بنجاح (: اتمنى لك رحلة تطوعية مليئة بالعطاء');
             $this->redirectRoute('home', navigate: true);
-
         } elseif ($this->userType === 'organization') {
-
-            // Create organization and associate with user
-            $user = User::create([
-                'user_name' => $this->user_name,
-                'email' => $this->email,
-                'password' => bcrypt($this->password),
-                'role' => 'organization',
-            ]);
-
-            Organization::create([
-                'name' => $this->name,
-                'city_id' => $this->city,
-                'sector_id' => $this->sector,
-                'user_id' => $user->id,
-            ]);
-
-            // Log in the user and redirect
-            Auth::login($user);
+           $this->signinOrganization();
             session()->flash('success', 'تم إنشى حسابك بنجاح (: اتمنى لك رحلة تطوعية مليئة بالعطاء');
             $this->redirectRoute('organization.dashboard', navigate: true);
         }
-
-
     }
 
+    public function signupVolunteer()
+    {
+        // Create a user
+        $user = User::create([
+            'user_name' => $this->user_name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+            'role' => 'volunteer',
+        ]);
+
+        // Create volunteer and associate with user
+        Volunteer::create([
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'gender' => $this->gender,
+            'education_level' => $this->education_level,
+            'age' => $this->age,
+            'user_id' => $user->id,
+        ]);
+
+        // Log in the user and redirect
+        Auth::login($user);
+    }
+
+    public function signinOrganization()
+    {
+        // Create organization and associate with user
+        $user = User::create([
+            'user_name' => $this->user_name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+            'role' => 'organization',
+        ]);
+
+        Organization::create([
+            'name' => $this->name,
+            'city_id' => $this->city,
+            'sector_id' => $this->sector,
+            'user_id' => $user->id,
+        ]);
+
+        // Log in the user and redirect
+        Auth::login($user);
+    }
     public function render()
     {
         return view('livewire.authentication.signup', [

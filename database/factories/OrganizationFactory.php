@@ -21,6 +21,9 @@ class OrganizationFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
+            'phone_number' => $this->faker->phoneNumber(),
+            'contact_email' => $this->faker->unique()->safeEmail(),
+            'bio'  => str(fake()->realText(120)),
             'city_id' => City::factory(),
             'sector_id' => Sector::factory(),
             'user_id' => User::factory(),

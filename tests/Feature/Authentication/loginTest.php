@@ -18,57 +18,12 @@ it('return the correct component' , function () {
 });
 
 
-
-it('assert redirect to admin page' , function () {
-    $user = User::factory()->create([
-        'email' => 'email@example.com',
-        'password' => bcrypt('password'),
-        'role' => 'admin',
-    ]);
-
-    Livewire::test(Login::class)
-        ->set('email', $user->email)
-        ->set('password', 'password')
-        ->call('authenticate')
-        ->assertRedirect('/admin/dashboard');
-});
-
-
-it('assert redirect to volunteer page' , function () {
-    $user = User::factory()->create([
-        'email' => 'email@example.com',
-        'password' => bcrypt('password'),
-        'role' => 'volunteer',
-    ]);
-
-    Livewire::test(Login::class)
-        ->set('email', $user->email)
-        ->set('password', 'password')
-        ->call('authenticate')
-        ->assertRedirect('/');
-});
-
-it('assert redirect to organization page' , function () {
-    $user = User::factory()->create([
-        'email' => 'email@example.com',
-        'password' => bcrypt('password'),
-        'role' => 'organization',
-    ]);
-
-    Livewire::test(Login::class)
-        ->set('email', $user->email)
-        ->set('password', 'password')
-        ->call('authenticate')
-        ->assertRedirect('/organization/dashboard');
-});
-
 it('email is valid' , function ($badEmail) {
     Livewire::test(Login::class)
         ->set('email', $badEmail)
         ->set('password', 'password')
         ->call('authenticate')
         ->assertHasErrors(['email']);
-
 })->with([
    "test@.com",
     "test@com@domain.com",
@@ -86,4 +41,33 @@ it('password is valid' , function ($badPassword) {
     1,
     1.5,
     null
+]);
+
+
+it('assert redirect to admin page' , function ($badRole) {
+    $user = User::factory()->create([
+        'email' => 'email@example.com',
+        'password' => bcrypt('password'),
+        'role' => $badRole,
+    ]);
+    actingAs($user)
+        ->get(route('admin.dashboard'))->assertRedirect(route('home'));
+})->with([
+    'organization',
+    'volunteer',
+]);
+
+
+it('assert redirect to organization page' , function ($badRole) {
+    $user = User::factory()->create([
+        'email' => 'email@example.com',
+        'password' => bcrypt('password'),
+        'role' => $badRole,
+    ]);
+
+    actingAs($user)
+        ->get(route('organization.dashboard'))->assertRedirect(route('home'));
+})->with([
+    'volunteer',
+    'admin',
 ]);

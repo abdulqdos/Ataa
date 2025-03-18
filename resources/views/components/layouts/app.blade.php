@@ -27,7 +27,7 @@
             <div class="flex justify-between h-16">
                 <div class="flex">
                     <div class="flex-shrink-0 flex items-center">
-                        <img class="h-10 w-auto" src="https://ui-avatars.com/api/?name=عطاء&background=106665&color=fff&size=70&bold=true" alt="شعار عطاء">
+                        <img class="h-10 w-auto" src="{{ asset('images/logo.svg') }}" alt="شعار عطاء">
                         <span class="mr-2 text-xl font-bold text-[var(--primary)]">عطاء</span>
                     </div>
                     <div class="hidden sm:gap-6 sm:flex  sm:space-x-reverse sm:mr-6">
@@ -115,7 +115,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="md:col-span-1">
                     <div class="flex items-center">
-                        <img class="h-10 w-auto" src="https://ui-avatars.com/api/?name=عطاء&background=fff&color=106665&size=70&bold=true" alt="شعار عطاء">
+                        <img class="h-10 w-auto" src=" {{ asset('images/logo.svg') }}" alt="شعار عطاء">
                         <span class="mr-2 text-xl font-bold text-white">عطاء</span>
                     </div>
                     <p class="mt-4 text-gray-200">

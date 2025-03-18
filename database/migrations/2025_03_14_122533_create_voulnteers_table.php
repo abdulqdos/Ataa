@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('nationality')->nullable();
-            $table->enum('gender' , ['male' , 'female'])->nullable();
-            $table->string('education_level')->nullable();
-            $table->integer('age')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('bio');
+            $table->enum('gender' , ['male' , 'female']);
+            $table->integer('age');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

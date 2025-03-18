@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use function Livewire\before;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Volunteer>
@@ -21,8 +22,9 @@ class VolunteerFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'age' => $this->faker->numberBetween(18, 99),
-            'education_level' => $this->faker->randomElement(['beginner', 'intermediate', 'advanced']),
-            'nationality' => $this->faker->country(),
+            'phone_number' => $this->faker->phoneNumber(),
+            'gender' => $this->faker->randomElement(['male', 'female']),
+            'bio'  => str(fake()->realText(120)),
             'user_id' => User::factory(),
         ];
     }

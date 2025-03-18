@@ -3,11 +3,13 @@
 namespace Database\Seeders;
 
 use App\Models\City;
+use App\Models\Opportunity;
 use App\Models\Organization;
 use App\Models\Sector;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Volunteer;
+use Database\Factories\OpportunityFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,8 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         $volunteer = User::factory()->create([
             'user_name' => 'Test User',
             'email' => 'volunteer@example.com',
@@ -39,7 +39,15 @@ class DatabaseSeeder extends Seeder
 
         Volunteer::factory()->recycle($volunteer)->create();
 
-        Organization::factory()->recycle($organization)->create();
+        Opportunity::factory(10)->recycle(Organization::factory()->recycle($organization)->create())->create();
+
+        $orgs = User::factory(20)->create([
+            'role' => 'organization',
+        ]);
+
+        $organizations = Organization::factory(20)->recycle($orgs)->create();
+
+        Opportunity::factory(100)->recycle($organizations)->create();
 
         City::factory(10)->create();
 

@@ -4,7 +4,11 @@ use App\Livewire\Authentication\ForgotPassword;
 use App\Livewire\Authentication\Login;
 use App\Livewire\Authentication\ResetPassword;
 use App\Livewire\Authentication\Signup;
+
 use App\Livewire\Organization\Dashboard;
+use App\Livewire\Organization\Opportunity\Index as Opportunity ;
+use App\Livewire\Organization\Opportunity\Create as OpportunityCreate ;
+
 use App\Livewire\Admin\Dashboard as AdminDashboard;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +31,13 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
 });
 
-Route::get('/organization/dashboard' , Dashboard::class)->name('organization.dashboard');
-Route::get('/admin/dashboard' , AdminDashboard::class)->name('admin.dashboard');
+Route::middleware('organization')->group(function () {
+    Route::get('/organization/dashboard' , Dashboard::class)->name('organization.dashboard');
+    Route::get('/organization/opportunity' , Opportunity::class)->name('organization.opportunity');
+    Route::get('/organization/opportunity/create' , OpportunityCreate::class)->name('organization.opportunity.create');
+});
+
+Route::middleware('admin')->group(function () {
+    Route::get('/admin/dashboard' , AdminDashboard::class)->name('admin.dashboard');
+
+});

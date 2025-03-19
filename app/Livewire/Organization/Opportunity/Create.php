@@ -12,7 +12,7 @@ class Create extends OrganizationComponent
 {
     use WithFileUploads ;
     #[title('إضافة فرصة تطوعية')]
-    public $title  , $description , $start_date , $end_date , $status ;
+    public $title  , $description , $start_date , $end_date  ;
     public $img , $img_url ;
 
     protected $rules = [
@@ -64,12 +64,17 @@ class Create extends OrganizationComponent
             'description' => $this->description,
             'start_date' => Carbon::parse($this->start_date)->toDateString(),
             'end_date' => Carbon::parse($this->end_date)->toDateString(),
-            'status' => $this->status,
             'img_url' => $this->img_url,
             'organization_id' => $organizationId,
         ]);
 
         return $this->redirect(route('organization.opportunity'));
+    }
+
+    public function removeImage()
+    {
+        $this->img = null;
+        $this->img_url = '';
     }
 
     public function render()

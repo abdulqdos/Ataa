@@ -1,6 +1,15 @@
-<div class="bg-white">
+<div>
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg px-3 py-1">
+    <div class="max-w-full mx-10 px-4 py-2 mb-4 bg-white shadow-md rounded-md">
+        <div class="flex flex-row justify-between items-center">
+            <h1 class="text-xl px-1 py-2 text-[var(--primary)]"> فرص التطوعية </h1>
+            <a href="{{ route('organization.opportunity.create') }}" wire:navigate class="bg-[var(--primary)] px-4 py-1 cursor-pointer hover:bg-[var(--primaryLight)] transition duration-300 text-white rounded-md">
+                + إضافة فرصة جديدة
+            </a>
+        </div>
+    </div>
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg px-3 py-1 bg-white mx-10">
         <div class="py-4 bg-white">
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative mt-1">

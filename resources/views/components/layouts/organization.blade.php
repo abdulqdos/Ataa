@@ -48,8 +48,8 @@
         </div>
         <nav class="mt-2">
 
-            <x-layouts.organiations.nav i="fas fa-tachometer-alt w-6" href="{{ route('organization.dashboard') }}" :active="request()->is('organization/dashboard')">لوحة التحكم</x-layouts.organiations.nav>
-            <x-layouts.organiations.nav i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunity')">الفرص التطوعية</x-layouts.organiations.nav>
+            <x-layouts.organiations.nav i="fas fa-tachometer-alt w-6" href="{{ route('organization.dashboard') }}"  :active="request()->is('organization/dashboard')" wire:navigate>لوحة التحكم</x-layouts.organiations.nav>
+            <x-layouts.organiations.nav i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}"  :active="request()->is('organization/opportunity')" wire:navigate>الفرص التطوعية</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-users w-6" href="#" :active="false">المتطوعون</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات</x-layouts.organiations.nav>
 
@@ -73,8 +73,8 @@
         </div>
         <nav class="mt-2">
 
-            <x-layouts.organiations.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('organization/dashboard')"> لوحة التحكم </x-layouts.organiations.nav-mobile>
-            <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunity')">الفرص التطوعية </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('organization/dashboard')" wire:navigate> لوحة التحكم </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunity')" wire:navigate>الفرص التطوعية </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-users w-6" href="#" :active="false">المتطوعون </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات </x-layouts.organiations.nav-mobile>
 

@@ -21,7 +21,7 @@ return new class extends Migration
                 'available',
                 'ongoing',
                 'completed'
-            ]);
+            ])->default('available');
             $table->foreignId('organization_id')->constrained('organizations');
             $table->string('img_url')->nullable();
             $table->timestamps();

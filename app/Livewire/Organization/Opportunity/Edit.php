@@ -1,26 +1,34 @@
 <?php
 
 namespace App\Livewire\Organization\Opportunity;
+
 use App\Livewire\OrganizationComponent;
 use App\Models\Opportunity;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Title;
+use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Create extends OrganizationComponent
+class Edit extends OrganizationComponent
 {
-    use WithFileUploads ;
-    #[title('إضافة فرصة تطوعية')]
-    public $title  , $description , $start_date , $end_date  ;
-    public $img , $img_url ;
+    use WithFileUploads;
+
+    #[Title('تعديل بيانات الفرصة')]
+
+    // Inputs
+    public $title, $description, $start_date, $end_date;
+    public $img, $img_url;
+
+    // Object
+    public $opportunity;
 
     protected $rules = [
         'title' => 'required|min:3|max:20|string|regex:/^[^<>\/]*$/',
         'description' => 'required|min:10|max:255|string|regex:/^[^<>\/]*$/',
         'start_date' => 'required|date|after_or_equal:today|before:end_date',
         'end_date' => 'required|date|after:start_date',
-        'img' => 'required|image|max:1024',
+        'img' => 'nullable|image|max:1024', // تغيير إلى nullable بدلاً من sometimes
     ];
 
     protected $messages = [
@@ -44,22 +52,48 @@ class Create extends OrganizationComponent
         'end_date.date' => 'يجب أن يكون تاريخ الانتهاء تاريخًا صحيحًا.',
         'end_date.after' => 'يجب أن يكون تاريخ الانتهاء بعد تاريخ البداية.',
 
-        'img.required' => 'الصورة مطلوبة.',
         'img.image' => 'يجب أن يكون الملف صورة بصيغة صحيحة.',
         'img.max' => 'يجب ألا يتجاوز حجم الصورة 1 ميجابايت.',
     ];
 
-    public function store()
+    public function mount(Opportunity $opportunity)
+    {
+        $this->title = $opportunity->title;
+        $this->description = $opportunity->description;
+        $this->start_date = Carbon::parse($this->opportunity->start_date)->format('Y-m-d');
+        $this->end_date = Carbon::parse($this->opportunity->end_date)->format('Y-m-d');
+        $this->img_url = $opportunity->img_url;
+        $this->opportunity = $opportunity;
+    }
+
+    public function removeImage()
+    {
+        $this->img = null;
+        $this->img_url = '';
+    }
+
+    public function update()
     {
         $organizationId = auth()->user()->organization?->id;
 
-        $this->validate();
-
-        if ($this->img && !app()->runningUnitTests()) {
-            $this->img_url = $this->img->storePublicly('opportunity_images', ['disk' => 'public']);
+        // validation img
+        if (!$this->img_url && !$this->img) {
+            $this->addError('img', 'الصورة مطلوبة.');
+            return;
         }
 
-        Opportunity::create([
+        $this->validate();
+
+        if ($this->img) {
+            if ($this->opportunity->img_url) {
+                Storage::disk('public')->delete($this->opportunity->img_url);
+            }
+
+            $this->img_url = $this->img->store('opportunities_photos', 'public');
+        }
+
+        // update data
+        $this->opportunity->update([
             'title' => $this->title,
             'description' => $this->description,
             'start_date' => Carbon::parse($this->start_date)->toDateString(),
@@ -71,14 +105,8 @@ class Create extends OrganizationComponent
         return $this->redirect(route('organization.opportunity'));
     }
 
-    public function removeImage()
-    {
-        $this->img = null;
-        $this->img_url = '';
-    }
-
     public function render()
     {
-        return view('livewire.organization.opportunity.create');
+        return view('livewire.organization.opportunity.edit');
     }
 }

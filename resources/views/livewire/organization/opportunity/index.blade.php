@@ -153,7 +153,7 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 flex flex-row gap-4">
-                                    <a href="#" class="font-medium bg-blue-600 px-4 py-1 text-white cursor-pointer hover:bg-blue-800 transition duration-300 rounded-md">Edit</a>
+                                    <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="font-medium bg-blue-600 px-4 py-1 text-white cursor-pointer hover:bg-blue-800 transition duration-300 rounded-md">Edit</a>
                                     <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="font-medium bg-red-600  px-4 py-1 text-white cursor-pointer hover:bg-red-800 transition duration-300 rounded-md">Delete</button>
                                 </td>
                             </tr>

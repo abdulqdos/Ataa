@@ -6,6 +6,7 @@ use App\Livewire\OrganizationComponent;
 use App\Models\Opportunity;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -69,7 +70,7 @@ class Index extends OrganizationComponent
         }
 
         return view('livewire.organization.opportunity.index', [
-            'opportunities' => $query->paginate(10),
+            'opportunities' => $query->latest()->paginate(10),
         ]);
     }
 }

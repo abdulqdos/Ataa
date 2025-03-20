@@ -18,7 +18,7 @@ class OpportunityFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->jobTitle(),
+            'title' => $this->faker->firstName(),
             'description' =>  str(fake()->realText(120)),
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),

@@ -17,13 +17,13 @@ return new class extends Migration
             $table->longText('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->enum('status', [
-                'available',
-                'ongoing',
-                'completed'
-            ])->default('available');
-            $table->foreignId('organization_id')->constrained('organizations');
             $table->string('img_url')->nullable();
+            $table->foreignId('organization_id')->constrained('organizations');
+            $table->enum('status', ['upcoming', 'active', 'completed', 'full'])
+                ->default('upcoming');
+            $table->string('location');
+            $table->string('location_url', 2048)->nullable();
+            $table->integer('count');
             $table->timestamps();
         });
     }

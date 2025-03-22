@@ -34,26 +34,33 @@ it('return a correct component' , function () {
         ->get(route('organization.opportunity.create'))->assertSeeLivewire('organization.opportunity.create');
 });
 
-
 it('can store an Opportunity', function () {
 
     actingAs($this->user);
 
+    $this->withoutExceptionHandling();
     Livewire::test('organization.opportunity.create')
-    ->set('title' , 'فرصة التعاونية')
-    ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
-    ->set('start_date' , '12-4-2025')
-    ->set('end_date' , '15-4-2025')
-    ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
-    ->call('store');
+        ->set('title' , 'فرصة التعاونية')
+        ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
+        ->set('start_date' , '2025-04-12')
+        ->set('end_date' , '2025-04-15')
+        ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
+        ->set('location' , 'شارع زاوية مقابل مستشفى')
+        ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
+        ->set('count' , 200)
+        ->call('store');
 
     $this->assertDatabaseHas('opportunities', [
         'title' => 'فرصة التعاونية',
         'description' => 'فرصة التعاونية لي بناء مجتمع افضل',
-        'start_date' => Carbon::createFromFormat('d-m-Y', '12-4-2025')->toDateString(),
-        'end_date' => Carbon::createFromFormat('d-m-Y', '15-4-2025')->toDateString(),
+        'start_date' => '2025-04-12',
+        'end_date' => '2025-04-15',
+        'location' => 'شارع زاوية مقابل مستشفى',
+        'location_url' => 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA',
+        'count' => 200,
     ]);
 });
+
 
 it('Redirect to correct page', function () {
 
@@ -66,6 +73,9 @@ it('Redirect to correct page', function () {
         ->set('start_date' , '12-4-2025')
         ->set('end_date' , '15-4-2025')
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
+        ->set('location' , 'شارع زاوية مقابل مستشفى')
+        ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
+        ->set('count' , 200)
         ->call('store')
         ->assertRedirect(route('organization.opportunity'));
 });

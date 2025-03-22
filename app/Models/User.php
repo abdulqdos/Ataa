@@ -56,4 +56,9 @@ class User extends Authenticatable
         return $this->hasOne(Organization::class , 'user_id' );
     }
 
+    public function volunteer()
+    {
+        return $this->hasOne(Volunteer::class , 'user_id' );
+    }
+
 }

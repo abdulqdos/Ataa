@@ -10,7 +10,7 @@ class Opportunity extends Model
     /** @use HasFactory<\Database\Factories\OpportunityFactory> */
     use HasFactory;
 
-    protected $fillable = [ 'title' , 'description' , 'status' , 'start_date' , 'end_date' , 'img_url' , 'organization_id' ];
+    protected $fillable = [ 'title' , 'description' , 'status' , 'start_date' , 'end_date' , 'img_url' , 'location' , 'location_url' , 'count', 'organization_id' ];
 
     protected $casts = [
         'start_date' => 'date:Y-m-d',

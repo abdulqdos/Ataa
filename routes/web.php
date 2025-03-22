@@ -1,10 +1,14 @@
 <?php
 
+// Authentication
 use App\Livewire\Authentication\ForgotPassword;
 use App\Livewire\Authentication\Login;
 use App\Livewire\Authentication\ResetPassword;
 use App\Livewire\Authentication\Signup;
 
+// Pages
+use App\Livewire\Opportunities ;
+// Organization
 use App\Livewire\Organization\Dashboard;
 use App\Livewire\Organization\Opportunity\Index as Opportunity ;
 use App\Livewire\Organization\Opportunity\Create as OpportunityCreate ;
@@ -17,6 +21,9 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::get('/opportunity', Opportunities::class )->name('opportunities');
+
+// Guest
 Route::middleware('guest')->group(function () {
     Route::get('/login' , Login::class)->name('login');
     Route::get('/signup' ,Signup::class)->name('signup');
@@ -24,7 +31,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/reset-password/{token}/{email}', ResetPassword::class)->name('password.reset');
 });
 
-
+// Auth
 Route::middleware('auth')->group(function () {
     Route::get('/logout' , function () {
         Auth::logout();
@@ -32,6 +39,7 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
 });
 
+// Organization
 Route::middleware('organization')->group(function () {
     Route::get('/organization/dashboard' , Dashboard::class)->name('organization.dashboard');
     Route::get('/organization/opportunity' , Opportunity::class)->name('organization.opportunity');
@@ -39,6 +47,7 @@ Route::middleware('organization')->group(function () {
     Route::get('/organization/opportunity/{opportunity}/edit' , OpportunityEdit::class)->name('organization.opportunity.edit');
 });
 
+// Admin
 Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard' , AdminDashboard::class)->name('admin.dashboard');
 

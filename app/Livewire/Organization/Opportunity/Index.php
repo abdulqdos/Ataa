@@ -7,7 +7,6 @@ use App\Models\Opportunity;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
-use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends OrganizationComponent

@@ -25,9 +25,9 @@
     @endif
 
 
-    <div class="max-w-full mx-10 px-4 py-2 mb-4 bg-white shadow-md rounded-md">
+    <div class="max-w-full mx-5 px-4 py-2 mb-4 bg-white shadow-sm rounded-md">
         <div class="flex flex-row justify-between items-center">
-            <h1 class="text-xl px-1 py-2 text-[var(--primary)]"> فرص التطوعية </h1>
+            <h1 class="text-xl px-1 py-2 text-[var(--primary)] font-semibold"> فرص التطوعية </h1>
             <a href="{{ route('organization.opportunity.create') }}" wire:navigate class="bg-[var(--primary)] px-4 py-1 cursor-pointer hover:bg-[var(--primaryLight)] transition duration-300 text-white rounded-md">
                 + إضافة فرصة جديدة
             </a>
@@ -35,7 +35,7 @@
     </div>
 
 
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg px-3 py-1 bg-white mx-10">
+    <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-1 bg-white mx-5">
         <div class="py-4 bg-white flex flex-row items-center justify-start gap-4">
             <!-- مربع البحث -->
             <div>
@@ -83,8 +83,8 @@
                 focus:ring-1 focus:outline-none focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)]"
                         wire:model.live="status">
                     <option value="">جميع الحالات</option>
-                    <option value="available">متاحة</option>
-                    <option value="ongoing">مستمرة</option>
+                    <option value="upcoming">قريباً</option>
+                    <option value="active">نشطة</option>
                     <option value="completed">مكتملة</option>
                 </select>
             </div>
@@ -135,20 +135,20 @@
 
                                 <td class="px-6 py-4">
                                     <span class="font-semibold text-center
-                                        @if($opportunity->status == 'ongoing')
+                                        @if($opportunity->status == 'active')
                                             text-blue-600 border border-blue-600 bg-white
                                         @elseif($opportunity->status == 'completed')
                                             text-green-600 border border-green-600 bg-white
-                                        @elseif($opportunity->status == 'available')
+                                        @elseif($opportunity->status == 'upcoming')
                                             text-yellow-600 border border-yellow-600 bg-white
                                         @endif
                                         px-1 py-1 mx-0 rounded-md text-sm">
-                                        @if($opportunity->status == 'ongoing')
-                                            مستمرة
+                                        @if($opportunity->status == 'active')
+                                            نشطة
                                         @elseif($opportunity->status == 'completed')
                                             مكتملة
-                                        @elseif($opportunity->status == 'available')
-                                            متاحة
+                                        @elseif($opportunity->status == 'upcoming')
+                                            قريباً
                                         @endif
                                     </span>
                                 </td>

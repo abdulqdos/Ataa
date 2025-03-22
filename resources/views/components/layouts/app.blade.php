@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مشروع عطاء | منصة التطوع</title>
-    @vite(['resources/css/app.css' , 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
@@ -32,7 +32,7 @@
                     </div>
                     <div class="hidden sm:gap-6 sm:flex  sm:space-x-reverse sm:mr-6">
                         <x-layouts.volunteers.nav href="/" :active="request()->is('/')">الرئيسية</x-layouts.volunteers.nav>
-                        <x-layouts.volunteers.nav href="/" :active="false">فرص التطوع</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="{{ route('opportunities') }}" :active="request()->is('opportunity')">فرص التطوع</x-layouts.volunteers.nav>
                         <x-layouts.volunteers.nav href="/" :active="false">المؤسسات</x-layouts.volunteers.nav>
                         <x-layouts.volunteers.nav href="/" :active="false"> المتطوعون</x-layouts.volunteers.nav>
                         <x-layouts.volunteers.nav href="/" :active="false">عن عطاء</x-layouts.volunteers.nav>
@@ -55,9 +55,7 @@
                             <div>
                                 <button type="button" id="userMenuButton" class="flex rounded-full focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-[var(--primary)]" aria-expanded="false" aria-haspopup="true">
                                     <span class="sr-only">افتح قائمة المستخدم</span>
-                                    <div class="h-8 w-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center">
-                                        <span class="text-sm font-medium">أح</span>
-                                    </div>
+                                    <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{auth()->user()->volunteer?->first_name}}&background=2d8c8a&color=fff" alt="صورة المؤسسة">
                                 </button>
                             </div>
                             <div id="userMenu" class="hidden origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-[var(--primaryLight)] ring-opacity-5 focus:outline-none z-50" role="menu" aria-orientation="vertical" aria-labelledby="userMenuButton" tabindex="-1">
@@ -68,7 +66,7 @@
                                 <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل الخروج</a>
                             </div>
                         </div>
-                        <span class="text-sm font-medium text-gray-700">أحمد محمد</span>
+                        <span class="text-sm font-medium text-gray-700 text-center"> {{ auth()->user()->volunteer?->first_name }}</span>
                     </div>
                 @endauth
 
@@ -86,7 +84,7 @@
         <div class="sm:hidden hidden" id="mobile-menu">
             <div class="pt-2 pb-3 space-y-1 bg-gray-50">
                 <x-layouts.volunteers.nav-mobile href="/" :active="request()->is('/')"> الرئيسية </x-layouts.volunteers.nav-mobile>
-                <x-layouts.volunteers.nav-mobile href="#" :active="false"> فرص التطوع </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="{{ route('opportunities') }}" :active="request()->is('opportunity')"> فرص التطوع </x-layouts.volunteers.nav-mobile>
                 <x-layouts.volunteers.nav-mobile href="#" :active="false">المؤسسات </x-layouts.volunteers.nav-mobile>
                 <x-layouts.volunteers.nav-mobile href="#" :active="false">المتطوعون </x-layouts.volunteers.nav-mobile>
                 <x-layouts.volunteers.nav-mobile href="#" :active="false">عن عطاء </x-layouts.volunteers.nav-mobile>

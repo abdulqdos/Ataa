@@ -33,8 +33,6 @@
                 <input type="date" wire:model="start_date" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('start_date') border-red-500 @enderror">
             </div>
 
-
-
             <!-- تاريخ النهاية -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">تاريخ النهاية</label>
@@ -52,6 +50,37 @@
                 <x-layouts.x-error-messge :message="$message" />
             @enderror
         </div>
+
+        <!-- Location -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">المكان   <span class="text-xs text-gray-500"> (وصف المكان)  </span></label>
+            <input type="text" wire:model="location" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('location') border-red-500 @enderror" placeholder="طرابلس , سيدي خليفة بجانب مسجد أبوغرارة">
+        </div>
+
+        @error('location')
+        <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
+        <!-- Location -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"> رابط المكان   </label>
+            <input type="url" wire:model="location_url" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('location_url') border-red-500 @enderror" placeholder="أدخل رابط المكان الخاص بك هنا (إنسخ و إلصق الرابط)">
+        </div>
+
+        @error('location_url')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">ادخل عدد متطوعون  </label>
+            <input type="text" wire:model="count" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('count') border-red-500 @enderror" placeholder="أدخل أقصى عدد متطوعون (يجب أن يكون رقم)">
+        </div>
+
+        @error('count')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
 
         <!-- رفع الصورة -->
         <div class="mb-4">

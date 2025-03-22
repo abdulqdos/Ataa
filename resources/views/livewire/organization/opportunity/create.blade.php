@@ -2,12 +2,12 @@
     <h2 class="text-3xl font-bold text-gray-800 mb-5 text-center">إضافة فرصة تطوعية</h2>
 
     <form wire:submit.prevent="store" class="space-y-5">
+
         <!-- العنوان -->
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">العنوان</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1"> العنوان <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="title"> * </span></label>
             <div class="relative">
                 <input type="text" wire:model="title" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('title') border-red-500 @enderror" placeholder="مثال: حملة تنظيف الشواطئ">
-
             </div>
         </div>
 
@@ -16,8 +16,9 @@
         @enderror
 
         <!-- الوصف -->
+
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">الوصف</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">الوصف <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="description"> * </span></label>
             <textarea wire:model="description" rows="3" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('description') border-red-500 @enderror" placeholder="وصف مختصر للفرصة التطوعية"></textarea>
         </div>
 
@@ -29,20 +30,19 @@
         <div class="grid grid-cols-2 gap-4">
             <!-- تاريخ البداية -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">تاريخ البداية</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">تاريخ البداية<span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="start_date"> * </span></label>
                 <input type="date" wire:model="start_date" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('start_date') border-red-500 @enderror">
             </div>
 
-
-
             <!-- تاريخ النهاية -->
             <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">تاريخ النهاية</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">  تاريخ النهاية<span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="end_date"> * </span></label>
                 <input type="date" wire:model="end_date" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('end_date') border-red-500 @enderror">
             </div>
 
         </div>
 
+        <!-- Error date -->
         <div class="flex flex-row justify-start items-center gap-x-8">
             @error('start_date')
                 <x-layouts.x-error-messge :message="$message" />
@@ -53,9 +53,39 @@
             @enderror
         </div>
 
+        <!-- Location -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">المكان   <span class="text-xs text-gray-500"> (وصف المكان)  <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="location"> * </span></span></label>
+            <input type="text" wire:model="location" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('location') border-red-500 @enderror" placeholder="طرابلس , سيدي خليفة بجانب مسجد أبوغرارة">
+        </div>
+
+        @error('location')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
+        <!-- Location -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"> رابط المكان   <span class="text-xs text-gray-500"> (إختياري)  </span></label>
+            <input type="url" wire:model="location_url" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('location_url') border-red-500 @enderror" placeholder="أدخل رابط المكان الخاص بك هنا (إنسخ و إلصق الرابط)">
+        </div>
+
+        @error('location_url')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">ادخل عدد متطوعون  <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="count"> * </span></label>
+            <input type="text" wire:model="count" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('count') border-red-500 @enderror" placeholder="أدخل أقصى عدد متطوعون (يجب أن يكون رقم)">
+        </div>
+
+        @error('count')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
         <!-- رفع الصورة -->
         <div class="mb-4">
-            <label class="block text-md font-semibold text-gray-700 mb-2">صورة الفرصة</label>
+            <label class="block text-md font-semibold text-gray-700 mb-2">صورة الفرصة <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="img"> * </span></label>
             <label for="img" class="cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-6 bg-gray-50 hover:bg-gray-100 transition duration-300 @error('img') border-red-500 @enderror">
                 @if ($img)
                     <img class="w-full h-40 object-cover rounded-lg shadow-md" src="{{ $img->temporaryUrl() }}" />
@@ -88,5 +118,6 @@
             </button>
         </div>
 
+        </form>
     </form>
 </div>

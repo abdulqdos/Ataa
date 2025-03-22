@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> {{ $title ?? 'لوحة تحكم المؤسسات | مشروع عطاء'}}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    @vite(['resources/js/app.js' , 'resources/css/app.css'])
+    @vite('resources/css/app.css')
 
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
@@ -44,8 +44,9 @@
         </div>
         <div class="p-2">
             <div class="text-sm text-gray-300 px-4 py-2">المؤسسة</div>
-            <div class="text-md font-bold px-4 pb-4">مؤسسة الخير التطوعية</div>
+            <div class="text-md font-bold px-4 pb-4"> {{  auth()->user()->organization?->name }}</div>
         </div>
+
         <nav class="mt-2">
 
             <x-layouts.organiations.nav i="fas fa-tachometer-alt w-6" href="{{ route('organization.dashboard') }}"  :active="request()->is('organization/dashboard')" wire:navigate>لوحة التحكم</x-layouts.organiations.nav>
@@ -69,7 +70,7 @@
         </div>
         <div class="p-2">
             <div class="text-sm text-gray-300 px-4 py-2">المؤسسة</div>
-            <div class="text-md font-bold px-4 pb-4">مؤسسة الخير التطوعية</div>
+            <div class="text-md font-bold px-4 pb-4">{{ auth()->user()->organization?->name  }}</div>
         </div>
         <nav class="mt-2">
 
@@ -103,8 +104,12 @@
                         </button>
                     </div>
                     <div class="flex items-center">
-                        <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name=مؤسسة+الخير&background=2d8c8a&color=fff" alt="صورة المؤسسة">
-                        <span class="mr-2 text-sm font-medium text-gray-700">مؤسسة الخير</span>
+                        @if(auth()->user()->organization?->img_url === null)
+                            <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{auth()->user()->organization?->name}}&background=2d8c8a&color=fff" alt="صورة المؤسسة">
+                        @else
+                            <img class="h-8 w-8 rounded-full object-cover" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->organization?->img_url) }}" alt="صورة المؤسسة">
+                        @endif
+                            <span class="mr-2 text-sm font-medium text-gray-700"> {{ auth()->user()->organization?->name }}</span>
                     </div>
                 </div>
             </div>

@@ -31,12 +31,12 @@
                         <span class="mr-2 text-xl font-bold text-[var(--primary)]">عطاء</span>
                     </div>
                     <div class="hidden sm:gap-6 sm:flex  sm:space-x-reverse sm:mr-6">
-                        <x-layouts.volunteers.nav href="/" :active="request()->is('/')">الرئيسية</x-layouts.volunteers.nav>
-                        <x-layouts.volunteers.nav href="{{ route('opportunities') }}" :active="request()->is('opportunity')">فرص التطوع</x-layouts.volunteers.nav>
-                        <x-layouts.volunteers.nav href="/" :active="false">المؤسسات</x-layouts.volunteers.nav>
-                        <x-layouts.volunteers.nav href="/" :active="false"> المتطوعون</x-layouts.volunteers.nav>
-                        <x-layouts.volunteers.nav href="/" :active="false">عن عطاء</x-layouts.volunteers.nav>
-                        <x-layouts.volunteers.nav href="/" :active="false" >تواصل معنا</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="request()->is('/')" wire:navigate>الرئيسية</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate>فرص التطوع</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false" wire:navigate>المؤسسات</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false" wire:navigate> المتطوعون</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false" wire:navigate>عن عطاء</x-layouts.volunteers.nav>
+                        <x-layouts.volunteers.nav href="/" :active="false" wire:navigate >تواصل معنا</x-layouts.volunteers.nav>
                     </div>
                 </div>
 
@@ -83,12 +83,12 @@
         <!-- Mobile menu, show/hide based on menu state. -->
         <div class="sm:hidden hidden" id="mobile-menu">
             <div class="pt-2 pb-3 space-y-1 bg-gray-50">
-                <x-layouts.volunteers.nav-mobile href="/" :active="request()->is('/')"> الرئيسية </x-layouts.volunteers.nav-mobile>
-                <x-layouts.volunteers.nav-mobile href="{{ route('opportunities') }}" :active="request()->is('opportunity')"> فرص التطوع </x-layouts.volunteers.nav-mobile>
-                <x-layouts.volunteers.nav-mobile href="#" :active="false">المؤسسات </x-layouts.volunteers.nav-mobile>
-                <x-layouts.volunteers.nav-mobile href="#" :active="false">المتطوعون </x-layouts.volunteers.nav-mobile>
-                <x-layouts.volunteers.nav-mobile href="#" :active="false">عن عطاء </x-layouts.volunteers.nav-mobile>
-                <x-layouts.volunteers.nav-mobile href="#" :active="false">تواصل معنا </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="/" :active="request()->is('/')" wire:navigate> الرئيسية </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate> فرص التطوع </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate>المؤسسات </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate>المتطوعون </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate>عن عطاء </x-layouts.volunteers.nav-mobile>
+                <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate>تواصل معنا </x-layouts.volunteers.nav-mobile>
             </div>
 
             <!-- Mobile auth section - For Non-authenticated users -->
@@ -208,8 +208,7 @@
         </div>
     </footer>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // التحكم في قائمة المستخدم
+        window.onload = function() {
             const userMenuButton = document.getElementById("userMenuButton");
             const userMenu = document.getElementById("userMenu");
 
@@ -240,12 +239,9 @@
                     }
                 });
             }
-        });
-
-
-
-
+        };
     </script>
-@livewireScripts
+
+    @livewireScripts
 </body>
 </html>

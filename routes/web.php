@@ -1,27 +1,28 @@
 <?php
 
 // Authentication
+use App\Livewire\Admin\Dashboard as AdminDashboard;
 use App\Livewire\Authentication\ForgotPassword;
 use App\Livewire\Authentication\Login;
 use App\Livewire\Authentication\ResetPassword;
 use App\Livewire\Authentication\Signup;
+use App\Livewire\Opportunity\Index;
+use App\Livewire\Opportunity\Show ;
+use App\Livewire\Organization\Dashboard;
+use App\Livewire\Organization\Opportunity\Create as OpportunityCreate;
+use App\Livewire\Organization\Opportunity\Edit as OpportunityEdit;
+use App\Livewire\Organization\Opportunity\Index as Opportunity;
+use Illuminate\Support\Facades\Route;
 
 // Pages
-use App\Livewire\Opportunities ;
 // Organization
-use App\Livewire\Organization\Dashboard;
-use App\Livewire\Organization\Opportunity\Index as Opportunity ;
-use App\Livewire\Organization\Opportunity\Create as OpportunityCreate ;
-use App\Livewire\Organization\Opportunity\Edit as OpportunityEdit ;
-
-use App\Livewire\Admin\Dashboard as AdminDashboard;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::get('/opportunity', Opportunities::class )->name('opportunities');
+Route::get('/opportunity', index::class )->name('opportunities');
+Route::get('/opportunities/{opportunity}', Show::class)->name('opportunities.show');
 
 // Guest
 Route::middleware('guest')->group(function () {

@@ -35,7 +35,6 @@ class Edit extends OrganizationComponent
     ];
 
     protected $messages = [
-
         // title
         'title.required' => 'العنوان مطلوب.',
         'title.min' => 'يجب أن يكون العنوان على الأقل 3 أحرف.',
@@ -87,8 +86,8 @@ class Edit extends OrganizationComponent
     {
         $this->title = $opportunity->title;
         $this->description = $opportunity->description;
-        $this->start_date = Carbon::parse($this->opportunity->start_date)->format('Y-m-d');
-        $this->end_date = Carbon::parse($this->opportunity->end_date)->format('Y-m-d');
+        $this->start_date = Carbon::parse($this->opportunity->start_date)->toDateString();
+        $this->end_date = Carbon::parse($this->opportunity->end_date)->toDateString();
         $this->img_url = $opportunity->img_url;
         $this->location = $opportunity->location;
         $this->location_url = $opportunity->location_url;

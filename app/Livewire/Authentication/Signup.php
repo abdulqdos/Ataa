@@ -24,11 +24,11 @@ class Signup extends Component
 
     // Volunteer Fields
     protected $volunteerRules = [
-        'first_name' => 'required|string|min:2|max:50',
-        'last_name' => 'required|string|min:2|max:50',
+        'first_name' => 'required|string|min:2|regex:/^[a-zA-Z]+$/u|max:50',
+        'last_name' => 'required|string|min:2|regex:/^[a-zA-Z]+$/u|max:50',
         'gender' => 'required|in:male,female',
-        'education_level' => 'required|string|max:100',
-        'age' => 'required|integer',
+        'phone_number' => 'required|integer|digits:10',
+        'age' => 'integer|min:8|max:90',
     ];
 
     // Organization Fields
@@ -36,13 +36,15 @@ class Signup extends Component
         'name' => 'required|string|min:2|max:50',
         'city' => 'required',
         'sector' => 'required',
+        'contact_email' => 'required|email|unique:organizations',
+        'phone_number_organization' => 'required|integer|digits:10',
     ];
 
     // Define variables
     public $userType = "volunteer";
     public $user_name, $email, $password, $password_confirmation ;
-    public $first_name, $last_name, $gender, $education_level, $age;
-    public $name, $city, $sector;
+    public $first_name, $last_name, $gender, $phone_number, $age;
+    public $name, $city , $sector , $contact_email , $phone_number_organization ;
 
     // Error messages for validation
     protected $messages = [
@@ -65,31 +67,42 @@ class Signup extends Component
         'first_name.string' => 'يجب أن يكون الاسم الأول نصًا.',
         'first_name.min' => 'يجب أن يتكون الاسم الأول من حرفين على الأقل.',
         'first_name.max' => 'يجب ألا يزيد الاسم الأول عن 50 حرفًا.',
+        'first_name.regx' => 'يجب ان يكون اسم الاول يحتوي على حرف فقط.',
 
         'last_name.required' => 'الاسم الأخير مطلوب.',
         'last_name.string' => 'يجب أن يكون الاسم الأخير نصًا.',
         'last_name.min' => 'يجب أن يتكون الاسم الأخير من حرفين على الأقل.',
         'last_name.max' => 'يجب ألا يزيد الاسم الأخير عن 50 حرفًا.',
+        'last_name.regx' => 'يجب ان يكون اسم الاول يحتوي على حرف فقط.',
 
         'gender.required' => 'الجنس مطلوب.',
         'gender.in' => 'يجب اختيار الجنس بين ذكر أو أنثى.',
 
-        'education_level.required' => 'المستوى التعليمي مطلوب.',
-        'education_level.string' => 'يجب أن يكون المستوى التعليمي نصًا.',
-        'education_level.max' => 'يجب ألا يزيد المستوى التعليمي عن 100 حرف.',
-
         'age.required' => 'العمر مطلوب.',
         'age.integer' => 'يجب أن يكون العمر رقمًا صحيحًا.',
+        'age.min' => 'يجب أن يكون العمر اكبر من 7.',
+        'age.max' => 'يجب أن يكون العمر اصغر من 91.',
+
+        'phone_number.required' => 'العمر مطلوب.',
+        'phone_number.integer' => 'يجب أن يكون العمر رقمًا صحيحًا.',
+        'phone_number.digits' => 'يجب أن يكون  عدد  خانات 10 .',
 
         'name.required' => 'اسم المؤسسة مطلوب.',
         'name.string' => 'يجب أن يكون اسم المؤسسة نصًا.',
         'name.min' => 'يجب أن يتكون اسم المؤسسة من حرفين على الأقل.',
         'name.max' => 'يجب ألا يزيد اسم المؤسسة عن 50 حرفًا.',
 
+        'phone_number_organization.required' => 'العمر مطلوب.',
+        'phone_number_organization.integer' => 'يجب أن يكون العمر رقمًا صحيحًا.',
+        'phone_number_organization.digits' => 'يجب أن يكون  عدد  خانات 10 .',
+
+        'contact_email.required' => 'البريد الإلكتروني مطلوب.',
+        'contact_email.email' => 'يرجى إدخال بريد إلكتروني صالح.',
+        'contact_email.unique' => 'البريد الإلكتروني مسجل مسبقًا.',
+
         'city.required' => 'يجب اختيار المدينة.',
         'sector.required' => 'يجب اختيار القطاع.',
     ];
-
 
     // Handle registration based on userType
     public function register()
@@ -106,6 +119,7 @@ class Signup extends Component
             session()->flash('success', 'تم إنشى حسابك بنجاح (: اتمنى لك رحلة تطوعية مليئة بالعطاء');
             $this->redirectRoute('organization.dashboard', navigate: true);
         }
+
     }
 
     public function signupVolunteer()
@@ -123,7 +137,7 @@ class Signup extends Component
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'gender' => $this->gender,
-            'education_level' => $this->education_level,
+            'phone_number' => $this->phone_number,
             'age' => $this->age,
             'user_id' => $user->id,
         ]);
@@ -146,6 +160,8 @@ class Signup extends Component
             'name' => $this->name,
             'city_id' => $this->city,
             'sector_id' => $this->sector,
+            'contact_email' => $this->contact_email,
+            'phone_number' => $this->phone_number_organization,
             'user_id' => $user->id,
         ]);
 

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
 {
+
     /** @use HasFactory<\Database\Factories\OrganizationFactory> */
     use HasFactory;
 
-    protected $fillable = ['name' , 'city_id' , 'sector_id' , 'user_id'];
+    protected $fillable = ['name' , 'city_id' , 'sector_id' , 'user_id' , 'contact_email' , 'phone_number'];
 
     public function user()
     {

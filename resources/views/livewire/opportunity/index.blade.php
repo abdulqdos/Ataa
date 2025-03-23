@@ -110,25 +110,35 @@
                             </div>
 
                             <div class="p-4">
-                                <h2 class="text-xl font-semibold mb-2">{{ $opportunity->title }}</h2>
+                                <div class="flex flex-row justify-between items-center mx-4">
+                                    <h2 class="text-xl font-semibold mb-2">{{ $opportunity->title }}</h2>
+                                    <div>
+                                        <span
+                                            class="
+                                                w-4 px-4 py-1 rounded-md
+                                                @if($opportunity->status === 'active')
+                                                    bg-green-100 text-green-500
+                                                @elseif($opportunity->status === 'upcoming')
+                                                    bg-yellow-100 text-yellow-600
+                                                @elseif($opportunity->status === 'completed')
+                                                    bg-blue-100 text-blue-500
+                                                @endif
+                                            ">
+                                            @if($opportunity->status === 'active')
+                                                نشط
+                                            @elseif($opportunity->status === 'upcoming')
+                                                قريباً
+                                            @elseif($opportunity->status === 'completed')
+                                                مكتملة
+                                            @endif
+                                        </span>
+                                    </div>
+                                </div>
 
                                 <div class="text-sm text-gray-600 mb-1">
-                                    <span class="font-bold">الحالة:</span>
-                                    <span class="
-                                        @if($opportunity->status === 'active')
-                                            text-green-500
-                                        @elseif($opportunity->status === 'upcoming')
-                                            text-blue-500
-                                        @elseif($opportunity->status === 'completed')
-                                            text-gray-500
-                                        @endif">
-                                        @if($opportunity->status === 'active')
-                                            نشط
-                                        @elseif($opportunity->status === 'upcoming')
-                                            قريباً
-                                        @elseif($opportunity->status === 'completed')
-                                            مكتملة
-                                        @endif
+                                    <span class="font-bold">المؤسسة :</span>
+                                    <span>
+                                        {{ $opportunity->organization->name }}
                                 </span>
                                 </div>
 
@@ -150,7 +160,7 @@
                                 </div>
 
                                 <div class="mt-4 ">
-                                    <a href="{{ route('opportunities.show' ,  $opportunity->id ) }}" class="px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[var(--primary)] hover:bg-[var(--primaryLight)] transition duration-300 w-full cursor-pointer ">
+                                    <a href="{{ route('opportunities.show' ,  $opportunity->id ) }}" wire:navigate class="px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[var(--primary)] hover:bg-[var(--primaryLight)] transition duration-300 w-full cursor-pointer ">
                                         عرض التفاصيل
                                     </a>
                                 </div>

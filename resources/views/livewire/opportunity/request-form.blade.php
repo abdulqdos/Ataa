@@ -16,13 +16,23 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form class="p-4 md:p-5" wire:submit.prevent="sendRequest">
+            <form class="p-4 md:p-5" wire:submit.prevent="sendRequest({{  $opportunity->id }})">
+
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div class="col-span-1">
                         <label for="reason" class="block mb-2 text-sm font-medium text-gray-900">سبب رغبتك في التطوع</label>
-                        <textarea id="reason" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-[var(--primaryLight)] focus:border-[var(--primaryLight)] focus:outline-none" placeholder="أكتب هنا سبب رغبتك في التطوع..."></textarea>
+                        <textarea
+                            id="reason"
+                            rows="4"
+                            wire:model="reason"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-[var(--primaryLight)] focus:border-[var(--primaryLight)] focus:outline-none @error('reason') border-red-500 @enderror " placeholder="أكتب هنا سبب رغبتك في التطوع..."></textarea>
                     </div>
                 </div>
+
+                @error('reason')
+                    <x-layouts.x-error-messge :message="$message" />
+                @enderror
+
                 <div class="flex justify-between mt-6">
                     <button type="submit" class="px-4 py-2 bg-[var(--primary)] text-white text-sm font-semibold rounded-lg shadow-md hover:bg-[var(--primaryLight)] cursor-pointer">
                         إرسال
@@ -31,6 +41,7 @@
                         إلغاء
                     </button>
                 </div>
+
             </form>
         </div>
     </div>

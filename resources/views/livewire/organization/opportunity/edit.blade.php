@@ -6,7 +6,7 @@
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">العنوان</label>
             <div class="relative">
-                <input type="text" wire:model="title" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('title') border-red-500 @enderror" placeholder="مثال: حملة تنظيف الشواطئ">
+                <input type="text" wire:model="title" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('title') border-red-500 @enderror" placeholder="مثال: حملة تنظيف الشواطئ">
 
             </div>
         </div>
@@ -18,7 +18,7 @@
         <!-- الوصف -->
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">الوصف</label>
-            <textarea wire:model="description" rows="3" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('description') border-red-500 @enderror" placeholder="وصف مختصر للفرصة التطوعية"></textarea>
+            <textarea wire:model="description" rows="3" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('description') border-red-500 @enderror" placeholder="وصف مختصر للفرصة التطوعية"></textarea>
         </div>
 
         @error('description')
@@ -54,7 +54,7 @@
         <!-- Location -->
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">المكان   <span class="text-xs text-gray-500"> (وصف المكان)  </span></label>
-            <input type="text" wire:model="location" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('location') border-red-500 @enderror" placeholder="طرابلس , سيدي خليفة بجانب مسجد أبوغرارة">
+            <input type="text" wire:model="location" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('location') border-red-500 @enderror" placeholder="طرابلس , سيدي خليفة بجانب مسجد أبوغرارة">
         </div>
 
         @error('location')
@@ -64,7 +64,7 @@
         <!-- Location -->
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1"> رابط المكان   </label>
-            <input type="url" wire:model="location_url" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('location_url') border-red-500 @enderror" placeholder="أدخل رابط المكان الخاص بك هنا (إنسخ و إلصق الرابط)">
+            <input type="url" wire:model="location_url" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('location_url') border-red-500 @enderror" placeholder="أدخل رابط المكان الخاص بك هنا (إنسخ و إلصق الرابط)">
         </div>
 
         @error('location_url')
@@ -74,7 +74,7 @@
 
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">ادخل عدد متطوعون  </label>
-            <input type="text" wire:model="count" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('count') border-red-500 @enderror" placeholder="أدخل أقصى عدد متطوعون (يجب أن يكون رقم)">
+            <input type="text" wire:model="count" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('count') border-red-500 @enderror" placeholder="أدخل أقصى عدد متطوعون (يجب أن يكون رقم)">
         </div>
 
         @error('count')
@@ -104,9 +104,9 @@
         @enderror
 
         <div class="flex flex-row justify-between items-center">
-            <a href="{{ route('organization.opportunity') }}" class="px-3 py-2 text-white bg-[var(--darkGray)] transition duration-300 hover:bg-[var(--lightGray)] cursor-pointer rounded-md"> رجوع </a>
+            <a href="{{ route('organization.opportunity') }}" class="px-3 py-2 btn-secondary"> رجوع </a>
 
-            <button type="submit" class="bg-[var(--primary)] text-white  text-sm p-3 rounded-md  hover:bg-[var(--primaryLight)] transition duration-300 cursor-pointer focus:outline-none flex items-center justify-center gap-2">
+            <button type="submit" class="text-sm p-3 btn-primary focus:outline-none flex items-center justify-center gap-2">
                 <div role="status" wire:loading class="mt-1">
                     <svg aria-hidden="true" class="w-3 h-3 text-gray-200 animate-spin fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

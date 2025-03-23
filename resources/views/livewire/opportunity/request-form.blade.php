@@ -25,7 +25,7 @@
                             id="reason"
                             rows="4"
                             wire:model="reason"
-                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-[var(--primaryLight)] focus:border-[var(--primaryLight)] focus:outline-none @error('reason') border-red-500 @enderror " placeholder="أكتب هنا سبب رغبتك في التطوع..."></textarea>
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-primaryLight focus:border-primaryLight focus:outline-none @error('reason') border-red-500 @enderror " placeholder="أكتب هنا سبب رغبتك في التطوع..."></textarea>
                     </div>
                 </div>
 
@@ -34,10 +34,10 @@
                 @enderror
 
                 <div class="flex justify-between mt-6">
-                    <button type="submit" class="px-4 py-2 bg-[var(--primary)] text-white text-sm font-semibold rounded-lg shadow-md hover:bg-[var(--primaryLight)] cursor-pointer">
+                    <button type="submit" class="px-4 py-2 btn-primary text-sm font-semibold shadow-md cursor-pointer">
                         إرسال
                     </button>
-                    <button wire:click="dispatch('toggle')" type="button" class="px-4 py-2 bg-[var(--darkGray)] text-white text-sm font-semibold rounded-md shadow-md hover:bg-[var(--lightGray)] cursor-pointer" data-modal-toggle="crud-modal">
+                    <button wire:click="dispatch('toggle')" type="button" class="px-4 py-2 btn-secondary  text-sm font-semibold  shadow-md cursor-pointer" data-modal-toggle="crud-modal">
                         إلغاء
                     </button>
                 </div>

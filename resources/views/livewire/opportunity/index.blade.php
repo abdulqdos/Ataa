@@ -16,7 +16,7 @@
                                 type="text"
                                 placeholder="بحث عن فرصة..."
                                 wire:model.live="searchText"
-                                class="w-full pr-10 py-3 px-4 rounded-lg border-1 border-gray-200 focus:border-[var(--primaryLight)] focus:ring-1 focus:outline-none  text-right placeholder:text-gray-400"
+                                class="w-full pr-10 py-3 px-4 rounded-lg border-1 border-gray-200 focus:border-primaryLight focus:ring-1 focus:outline-none  text-right placeholder:text-gray-400"
                             />
                         </div>
 
@@ -27,7 +27,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
                                 </svg>
                             </div>
-                            <select class="w-full appearance-none pr-10 py-3 px-4 rounded-lg border-1 border-gray-200 focus:border-[var(--primaryLight)] focus:ring-1 focus:outline-none  text-right bg-white cursor-pointer"
+                            <select class="w-full appearance-none pr-10 py-3 px-4 rounded-lg border-1 border-gray-200 focus:border-primaryLight focus:ring-1 focus:outline-none  text-right bg-white cursor-pointer"
                                     wire:model.live="status">
                                 <option value="">كل الحالات</option>
                                 <option value="upcoming">قريبا</option>
@@ -56,7 +56,7 @@
                                     <input
                                         type="date"
                                         wire:model.live="start_date"
-                                        class="w-full pr-10 py-2 px-4 rounded-lg border-1 border-gray-200 focus:border-[var(--primaryLight)] focus:outline-none text-right"
+                                        class="w-full pr-10 py-2 px-4 rounded-lg border-1 border-gray-200 focus:border-primaryLight focus:outline-none text-right"
                                     />
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                     <input
                                         type="date"
                                         wire:model.live="end_date"
-                                        class="w-full pr-10 py-2 px-4 rounded-lg border-1 border-gray-200 focus:border-[var(--primaryLight)] focus:outline-none text-right"
+                                        class="w-full pr-10 py-2 px-4 rounded-lg border-1 border-gray-200 focus:border-primaryLight focus:outline-none text-right"
                                     />
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
 
             @if($opportunities->count() > 0)
                 <div class="my-6 mx-auto flex flex-col md:flex-row justify-center items-center max-w-[992px] gap-6">
-                    <button wire:click="previousPage" wire:loading.attr="disabled" class="bg-[var(--primary)] hover:bg-[var(--primaryLight)] text-white px-4 py-2 rounded-lg shadow transition duration-300 cursor-pointer disabled:bg-[var(--primaryLight)] disabled:opacity-75 disabled:cursor-default" @if ($opportunities->onFirstPage()) disabled @endif>
+                    <button wire:click="previousPage" wire:loading.attr="disabled" class="bg-primary hover:bg-primaryLight text-white px-4 py-2 rounded-lg shadow transition duration-300 cursor-pointer disabled:bg-primaryLight disabled:opacity-75 disabled:cursor-default" @if ($opportunities->onFirstPage()) disabled @endif>
                         << السابق
                     </button>
                     <div class="text-gray-800 text-xl flex justify-center items-center gap-2 my-4 md:my-0">
@@ -91,7 +91,7 @@
                         <span class="font-bold">{{ $opportunities->total() }}</span>
                         <span>الفرص</span>
                     </div>
-                    <button wire:click="nextPage" wire:loading.attr="disabled" class="bg-[var(--primary)] hover:bg-[var(--primaryLight)] text-white px-4 py-2 rounded-lg shadow transition duration-300 cursor-pointer disabled:bg-[var(--primaryLight)] disabled:opacity-75 disabled:cursor-default" @if (!$opportunities->hasMorePages()) disabled @endif>
+                    <button wire:click="nextPage" wire:loading.attr="disabled" class="bg-primary hover:bg-primaryLight text-white px-4 py-2 rounded-lg shadow transition duration-300 cursor-pointer disabled:bg-primaryLight disabled:opacity-75 disabled:cursor-default" @if (!$opportunities->hasMorePages()) disabled @endif>
                         التالي >>
                     </button>
                 </div>
@@ -160,7 +160,7 @@
                                 </div>
 
                                 <div class="mt-4 ">
-                                    <a href="{{ route('opportunities.show' ,  $opportunity->id ) }}" wire:navigate class="px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[var(--primary)] hover:bg-[var(--primaryLight)] transition duration-300 w-full cursor-pointer ">
+                                    <a href="{{ route('opportunities.show' ,  $opportunity->id ) }}" wire:navigate class="px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primaryLight transition duration-300 w-full cursor-pointer ">
                                         عرض التفاصيل
                                     </a>
                                 </div>

@@ -49,28 +49,29 @@
 
             <!-- الأزرار -->
             <div class="mt-6 flex space-x-4">
+                @if($opportunity->status === 'completed')
+                    <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
+                        هاذي فرصة مكتملة .
+                    </button>
+                @endif
                 @auth
-                    @if($opportunity->status === 'completed')
-                        <button disabled class="px-4 py-2 bg-[var(--primary)] text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-[var(--primaryLight)] cursor-default">
-                            هاذي فرصة مكتملة .
-                        </button>
-                    @elseif($submitted)
-                        <button disabled class="px-4 py-2 bg-[var(--primary)] text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-[var(--primaryLight)] cursor-default">
+                    @if($submitted)
+                        <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
                             لقد سجلت بنجاح .
                         </button>
                     @else
-                        <button wire:click="toggle" class="px-4 py-2 bg-[var(--primary)] text-white text-sm font-semibold rounded-lg shadow-md hover:bg-[var(--primaryLight)] cursor-pointer">
+                        <button wire:click="toggle" class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md hover:bg-primaryLight cursor-pointer">
                             التسجيل في الفرصة
                         </button>
                     @endif
 
                 @endauth
                 @guest
-                        <a href="/login" wire:navigate class="px-4 py-2 bg-[var(--primary)] text-white text-sm font-semibold rounded-lg shadow-md hover:bg-[var(--primaryLight)] cursor-pointer">
+                        <a href="/login" wire:navigate class="px-4 py-2 btn-primary text-white text-sm font-semibold  shadow-md cursor-pointer">
                             التسجيل في الفرصة
                         </a>
                 @endguest
-                <a href="{{ route('opportunities') }}" wire:navigate class="px-4 py-2 bg-[var(--darkGray)] text-white text-sm font-semibold rounded-lg shadow-md hover:bg-[var(--lightGray)]">
+                <a href="{{ route('opportunities') }}" wire:navigate class="px-4 py-2 btn-secondary text-white text-sm font-semibold  shadow-md ">
                     العودة
                 </a>
             </div>

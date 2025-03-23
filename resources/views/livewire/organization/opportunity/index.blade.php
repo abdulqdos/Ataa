@@ -27,8 +27,8 @@
 
     <div class="max-w-full mx-5 px-4 py-2 mb-4 bg-white shadow-sm rounded-md">
         <div class="flex flex-row justify-between items-center">
-            <h1 class="text-xl px-1 py-2 text-[var(--primary)] font-semibold"> فرص التطوعية </h1>
-            <a href="{{ route('organization.opportunity.create') }}" wire:navigate class="bg-[var(--primary)] px-4 py-1 cursor-pointer hover:bg-[var(--primaryLight)] transition duration-300 text-white rounded-md">
+            <h1 class="text-xl px-1 py-2 text-primary font-semibold"> فرص التطوعية </h1>
+            <a href="{{ route('organization.opportunity.create') }}" wire:navigate class="px-4 py-1 btn-primary">
                 + إضافة فرصة جديدة
             </a>
         </div>
@@ -49,7 +49,7 @@
                     <input type="text" id="table-search"
                            wire:model.live="searchText"
                            class="block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50
-                   focus:ring-1 focus:outline-none focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)]"
+                   focus:ring-1 focus:outline-none focus:ring-secondaryLight focus:border-secondaryLight"
                            placeholder="ابحث عن فرصة معينة...">
                 </div>
             </div>
@@ -61,7 +61,7 @@
                     <label for="start_date" class="block text-sm font-medium text-gray-600">تاريخ البداية</label>
                     <input type="date" id="start_date" name="start_date"
                            class="block w-full py-2 px-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
-                   focus:ring-1 focus:outline-none focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)]"
+                   focus:ring-1 focus:outline-none focus:ring-secondaryLight focus:border-secondaryLight"
                            wire:model.live="start_date">
                 </div>
 
@@ -70,7 +70,7 @@
                     <label for="end_date" class="block text-sm font-medium text-gray-600">تاريخ النهاية</label>
                     <input type="date" id="end_date" name="end_date"
                            class="block w-full py-2 px-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
-                   focus:ring-1 focus:outline-none focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)]"
+                   focus:ring-1 focus:outline-none focus:ring-secondaryLight focus:border-secondaryLight"
                            wire:model.live="end_date">
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <label for="status" class="block text-sm font-medium text-gray-600">الحالة</label>
                 <select id="status" name="status"
                         class="block w-full py-2 px-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
-                focus:ring-1 focus:outline-none focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)]"
+                focus:ring-1 focus:outline-none focus:ring-secondaryLight focus:border-secondaryLight"
                         wire:model.live="status">
                     <option value="">جميع الحالات</option>
                     <option value="upcoming">قريباً</option>

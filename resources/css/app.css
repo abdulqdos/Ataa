@@ -5,13 +5,28 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
     --font-reem: 'Reem Kufi', sans-serif;
-    --primary: #106665; /* primary color */
-    --secondary: #2d8c8a; /* secondary color */
-    --primaryLight: #1a7e7d;
-    --secondaryLight: #3da3a1;
-    --gold: #ff9f1c;
-    --darkGray: #6a7778;
-    --lightGray: #7F8C8D;
+    --color-primary: #106665;
+    --color-secondary: #2d8c8a;
+    --color-primaryLight: #1a7e7d;
+    --color-secondaryLight: #3da3a1;
+    --color-gold: #ff9f1c;
+    --color-darkGray: #6a7778;
+    --color-lightGray: #7F8C8D;
+}
+
+@layer {
+    .btn-primary {
+        @apply bg-primary hover:bg-primaryLight rounded-md text-white cursor-pointer transition duration-300
+    }
+
+    .btn-secondary {
+        @apply bg-darkGray hover:bg-lightGray rounded-md text-white cursor-pointer transition duration-300
+    }
+
+    .active-link {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-right: 4px solid white;
+    }
 }
 
 

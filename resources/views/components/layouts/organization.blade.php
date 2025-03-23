@@ -18,11 +18,6 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .active-link {
-            background-color: rgba(255, 255, 255, 0.15);
-            border-right: 4px solid white;
-        }
-
         @media (max-width: 768px) {
             .sidebar.hidden {
                 transform: translateX(100%);
@@ -38,7 +33,7 @@
 <body class="bg-gray-100">
 <div class="flex h-screen overflow-hidden">
     <!-- Sidebar (Desktop) -->
-    <div id="sidebar" class="sidebar bg-[var(--primary)] text-white w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
+    <div id="sidebar" class="sidebar bg-primary text-white w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
         <div class="p-4 flex items-center justify-center border-b border-secondary">
             <div class="text-xl font-bold">مشروع عطاء</div>
         </div>
@@ -54,15 +49,15 @@
             <x-layouts.organiations.nav i="fas fa-users w-6" href="#" :active="false">المتطوعون</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات</x-layouts.organiations.nav>
 
-            <div class="border-t border-[var(--secondary)] mt-4 pt-4">
+            <div class="border-t border-secondary mt-4 pt-4">
                 <x-layouts.organiations.nav i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تجيل الخروج</x-layouts.organiations.nav>
             </div>
         </nav>
     </div>
 
     <!-- Mobile Sidebar (Hidden by default) -->
-    <div id="mobileSidebar" class="sidebar fixed top-0 right-0 h-full bg-[var(--primary)] text-white w-64 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
-        <div class="p-4 flex items-center justify-between border-b border-[var(--secondary)]">
+    <div id="mobileSidebar" class="sidebar fixed top-0 right-0 h-full bg-primary text-white w-64 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="p-4 flex items-center justify-between border-b boseconda">
             <div class="text-xl font-bold">مشروع عطاء</div>
             <button id="closeSidebar" class="text-white">
                 <i class="fas fa-times"></i>
@@ -79,7 +74,7 @@
             <x-layouts.organiations.nav-mobile i="fas fa-users w-6" href="#" :active="false">المتطوعون </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات </x-layouts.organiations.nav-mobile>
 
-            <div class="border-t border-[var(--secondary)] mt-4 pt-4">
+            <div class="border-t border-secondary mt-4 pt-4">
                 <x-layouts.organiations.nav-mobile i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تسجيل الخروج </x-layouts.organiations.nav-mobile>
 
             </div>
@@ -92,7 +87,7 @@
         <header class="bg-white shadow-sm z-10">
             <div class="flex items-center justify-between h-16 px-4">
                 <div>
-                    <button id="toggleSidebar" class="text-gray-500 hover:text-[var(--primary)] md:hidden">
+                    <button id="toggleSidebar" class="text-gray-500 hover:text-primary md:hidden">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>

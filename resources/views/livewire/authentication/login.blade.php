@@ -2,7 +2,7 @@
     <div class="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm mx-auto my-4 lg:min-w-96 min-w-[300px]">
         <div class="p-4 sm:p-7">
             <div class="text-center">
-                <h1 class="block lg:text-2xl font-bold text-[var(--primary)] text-lg">تسجيل الدخول</h1>
+                <h1 class="block lg:text-2xl font-bold text-primary text-lg">تسجيل الدخول</h1>
                 <p class="mt-2 text-sm text-gray-600">
                     ليس لديك حساب؟
                     <a class="text-[var(--secondary)] decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="{{ route('signup') }}">
@@ -20,8 +20,8 @@
                             <label for="email" class="block text-sm mb-2 text-gray-800">البريد الإلكتروني</label>
                             <div class="relative">
                                 <input type="email" id="email" wire:model="email"
-                                       class="py-3 px-4 block w-full bg-gray-50 border-[var(--primary)] rounded-lg text-sm
-                                            focus:border-[var(--primary)] focus:ring-[var(--primary)] focus:outline focus:outline-2 focus:outline-[var(--primary)]
+                                       class="py-3 px-4 block w-full bg-gray-50 border-primary rounded-lg text-sm
+                                            focus:border-primary focus:ring-primary focus:outline focus:outline-2 focus:outline-primary
                                             disabled:opacity-50 disabled:pointer-events-none placeholder-gray-300"
                                        required aria-describedby="email-error" placeholder="example@email.com">
                             </div>
@@ -35,13 +35,13 @@
                         <div>
                             <div class="flex justify-between items-center">
                                 <label for="password" class="block text-sm mb-2 text-gray-800">كلمة المرور</label>
-                                <a class="inline-flex items-center gap-x-1 text-sm text-[var(--primary)] decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="{{ route('password.forgot') }}">نسيت كلمة المرور؟</a>
+                                <a class="inline-flex items-center gap-x-1 text-sm text-primary decoration-2 hover:underline focus:outline-none focus:underline font-medium" href="{{ route('password.forgot') }}">نسيت كلمة المرور؟</a>
                             </div>
 
                             <div class="relative">
                                 <input type="password" id="password" name="password" wire:model="password"
-                                       class="py-3 px-4 block w-full bg-gray-50 border-[var(--primary)] rounded-lg text-sm
-                                            focus:border-[var(--primary)] focus:ring-[var(--primary)] focus:outline focus:outline-2 focus:outline-[var(--primary)]
+                                       class="py-3 px-4 block w-full bg-gray-50 border-primary rounded-lg text-sm
+                                            focus:border-primary focus:ring-primary focus:outline focus:outline-2 focus:outline-primary
                                             disabled:opacity-50 disabled:pointer-events-none placeholder-gray-300"
                                        required placeholder="*********">
                             </div>

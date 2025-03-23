@@ -18,7 +18,7 @@
                         <x-layouts.volunteers.middle-secondary-btn href="#">
                             تصفح الفرص التطوعية
                         </x-layouts.volunteers.middle-secondary-btn>
-                        <a href="#" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[var(--secondary)] hover:bg-[var(--secondaryLight)] transition duration-800 cursor-pointer sm:px-8">
+                        <a href="#" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondaryLight transition duration-800 cursor-pointer sm:px-8">
                             سجل كمتطوع
                         </a>
                     </div>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                             <div class="flex-1">
-                                <p class="text-sm font-medium text-[var(--primary)]">
+                                <p class="text-sm font-medium text-primary">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                         متاح
                                     </span>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                             <div class="flex-1">
-                                <p class="text-sm font-medium text-[var(--primary)]">
+                                <p class="text-sm font-medium text-primary">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                         متاح
                                     </span>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                             <div class="flex-1">
-                                <p class="text-sm font-medium text-[var(--primary)]">
+                                <p class="text-sm font-medium text-primary">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                                         قريباً
                                     </span>
@@ -173,7 +173,7 @@
                                     <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
                                         متطوع
                                     </dt>
-                                    <dd class="order-1 text-5xl font-extrabold text-[var(--primary)]">
+                                    <dd class="order-1 text-5xl font-extrabold text-primary">
                                         5,300+
                                     </dd>
                                 </div>
@@ -181,7 +181,7 @@
                                     <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
                                         فرصة تطوعية
                                     </dt>
-                                    <dd class="order-1 text-5xl font-extrabold text-[var(--primary)]">
+                                    <dd class="order-1 text-5xl font-extrabold text-primary">
                                         1,200+
                                     </dd>
                                 </div>
@@ -189,7 +189,7 @@
                                     <dt class="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
                                         ساعة تطوع
                                     </dt>
-                                    <dd class="order-1 text-5xl font-extrabold text-[var(--primary)]">
+                                    <dd class="order-1 text-5xl font-extrabold text-primary">
                                         42,000+
                                     </dd>
                                 </div>

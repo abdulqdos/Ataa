@@ -17,8 +17,8 @@ class Request extends Model
         return $this->belongsTo(Volunteer::class);
     }
 
-    public function organization()
+    public function opportunity()
     {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(Opportunity::class);
     }
 }

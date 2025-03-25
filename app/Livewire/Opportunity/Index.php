@@ -28,6 +28,12 @@ class index extends Component
     {
         $this->reset('searchText', 'start_date', 'end_date' , 'status');
     }
+
+    public function updated()
+    {
+        $this->resetPage();
+    }
+
     public $pageName = 'opportunities';
     public function render()
     {
@@ -48,6 +54,7 @@ class index extends Component
         if (!empty($this->status)) {
             $query->where('status', $this->status);
         }
+
 
         return view('livewire.opportunity.index' ,
             [

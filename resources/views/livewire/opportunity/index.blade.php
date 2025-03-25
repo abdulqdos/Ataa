@@ -2,7 +2,7 @@
         <div class="container mx-auto px-6 lg:px-24 py-2">
 
             <!-- Search && Filter -->
-            <div class="bg-white rounded-md shadow-md p-4 transition-all duration-300">
+            <div id="top" class="bg-white rounded-md shadow-md p-4 transition-all duration-300">
                 <div class="flex flex-col gap-4">
                     <!-- Search Box -->
                     <div class="flex flex-col md:flex-row gap-4">
@@ -78,26 +78,9 @@
             </div>
 
             @if($opportunities->count() > 0)
-                <div class="my-6 mx-auto flex flex-col md:flex-row justify-center items-center max-w-[992px] gap-6">
-                    <button wire:click="previousPage" wire:loading.attr="disabled" class="bg-primary hover:bg-primaryLight text-white px-4 py-2 rounded-lg shadow transition duration-300 cursor-pointer disabled:bg-primaryLight disabled:opacity-75 disabled:cursor-default" @if ($opportunities->onFirstPage()) disabled @endif>
-                        << السابق
-                    </button>
-                    <div class="text-gray-800 text-xl flex justify-center items-center gap-2 my-4 md:my-0">
-                        <span>عرض</span>
-                        <span class="font-bold">{{ $opportunities->firstItem() }}</span>
-                        <span>إلى</span>
-                        <span class="font-bold">{{ $opportunities->lastItem() }}</span>
-                        <span>من</span>
-                        <span class="font-bold">{{ $opportunities->total() }}</span>
-                        <span>الفرص</span>
-                    </div>
-                    <button wire:click="nextPage" wire:loading.attr="disabled" class="bg-primary hover:bg-primaryLight text-white px-4 py-2 rounded-lg shadow transition duration-300 cursor-pointer disabled:bg-primaryLight disabled:opacity-75 disabled:cursor-default" @if (!$opportunities->hasMorePages()) disabled @endif>
-                        التالي >>
-                    </button>
-                </div>
 
                 <!-- عرض الفرص التطوعية -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6 mt-3">
                     @foreach($opportunities as $opportunity)
                         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
                             <div class="flex items-center justify-center h-48">
@@ -169,6 +152,11 @@
                         </div>
                     @endforeach
                 </div>
+
+                <div class="my-6 mx-auto flex flex-col md:flex-row justify-center items-center max-w-[992px] gap-6">
+                    {{ $opportunities->links('vendor.pagination.custom') }}
+                </div>
+
             @else
                 <div class="flex items-center justify-between p-4 mb-4 my-10 lg:my-6  text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 text-sm lg:text-lg" role="alert">
                     <div class="flex flex-row items-center gap-4">

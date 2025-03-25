@@ -21,6 +21,10 @@ class Index extends OrganizationComponent
     public $showDeleteBox = false;
     public $selectedOpportunity = null; // لتخزين ID الفرصة المراد حذفها
 
+    public function updated()
+    {
+        $this->resetPage();
+    }
     #[On('search:clear')]
     public function clear()
     {

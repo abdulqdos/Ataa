@@ -25,7 +25,7 @@
     @endif
 
 
-    <div class="max-w-full mx-5 px-4 py-2 mb-4 bg-white shadow-sm rounded-md">
+    <div class="max-w-full mx-5 px-4 py-2 mb-4 bg-white shadow-sm rounded-md" id="top">
         <div class="flex flex-row justify-between items-center">
             <h1 class="text-xl px-1 py-2 text-primary font-semibold"> فرص التطوعية </h1>
             <a href="{{ route('organization.opportunity.create') }}" wire:navigate class="px-4 py-1 btn-primary">
@@ -94,7 +94,7 @@
         <div>
             @if($opportunities->count() > 0)
                 <table class="w-full text-sm text-left rtl:text-right text-gray-900 ">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                    <thead class="text-xs bg-gray-900 uppercase text-white">
                     <tr>
 
                         <th scope="col" class="px-6 py-3">
@@ -120,8 +120,19 @@
                     <tbody>
                         @foreach($opportunities as $opportunity)
                             <tr class="bg-white  hover:bg-gray-50">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                    {{ $opportunity->title }}
+                                <th scope="row" class="px-6 py-4">
+                                    <div class="flex flex-row items-center gap-2 justify-start">
+                                        @if($opportunity->img_url === null)
+                                            <img class="h-6 w-6 rounded-md" src="https://ui-avatars.com/api/?name={{ $opportunity->title }}&background=random&color=fff" alt="صورة المؤسسة">
+                                        @else
+                                            <img class="h-6 w-6 rounded-md" src="{{ \Illuminate\Support\Facades\Storage::url($opportunity->img_url) }}" alt="صورة المؤسسة">
+                                        @endif
+                                        <a href="{{ route('organization.opportunity.show' , $opportunity->id) }}" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
+                                            {{ $opportunity->title }}
+                                        </a>
+
+                                    </div>
+
                                 </th>
                                 <td class="px-6 py-4 truncate ... max-w-[150px]">
                                     {{ $opportunity->description }}
@@ -153,8 +164,8 @@
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 flex flex-row gap-4">
-                                    <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="font-medium bg-blue-600 px-4 py-1 text-white cursor-pointer hover:bg-blue-800 transition duration-300 rounded-md">Edit</a>
-                                    <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="font-medium bg-red-600  px-4 py-1 text-white cursor-pointer hover:bg-red-800 transition duration-300 rounded-md">Delete</button>
+                                    <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="font-medium px-4 py-1  btn-blue">Edit</a>
+                                    <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="font-medium  px-4 py-1 btn-red">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -184,6 +195,9 @@
                     </div>
                 </div>
             @endif
+        </div>
+        <div class="my-6 mx-auto flex flex-col md:flex-row justify-center items-center max-w-[992px] gap-6">
+            {{ $opportunities->links('vendor.pagination.custom' , data: ['scrollTo' => '#top']) }}
         </div>
     </div>
 

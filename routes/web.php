@@ -11,6 +11,7 @@ use App\Livewire\Opportunity\Show ;
 use App\Livewire\Organization\Dashboard;
 use App\Livewire\Organization\Opportunity\Create as OpportunityCreate;
 use App\Livewire\Organization\Opportunity\Edit as OpportunityEdit;
+use App\Livewire\Organization\Opportunity\Show as OpportunityShow;
 use App\Livewire\Organization\Opportunity\Index as Opportunity;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,7 @@ Route::middleware('organization')->group(function () {
     Route::get('/organization/dashboard' , Dashboard::class)->name('organization.dashboard');
     Route::get('/organization/opportunity' , Opportunity::class)->name('organization.opportunity');
     Route::get('/organization/opportunity/create' , OpportunityCreate::class)->name('organization.opportunity.create');
+    Route::get('/organization/opportunity/{opportunity}' , OpportunityShow::class)->name('organization.opportunity.show');
     Route::get('/organization/opportunity/{opportunity}/edit' , OpportunityEdit::class)->name('organization.opportunity.edit');
 });
 

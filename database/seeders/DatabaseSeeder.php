@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
 
         Volunteer::factory()->recycle($volunteer)->create();
 
-        Opportunity::factory(10)->recycle(Organization::factory()->recycle($organization)->create())->create();
+        Opportunity::factory(30)->recycle(Organization::factory()->recycle($organization)->create())->create();
 
         $orgs = User::factory(20)->create([
             'role' => 'organization',

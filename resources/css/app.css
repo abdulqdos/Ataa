@@ -23,6 +23,18 @@
         @apply bg-darkGray hover:bg-lightGray rounded-md text-white cursor-pointer transition duration-300
     }
 
+    .btn-blue {
+        @apply bg-blue-600  text-white cursor-pointer hover:bg-blue-800 transition duration-300 rounded-md
+    }
+
+    .btn-red {
+        @apply  bg-red-600 text-white cursor-pointer hover:bg-red-800 transition duration-300 rounded-md
+    }
+
+    .btn-yellow {
+        @apply  bg-yellow-400 text-white cursor-pointer hover:bg-yellow-600 transition duration-300 rounded-md
+    }
+
     .active-link {
         background-color: rgba(255, 255, 255, 0.15);
         border-right: 4px solid white;

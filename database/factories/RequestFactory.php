@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Opportunity;
+use App\Models\Volunteer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class RequestFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'reason' => $this->faker->realText(30),
+            'volunteer_id' => Volunteer::factory(),
+            'opportunity_id' => Opportunity::factory(),
         ];
     }
 }

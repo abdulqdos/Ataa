@@ -20,4 +20,9 @@ class Opportunity extends Model
     {
         return $this->belongsTo(Organization::class);
     }
+
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
+    }
 }

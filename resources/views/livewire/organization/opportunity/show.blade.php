@@ -62,7 +62,7 @@
                             </td>
 
                             <td class="px-6 py-4 flex flex-row gap-4 text-sm justify-center items-center">
-                                <button type="button"  class="font-medium px-4 py-1 btn-yellow">مراجعة</button>
+                                <a href="{{ route('organization.requests.show' , $request->id) }}"  class="font-medium px-4 py-1 btn-yellow">مراجعة</a>
                                 <button type="button" class="font-medium px-4 py-1 btn-primary">قبول</button>
                                 <button type="button" class="font-medium px-4 py-1 btn-secondary">رفض</button>
                             </td>

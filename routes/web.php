@@ -9,10 +9,14 @@ use App\Livewire\Authentication\Signup;
 use App\Livewire\Opportunity\Index;
 use App\Livewire\Opportunity\Show ;
 use App\Livewire\Organization\Dashboard;
+
 use App\Livewire\Organization\Opportunity\Create as OpportunityCreate;
 use App\Livewire\Organization\Opportunity\Edit as OpportunityEdit;
 use App\Livewire\Organization\Opportunity\Show as OpportunityShow;
 use App\Livewire\Organization\Opportunity\Index as Opportunity;
+
+
+use App\Livewire\Organization\Requests\Show as RequestShow;
 use Illuminate\Support\Facades\Route;
 
 // Pages
@@ -43,11 +47,17 @@ Route::middleware('auth')->group(function () {
 
 // Organization
 Route::middleware('organization')->group(function () {
+    // Dashboard
     Route::get('/organization/dashboard' , Dashboard::class)->name('organization.dashboard');
+
+    // opportunity
     Route::get('/organization/opportunity' , Opportunity::class)->name('organization.opportunity');
     Route::get('/organization/opportunity/create' , OpportunityCreate::class)->name('organization.opportunity.create');
     Route::get('/organization/opportunity/{opportunity}' , OpportunityShow::class)->name('organization.opportunity.show');
     Route::get('/organization/opportunity/{opportunity}/edit' , OpportunityEdit::class)->name('organization.opportunity.edit');
+
+    // Requests
+    Route::get('/organization/requests/{request}' , RequestShow::class)->name('organization.requests.show');
 });
 
 // Admin

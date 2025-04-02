@@ -39,3 +39,20 @@ it('can show  opportunity', function () {
         ->assertSet('opportunity', $this->opportunity);
 });
 
+
+it('accepted Request', function () {
+//    $this->withoutExceptionHandling();
+//
+//    $request = Request::factory()->recycle($this->opportunity)->create();
+//
+//    actingAs($this->organization);
+//
+//    $status = 'accepted';
+//
+//    Livewire::test('organization.opportunity.show', ['opportunity' => $this->opportunity])
+//        ->call('setModel',  ['status' => $status , 'requestId' => $request->id])
+//        ->call('updateRequestStatus', ['status' => $status]);
+//
+//    $this->assertEquals($status , $request->status);
+});
+

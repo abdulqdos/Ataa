@@ -1,5 +1,30 @@
 <div class="w-full flex flex-row gap-x-6 my-10">
 
+        @if($modalType)
+            <div class="bg-black/10 fixed top-0 right-0 left-0 z-50 flex items-center justify-center w-full h-screen">
+                <div class="relative p-4 w-full max-w-md">
+                    <div class="relative bg-white rounded-lg shadow-sm">
+                        <button type="button" wire:click="setModel(null)" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center cursor-pointer">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                        <div class="p-4 md:p-5 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto mb-4 text-gray-700 w-12 h-12">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            <h3 class="mb-5 text-lg font-normal text-gray-700">{{ $modalType === 'accepted' ? 'هل أنت من قبول المتطوع ؟' : 'هل أنت من رفض الطلب ؟' }}</h3>
+                            <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium focus:outline-none focus:z-10 btn-secondary" wire:click="setModel(null)">لا , إلغاء</button>
+                            <button data-modal-hide="popup-modal" type="button" class="text-white font-medium text-sm inline-flex items-center px-5 py-2.5 text-center {{ $modalType === 'accepted' ? 'btn-primary' : 'btn-red' }}" wire:click="updateRequestStatus('{{ $modalType }}')">
+                                نعم , {{ $modalType === 'accepted' ? 'قبول المتطوع' : 'رفض الطلب' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
 
     <!-- Requests -->
     <div class="w-2/3 flex flex-col gap-y-4 items-center">
@@ -20,7 +45,7 @@
                 </select>
 
                 <!-- العدد المطلوب -->
-                <p class="text-sm font-medium">العدد المطلوب: {{ $opportunity->count }}</p>
+                <p class="text-sm font-medium">العدد المطلوب: {{ $opportunity->count - $opportunity->accepted_count }}</p>
             </div>
         </div>
 
@@ -47,24 +72,29 @@
                             </th>
 
                             <td class="px-4 py-2">
-                    <span class="px-3 py-1 text-xs font-semibold rounded-md
-                        @if($request->status == 'accepted') bg-green-100 text-green-600
-                        @elseif($request->status == 'pending') bg-yellow-100 text-yellow-600
-                        @else bg-red-100 text-red-600 @endif">
-                        @if($request->status === 'accepted')
-                            مقبول
-                        @elseif($request->status === 'pending')
-                            قيد الانتظار
-                        @elseif($request->status === 'declined')
-                            مرفوض
-                        @endif
-                    </span>
+                                <span class="px-3 py-1 text-xs font-semibold rounded-md
+                                    @if($request->status == 'accepted') bg-green-100 text-green-600
+                                    @elseif($request->status == 'pending') bg-yellow-100 text-yellow-600
+                                    @else bg-red-100 text-red-600 @endif">
+                                    @if($request->status === 'accepted')
+                                        مقبول
+                                    @elseif($request->status === 'pending')
+                                        قيد الانتظار
+                                    @elseif($request->status === 'declined')
+                                        مرفوض
+                                    @endif
+                                </span>
                             </td>
 
                             <td class="px-6 py-4 flex flex-row gap-4 text-sm justify-center items-center">
-                                <a href="{{ route('organization.requests.show' , $request->id) }}"  class="font-medium px-4 py-1 btn-yellow">مراجعة</a>
-                                <button type="button" class="font-medium px-4 py-1 btn-primary">قبول</button>
-                                <button type="button" class="font-medium px-4 py-1 btn-secondary">رفض</button>
+                                @if($request->status == 'accepted' || $request->status == 'declined')
+                                    <a href="#"  class="font-medium px-4 py-1 btn-yellow">عرض بيانات المتطوع</a>
+                                @else
+                                    <a href="{{ route('organization.requests.show' , $request->id) }}"  class="font-medium px-4 py-1 btn-yellow">مراجعة</a>
+                                    <button type="button" class="font-medium px-4 py-1 btn-primary" wire:click="setModel('accepted' , {{ $request->id }})">قبول</button>
+                                    <button type="button" class="font-medium px-4 py-1 btn-secondary" wire:click="setModel('declined',{{ $request->id }})">رفض</button>
+                                @endif
+
                             </td>
                         </tr>
                     @endforeach
@@ -85,21 +115,19 @@
                     </svg>
                     <div>
                         <span class="font-medium">عذراً</span>
-                        لم يتم تقديم أي طلبات
-                        @if($filterStatus)
-                            <span class="font-semibold">
-                    "{{ match($filterStatus) {
-                        'pending' => 'قيد الانتظار',
-                        'accepted' => 'مقبول',
-                        'declined' => 'مرفوض',
-                        default => '' }
-                    }}"
-                </span>
-                        @endif
+                                لم يتم تقديم أي طلبات
+                                @if($filterStatus)
+                                    <span class="font-semibold"> "{{ match($filterStatus) {
+                                            'pending' => 'قيد الانتظار',
+                                            'accepted' => 'مقبول',
+                                            'declined' => 'مرفوض',
+                                            default => '' }
+                                        }}"
+                                    </span>
+                                 @endif
                     </div>
                 </div>
             </div>
-
         @endif
     </div>
 

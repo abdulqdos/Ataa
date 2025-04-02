@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('location_url', 2048)->nullable();
             $table->integer('count');
+            $table->integer('accepted_count')->default(0);
             $table->timestamps();
         });
     }

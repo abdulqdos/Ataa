@@ -39,11 +39,14 @@ class Index extends OrganizationComponent
 
     public function confirmDelete()
     {
-        if ($this->selectedOpportunity) {
-            $this->selectedOpportunity->delete();
-            $this->resetPage();
-            $this->resetDeleteBox();
+        if (!$this->selectedOpportunity) {
+            session()->flash('error', 'لا توجد فرصة تطوعية محددة للحذف.');
+            return;
         }
+
+        $this->selectedOpportunity->delete();
+        $this->reset(['selectedOpportunity']);
+        return redirect()->route('organization.opportunity')->with('success', 'تم حذف الفرصة التطوعية بنجاح');
     }
 
     public function resetDeleteBox()

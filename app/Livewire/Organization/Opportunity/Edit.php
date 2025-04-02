@@ -133,7 +133,7 @@ class Edit extends OrganizationComponent
             'count' => $this->count,
             'organization_id' => $organizationId,
         ]);
-
+        session()->flash('success' , 'تمت تحديث الفرصة بنجاح');
         return $this->redirect(route('organization.opportunity'));
     }
 

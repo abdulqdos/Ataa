@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\City;
 use App\Models\Opportunity;
 use App\Models\Organization;
+use App\Models\Request;
 use App\Models\Sector;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -39,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
         Volunteer::factory()->recycle($volunteer)->create();
 
-        Opportunity::factory(30)->recycle(Organization::factory()->recycle($organization)->create())->create();
+        $opportunity = Opportunity::factory(30)->recycle(Organization::factory()->recycle($organization)->create())->create();
 
         $orgs = User::factory(20)->create([
             'role' => 'organization',
@@ -48,6 +49,8 @@ class DatabaseSeeder extends Seeder
         $organizations = Organization::factory(20)->recycle($orgs)->create();
 
         Opportunity::factory(100)->recycle($organizations)->create();
+
+        Request::factory(10)->recycle($opportunity)->recycle($organization)->create();
 
         City::factory(10)->create();
 

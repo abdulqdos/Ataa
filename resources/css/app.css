@@ -24,7 +24,7 @@
     }
 
     .btn-blue {
-        @apply bg-blue-600  text-white cursor-pointer hover:bg-blue-800 transition duration-300 rounded-md
+        @apply bg-blue-600  text-white cursor-pointer hover:bg-blue-700 transition duration-300 rounded-md
     }
 
     .btn-red {

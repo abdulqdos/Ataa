@@ -95,7 +95,7 @@ class Create extends OrganizationComponent
             'count' => $this->count,
             'organization_id' => $organizationId,
         ]);
-
+        session()->flash('success' , 'تمت إضافة الفرصة بنجاح');
         return $this->redirect(route('organization.opportunity'));
     }
 

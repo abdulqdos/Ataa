@@ -144,23 +144,7 @@
                                 </td>
 
                                 <td class="px-6 py-4">
-                                    <span class="font-semibold text-center
-                                        @if($opportunity->status == 'active')
-                                            text-blue-600 border border-blue-600 bg-white
-                                        @elseif($opportunity->status == 'completed')
-                                            text-green-600 border border-green-600 bg-white
-                                        @elseif($opportunity->status == 'upcoming')
-                                            text-yellow-600 border border-yellow-600 bg-white
-                                        @endif
-                                        px-1 py-1 mx-0 rounded-md text-sm">
-                                        @if($opportunity->status == 'active')
-                                            نشطة
-                                        @elseif($opportunity->status == 'completed')
-                                            مكتملة
-                                        @elseif($opportunity->status == 'upcoming')
-                                            قريباً
-                                        @endif
-                                    </span>
+                                   <livewire:opportunity-status :opportunity="$opportunity" wire:key="{{ $opportunity->id }}" />
                                 </td>
                                 <td class="px-6 py-4 flex flex-row gap-4">
                                     <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="font-medium px-4 py-1  btn-blue">Edit</a>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Organization\Opportunity;
 
 use App\Livewire\OrganizationComponent;
+use App\Models\Notification;
 use App\Models\Opportunity;
 use App\Models\Request;
 use Livewire\Attributes\Title;
@@ -42,6 +43,7 @@ class Show extends OrganizationComponent
         $this->changeStatus($status);
 
         // Send Notification
+        $this->sendNotification($status , $this->currentRequest );
 
         // Set Session message
         $message = $status === 'accepted' ? 'تم قبول الطلب بنجاح.' : ($status === 'declined' ? 'تم رفض الطلب بنجاح.' : 'حالة غير معروفة');
@@ -62,6 +64,20 @@ class Show extends OrganizationComponent
                 'accepted_count' => $this->opportunity->accepted_count++,
             ]);
         }
+    }
+
+    public function sendNotification($status , $request )
+    {
+        if ($status === 'accepted') {
+            Notification::create([
+                'title' => $this->opportunity->title,
+                'message' => 'مبروك لقد تم قبولك في فرصة تطوعية , نرجى منك حضور في موعد محدد .',
+                'read_at' => null,
+                'user_id' => $request->volunteer->user->id,
+            ]);
+        }
+
+        return ;
     }
 
     public function render()

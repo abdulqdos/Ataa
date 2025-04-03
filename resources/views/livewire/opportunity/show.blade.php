@@ -10,19 +10,7 @@
         <!-- بيانات الفرصة -->
         <div class="p-6 flex-1">
             <!-- حالة الفرصة -->
-            <span class="w-4 px-4 py-1  rounded-md
-                @if($opportunity->status == 'active') bg-green-100 text-green-500
-                @elseif($opportunity->status == 'completed') bg-blue-100 text-blue-500
-                @else bg-yellow-100 text-yellow-600 @endif">
-
-                @if($opportunity->status === 'active')
-                    نشط
-                @elseif($opportunity->status === 'upcoming')
-                    قريباً
-                @elseif($opportunity->status === 'completed')
-                    مكتملة
-                @endif
-            </span>
+           <livewire:opportunity-status :opportunity="$opportunity" />
 
             <!-- العنوان -->
             <h2 class="mt-4 text-2xl font-bold text-gray-900">{{ $opportunity->title }}</h2>
@@ -45,7 +33,7 @@
             </div>
 
             <!-- العدد المطلوب -->
-            <p class="mt-3 text-sm text-gray-600">👥 **عدد المتطوعين المطلوب:** {{ $opportunity->count }}</p>
+            <span class="mt-3 text-sm text-gray-600 font-semibold">المتطوعين المطلوبين:</span> {{ $opportunity->count }} / {{ $opportunity->accepted_count }}
 
             <!-- الأزرار -->
             <div class="mt-6 flex space-x-4">
@@ -53,24 +41,26 @@
                     <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
                         هاذي فرصة مكتملة .
                     </button>
-                @endif
-                @auth
-                    @if($submitted)
-                        <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
-                            لقد سجلت بنجاح .
-                        </button>
-                    @else
-                        <button wire:click="toggle" class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md hover:bg-primaryLight cursor-pointer">
-                            التسجيل في الفرصة
-                        </button>
-                    @endif
 
-                @endauth
-                @guest
+                @else
+                    @auth
+                        @if($submitted)
+                            <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
+                                لقد سجلت بنجاح .
+                            </button>
+                        @else
+                            <button wire:click="toggle" class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md hover:bg-primaryLight cursor-pointer">
+                                التسجيل في الفرصة
+                            </button>
+                        @endif
+                    @endauth
+                    @guest
                         <a href="/login" wire:navigate class="px-4 py-2 btn-primary text-white text-sm font-semibold  shadow-md cursor-pointer">
                             التسجيل في الفرصة
                         </a>
-                @endguest
+                    @endguest
+                @endif
+
                 <a href="{{ route('opportunities') }}" wire:navigate class="px-4 py-2 btn-secondary text-white text-sm font-semibold  shadow-md ">
                     العودة
                 </a>

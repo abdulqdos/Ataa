@@ -96,25 +96,7 @@
                                 <div class="flex flex-row justify-between items-center mx-4">
                                     <h2 class="text-xl font-semibold mb-2">{{ $opportunity->title }}</h2>
                                     <div>
-                                        <span
-                                            class="
-                                                w-4 px-4 py-1 rounded-md
-                                                @if($opportunity->status === 'active')
-                                                    bg-green-100 text-green-500
-                                                @elseif($opportunity->status === 'upcoming')
-                                                    bg-yellow-100 text-yellow-600
-                                                @elseif($opportunity->status === 'completed')
-                                                    bg-blue-100 text-blue-500
-                                                @endif
-                                            ">
-                                            @if($opportunity->status === 'active')
-                                                نشط
-                                            @elseif($opportunity->status === 'upcoming')
-                                                قريباً
-                                            @elseif($opportunity->status === 'completed')
-                                                مكتملة
-                                            @endif
-                                        </span>
+                                       <livewire:opportunity-status :opportunity="$opportunity" wire:key="{{ $opportunity->id }}">
                                     </div>
                                 </div>
 
@@ -139,7 +121,7 @@
                                 </div>
 
                                 <div class="text-sm text-gray-600 mb-1">
-                                    <span class="font-bold">المتطوعين المطلوبين:</span> {{ $opportunity->count }}
+                                    <span class="font-bold">المتطوعين المطلوبين:</span> {{ $opportunity->count }} / {{ $opportunity->accepted_count }}
                                 </div>
 
                                 <div class="mt-4 ">

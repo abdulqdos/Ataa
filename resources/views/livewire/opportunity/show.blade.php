@@ -49,7 +49,7 @@
                                 لقد سجلت بنجاح .
                             </button>
                         @else
-                            <button wire:click="toggle" class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md hover:bg-primaryLight cursor-pointer">
+                            <button wire:click="toggle" class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md hover:bg-primaryLight cursor-pointer ">
                                 التسجيل في الفرصة
                             </button>
                         @endif

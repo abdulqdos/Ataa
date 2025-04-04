@@ -35,8 +35,8 @@ class Show extends Component
         $this->showRequestForm = !$this->showRequestForm;
     }
 
-    #[on('sendRequest')]
-    public function sendRequest()
+    #[on('sendRequestModel')]
+    public function sendRequestModel()
     {
         $this->showRequestForm = false ;
     }

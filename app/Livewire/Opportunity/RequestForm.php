@@ -4,6 +4,7 @@ namespace App\Livewire\Opportunity;
 
 use App\Models\Opportunity;
 use App\Models\Request;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -36,7 +37,7 @@ class RequestForm extends Component
             'opportunity_id' => $this->opportunity->id,
         ]);
 
-        $this->dispatch('sendRequest');
+        $this->dispatch('sendRequestModel');
 
         return $this->redirect(route('opportunities.show', $this->opportunity));
     }

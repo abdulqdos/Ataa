@@ -53,9 +53,8 @@
                         <div class="flex flex-row items-center">
 
                             <!-- Notification -->
-
-
                             <livewire:notifications  :user="auth()->user()"/>
+
                             <div id="authView" class="sm:flex sm:items-center sm:mr-3">
                                 <div class="mr-3 relative">
                                     <div>
@@ -182,7 +181,7 @@
                         <h3 class="text-sm font-semibold text-white tracking-wider uppercase">
                             تابعنا
                         </h3>
-                        <div class="mt-4 flex space-x-6 space-x-reverse">
+                        <div class="mt-4 flex space-x-6">
                             <a href="#" class="text-gray-200 hover:text-white">
                                 <i class="fab fa-facebook text-xl"></i>
                             </a>
@@ -216,7 +215,7 @@
                 </div>
             </div>
         </footer>
-        <script>
+        <script >
             window.onload = function() {
                 const userMenuButton = document.getElementById("userMenuButton");
                 const userMenu = document.getElementById("userMenu");

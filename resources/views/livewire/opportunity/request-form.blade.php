@@ -16,7 +16,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form class="p-4 md:p-5" wire:submit.prevent="sendRequest({{  $opportunity->id }})">
+            <form class="p-4 md:p-5" wire:submit.prevent="sendRequest">
 
                 <div class="grid gap-4 mb-4 grid-cols-1">
                     <div class="col-span-1">
@@ -34,9 +34,16 @@
                 @enderror
 
                 <div class="flex justify-between mt-6">
-                    <button type="submit" class="px-4 py-2 btn-primary text-sm font-semibold shadow-md cursor-pointer">
-                        إرسال
+
+                    <button type="submit"
+                            wire:target="sendRequest"
+                            wire:loading.attr="disabled"
+                            wire:loading.class="opacity-50 cursor-not-allowed"
+                            class="px-4 py-2 btn-primary">
+                        <span wire:loading wire:target="sendRequest">جاري الإرسال...</span>
+                        <span wire:loading.remove wire:target="sendRequest">إرسال</span>
                     </button>
+
                     <button wire:click="dispatch('toggle')" type="button" class="px-4 py-2 btn-secondary  text-sm font-semibold  shadow-md cursor-pointer" data-modal-toggle="crud-modal">
                         إلغاء
                     </button>
@@ -45,4 +52,5 @@
             </form>
         </div>
     </div>
+
 </div>

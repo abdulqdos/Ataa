@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\City;
+use App\Models\Notification;
 use App\Models\Opportunity;
 use App\Models\Organization;
 use App\Models\Request;
@@ -10,6 +11,7 @@ use App\Models\Sector;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Volunteer;
+use Database\Factories\NotificationFactory;
 use Database\Factories\OpportunityFactory;
 use Illuminate\Database\Seeder;
 
@@ -51,6 +53,8 @@ class DatabaseSeeder extends Seeder
         Opportunity::factory(100)->recycle($organizations)->create();
 
         Request::factory(10)->recycle($opportunity)->recycle($organization)->create();
+
+        Notification::factory(5)->recycle($volunteer)->create();
 
         City::factory(10)->create();
 

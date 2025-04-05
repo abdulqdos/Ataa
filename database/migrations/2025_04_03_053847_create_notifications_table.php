@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('message');
             $table->foreignId('user_id')->constrained('users');
+            $table->softDeletes();
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

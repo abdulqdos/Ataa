@@ -9,9 +9,9 @@
     --color-secondary: #2d8c8a;
     --color-primaryLight: #1a7e7d;
     --color-secondaryLight: #3da3a1;
-    --color-gold: #ff9f1c;
     --color-darkGray: #6a7778;
     --color-lightGray: #7F8C8D;
+    --color-gold: #ff9f1c;
 }
 
 @layer {

@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Opportunity extends Model
 {
     /** @use HasFactory<\Database\Factories\OpportunityFactory> */
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [ 'title' , 'description' , 'status' , 'start_date' , 'end_date' , 'img_url' , 'location' , 'location_url' , 'count', 'organization_id' ];
 
@@ -25,7 +27,6 @@ class Opportunity extends Model
         $start = $this->start_date->format('Y-m-d');
         $end = $this->end_date->format('Y-m-d');
 
-//        dd($today, $start, $end);
         if ($start > $today) {
             $this->status = 'upcoming';
         } elseif ($start <= $today && $end >= $today) {

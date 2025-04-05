@@ -11,7 +11,7 @@ class OpportunityStatus extends Component
 
     public function mount(Opportunity $opportunity)
     {
-        $this->updateOpportunityStatus();
+//        $this->updateOpportunityStatus();
         $this->opportunity = $opportunity;
     }
 

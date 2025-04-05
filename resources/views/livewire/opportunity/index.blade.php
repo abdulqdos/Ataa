@@ -96,7 +96,7 @@
                                 <div class="flex flex-row justify-between items-center mx-4">
                                     <h2 class="text-xl font-semibold mb-2">{{ $opportunity->title }}</h2>
                                     <div>
-                                       <livewire:opportunity-status :opportunity="$opportunity" wire:key="{{ $opportunity->id }}">
+                                       <livewire:opportunity-status :opportunity="$opportunity" wire:key="{{ $opportunity->id }}-{{ $searchText }}-{{ $status }}">
                                     </div>
                                 </div>
 

@@ -6,10 +6,14 @@ use App\Livewire\Authentication\ForgotPassword;
 use App\Livewire\Authentication\Login;
 use App\Livewire\Authentication\ResetPassword;
 use App\Livewire\Authentication\Signup;
+
 use App\Livewire\Opportunity\Index;
 use App\Livewire\Opportunity\Show ;
-use App\Livewire\Organization\Dashboard;
 
+// Volunteer
+use App\Livewire\Authentication\UpdateProfile\Volunteer as volunteerProfile ;
+
+use App\Livewire\Organization\Dashboard;
 use App\Livewire\Organization\Opportunity\Create as OpportunityCreate;
 use App\Livewire\Organization\Opportunity\Edit as OpportunityEdit;
 use App\Livewire\Organization\Opportunity\Show as OpportunityShow;
@@ -19,15 +23,6 @@ use App\Livewire\Organization\Opportunity\Index as Opportunity;
 use App\Livewire\Organization\Requests\Show as RequestShow;
 use Illuminate\Support\Facades\Route;
 
-// Pages
-// Organization
-
-Route::get('/', function () {
-    return view('index');
-})->name('home');
-
-Route::get('/opportunity', index::class )->name('opportunities');
-Route::get('/opportunities/{opportunity}', Show::class)->name('opportunities.show');
 
 // Guest
 Route::middleware('guest')->group(function () {
@@ -43,6 +38,20 @@ Route::middleware('auth')->group(function () {
         Auth::logout();
         return redirect('/login');
     })->name('logout');
+});
+
+// Pages
+Route::middleware('volunteerOrGuest')->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    })->name('home');
+    Route::get('/opportunity', index::class )->name('opportunities');
+    Route::get('/opportunities/{opportunity}', Show::class)->name('opportunities.show');
+});
+
+// Volunteer
+Route::middleware('volunteer')->group(function () {
+   Route::get('/volunteer/profile', volunteerProfile::class)->name('volunteer.profile');
 });
 
 // Organization
@@ -63,5 +72,4 @@ Route::middleware('organization')->group(function () {
 // Admin
 Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard' , AdminDashboard::class)->name('admin.dashboard');
-
 });

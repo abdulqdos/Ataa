@@ -16,28 +16,32 @@
 
 @layer {
     .btn-primary {
-        @apply bg-primary hover:bg-primaryLight rounded-md text-white cursor-pointer transition duration-300
+        @apply bg-primary hover:bg-primaryLight rounded-md text-white cursor-pointer transition duration-300 disabled:opacity-50 disabled:hover:bg-primary disabled:cursor-default
     }
 
     .btn-secondary {
-        @apply bg-darkGray hover:bg-lightGray rounded-md text-white cursor-pointer transition duration-300
+        @apply bg-darkGray hover:bg-lightGray rounded-md text-white cursor-pointer transition duration-300 disabled:opacity-50 disabled:hover:bg-darkGray disabled:cursor-default
     }
 
     .btn-blue {
-        @apply bg-blue-600  text-white cursor-pointer hover:bg-blue-700 transition duration-300 rounded-md
+        @apply bg-blue-600  text-white cursor-pointer hover:bg-blue-700 transition duration-300 rounded-md disabled:opacity-50 disabled:hover:bg-blue-600  disabled:cursor-default
     }
 
     .btn-red {
-        @apply  bg-red-600 text-white cursor-pointer hover:bg-red-800 transition duration-300 rounded-md
+        @apply  bg-red-500 text-white cursor-pointer hover:bg-red-600 transition duration-300 rounded-md disabled:opacity-50 disabled:hover:bg-red-500  disabled:cursor-default
     }
 
     .btn-yellow {
-        @apply  bg-yellow-400 text-white cursor-pointer hover:bg-yellow-600 transition duration-300 rounded-md
+        @apply  bg-yellow-400 text-white cursor-pointer hover:bg-yellow-600 transition duration-300 rounded-md disabled:opacity-50 disabled:hover:bg-yellow-400  disabled:cursor-default
     }
 
     .active-link {
         background-color: rgba(255, 255, 255, 0.15);
         border-right: 4px solid white;
+    }
+
+    .input {
+        @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1
     }
 }
 

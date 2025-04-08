@@ -17,10 +17,12 @@ class Signup extends Component
 
     // Validation rules for common fields
     protected $commonRules = [
-        'user_name' => 'required|string|regex:/^[a-zA-Z]+$/u|min:4|max:20',
+        'user_name' => 'required|string|regex:/^[a-zA-Z]+$/u|min:4|max:20|alpha_dash|unique:users,user_name',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:8|max:20|confirmed',
     ];
+
+
 
     // Volunteer Fields
     protected $volunteerRules = [
@@ -53,7 +55,8 @@ class Signup extends Component
         'user_name.regex' => 'يجب أن يحتوي اسم المستخدم على حروف إنجليزية فقط.',
         'user_name.min' => 'يجب أن يكون اسم المستخدم على الأقل 4 أحرف.',
         'user_name.max' => 'يجب ألا يزيد اسم المستخدم عن 20 حرفًا.',
-
+        'user_name.alpha_dash' => 'اسم المستخدم يمكن أن يحتوي على أحرف، أرقام، شرطات (-) أو (_) فقط.',
+        'user_name.unique' => 'اسم المستخدم هذا مستخدم بالفعل.',
         'email.required' => 'البريد الإلكتروني مطلوب.',
         'email.email' => 'يرجى إدخال بريد إلكتروني صالح.',
         'email.unique' => 'البريد الإلكتروني مسجل مسبقًا.',

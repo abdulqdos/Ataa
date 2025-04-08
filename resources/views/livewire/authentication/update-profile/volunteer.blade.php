@@ -17,9 +17,13 @@
             <h2 class="text-lg font-semibold text-gray-800 mb-4">صورة الملف الشخصي</h2>
             <div class="flex items-center space-x-6 space-x-reverse gap-4">
                 <div class="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+                    @if($user->img_url === null)
                     <svg class="w-10 h-10 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
                     </svg>
+                    @else
+                        <img src="{{ \Illuminate\Support\Facades\Storage::url($user->img_url ) }}" class="w-10 h-10 rounded-full" />
+                    @endif
                 </div>
                 <div class="flex flex-col gap-2">
                     <div class="flex gap-3">
@@ -57,27 +61,34 @@
             </h2>
 
 
-            <!-- صف 1: الاسم الأول + الاسم الأخير -->
+            <!-- صف 1: الاسم الأول + الاسم الأخير + اسم المستخدم -->
             <div class="flex flex-col md:flex-row gap-6 mb-6">
-                <div class="w-full">
-                    <label class="block text-gray-700 text-sm font-medium mb-2" for="first_name">الاسم الأول</label>
-                    <input type="text" id="first_name" class="input focus:ring-blue-500" placeholder="إسمك....">
+                <div class="w-full md:w-1/3">
+                    <label class="block text-gray-700 text-sm font-medium mb-2" for="username">
+                        اسم المستخدم
+                    </label>
+                    <input type="text" id="username" class="input focus:ring-blue-500" placeholder="mohammed68" wire:model="user_name">
                 </div>
-                <div class="w-full">
+                <div class="w-full md:w-1/3">
+                    <label class="block text-gray-700 text-sm font-medium mb-2" for="first_name">الاسم الأول</label>
+                    <input type="text" id="first_name" class="input focus:ring-blue-500" placeholder="إسمك...." wire:model="first_name">
+                </div>
+                <div class="w-full md:w-1/3">
                     <label class="block text-gray-700 text-sm font-medium mb-2" for="last_name">الاسم الأخير</label>
-                    <input type="text" id="last_name" class="input focus:ring-blue-500" placeholder="إسم العائلة....">
+                    <input type="text" id="last_name" class="input focus:ring-blue-500" placeholder="إسم العائلة...." wire:model="last_name">
                 </div>
             </div>
+
 
             <!-- صف 2: رقم الهاتف + الجنس -->
             <div class="flex flex-col md:flex-row gap-6 mb-6">
                 <div class="w-full">
                     <label class="block text-gray-700 text-sm font-medium mb-2" for="phone_number">رقم الهاتف</label>
-                    <input type="text" id="phone_number" class="input focus:ring-blue-500" placeholder="09XXXXXXXX">
+                    <input type="text" id="phone_number" class="input focus:ring-blue-500" placeholder="09XXXXXXXX" wire:model="phone_number">
                 </div>
                 <div class="w-full">
                     <label class="block text-gray-700 text-sm font-medium mb-2" for="email">البريد الإلكتروني</label>
-                    <input type="email" id="email" class="input focus:ring-blue-500" placeholder="john@gmail.com">
+                    <input type="email" id="email" class="input focus:ring-blue-500" placeholder="john@gmail.com" wire:model="email">
                 </div>
             </div>
 
@@ -85,11 +96,11 @@
             <div class="flex flex-col md:flex-row gap-6 mb-6">
                 <div class="w-full">
                     <label class="block text-gray-700 text-sm font-medium mb-2" for="age">العمر</label>
-                    <input type="number" id="age" class="input focus:ring-blue-500" placeholder="أدخل عمرك">
+                    <input type="number" id="age" class="input focus:ring-blue-500" placeholder="أدخل عمرك" wire:model="age">
                 </div>
                 <div class="w-full">
                     <label class="block text-gray-700 text-sm font-medium mb-2" for="gender">الجنس</label>
-                    <select id="gender" class="input focus:ring-blue-500">
+                    <select id="gender" class="input focus:ring-blue-500" wire:model="gender">
                         <option value="">اختر الجنس</option>
                         <option value="male">ذكر</option>
                         <option value="female">أنثى</option>
@@ -100,7 +111,7 @@
             <!-- سطر خاص بالسيرة الذاتية -->
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-medium mb-2" for="bio">نبذة عنك</label>
-                <textarea id="bio" rows="4" class="input focus:ring-blue-500" placeholder="اكتب نبذة قصيرة عن نفسك..."></textarea>
+                <textarea id="bio" rows="4" class="input focus:ring-blue-500" placeholder="اكتب نبذة قصيرة عن نفسك..." wire:model="bio"></textarea>
             </div>
         </div>
 

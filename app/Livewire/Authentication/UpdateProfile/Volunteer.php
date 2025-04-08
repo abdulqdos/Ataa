@@ -2,13 +2,18 @@
 
 namespace App\Livewire\Authentication\UpdateProfile;
 
+use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Volunteer extends Component
 {
-    public $user , $user_name , $first_name , $last_name , $email , $phone_number ,$gender, $age , $bio ;
+    use withFileUploads ;
+    #[title('تعديل ملف الشخصي')]
+    public $user , $user_name , $first_name , $last_name  ,  $email , $phone_number ,$gender, $age , $bio ,$img , $img_url ;
 
-
+    public $old_password , $new_password , $new_password_confirmation;
+    // rules
     protected $rules = [
         'first_name' => 'required|string|min:2|regex:/^[a-zA-Zء-ي]+$/u|max:50',
         'last_name' => 'required|string|min:2|regex:/^[a-zA-Zء-ي]+$/u|max:50',
@@ -16,9 +21,20 @@ class Volunteer extends Component
         'phone_number' => 'required|digits_between:8,15',
         'age' => 'required|integer|min:8|max:90',
         'user_name' => 'required|string|min:3|max:30|alpha_dash|unique:users,user_name',
-        'email' => 'required|email|max:255|unique:users,email',
         'bio' => 'nullable|string|min:10|max:300',
+        'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'old_password' => ['required'],
+        'new_password' => ['required', 'min:8', 'confirmed'],
     ];
+
+    // Just For email
+    public function rules()
+    {
+        return [
+            'email' => 'required|email|max:255|unique:users,email,' . $this->user->id,
+        ];
+    }
+
 
     protected $messages = [
         // first_name
@@ -68,6 +84,12 @@ class Volunteer extends Component
         'bio.string' => 'الوصف التعريفي يجب أن يكون نصاً.',
         'bio.min' => 'الوصف التعريفي يجب ألا يقل عن 10 أحرف.',
         'bio.max' => 'الوصف التعريفي يجب ألا يزيد عن 300 حرف.',
+
+        // images
+        'img.required' => 'يرجى رفع صورة.',
+        'img.image' => 'الملف المرفوع يجب أن يكون صورة.',
+        'img.mimes' => 'صيغة الصورة يجب أن تكون من نوع: jpeg, png, jpg, gif.',
+        'img.max' => 'حجم الصورة يجب ألا يتجاوز 2 ميغابايت.',
     ];
 
     public function mount()
@@ -81,14 +103,22 @@ class Volunteer extends Component
         $this->gender = $this->user->volunteer->gender ;
         $this->age = $this->user->volunteer->age ;
         $this->bio = $this->user->volunteer->bio ;
+        $this->img_url =  $this->user->img_url ;
     }
 
     public function update()
     {
         $this->validate();
+
+        if($this->img) {
+            $this->img_url = $this->img->storePublicly('img_photos' , ['disk' => 'public']);
+        }
+
         $this->user->update([
             'user_name' => $this->user_name,
             'email' => $this->email,
+            'img_url' => $this->img_url,
+
         ]);
 
         $this->user->volunteer->update([
@@ -99,6 +129,46 @@ class Volunteer extends Component
             'age' => $this->age,
             'bio' => $this->bio,
         ]);
+
+        session()->flash('success' , 'تم تعديل بياناتك بنجاح .');
+        return redirect(route('volunteer.profile'));
+
+    }
+
+    public function changePassword()
+    {
+        $this->validate(
+            [
+                'old_password' => 'required|current_password',
+                'new_password' => 'required|string|min:8|confirmed',
+            ],
+            [
+                'old_password.required' => 'يجب إدخال كلمة المرور القديمة.',
+                'old_password.current_password' => 'كلمة المرور القديمة غير صحيحة.',
+                'new_password.required' => 'يجب إدخال كلمة المرور الجديدة.',
+                'new_password.min' => 'كلمة المرور الجديدة يجب أن تكون على الأقل 8 أحرف.',
+                'new_password.confirmed' => 'تأكيد كلمة المرور الجديدة غير متطابق.',
+            ],
+            [
+                'old_password' => 'كلمة المرور القديمة',
+                'new_password' => 'كلمة المرور الجديدة',
+            ]
+        );
+
+        $this->user->password = bcrypt($this->new_password);
+
+        $this->user->save();
+
+        session()->flash('success', 'تم تغيير كلمة المرور بنجاح.');
+
+        $this->reset(['old_password', 'new_password', 'new_password_confirmation']);
+
+        return redirect(route('volunteer.profile'));
+    }
+    public function removeImage()
+    {
+        $this->img = null ;
+        $this->img_url = null;
     }
     public function render()
     {

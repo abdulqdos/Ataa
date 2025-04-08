@@ -60,7 +60,11 @@
                                     <div>
                                         <button type="button" id="userMenuButton" class="flex rounded-full focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-primary" aria-expanded="false" aria-haspopup="true">
                                             <span class="sr-only">افتح قائمة المستخدم</span>
-                                            <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{auth()->user()->volunteer?->first_name}}&background=2d8c8a&color=fff" alt="صورة المؤسسة">
+                                            @if(auth()->user()->img_url !== null)
+                                                <img class="h-8 w-8 rounded-full object-cover" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->img_url) }}" alt="صورة المؤسسة">
+                                            @else
+                                                <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{auth()->user()->volunteer?->first_name}}&background=2d8c8a&color=fff" alt="صورة المؤسسة">
+                                            @endif
                                         </button>
                                     </div>
                                     <div id="userMenu" class="hidden origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-gray-100 ring-opacity-5 focus:outline-none z-50" role="menu" aria-orientation="vertical" aria-labelledby="userMenuButton" tabindex="-1">
@@ -112,6 +116,22 @@
         </nav>
 
         <main class="z-1">
+            @if(session('success'))
+                <div id="alert-border-3" class="flex items-center p-4 my-4 mx-5 text-green-800 border-t-4 border-green-300 bg-green-50" role="alert">
+                    <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" >
+                        <path d="M16.707 5.293a1 1 0 0 0-1.414 0L8 12.586l-3.293-3.293a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l8-8a1 1 0 0 0 0-1.414z"/>
+                    </svg>
+                    <div class="ms-3 text-sm font-medium">
+                        {{ session('success') }}
+                    </div>
+                    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 cursor-pointer transition duration-300 close-alert" aria-label="Close">
+                        <span class="sr-only">Dismiss</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                    </button>
+                </div>
+            @endif
             {{ $slot }}
         </main>
 
@@ -215,7 +235,7 @@
                 </div>
             </div>
         </footer>
-        <script >
+        <script>
             window.onload = function() {
                 const userMenuButton = document.getElementById("userMenuButton");
                 const userMenu = document.getElementById("userMenu");
@@ -248,6 +268,12 @@
                     });
                 }
             };
+
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelector(".close-alert").addEventListener("click", function () {
+                    document.getElementById("alert-border-3").style.display = "none";
+                });
+            });
         </script>
         @livewireScripts
     </body>

@@ -21,7 +21,8 @@ class User extends Authenticatable
         'user_name',
         'email',
         'password',
-        'role'
+        'role',
+        'img_url'
     ];
 
     public function setRole($role)

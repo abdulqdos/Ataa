@@ -39,7 +39,6 @@ it('have a correct data' , function () {
 it('can update profile' , function () {
     actingAs($this->user);
 
-    $this->withoutExceptionHandling();
     Livewire::test('authentication.update-profile.volunteer')
         ->set('user_name', 'abdu_alqdus')
         ->set('email', 'abdu@gmail.com')
@@ -64,4 +63,19 @@ it('can update profile' , function () {
         'age' => '22',
         'bio' => 'عمل تطوعي هوا جزء من حياتي اليومية',
     ]);
+});
+
+it('can change password' , function () {
+
+    actingAs($this->user);
+
+    Livewire::test('authentication.update-profile.volunteer')
+        ->set('old_password', 'password')
+        ->set('new_password', 'password2')
+        ->set('new_password_confirmation', 'password2')
+        ->call('changePassword');
+
+    $this->assertTrue(
+        Hash::check('password2', $this->user->fresh()->password)
+    );
 });

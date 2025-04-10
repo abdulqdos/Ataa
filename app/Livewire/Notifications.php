@@ -18,6 +18,7 @@ class Notifications extends Component
     public function toggleShowNotifications()
     {
         $this->showNotifications = !$this->showNotifications;
+        $this->dispatch('reset-user-icon');
     }
 
     #[On('closeNotifications')]
@@ -69,6 +70,7 @@ class Notifications extends Component
         return view('livewire.notifications', [
             'notifications' => $this->user->notifications,
             'count' => $this->count,
+            'notificationReadCount' => $this->user->notifications->where('read_at', null)->count(),
         ]);
     }
 }

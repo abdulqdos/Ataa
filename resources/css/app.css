@@ -36,8 +36,7 @@
     }
 
     .active-link {
-        background-color: rgba(255, 255, 255, 0.15);
-        border-right: 4px solid white;
+        @apply text-secondary border-r-4 border-white bg-gray-50
     }
 
     .input {

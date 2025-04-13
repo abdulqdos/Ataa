@@ -33,7 +33,7 @@
 <body class="bg-gray-100">
 <div class="flex h-screen overflow-hidden">
     <!-- Sidebar (Desktop) -->
-    <div id="sidebar" class="sidebar bg-primary text-white w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
+    <div id="sidebar" class="sidebar  bg-white text-gray-600 w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
         <div class="p-4 flex items-center justify-center border-b border-secondary">
             <div class="text-xl font-bold">مشروع عطاء</div>
         </div>
@@ -56,10 +56,10 @@
     </div>
 
     <!-- Mobile Sidebar (Hidden by default) -->
-    <div id="mobileSidebar" class="sidebar fixed top-0 right-0 h-full bg-primary text-white w-64 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
+    <div id="mobileSidebar" class="sidebar fixed top-0 right-0 h-full bg-white text-gray-600 w-64 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
         <div class="p-4 flex items-center justify-between border-b boseconda">
             <div class="text-xl font-bold">مشروع عطاء</div>
-            <button id="closeSidebar" class="text-white">
+            <button id="closeSidebar" class="text-gray-600">
                 <i class="fas fa-times"></i>
             </button>
         </div>

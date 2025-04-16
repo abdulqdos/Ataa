@@ -89,71 +89,94 @@
                 </select>
             </div>
         </div>
-
-
         <div>
             @if($opportunities->count() > 0)
-                <table class="w-full text-sm text-left rtl:text-right text-gray-900 ">
-                    <thead class="text-xs bg-gray-900 uppercase text-white">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            عنوان االفرصة
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            وصف الفرصة
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            تاريخ البداية
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            تاريخ النهاية
-                        </th>
-                        <th scope="col" class="px-10 py-3">
-                            الحالة
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            العملية
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($opportunities as $opportunity)
-                            <tr class="bg-white  hover:bg-gray-50">
-                                <th scope="row" class="px-6 py-4">
-                                    <div class="flex flex-row items-center gap-2 justify-start">
-                                        @if($opportunity->img_url === null)
-                                            <img class="h-6 w-6 rounded-md" src="https://ui-avatars.com/api/?name={{ $opportunity->title }}&background=random&color=fff" alt="صورة المؤسسة">
-                                        @else
-                                            <img class="h-6 w-6 rounded-md" src="{{ \Illuminate\Support\Facades\Storage::url($opportunity->img_url) }}" alt="صورة المؤسسة">
-                                        @endif
-                                        <a href="{{ route('organization.opportunity.show' , $opportunity->id) }}" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
-                                            {{ $opportunity->title }}
-                                        </a>
+                <div class="flex flex-col">
+                    <div class="-m-1.5 overflow-x-auto">
+                        <div class="p-1.5 min-w-full inline-block align-middle">
+                            <div class="overflow-hidden">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                            عنوان االفرصة
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                            وصف الفرصة
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                            تاريخ البداية
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                            تاريخ النهاية
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                            الحالة
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                            العملية
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                    @foreach($opportunities as $opportunity)
 
-                                    </div>
+                                        <tr  class="hover:bg-gray-100 text-center">
+                                            <th class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                                <div class="flex flex-row items-center gap-2 justify-start">
+                                                    @if($opportunity->img_url === null)
+                                                        <img class="h-6 w-6 rounded-md" src="https://ui-avatars.com/api/?name={{ $opportunity->title }}&background=random&color=fff" alt="صورة المؤسسة">
+                                                    @else
+                                                        <img class="h-6 w-6 rounded-md" src="{{ \Illuminate\Support\Facades\Storage::url($opportunity->img_url) }}" alt="صورة المؤسسة">
+                                                    @endif
+                                                    <a href="{{ route('organization.opportunity.show' , $opportunity->id) }}" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
+                                                        {{ $opportunity->title }}
+                                                    </a>
+                                                </div>
+                                            </th>
+                                            <td  class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 truncate ... max-w-[150px]">
+                                                {{ $opportunity->description }}
+                                            </td>
 
-                                </th>
-                                <td class="px-6 py-4 truncate ... max-w-[150px]">
-                                    {{ $opportunity->description }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ \Carbon\Carbon::parse($opportunity->start_date)->format('d M Y') }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ \Carbon\Carbon::parse($opportunity->end_date)->format('d M Y') }}
-                                </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                                {{ \Carbon\Carbon::parse($opportunity->start_date)->format('d M Y') }}
+                                            </td>
 
-                                <td class="px-6 py-4">
-                                   <livewire:opportunity-status :opportunity="$opportunity" wire:key="{{ $opportunity->id }}" />
-                                </td>
-                                <td class="px-6 py-4 flex flex-row gap-4">
-                                    <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="font-medium px-4 py-1  btn-blue">Edit</a>
-                                    <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="font-medium  px-4 py-1 btn-red">Delete</button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                                {{ \Carbon\Carbon::parse($opportunity->end_date)->format('d M Y') }}
+                                            </td>
+
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                                <livewire:opportunity-status :opportunity="$opportunity"  wire:key="{{ $opportunity->id }}"  />
+                                            </td>
+
+
+                                            <td class="px-6 py-4 flex flex-row gap-4 items-center justify-center">
+                                                <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="group font-medium px-4 py-1 flex flex-col items-center gap-1 cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 group-hover:text-green-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6H9v-3z" />
+                                                    </svg>
+                                                    <span class="text-xs text-green-500 group-hover:text-green-600 transition">Edit</span>
+                                                </a>
+
+
+                                                <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="group font-medium px-4 py-1 flex flex-col gap-1 items-center cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 group-hover:text-red-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0a2 2 0 00-2-2H9a2 2 0 00-2 2m12 0H5" />
+                                                    </svg>
+                                                    <span class="text-xs text-red-500 group-hover:text-red-600 transition">Delete</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @else
                 <div class="flex items-center justify-between p-4 mb-4 my-6 lg:my-10 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50" role="alert">
                     <div class="flex flex-row items-center gap-4">

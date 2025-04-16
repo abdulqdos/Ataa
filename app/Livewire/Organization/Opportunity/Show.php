@@ -6,6 +6,7 @@ use App\Livewire\OrganizationComponent;
 use App\Models\Notification;
 use App\Models\Opportunity;
 use App\Models\Request;
+use App\Models\VolunteerOpportunity;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -44,6 +45,11 @@ class Show extends OrganizationComponent
 
         // Send Notification
         $this->sendNotification($status , $this->currentRequest );
+
+        VolunteerOpportunity::create([
+            'volunteer_id' => $this->currentRequest->volunteer_id,
+            'opportunity_id' => $this->opportunity->id,
+        ]);
 
         // Set Session message
         $message = $status === 'accepted' ? 'تم قبول الطلب بنجاح.' : ($status === 'declined' ? 'تم رفض الطلب بنجاح.' : 'حالة غير معروفة');

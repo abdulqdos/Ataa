@@ -47,4 +47,8 @@ class Opportunity extends Model
     {
         return $this->hasMany(Request::class);
     }
+
+    public function volunteers()
+    {
+        return $this->belongsToMany(Volunteer::class, 'volunteer_opportunities', 'opportunity_id', 'volunteer_id');    }
 }

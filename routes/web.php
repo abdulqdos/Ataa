@@ -21,6 +21,7 @@ use App\Livewire\Organization\Opportunity\Index as Opportunity;
 
 
 use App\Livewire\Organization\Requests\Show as RequestShow;
+use App\Livewire\Volunteer\MyOpportunity;
 use Illuminate\Support\Facades\Route;
 
 
@@ -52,6 +53,7 @@ Route::middleware('volunteerOrGuest')->group(function () {
 // Volunteer
 Route::middleware('volunteer')->group(function () {
    Route::get('/volunteer/profile', volunteerProfile::class)->name('volunteer.profile');
+   Route::get('/volunteer/myOpportunity', myOpportunity::class)->name('volunteer.myOpportunity');
 });
 
 // Organization

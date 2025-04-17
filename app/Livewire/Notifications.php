@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Notification;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -68,6 +69,7 @@ class Notifications extends Component
     {
         return view('livewire.notifications', [
             'notifications' => $this->user->notifications,
+            'unreadNotificationsCount' => Notification::whereNull('read_at')->count(),
             'count' => $this->count,
         ]);
     }

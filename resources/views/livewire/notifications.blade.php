@@ -40,10 +40,10 @@
             <div class="flex items-center justify-between px-4 py-3 border-b">
                     <h2 class="text-lg font-semibold">الإشعارات</h2>
                     <div class="flex items-center space-x-2">
-                        <button type="button" class="text-xs text-secondary px-3 py-1 hover:underline cursor-pointer" wire:click="makeAllAsRead">
+                        <button type="button" class="text-xs text-secondary px-3 py-1 hover:underline cursor-pointer {{  $unreadNotificationsCount > 0 ?  '' : 'hidden' }}" wire:click="makeAllAsRead">
                             تحديد الكل كمقروء
                         </button>
-                        <button type="button" class="text-xs text-red-500  px-3 py-1 hover:underline cursor-pointer" wire:click="deleteAll" >
+                        <button type="button" class="text-xs text-red-500  px-3 py-1 hover:underline cursor-pointer {{ $notifications->count() > 0 ? '' : 'hidden' }}" wire:click="deleteAll" >
                             حذف الكل
                         </button>
                         <button @click="showSidebar = false" class="text-gray-600 hover:text-gray-800 cursor-pointer">

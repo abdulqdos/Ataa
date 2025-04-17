@@ -2,73 +2,75 @@
         <div class="container mx-auto px-6 lg:px-24 py-2">
 
             <!-- Search && Filter -->
-            <div id="top" class="bg-white rounded-md shadow-md p-4 transition-all duration-300">
-                <div class="flex flex-col gap-4">
-                    <!-- Search Box -->
-                    <div class="flex flex-col md:flex-row gap-4">
+            <div id="top" class="bg-white rounded-lg shadow-sm p-4 transition-all duration-300 rtl" dir="rtl">
+                <div class="flex flex-col gap-3">
+                    <!-- Search and Filter Row -->
+                    <div class="flex flex-col md:flex-row gap-3 items-stretch">
+                        <!-- Search Box - Compact -->
                         <div class="flex-1 relative">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                                 </svg>
                             </div>
                             <input
                                 type="text"
-                                placeholder="بحث عن فرصة..."
+                                placeholder="ابحث عن فرصة تطوعية..."
                                 wire:model.live="searchText"
-                                class="w-full pr-10 py-3 px-4 rounded-lg border-1 border-gray-200 focus:border-primaryLight focus:ring-1 focus:outline-none  text-right placeholder:text-gray-400"
+                                class="w-full pr-9 py-2 px-3 text-sm rounded-md border border-gray-200 focus:border-blue-300 focus:ring-1 focus:ring-blue-200 focus:outline-none placeholder-gray-400 transition"
                             />
                         </div>
 
-                        <!--Filter List -->
-                        <div class="relative min-w-[160px]">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <!-- Status Filter - Compact -->
+                        <div class="relative min-w-[140px]">
+                            <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
                                 </svg>
                             </div>
-                            <select class="w-full appearance-none pr-10 py-3 px-4 rounded-lg border-1 border-gray-200 focus:border-primaryLight focus:ring-1 focus:outline-none  text-right bg-white cursor-pointer"
-                                    wire:model.live="status">
+                            <select
+                                class="w-full text-sm appearance-none pr-9 py-2 px-3 rounded-md border border-gray-200 focus:border-blue-300 focus:ring-1 focus:ring-blue-200 focus:outline-none bg-white cursor-pointer transition"
+                                wire:model.live="status">
                                 <option value="">كل الحالات</option>
-                                <option value="upcoming">قريبا</option>
+                                <option value="upcoming">قريباً</option>
                                 <option value="active">نشطة</option>
                                 <option value="completed">مكتملة</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- فلترة التاريخ -->
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <div class="flex flex-row items-center justify-between mx-4">
-                            <h3 class="text-sm font-semibold text-gray-700 mb-3">تصفية حسب التاريخ</h3>
-                            <button wire:click="clear">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 rounded-md bg-red-500 hover:bg-red-700 transition duration-300 text-white cursor-pointer p-1">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                    <!-- Date Filter - Compact -->
+                    <div class="bg-gray-50 p-3 rounded-md border border-gray-200">
+                        <div class="flex flex-row items-center justify-between mb-2">
+                            <h3 class="text-xs font-medium text-gray-600">تصفية حسب التاريخ</h3>
+                            <button wire:click="clear" class="text-red-500 hover:text-red-700 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                 </svg>
                             </button>
-
-
                         </div>
-                        <div class="flex flex-col md:flex-row gap-4">
+
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <!-- Start Date -->
                             <div class="flex-1">
-                                <label class="block text-sm text-gray-700 mb-2">من تاريخ</label>
+                                <label class="block text-xs text-gray-500 mb-1">من تاريخ</label>
                                 <div class="relative">
                                     <input
                                         type="date"
                                         wire:model.live="start_date"
-                                        class="w-full pr-10 py-2 px-4 rounded-lg border-1 border-gray-200 focus:border-primaryLight focus:outline-none text-right"
+                                        class="w-full text-sm py-1.5 px-2 rounded-md border border-gray-200 focus:border-blue-300 focus:outline-none"
                                     />
                                 </div>
                             </div>
 
-                            <!-- إلى تاريخ -->
+                            <!-- End Date -->
                             <div class="flex-1">
-                                <label class="block text-sm text-gray-700 mb-2">إلى تاريخ</label>
+                                <label class="block text-xs text-gray-500 mb-1">إلى تاريخ</label>
                                 <div class="relative">
                                     <input
                                         type="date"
                                         wire:model.live="end_date"
-                                        class="w-full pr-10 py-2 px-4 rounded-lg border-1 border-gray-200 focus:border-primaryLight focus:outline-none text-right"
+                                        class="w-full text-sm py-1.5 px-2 rounded-md border border-gray-200 focus:border-blue-300 focus:outline-none"
                                     />
                                 </div>
                             </div>
@@ -76,7 +78,6 @@
                     </div>
                 </div>
             </div>
-
             @if($opportunities->count() > 0)
 
                 <!-- عرض الفرص التطوعية -->

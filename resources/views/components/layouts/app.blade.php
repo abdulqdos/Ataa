@@ -31,8 +31,8 @@
                             <span class="mr-2 text-xl font-bold text-primary">عطاء</span>
                         </div>
                         <div class="hidden sm:gap-6 sm:flex  sm:space-x-reverse sm:mr-6">
-                            <x-layouts.volunteers.nav href="/" :active="request()->is('/')" wire:navigate>الرئيسية</x-layouts.volunteers.nav>
-                            <x-layouts.volunteers.nav href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate>فرص التطوع</x-layouts.volunteers.nav>
+                            <x-layouts.volunteers.nav href="/" :active="request()->is('/')" wire:navigate.keep>الرئيسية</x-layouts.volunteers.nav>
+                            <x-layouts.volunteers.nav href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate.keep>فرص التطوع</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="/" :active="false" wire:navigate>المؤسسات</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="/" :active="false" wire:navigate> المتطوعون</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="/" :active="false" wire:navigate>عن عطاء</x-layouts.volunteers.nav>
@@ -69,7 +69,7 @@
                                     </div>
                                     <div id="userMenu" class="hidden origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-gray-100 ring-opacity-5 focus:outline-none z-50" role="menu" aria-orientation="vertical" aria-labelledby="userMenuButton" tabindex="-1">
                                         <a href="{{ route('volunteer.profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الملف الشخصي</a>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">فرصي التطوعية</a>
+                                        <a href="{{ route('volunteer.myOpportunity') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">فرصي التطوعية</a>
                                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">الإعدادات</a>
                                         <div class="border-t border-gray-100"></div>
                                         <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">تسجيل الخروج</a>
@@ -95,12 +95,12 @@
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="sm:hidden hidden" id="mobile-menu">
                 <div class="pt-2 pb-3 space-y-1 bg-gray-50">
-                    <x-layouts.volunteers.nav-mobile href="/" :active="request()->is('/')" wire:navigate> الرئيسية </x-layouts.volunteers.nav-mobile>
-                    <x-layouts.volunteers.nav-mobile href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate> فرص التطوع </x-layouts.volunteers.nav-mobile>
-                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate>المؤسسات </x-layouts.volunteers.nav-mobile>
-                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate>المتطوعون </x-layouts.volunteers.nav-mobile>
-                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate>عن عطاء </x-layouts.volunteers.nav-mobile>
-                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate>تواصل معنا </x-layouts.volunteers.nav-mobile>
+                    <x-layouts.volunteers.nav-mobile href="/" :active="request()->is('/')" wire:navigate.keep> الرئيسية </x-layouts.volunteers.nav-mobile>
+                    <x-layouts.volunteers.nav-mobile href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate.keep> فرص التطوع </x-layouts.volunteers.nav-mobile>
+                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate.keep>المؤسسات </x-layouts.volunteers.nav-mobile>
+                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate.keep>المتطوعون </x-layouts.volunteers.nav-mobile>
+                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate.keep>عن عطاء </x-layouts.volunteers.nav-mobile>
+                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate.keep>تواصل معنا </x-layouts.volunteers.nav-mobile>
                 </div>
 
                 <!-- Mobile auth section - For Non-authenticated users -->
@@ -236,41 +236,41 @@
             </div>
         </footer>
         <script>
-            window.onload = function() {
+            document.addEventListener('livewire:navigated', () => {
+                // إعادة ربط أحداث القائمة المنسدلة للمستخدم
                 const userMenuButton = document.getElementById("userMenuButton");
                 const userMenu = document.getElementById("userMenu");
 
                 if (userMenuButton && userMenu) {
-                    userMenuButton.addEventListener("click", function () {
+                    userMenuButton.addEventListener("click", () => {
                         userMenu.classList.toggle("hidden");
                     });
 
-                    document.addEventListener("click", function (event) {
+                    document.addEventListener("click", (event) => {
                         if (!userMenuButton.contains(event.target) && !userMenu.contains(event.target)) {
                             userMenu.classList.add("hidden");
                         }
                     });
                 }
 
-                // التحكم في القائمة الجانبية للجوال
+                // إعادة ربط أحداث قائمة الجوال
                 const mobileMenuButton = document.getElementById("mobileMenuButton");
                 const mobileMenu = document.getElementById("mobile-menu");
 
                 if (mobileMenuButton && mobileMenu) {
-                    mobileMenuButton.addEventListener("click", function () {
+                    mobileMenuButton.addEventListener("click", () => {
                         mobileMenu.classList.toggle("hidden");
                     });
 
-                    document.addEventListener("click", function (event) {
+                    document.addEventListener("click", (event) => {
                         if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
                             mobileMenu.classList.add("hidden");
                         }
                     });
                 }
-            };
 
-            document.addEventListener("DOMContentLoaded", function () {
-                document.querySelector(".close-alert").addEventListener("click", function () {
+                // إعادة ربط حدث إغلاق التنبيه
+                document.querySelector(".close-alert")?.addEventListener("click", () => {
                     document.getElementById("alert-border-3").style.display = "none";
                 });
             });

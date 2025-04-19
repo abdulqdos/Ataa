@@ -69,14 +69,13 @@
         </div>
         <nav class="mt-2">
 
-            <x-layouts.organiations.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('organization/dashboard')" wire:navigate> لوحة التحكم </x-layouts.organiations.nav-mobile>
-            <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunity')" wire:navigate>الفرص التطوعية </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('organization/dashboard')" wire:navigate.keep> لوحة التحكم </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunity')" wire:navigate.keep>الفرص التطوعية </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-users w-6" href="#" :active="false">المتطوعون </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات </x-layouts.organiations.nav-mobile>
 
             <div class="border-t border-secondary mt-4 pt-4">
                 <x-layouts.organiations.nav-mobile i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تسجيل الخروج </x-layouts.organiations.nav-mobile>
-
             </div>
         </nav>
     </div>
@@ -91,12 +90,9 @@
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
-                <div class="flex items-center">
-                    <div class="relative">
-                        <button class="flex items-center text-gray-700 mx-4">
-                            <i class="far fa-bell"></i>
-                            <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">3</span>
-                        </button>
+                <div class="flex items-center justify-center gap-2">
+                    <div class="relative mt-2">
+                        <livewire:notifications />
                     </div>
                     <div class="flex items-center">
                         @if(auth()->user()->organization?->img_url === null)

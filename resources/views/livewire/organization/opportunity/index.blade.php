@@ -25,17 +25,16 @@
     @endif
 
 
-    <div class="max-w-full mx-5 px-4 py-2 mb-4 bg-white shadow-sm rounded-md" id="top">
-        <div class="flex flex-row justify-between items-center">
-            <h1 class="text-xl px-1 py-2 text-primary font-semibold"> فرص التطوعية </h1>
+        <x-layouts.header title="الفرص التطوعية"
+                       :breadcrumbs="[['الرئيسية', route('organization.dashboard')], ['الفرص التطوعية']]">
             <a href="{{ route('organization.opportunity.create') }}" wire:navigate class="px-4 py-1 btn-primary">
                 + إضافة فرصة جديدة
             </a>
-        </div>
-    </div>
+        </x-layouts.header>
 
 
-    <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-1 bg-white mx-5">
+
+        <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-1 bg-white mx-5">
         <div class="py-4 bg-white flex flex-row items-center justify-start gap-4">
             <!-- مربع البحث -->
             <div>
@@ -148,7 +147,23 @@
 
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                                <livewire:opportunity-status :opportunity="$opportunity"  wire:key="{{ $opportunity->id }}"  />
+{{--                                                <livewire:opportunity-status :opportunity="$opportunity"  wire:key="{{ $opportunity->id }}"  />--}}
+                                                <div>
+                                                    <span class="w-4 px-4 py-1  rounded-md
+                                                                @if($opportunity->status == 'active') bg-green-100 text-green-500
+                                                                @elseif($opportunity->status == 'completed') bg-blue-100 text-blue-500
+                                                                @else bg-yellow-100 text-yellow-600 @endif">
+
+                                                                @if($opportunity->status === 'active')
+                                                            نشط
+                                                        @elseif($opportunity->status === 'upcoming')
+                                                            قريباً
+                                                        @elseif($opportunity->status === 'completed')
+                                                            مكتملة
+                                                        @endif
+                                                    </span>
+                                                </div>
+
                                             </td>
 
 
@@ -178,28 +193,42 @@
                     </div>
                 </div>
             @else
-                <div class="flex items-center justify-between p-4 mb-4 my-6 lg:my-10 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50" role="alert">
-                    <div class="flex flex-row items-center gap-4">
-                        <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                        </svg>
-                        <div>
-                            <span class="font-medium">عذراً</span>
-                            لم نعثر على فرص تطوعية تحت عنوان
-                            @if(!empty($searchText))
-                                <span class="font-semibold"> " {{ $searchText }}"</span>
-                            @endif
+
+                @if( (!empty($searchText) || !empty($status) || !empty($start_date) || !empty($end_date) ))
+                    <div class="text-center py-10">
+                        <div class="bg-primary/10 border-l-4 border-secondaryLight p-4 mb-4">
+                            <div class="flex items-center justify-center gap-2">
+                                <svg class="w-6 h-6 text-primary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                                <div>
+                                    <p class="font-bold text-primary">لا توجد نتائج بحث</p>
+                                    <p class="text-primary/90">لم يتم العثور على فرص تطابق "{{ $searchText }}"</p>
+                                </div>
+                            </div>
+                            <button wire:click="clear()" class="mt-3 px-4 py-2 btn-primary">
+                                عرض جميع الفرص
+                            </button>
                         </div>
                     </div>
-                    <div>
-                        <button type="button" class="text-white bg-yellow-600 hover:bg-yellow-700  focus:outline-none font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center cursor-pointer transition duration-300" wire:click="clear">
-                            <svg class="me-2 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
-                                <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-                            </svg>
-                            عرض كل الفرص التطوعية
-                        </button>
+                @else
+                    <!-- Empty State -->
+                    <div class="bg-primary/20 border border-secondaryLight rounded-xl p-6 text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        <h3 class="mt-3 text-lg font-medium text-gray-800">لا توجد فرص مسجلة</h3>
+                        <p class="mt-1 text-sm text-gray-600">لا يوجد فرص لي مؤسستك حاليا . يمكنك انشاء فرصة الان .</p>
+                        <div class="mt-4">
+                            <a href="{{ route('organization.opportunity.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                <span class="mr-2"> انشاء فرصة </span>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                @endif
             @endif
         </div>
         <div class="my-6 mx-auto flex flex-col md:flex-row justify-center items-center max-w-[992px] gap-6">

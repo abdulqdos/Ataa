@@ -58,7 +58,7 @@ class index extends Component
 
         return view('livewire.opportunity.index' ,
             [
-                'opportunities' => $query->latest()->paginate(12),
+                'opportunities' => $query->latest()->with('organization')->paginate(12),
             ]
         );
     }

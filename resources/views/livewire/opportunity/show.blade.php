@@ -5,7 +5,11 @@
 
     <div class="flex flex-col md:flex-row">
         <!-- صورة الفرصة -->
-        <img class="object-cover w-full md:w-1/3 h-64 md:h-auto" src="{{ \Illuminate\Support\Facades\Storage::url($opportunity->img_url) }}" alt="">
+        @if($opportunity->img_url !== null)
+            <img class="object-cover w-full md:w-1/3 h-64 md:h-auto" src="{{ \Illuminate\Support\Facades\Storage::url($opportunity->img_url) }}" alt="">
+        @else
+            <img class="object-cover w-full md:w-1/3 h-64 md:h-auto" src="https://ui-avatars.com/api/?name={{ urlencode($opportunity->title) }}&background=random&color=fff" alt="صورة المؤسسة">
+        @endif
 
         <!-- بيانات الفرصة -->
         <div class="p-6 flex-1">

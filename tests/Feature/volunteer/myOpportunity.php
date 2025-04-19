@@ -6,6 +6,15 @@ use App\Models\User;
 use App\Models\Volunteer;
 use function Pest\Laravel\actingAs;
 
+beforeEach(function () {
+    $user = User::factory()->create([
+        'role' => 'volunteer',
+    ]);
+
+    Volunteer::factory()->recycle($user)->create();
+
+});
+
 it('must be volunteer' , function ($badRole) {
     $user = User::factory()->create([
         'role' => $badRole,
@@ -19,14 +28,44 @@ it('must be volunteer' , function ($badRole) {
 ]);
 
 it('return a correct component' , function () {
+    actingAs($this->user);
+    Livewire::test('volunteer.my-opportunity')
+        ->assertSeeLivewire('volunteer.my-opportunity');
+});
+
+it('can cancel Registration', function () {
     $user = User::factory()->create([
         'role' => 'volunteer',
     ]);
 
-    Volunteer::factory()->recycle($user)->create();
+    $volunteer = Volunteer::factory()->recycle($user)->create();
 
+    $opportunity = Opportunity::factory()->create();
+
+    $volunteer->opportunities()->attach($opportunity);
+
+    $opportunity->update([
+        'accepted_count' => 1,
+    ]);
+    
     actingAs($user);
 
     Livewire::test('volunteer.my-opportunity')
-        ->assertSeeLivewire('volunteer.my-opportunity');
+        ->set('selectedOpportunity', $opportunity)
+        ->call('cancelRegistration');
+
+    // Cancel
+    $this->assertDatabaseMissing('volunteer_opportunities', [
+        'volunteer_id' => $volunteer->id,
+        'opportunity_id' => $opportunity->id,
+    ]);
+
+    // Send Notification
+    $this->assertDatabaseHas('notifications', [
+        'user_id' => $opportunity->organization_id,
+    ]);
+
+    $this->assertDatabaseHas('opportunities', [
+        'accepted_count' => $opportunity->accepted_count - 1,
+    ]);
 });

@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Volunteer;
 
+use App\Livewire\Notifications;
+use App\Models\Notification;
 use App\Models\Opportunity;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,12 +12,9 @@ class MyOpportunity extends Component
 {
     use WithPagination;
 
-    public $user;
-    public $searchText = '';
-    public $status = '';
-    public $start_date = '';
-    public $end_date = '';
-
+    public $user , $searchText , $status , $start_date , $end_date = '';
+    public $selectedOpportunity = null ;
+    public $showDeleteBox = false  ;
     protected $queryString = [
         'searchText' => ['except' => ''],
         'status' => ['except' => ''],
@@ -28,11 +27,43 @@ class MyOpportunity extends Component
         $this->user = auth()->user();
     }
 
-    public function clearFilters()
+    public function clearSearch()
     {
         $this->reset(['searchText', 'status', 'start_date', 'end_date']);
         $this->resetPage();
     }
+
+    // Alerts Function
+    public function toggleShowDeleteBox(Opportunity $opportunity)
+    {
+        $this->selectedOpportunity = $this->user->volunteer->opportunities->firstWhere('id', $opportunity->id);
+        $this->showDeleteBox = true;
+    }
+
+    public function cancelRegistration()
+    {
+        if ($this->selectedOpportunity) {
+            auth()->user()->volunteer->opportunities()->detach($this->selectedOpportunity->id);
+            Notification::create([
+               'user_id' =>  $this->selectedOpportunity->organization_id,
+                'title' => 'إلغاء تسجيل متطوع',
+                'message' =>  'بإلغاء تسجيله من الفرصة .'. auth()->user()->volunteer->first_name  .'لقد قام المتطوع'
+            ]);
+            $this->selectedOpportunity->update([
+                'accepted_count' => $this->selectedOpportunity->accepted_count - 1,
+            ]);
+            $this->resetDeleteBox();
+            return redirect()->route('volunteer.myOpportunity')->with('success', 'تم إلغاء تسجيلك بنجاح .');
+        }
+
+        session()->flash('error', 'لا توجد فرصة تطوعية محددة للحذف.');
+    }
+
+    public function resetDeleteBox()
+    {
+        $this->reset(['showDeleteBox', 'selectedOpportunity']);
+    }
+
 
     public function render()
     {
@@ -54,7 +85,7 @@ class MyOpportunity extends Component
             })
             ->orderBy('start_date', 'desc');
 
-        $opportunities = $query->paginate(10);
+        $opportunities = $query->with('organization')->paginate(10);
 
         return view('livewire.volunteer.my-opportunity', [
             'opportunities' => $opportunities

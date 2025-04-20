@@ -97,7 +97,18 @@
                                 <div class="flex flex-row justify-between items-center mx-4">
                                     <h2 class="text-xl font-semibold mb-2">{{ $opportunity->title }}</h2>
                                     <div>
-                                       <livewire:opportunity-status :opportunity="$opportunity" wire:key="{{ $opportunity->id }}-{{ $searchText }}-{{ $status }}">
+                                         <span class="w-4 px-2 md:px-4 py-1 rounded-md text-xs md:text-sm
+                                                                @if($opportunity->start_date <= now() && $opportunity->end_date >= now()) bg-green-100 text-green-500
+                                                                @elseif($opportunity->end_date < now()) bg-blue-100 text-blue-500
+                                                                @elseif($opportunity->start_date > now()) bg-yellow-100 text-yellow-600 @endif">
+                                                        @if($opportunity->start_date <= now() && $opportunity->end_date >= now() )
+                                                 نشط
+                                             @elseif($opportunity->start_date > now() )
+                                                 قريباً
+                                             @elseif($opportunity->end_date < now() )
+                                                 مكتملة
+                                             @endif
+                                                    </span>
                                     </div>
                                 </div>
 

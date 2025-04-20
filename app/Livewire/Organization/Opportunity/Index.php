@@ -72,8 +72,18 @@ class Index extends OrganizationComponent
         }
 
         if (!empty($this->status)) {
-            $query->where('status', $this->status);
+            $now = now();
+
+            if ($this->status === 'upcoming') {
+                $query->where('start_date', '>', $now);
+            } elseif ($this->status === 'active') {
+                $query->where('start_date', '<=', $now)
+                    ->where('end_date', '>=', $now);
+            } elseif ($this->status === 'completed') {
+                $query->where('end_date', '<', $now);
+            }
         }
+
 
         return view('livewire.organization.opportunity.index', [
             'opportunities' => $query->latest()->paginate(10),

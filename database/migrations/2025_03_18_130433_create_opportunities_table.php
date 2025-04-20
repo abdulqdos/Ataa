@@ -19,8 +19,6 @@ return new class extends Migration
             $table->date('end_date');
             $table->string('img_url')->nullable();
             $table->foreignId('organization_id')->constrained('organizations');
-            $table->enum('status', ['upcoming', 'active', 'completed'])
-                ->default('upcoming');
             $table->string('location');
             $table->string('location_url', 2048)->nullable();
             $table->integer('count');

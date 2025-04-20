@@ -25,7 +25,6 @@ class OpportunityFactory extends Factory
             'description' =>  str(fake()->realText(120)),
             'start_date' =>$startDate,
             'end_date' => $endDate,
-            'status' => $this->faker->randomElement(['upcoming', 'active', 'completed']),
             'location' => $this->faker->city(),
             'location_url' => "https://www.google.com/maps/search/?api=1&query=" . fake()->latitude . "," . fake()->longitude,
             'count' => $this->faker->numberBetween(20, 100),

@@ -24,22 +24,19 @@
         </div>
     @endif
 
+    <x-layouts.header title="الفرص التطوعية"
+                      :breadcrumbs="[['الرئيسية', route('organization.dashboard')], ['الفرص التطوعية']]">
+        <a href="{{ route('organization.opportunity.create') }}" wire:navigate class="px-4 py-1 btn-primary">
+            + إضافة فرصة جديدة
+        </a>
+    </x-layouts.header>
 
-        <x-layouts.header title="الفرص التطوعية"
-                       :breadcrumbs="[['الرئيسية', route('organization.dashboard')], ['الفرص التطوعية']]">
-            <a href="{{ route('organization.opportunity.create') }}" wire:navigate class="px-4 py-1 btn-primary">
-                + إضافة فرصة جديدة
-            </a>
-        </x-layouts.header>
-
-
-
-        <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-1 bg-white mx-5">
-        <div class="py-4 bg-white flex flex-row items-center justify-start gap-4">
-            <!-- مربع البحث -->
-            <div>
+    <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-1 bg-white mx-2 md:mx-5">
+        <div class="py-4 bg-white flex flex-col md:flex-row items-start md:items-center justify-start gap-4">
+            <!-- Search box -->
+            <div class="w-full md:w-auto">
                 <label for="table-search" class="sr-only">بحث</label>
-                <div class="relative mt-1">
+                <div class="relative">
                     <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -47,16 +44,16 @@
                     </div>
                     <input type="text" id="table-search"
                            wire:model.live="searchText"
-                           class="block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50
+                           class="block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full md:w-80 bg-gray-50
                    focus:ring-1 focus:outline-none focus:ring-secondaryLight focus:border-secondaryLight"
                            placeholder="ابحث عن فرصة معينة...">
                 </div>
             </div>
 
-            <!-- البحث بالتاريخ -->
-            <div class="flex gap-4">
-                <!-- تاريخ البداية -->
-                <div class="w-44 flex flex-row gap-4 items-center">
+            <!-- Date filters -->
+            <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                <!-- Start date -->
+                <div class="w-full md:w-44 flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
                     <label for="start_date" class="block text-sm font-medium text-gray-600">تاريخ البداية</label>
                     <input type="date" id="start_date" name="start_date"
                            class="block w-full py-2 px-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
@@ -64,8 +61,8 @@
                            wire:model.live="start_date">
                 </div>
 
-                <!-- تاريخ النهاية -->
-                <div class="w-44 flex flex-row gap-6 items-center mr-5">
+                <!-- End date -->
+                <div class="w-full md:w-44 flex flex-col md:flex-row gap-2 md:gap-6 items-start md:items-center">
                     <label for="end_date" class="block text-sm font-medium text-gray-600">تاريخ النهاية</label>
                     <input type="date" id="end_date" name="end_date"
                            class="block w-full py-2 px-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
@@ -74,8 +71,8 @@
                 </div>
             </div>
 
-            <!-- البحث بالحالة -->
-            <div class="w-44 flex flex-row gap-6 items-center mr-5">
+            <!-- Status filter -->
+            <div class="w-full md:w-44 flex flex-col md:flex-row gap-2 md:gap-6 items-start md:items-center lg:mr-4">
                 <label for="status" class="block text-sm font-medium text-gray-600">الحالة</label>
                 <select id="status" name="status"
                         class="block w-full py-2 px-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50
@@ -88,6 +85,7 @@
                 </select>
             </div>
         </div>
+
         <div>
             @if($opportunities->count() > 0)
                 <div class="flex flex-col">
@@ -97,31 +95,30 @@
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
-                                            عنوان االفرصة
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
+                                            عنوان الفرصة
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6 hidden sm:table-cell">
                                             وصف الفرصة
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                             تاريخ البداية
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6 hidden md:table-cell">
                                             تاريخ النهاية
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                             الحالة
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500">
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                             العملية
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200">
                                     @foreach($opportunities as $opportunity)
-
-                                        <tr  class="hover:bg-gray-100 text-center">
-                                            <th class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                        <tr class="hover:bg-gray-100 text-center">
+                                            <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800 md:px-6">
                                                 <div class="flex flex-row items-center gap-2 justify-start">
                                                     @if($opportunity->img_url === null)
                                                         <img class="h-6 w-6 rounded-md" src="https://ui-avatars.com/api/?name={{ $opportunity->title }}&background=random&color=fff" alt="صورة المؤسسة">
@@ -129,54 +126,48 @@
                                                         <img class="h-6 w-6 rounded-md" src="{{ \Illuminate\Support\Facades\Storage::url($opportunity->img_url) }}" alt="صورة المؤسسة">
                                                     @endif
                                                     <a href="{{ route('organization.opportunity.show' , $opportunity->id) }}" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
-                                                        {{ $opportunity->title }}
+                                                        {{ Str::limit($opportunity->title, 20) }}
                                                     </a>
                                                 </div>
-                                            </th>
-                                            <td  class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 truncate ... max-w-[150px]">
-                                                {{ $opportunity->description }}
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 truncate max-w-[150px] hidden sm:table-cell md:px-6">
+                                                {{ Str::limit($opportunity->description, 30) }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 md:px-6">
                                                 {{ \Carbon\Carbon::parse($opportunity->start_date)->format('d M Y') }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 hidden md:table-cell md:px-6">
                                                 {{ \Carbon\Carbon::parse($opportunity->end_date)->format('d M Y') }}
                                             </td>
 
-
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-{{--                                                <livewire:opportunity-status :opportunity="$opportunity"  wire:key="{{ $opportunity->id }}"  />--}}
+                                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 md:px-6">
                                                 <div>
-                                                    <span class="w-4 px-4 py-1  rounded-md
-                                                                @if($opportunity->status == 'active') bg-green-100 text-green-500
-                                                                @elseif($opportunity->status == 'completed') bg-blue-100 text-blue-500
-                                                                @else bg-yellow-100 text-yellow-600 @endif">
-
-                                                                @if($opportunity->status === 'active')
+                                                    <span class="w-4 px-2 md:px-4 py-1 rounded-md text-xs md:text-sm
+                                                                @if($opportunity->start_date <= now() && $opportunity->end_date >= now()) bg-green-100 text-green-500
+                                                                @elseif($opportunity->end_date < now()) bg-blue-100 text-blue-500
+                                                                @elseif($opportunity->start_date > now()) bg-yellow-100 text-yellow-600 @endif">
+                                                        @if($opportunity->start_date <= now() && $opportunity->end_date >= now() )
                                                             نشط
-                                                        @elseif($opportunity->status === 'upcoming')
+                                                        @elseif($opportunity->start_date > now() )
                                                             قريباً
-                                                        @elseif($opportunity->status === 'completed')
+                                                        @elseif($opportunity->end_date < now() )
                                                             مكتملة
                                                         @endif
                                                     </span>
                                                 </div>
-
                                             </td>
 
-
-                                            <td class="px-6 py-4 flex flex-row gap-4 items-center justify-center">
-                                                <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="group font-medium px-4 py-1 flex flex-col items-center gap-1 cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 group-hover:text-green-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <td class="px-3 py-4 flex flex-row gap-2 md:gap-4 items-center justify-center md:px-6">
+                                                <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="group font-medium px-2 md:px-4 py-1 flex flex-col items-center gap-1 cursor-pointer">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 md:h-6 w-5 md:w-6 text-green-500 group-hover:text-green-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6H9v-3z" />
                                                     </svg>
                                                     <span class="text-xs text-green-500 group-hover:text-green-600 transition">Edit</span>
                                                 </a>
 
-
-                                                <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="group font-medium px-4 py-1 flex flex-col gap-1 items-center cursor-pointer">
+                                                <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="group font-medium px-2 md:px-4 py-1 flex flex-col gap-1 items-center cursor-pointer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 group-hover:text-red-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0a2 2 0 00-2-2H9a2 2 0 00-2 2m12 0H5" />
                                                     </svg>
@@ -187,13 +178,11 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
                 </div>
             @else
-
                 @if( (!empty($searchText) || !empty($status) || !empty($start_date) || !empty($end_date) ))
                     <div class="text-center py-10">
                         <div class="bg-primary/10 border-l-4 border-secondaryLight p-4 mb-4">
@@ -235,6 +224,4 @@
             {{ $opportunities->links('vendor.pagination.custom' , data: ['scrollTo' => '#top']) }}
         </div>
     </div>
-
-
 </div>

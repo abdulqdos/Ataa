@@ -68,7 +68,6 @@
             <div class="text-md font-bold px-4 pb-4">{{ auth()->user()->organization?->name  }}</div>
         </div>
         <nav class="mt-2">
-
             <x-layouts.organiations.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('organization/dashboard')" wire:navigate.keep> لوحة التحكم </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunity')" wire:navigate.keep>الفرص التطوعية </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-users w-6" href="#" :active="false">المتطوعون </x-layouts.organiations.nav-mobile>
@@ -100,7 +99,7 @@
                         @else
                             <img class="h-8 w-8 rounded-full object-cover" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->organization?->img_url) }}" alt="صورة المؤسسة">
                         @endif
-                            <span class="mr-2 text-sm font-medium text-gray-700"> {{ auth()->user()->organization?->name }}</span>
+                            <span class="mr-2 text-sm font-medium text-gray-700 hidden lg:inline"> {{ auth()->user()->organization?->name }}</span>
                     </div>
                 </div>
             </div>

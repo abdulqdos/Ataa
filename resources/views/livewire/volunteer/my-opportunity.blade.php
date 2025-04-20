@@ -132,8 +132,20 @@
 
                             <!-- Status -->
                             <td class="px-6 py-4 text-center">
-                                <livewire:opportunity-status :opportunity="$opportunity" wire:key="{{ $opportunity->id }}" />
+                                    <span class="w-4 px-2 md:px-4 py-1 rounded-md text-xs md:text-sm
+                                        @if($opportunity->start_date <= now() && $opportunity->end_date >= now()) bg-green-100 text-green-500
+                                        @elseif($opportunity->end_date < now()) bg-blue-100 text-blue-500
+                                        @elseif($opportunity->start_date > now()) bg-yellow-100 text-yellow-600 @endif">
+                                        @if($opportunity->start_date <= now() && $opportunity->end_date >= now() )
+                                                نشط
+                                            @elseif($opportunity->start_date > now() )
+                                                قريباً
+                                            @elseif($opportunity->end_date < now() )
+                                                مكتملة
+                                            @endif
+                                    </span>
                             </td>
+
 
                             <!-- Actions -->
                             <td class="px-6 py-4 text-center">

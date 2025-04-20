@@ -75,7 +75,16 @@ class MyOpportunity extends Component
                 });
             })
             ->when($this->status, function ($query) {
-                $query->where('status', $this->status);
+                $now = now();
+
+                if ($this->status === 'upcoming') {
+                    $query->where('start_date', '>', $now);
+                } elseif ($this->status === 'active') {
+                    $query->where('start_date', '<=', $now)
+                        ->where('end_date', '>=', $now);
+                } elseif ($this->status === 'completed') {
+                    $query->where('end_date', '<', $now);
+                }
             })
             ->when($this->start_date, function ($query) {
                 $query->whereDate('start_date', '>=', $this->start_date);

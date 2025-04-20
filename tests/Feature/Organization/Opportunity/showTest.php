@@ -43,7 +43,7 @@ it('can show  opportunity', function () {
 
 it('accepts a volunteer request and updates status correctly', function () {
     actingAs($this->organization);
-
+    $this->withoutExceptionHandling();
     $volunteer = Volunteer::factory()->create();
     $request = Request::factory()
         ->for($volunteer)

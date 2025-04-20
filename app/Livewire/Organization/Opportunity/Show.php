@@ -67,7 +67,7 @@ class Show extends OrganizationComponent
 
         if ($status === 'accepted') {
             $this->opportunity->update([
-                'accepted_count' => $this->opportunity->accepted_count++,
+                'accepted_count' =>$this->opportunity->accepted_count + 1,
             ]);
         }
     }

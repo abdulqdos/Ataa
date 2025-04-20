@@ -42,8 +42,8 @@ it('can store an Opportunity', function () {
     Livewire::test('organization.opportunity.create')
         ->set('title' , 'فرصة التعاونية')
         ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
-        ->set('start_date' , '2025-04-12')
-        ->set('end_date' , '2025-04-15')
+        ->set('start_date' , '2025-05-25')
+        ->set('end_date' , '2025-06-15')
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->set('location' , 'شارع زاوية مقابل مستشفى')
         ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
@@ -53,8 +53,8 @@ it('can store an Opportunity', function () {
     $this->assertDatabaseHas('opportunities', [
         'title' => 'فرصة التعاونية',
         'description' => 'فرصة التعاونية لي بناء مجتمع افضل',
-        'start_date' => '2025-04-12',
-        'end_date' => '2025-04-15',
+        'start_date' => '2025-05-25',
+        'end_date' => '2025-06-15',
         'location' => 'شارع زاوية مقابل مستشفى',
         'location_url' => 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA',
         'count' => 200,
@@ -70,8 +70,8 @@ it('Redirect to correct page', function () {
     Livewire::test('organization.opportunity.create')
         ->set('title' , 'فرصة التعاونية')
         ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
-        ->set('start_date' , '12-4-2025')
-        ->set('end_date' , '15-4-2025')
+        ->set('start_date' , '12-5-2025')
+        ->set('end_date' , '15-6-2025')
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->set('location' , 'شارع زاوية مقابل مستشفى')
         ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')

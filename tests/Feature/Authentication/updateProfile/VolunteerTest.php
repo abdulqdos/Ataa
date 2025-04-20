@@ -26,6 +26,12 @@ it('must be an volunteer' , function ($badRole) {
 ]);
 
 it('return a correct component' , function () {
+    $user =  User::factory()->create([
+        'role' => 'volunteer',
+    ]);
+    $this->volunteer = Volunteer::factory()->recycle($user)->create();
+
+    actingAs($user);
     Livewire::test('authentication.update-profile.volunteer')
         ->assertSeeLivewire('authentication.update-profile.volunteer');
 });

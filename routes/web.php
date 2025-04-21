@@ -11,13 +11,14 @@ use App\Livewire\Opportunity\Index;
 use App\Livewire\Opportunity\Show ;
 
 // Volunteer
-use App\Livewire\Authentication\UpdateProfile\Volunteer as volunteerProfile ;
+use App\Livewire\Volunteer\Profile\Update as VolunteerUpdateProfile ;
 
 use App\Livewire\Organization\Dashboard;
 use App\Livewire\Organization\Opportunity\Create as OpportunityCreate;
 use App\Livewire\Organization\Opportunity\Edit as OpportunityEdit;
 use App\Livewire\Organization\Opportunity\Show as OpportunityShow;
 use App\Livewire\Organization\Opportunity\Index as Opportunity;
+use App\Livewire\Organization\Profile\Update as  OrganizationUpdateProfile ;
 
 
 use App\Livewire\Organization\Requests\Show as RequestShow;
@@ -52,7 +53,7 @@ Route::middleware('volunteerOrGuest')->group(function () {
 
 // Volunteer
 Route::middleware('volunteer')->group(function () {
-   Route::get('/volunteer/profile', volunteerProfile::class)->name('volunteer.profile');
+   Route::get('/volunteer/profile', VolunteerUpdateProfile::class)->name('volunteer.profile');
    Route::get('/volunteer/myOpportunity', myOpportunity::class)->name('volunteer.myOpportunity');
 });
 
@@ -69,6 +70,9 @@ Route::middleware('organization')->group(function () {
 
     // Requests
     Route::get('/organization/requests/{request}' , RequestShow::class)->name('organization.requests.show');
+
+    // Profile
+    Route::get('/organization/update-profile' , OrganizationUpdateProfile::class)->name('organization.update-profile');
 });
 
 // Admin

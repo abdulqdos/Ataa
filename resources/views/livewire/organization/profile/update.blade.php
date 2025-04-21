@@ -85,15 +85,15 @@
 
                 <div class="flex flex-col md:flex-row gap-6">
                     @error('user_name')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
 
                     @error('first_name')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
 
                     @error('last_name')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
                 </div>
 
@@ -110,11 +110,11 @@
 
                 <div class="flex flex-col md:flex-row gap-6">
                     @error('phone_number')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
 
                     @error('email')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
                 </div>
 
@@ -135,11 +135,11 @@
 
                 <div class="flex flex-col md:flex-row gap-6">
                     @error('age')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
 
                     @error('gender')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
                 </div>
 
@@ -150,7 +150,7 @@
                 </div>
 
                 @error('bio')
-                    <x-layouts.x-error-messge :message="$message" />
+                <x-layouts.x-error-messge :message="$message" />
                 @enderror
             </div>
 
@@ -189,11 +189,11 @@
                 <div class="flex flex-col md:flex-row gap-6">
 
                     @error('old_password')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
 
                     @error('new_password')
-                        <x-layouts.x-error-messge :message="$message" />
+                    <x-layouts.x-error-messge :message="$message" />
                     @enderror
                 </div>
 

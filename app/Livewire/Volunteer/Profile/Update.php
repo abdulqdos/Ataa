@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Authentication\UpdateProfile;
+namespace App\Livewire\Volunteer\Profile ;
 
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Volunteer extends Component
+class Update extends Component
 {
     use withFileUploads ;
     #[title('تعديل ملف الشخصي')]
@@ -172,6 +172,6 @@ class Volunteer extends Component
     }
     public function render()
     {
-        return view('livewire.authentication.update-profile.volunteer');
+        return view('livewire.volunteer.profile.update');
     }
 }

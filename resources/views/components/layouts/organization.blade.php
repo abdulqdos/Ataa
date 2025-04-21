@@ -50,6 +50,7 @@
             <x-layouts.organiations.nav i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات</x-layouts.organiations.nav>
 
             <div class="border-t border-secondary mt-4 pt-4">
+                <x-layouts.organiations.nav i="fas fa-user w-6" href="{{ route('organization.update-profile') }}" :active="false">الملف الشخصي</x-layouts.organiations.nav>
                 <x-layouts.organiations.nav i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تجيل الخروج</x-layouts.organiations.nav>
             </div>
         </nav>
@@ -74,6 +75,7 @@
             <x-layouts.organiations.nav-mobile i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات </x-layouts.organiations.nav-mobile>
 
             <div class="border-t border-secondary mt-4 pt-4">
+                <x-layouts.organiations.nav-mobile i="fas fa-user w-6" href="{{ route('organization.update-profile') }}" :active="false">الملف الشخصي</x-layouts.organiations.nav-mobile>
                 <x-layouts.organiations.nav-mobile i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تسجيل الخروج </x-layouts.organiations.nav-mobile>
             </div>
         </nav>

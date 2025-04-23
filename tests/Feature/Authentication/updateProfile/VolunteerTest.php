@@ -32,20 +32,20 @@ it('return a correct component' , function () {
     $this->volunteer = Volunteer::factory()->recycle($user)->create();
 
     actingAs($user);
-    Livewire::test('authentication.update-profile.volunteer')
-        ->assertSeeLivewire('authentication.update-profile.volunteer');
+    Livewire::test('volunteer.profile.update')
+        ->assertSeeLivewire('volunteer.profile.update');
 });
 
 it('have a correct data' , function () {
     actingAs($this->user);
-    Livewire::test('authentication.update-profile.volunteer')
+    Livewire::test('volunteer.profile.update')
         ->assertSet('user' , auth()->user());
 });
 
 it('can update profile' , function () {
     actingAs($this->user);
 
-    Livewire::test('authentication.update-profile.volunteer')
+    Livewire::test('volunteer.profile.update')
         ->set('user_name', 'abdu_alqdus')
         ->set('email', 'abdu@gmail.com')
         ->set('first_name', 'عبدالقدوس')
@@ -75,7 +75,7 @@ it('can change password' , function () {
 
     actingAs($this->user);
 
-    Livewire::test('authentication.update-profile.volunteer')
+    Livewire::test('volunteer.profile.update')
         ->set('old_password', 'password')
         ->set('new_password', 'password2')
         ->set('new_password_confirmation', 'password2')

@@ -153,19 +153,7 @@
             <div class="p-4 flex flex-col gap-3">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <h2 class="text-lg md:text-xl text-gray-800 font-bold"> {{ $opportunity->title }}</h2>
-
-                    <span class="px-3 py-1 text-xs sm:text-sm font-semibold rounded-md text-center
-                   @if($opportunity->start_date <= now() && $opportunity->end_date >= now()) bg-green-100 text-green-500
-                    @elseif($opportunity->end_date < now()) bg-blue-100 text-blue-500
-                    @elseif($opportunity->start_date > now()) bg-yellow-100 text-yellow-600 @endif">
-                    @if($opportunity->start_date <= now() && $opportunity->end_date >= now() )
-                            نشط
-                        @elseif($opportunity->start_date > now() )
-                            قريباً
-                        @elseif($opportunity->end_date < now() )
-                            مكتملة
-                        @endif
-                    </span>
+                    <x-layouts.status-opportunity :opportunity="$opportunity" />
                 </div>
 
                 <p class="text-gray-600 text-sm md:text-base leading-relaxed">

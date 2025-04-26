@@ -203,6 +203,15 @@
                     <input type="password" id="confirm_password" class="input focus:ring-primary" placeholder="أعد كتابة كلمة المرور الجديدة" wire:model="new_password_confirmation">
                 </div>
 
+                <div class="bg-secondary/10 p-4 rounded-lg mb-6">
+                    <h3 class="text-sm font-medium text-primary mb-2">نصائح لأمان أفضل:</h3>
+                    <ul class="text-xs text-primary/90 list-disc pr-4 space-y-1">
+                        <li>استخدم 8 أحرف على الأقل</li>
+                        <li>اجمع بين الأحرف والأرقام والرموز</li>
+                        <li>تجنب استخدام كلمات مرور سهلة التخمين</li>
+                    </ul>
+                </div>
+
                 <!-- زر حفظ -->
                 <div class="text-left">
                     <button type="submit" class="font-semibold py-2 px-6 btn-primary">

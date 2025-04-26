@@ -13,27 +13,25 @@ class Update extends Component
     public $user , $user_name , $first_name , $last_name  ,  $email , $phone_number ,$gender, $age , $bio ,$img , $img_url ;
 
     public $old_password , $new_password , $new_password_confirmation;
-    // rules
-    protected $rules = [
-        'first_name' => 'required|string|min:2|regex:/^[a-zA-Zء-ي]+$/u|max:50',
-        'last_name' => 'required|string|min:2|regex:/^[a-zA-Zء-ي]+$/u|max:50',
-        'gender' => 'required|in:male,female',
-        'phone_number' => 'required|digits_between:8,15',
-        'age' => 'required|integer|min:8|max:90',
-        'user_name' => 'required|string|min:3|max:30|alpha_dash|unique:users,user_name',
-        'bio' => 'nullable|string|min:10|max:300',
-        'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'old_password' => ['required'],
-        'new_password' => ['required', 'min:8', 'confirmed'],
-    ];
 
-    // Just For email
-    public function rules()
+    // rules
+    protected function rules()
     {
         return [
+            'first_name' => 'required|string|min:2|regex:/^[a-zA-Zء-ي]+$/u|max:50',
+            'last_name' => 'required|string|min:2|regex:/^[a-zA-Zء-ي]+$/u|max:50',
+            'gender' => 'required|in:male,female',
+            'phone_number' => 'required|digits_between:8,15',
+            'age' => 'required|integer|min:8|max:90',
+            'user_name' => 'required|string|min:3|max:30|alpha_dash|unique:users,user_name,' . $this->user->id,
+            'bio' => 'nullable|string|min:10|max:300',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'required|email|max:255|unique:users,email,' . $this->user->id,
+            'old_password' => ['nullable'], // انت تتحكم فيها في changePassword()
+            'new_password' => ['nullable'], // انت تتحكم فيها في changePassword()
         ];
     }
+
 
 
     protected $messages = [

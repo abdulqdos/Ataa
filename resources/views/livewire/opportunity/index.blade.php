@@ -83,65 +83,74 @@
                 <!-- عرض الفرص التطوعية -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-6 mt-3">
                     @foreach($opportunities as $opportunity)
-                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                            <div class="flex items-center justify-center h-48">
+                        <div class="bg-white shadow-md rounded-md overflow-hidden transition-transform duration-300 ">
+                            <div class="flex items-center justify-center h-48 md:h-56">
                                 @if($opportunity->img_url === null)
-                                    <!-- إذا كانت الصورة غير موجودة نعرض صورة عشوائية بلون عشوائي -->
-                                    <img class="h-full w-full object-cover" src="https://ui-avatars.com/api/?name={{ urlencode($opportunity->title) }}&background=random&color=fff" alt="صورة المؤسسة">
+                                    <img class="h-full w-full object-cover"
+                                         src="https://ui-avatars.com/api/?name={{ urlencode($opportunity->title) }}&background=random&color=fff"
+                                         alt="صورة المؤسسة">
                                 @else
-                                    <img class="h-full w-full object-cover" src="{{ \Illuminate\Support\Facades\Storage::url($opportunity->img_url) }}" alt="صورة المؤسسة">
+                                    <img class="h-full w-full object-cover"
+                                         src="{{ \Illuminate\Support\Facades\Storage::url($opportunity->img_url) }}"
+                                         alt="صورة المؤسسة">
                                 @endif
                             </div>
 
-                            <div class="p-4">
-                                <div class="flex flex-row justify-between items-center mx-4">
-                                    <h2 class="text-xl font-semibold mb-2">{{ $opportunity->title }}</h2>
-                                    <div>
-                                         <span class="w-4 px-2 md:px-4 py-1 rounded-md text-xs md:text-sm
-                                                                @if($opportunity->start_date <= now() && $opportunity->end_date >= now()) bg-green-100 text-green-500
-                                                                @elseif($opportunity->end_date < now()) bg-blue-100 text-blue-500
-                                                                @elseif($opportunity->start_date > now()) bg-yellow-100 text-yellow-600 @endif">
-                                                        @if($opportunity->start_date <= now() && $opportunity->end_date >= now() )
-                                                 نشط
-                                             @elseif($opportunity->start_date > now() )
-                                                 قريباً
-                                             @elseif($opportunity->end_date < now() )
-                                                 مكتملة
-                                             @endif
-                                                    </span>
+                            <div class="p-5 space-y-4">
+                                <div class="flex flex-row justify-between items-center">
+                                    <h2 class="text-2xl font-bold text-gray-800">{{ $opportunity->title }}</h2>
+                                    <x-layouts.status-opportunity :opportunity="$opportunity" />
+                                </div>
+
+                                <div class="space-y-3">
+                                    <div class="flex items-center text-base text-gray-700">
+                                        <span class="font-semibold min-w-[80px]">المؤسسة:</span>
+                                        <span class="mr-2">{{ $opportunity->organization->name }}</span>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="text-base text-gray-700">
+                                            <p class="font-semibold">البداية</p>
+                                            <p>{{ \Carbon\Carbon::parse($opportunity->start_date)->format('d-m-Y') }}</p>
+                                        </div>
+
+                                        <div class="text-base text-gray-700">
+                                            <p class="font-semibold">النهاية</p>
+                                            <p>{{ \Carbon\Carbon::parse($opportunity->end_date)->format('d-m-Y') }}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-base text-gray-700">
+                                        <span class="font-semibold">الموقع:</span>
+                                        <a href="{{ $opportunity->location_url }}"
+                                           class="text-blue-500 hover:underline"
+                                           target="_blank">
+                                            {{ $opportunity->location }}
+                                        </a>
+                                    </div>
+
+                                    <div class="text-base text-gray-700">
+                                        <div class="flex justify-between mb-2">
+                                            <span class="font-semibold">المتطوعين:</span>
+                                            <span>{{ $opportunity->accepted_count }}/{{ $opportunity->count }}</span>
+                                        </div>
+                                        <div class="w-full bg-gray-200 rounded-full h-2">
+                                            <div class="bg-primary h-2 rounded-full"
+                                                 style="width: {{ ($opportunity->accepted_count/$opportunity->count)*100 }}%">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="text-sm text-gray-600 mb-1">
-                                    <span class="font-bold">المؤسسة :</span>
-                                    <span>
-                                        {{ $opportunity->organization->name }}
-                                </span>
-                                </div>
-
-                                <div class="text-sm text-gray-600 mb-1">
-                                    <span class="font-bold">تبدأ:</span> {{ \Carbon\Carbon::parse($opportunity->start_date)->format('d-m-Y') }}
-                                </div>
-
-                                <div class="text-sm text-gray-600 mb-1">
-                                    <span class="font-bold">تنتهي:</span> {{ \Carbon\Carbon::parse($opportunity->end_date)->format('d-m-Y') }}
-                                </div>
-
-                                <div class="text-sm text-gray-600 mb-1">
-                                    <span class="font-bold">المكان:</span>
-                                    <a href="{{ $opportunity->location_url }}" class="text-blue-500" target="_blank">{{ $opportunity->location }}</a>
-                                </div>
-
-                                <div class="text-sm text-gray-600 mb-1">
-                                    <span class="font-bold">المتطوعين المطلوبين:</span> {{ $opportunity->count }} / {{ $opportunity->accepted_count }}
-                                </div>
-
-                                <div class="mt-4 ">
-                                    <a href="{{ route('opportunities.show' ,  $opportunity->id ) }}" wire:navigate class="px-6 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primaryLight transition duration-300 w-full cursor-pointer ">
+                                <div class="pt-4">
+                                    <a href="{{ route('opportunities.show', $opportunity->id) }}"
+                                       wire:navigate.keep
+                                       class="block text-center px-6 py-3 text-base font-medium rounded-md
+                      shadow-sm text-white bg-primary hover:bg-primaryLight transition-all
+                      duration-300 cursor-pointer">
                                         عرض التفاصيل
                                     </a>
                                 </div>
-
                             </div>
                         </div>
                     @endforeach

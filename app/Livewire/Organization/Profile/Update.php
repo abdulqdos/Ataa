@@ -13,7 +13,7 @@ class Update extends OrganizationComponent
 {
     use withFileUploads ;
     #[title('تعديل ملف الشخصي')]
-    public $user , $user_name , $email ,  $img , $img_url , $bio  , $name , $contact_email , $phone_number , $city , $sector ;
+    public $user , $user_name , $email ,  $img , $img_url , $bio  , $name , $contact_email , $phone_number , $city_id, $sector_id ;
     public $old_password , $new_password , $new_password_confirmation;
 
     // rules
@@ -78,8 +78,8 @@ class Update extends OrganizationComponent
         $this->img_url =  $this->user->img_url ;
          $this->name = $this->user->organization->name ;
          $this->contact_email = $this->user->organization->contact_email;
-         $this->city = $this->user->organization->city ;
-         $this->sector = $this->user->organization->sector ;
+         $this->city_id = $this->user->organization->city_id ;
+         $this->sector_id = $this->user->organization->sector_id ;
         $this->phone_number = $this->user->organization->phone_number ;
         $this->bio = $this->user->organization->bio ;
     }
@@ -130,12 +130,12 @@ class Update extends OrganizationComponent
         ]);
 
 
-        $this->user->organiztion->update([
+        $this->user->organization->update([
             'name' => $this->name,
             'contact_email' => $this->contact_email,
             'phone_number' => $this->phone_number,
-            'city_id' => $this->city->id,
-            'sector_id' => $this->sector->id,
+            'city_id' => $this->city_id,
+            'sector_id' => $this->sector_id,
             'bio' => $this->bio,
         ]);
 

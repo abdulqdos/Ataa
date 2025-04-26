@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.app xmlns="http://www.w3.org/1999/html">
     <x-slot:title> عطاء - للأعمال التطوعية</x-slot:title>
 
     <div>
@@ -14,14 +14,25 @@
                     انضم الآن وابدأ رحلتك التطوعية. تصفح آلاف الفرص التطوعية وساهم في مجتمعك.
                 </p>
                 <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
+                        @guest
                     <div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
-                        <x-layouts.volunteers.middle-secondary-btn href="#">
+                        <x-layouts.volunteers.middle-secondary-btn href="{{ route('opportunities') }}">
                             تصفح الفرص التطوعية
                         </x-layouts.volunteers.middle-secondary-btn>
-                        <a href="#" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondaryLight transition duration-800 cursor-pointer sm:px-8">
-                            سجل كمتطوع
-                        </a>
+                            <a href="/login" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondaryLight transition duration-800 cursor-pointer sm:px-8">
+                                سجل كمتطوع
+                            </a>
                     </div>
+                        @endguest
+
+                    @auth
+                        <div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid  sm:gap-5">
+                            <x-layouts.volunteers.middle-secondary-btn href="{{ route('opportunities') }}">
+                                تصفح الفرص التطوعية
+                            </x-layouts.volunteers.middle-secondary-btn>
+                        </div>
+                    @endauth
+
                 </div>
             </div>
         </div>

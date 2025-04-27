@@ -23,7 +23,7 @@ class Index extends organizationComponent
             $query->where('organization_id', $organization->id);
         });
     }
-    
+
     public function render()
     {
         $volunteers = $this->getVolunteers();

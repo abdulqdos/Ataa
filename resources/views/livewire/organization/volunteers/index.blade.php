@@ -60,17 +60,20 @@
                                             <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800 md:px-6">
                                                 <div class="flex flex-row items-center gap-2 justify-start">
                                                     @if($volunteer->img_url === null)
-                                                        <img class="h-6 w-6 rounded-md" src="https://ui-avatars.com/api/?name={{ $volunteer->user->userNme}}&background=random&color=fff" alt="صورة المؤسسة">
+                                                        <img class="h-6 w-6 rounded-md" src="https://ui-avatars.com/api/?name={{ $volunteer->user->user_name}}&background=random&color=fff" alt="صورة المؤسسة">
                                                     @else
                                                         <img class="h-6 w-6 rounded-md" src="{{ \Illuminate\Support\Facades\Storage::url($volunteer->img_url) }}" alt="صورة المؤسسة">
                                                     @endif
                                                     <a href="#" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
-                                                        {{ $volunteer->user->userNme }}
+                                                        {{ $volunteer->user->user_name }}
                                                     </a>
                                                 </div>
                                             </td>
                                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 truncate max-w-[150px] hidden sm:table-cell md:px-6">
                                                 {{ $volunteer->first_name . ' ' . $volunteer->last_name }}
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 truncate max-w-[150px] hidden sm:table-cell md:px-6">
+{{--                                                {{ $volunteer->opportunity->name }}--}}
                                             </td>
 
 

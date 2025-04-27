@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 // Authentication
 use App\Livewire\Admin\Dashboard as AdminDashboard;
@@ -7,24 +8,23 @@ use App\Livewire\Authentication\Login;
 use App\Livewire\Authentication\ResetPassword;
 use App\Livewire\Authentication\Signup;
 
+// Pages
 use App\Livewire\Opportunity\Index;
 use App\Livewire\Opportunity\Show ;
 
 // Volunteer
 use App\Livewire\Volunteer\Profile\Update as VolunteerUpdateProfile ;
 
+// Organization
 use App\Livewire\Organization\Dashboard;
 use App\Livewire\Organization\Opportunity\Create as OpportunityCreate;
 use App\Livewire\Organization\Opportunity\Edit as OpportunityEdit;
 use App\Livewire\Organization\Opportunity\Show as OpportunityShow;
 use App\Livewire\Organization\Opportunity\Index as Opportunity;
 use App\Livewire\Organization\Profile\Update as  OrganizationUpdateProfile ;
-
-
 use App\Livewire\Organization\Requests\Show as RequestShow;
 use App\Livewire\Volunteer\MyOpportunity;
-use Illuminate\Support\Facades\Route;
-
+use App\Livewire\Organization\Volunteers\Index as OrganizationVolunteer ;
 
 // Guest
 Route::middleware('guest')->group(function () {
@@ -63,10 +63,13 @@ Route::middleware('organization')->group(function () {
     Route::get('/organization/dashboard' , Dashboard::class)->name('organization.dashboard');
 
     // opportunity
-    Route::get('/organization/opportunity' , Opportunity::class)->name('organization.opportunity');
-    Route::get('/organization/opportunity/create' , OpportunityCreate::class)->name('organization.opportunity.create');
-    Route::get('/organization/opportunity/{opportunity}' , OpportunityShow::class)->name('organization.opportunity.show');
-    Route::get('/organization/opportunity/{opportunity}/edit' , OpportunityEdit::class)->name('organization.opportunity.edit');
+    Route::get('/organization/opportunities' , Opportunity::class)->name('organization.opportunity');
+    Route::get('/organization/opportunities/create' , OpportunityCreate::class)->name('organization.opportunity.create');
+    Route::get('/organization/opportunities/{opportunity}' , OpportunityShow::class)->name('organization.opportunity.show');
+    Route::get('/organization/opportunities/{opportunity}/edit' , OpportunityEdit::class)->name('organization.opportunity.edit');
+
+    // Volunteers
+    Route::get('/organization/volunteers' , OrganizationVolunteer::class)->name('organization.volunteers');
 
     // Requests
     Route::get('/organization/requests/{request}' , RequestShow::class)->name('organization.requests.show');

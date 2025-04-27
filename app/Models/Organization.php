@@ -26,4 +26,11 @@ class Organization extends Model
     {
         return $this->belongsTo(Sector::class);
     }
+
+    public function opportunities()
+    {
+        return $this->hasMany(Opportunity::class);
+    }
+
+
 }

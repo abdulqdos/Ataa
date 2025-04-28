@@ -12,7 +12,7 @@ class Opportunity extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [ 'title' , 'description' , 'status' , 'start_date' , 'end_date' , 'img_url' , 'location' , 'location_url' , 'count' , 'accepted_count', 'organization_id' ];
+    protected $fillable = [ 'title' , 'description' , 'start_date' , 'end_date' , 'img_url' , 'location' , 'location_url' , 'count' , 'accepted_count', 'organization_id' ];
 
     protected $casts = [
         'start_date' => 'date:Y-m-d',
@@ -21,21 +21,19 @@ class Opportunity extends Model
 
     protected $dates = ['start_date', 'end_date'];
 
-    public function updateStatus()
+    public function getStatus()
     {
-        $today = now()->format('Y-m-d');
-        $start = $this->start_date->format('Y-m-d');
-        $end = $this->end_date->format('Y-m-d');
+        $now = now();
 
-        if ($start > $today) {
-            $this->status = 'upcoming';
-        } elseif ($start <= $today && $end >= $today) {
-            $this->status = 'active';
-        } else {
-            $this->status = 'completed';
+        if ($this->start_date > $now) {
+            return 'upcoming';
+        } elseif ($this->start_date <= $now && $this->end_date >= $now) {
+            return 'active';
+        } elseif ($this->end_date < $now) {
+            return 'completed';
         }
 
-        $this->save();
+        return null;
     }
 
     public function organization()

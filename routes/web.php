@@ -25,6 +25,7 @@ use App\Livewire\Organization\Profile\Update as  OrganizationUpdateProfile ;
 use App\Livewire\Organization\Requests\Show as RequestShow;
 use App\Livewire\Volunteer\MyOpportunity;
 use App\Livewire\Organization\Volunteers\OpportunitiesVolunteers as OrganizationOpportunitiesVolunteers ;
+use App\Livewire\Organization\Volunteers\Index as OrganizationVolunteers ;
 
 // Guest
 Route::middleware('guest')->group(function () {
@@ -70,6 +71,7 @@ Route::middleware('organization')->group(function () {
 
     // Volunteers
     Route::get('/organization/opportunities-volunteers' , OrganizationOpportunitiesVolunteers::class)->name('organization.opportunities-volunteers');
+    Route::get('/organization/opportunities-volunteers/{opportunity}/volunteers' ,OrganizationVolunteers::class )->name('organization.volunteers');
 
     // Requests
     Route::get('/organization/requests/{request}' , RequestShow::class)->name('organization.requests.show');

@@ -136,7 +136,7 @@
 
                             <!-- Button -->
                             <div class="pt-5 mt-auto">
-                                <a href="#"
+                                <a href="{{ route('organization.volunteers' , $opportunity->id) }}"
                                    wire:navigate.keep
                                    class="block w-full text-center px-4 py-3 text-sm font-medium rounded-lg
                                    shadow-sm text-white bg-primary hover:bg-primary/90 transition-all

@@ -13,7 +13,6 @@ class OpportunitiesVolunteers extends OrganizationComponent
 {
     use WithPagination;
     #[Url(as: 'q', except: '')]
-
     public $searchText , $status , $organization;
 
     public function updated()

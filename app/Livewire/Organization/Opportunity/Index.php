@@ -9,11 +9,11 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 
+#[Title('إدارة الفرص التطوعية')]
 class Index extends OrganizationComponent
 {
     use WithPagination;
 
-    #[Title('الفرص التطوعية')]
     #[Url(as: 'q', except: '')]
 
     public $searchText;

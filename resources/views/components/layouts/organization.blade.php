@@ -46,7 +46,7 @@
 
             <x-layouts.organiations.nav i="fas fa-tachometer-alt w-6" href="{{ route('organization.dashboard') }}"  :active="request()->is('organization/dashboard')" wire:navigate>لوحة التحكم</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}"  :active="request()->is('organization/opportunity')" wire:navigate>الفرص التطوعية</x-layouts.organiations.nav>
-            <x-layouts.organiations.nav i="fas fa-users w-6" href="{{ route('organization.volunteers') }}" :active="request()->is('organization/volunteers')">المتطوعون</x-layouts.organiations.nav>
+            <x-layouts.organiations.nav i="fas fa-users w-6" href="{{ route('organization.opportunities-volunteers') }}" :active="request()->is('organization/opportunities-volunteers')">المتطوعون</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات</x-layouts.organiations.nav>
 
             <div class="border-t border-secondary mt-4 pt-4">

@@ -1,7 +1,7 @@
 <div>
 
     <x-layouts.header title="إدارة المتطوعون"
-                      :breadcrumbs="[['الرئيسية', route('organization.dashboard')], ['إداؤة المتطوعون']]">
+                      :breadcrumbs="[['الرئيسية', route('organization.dashboard')], ['إدارة المتطوعون']]">
     </x-layouts.header>
     <div class="container lg:px-24 py-3">
         <!-- Search && Filter Section -->

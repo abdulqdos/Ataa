@@ -31,6 +31,10 @@
         @apply  bg-red-500 text-white cursor-pointer hover:bg-red-600 transition duration-300 rounded-md disabled:opacity-50 disabled:hover:bg-red-500  disabled:cursor-default
     }
 
+    .btn-green {
+        @apply bg-green-600 text-white cursor-pointer hover:bg-green-700 transition duration-300 rounded-md;
+    }
+
     .btn-yellow {
         @apply  bg-yellow-400 text-white cursor-pointer hover:bg-yellow-600 transition duration-300 rounded-md disabled:opacity-50 disabled:hover:bg-yellow-400  disabled:cursor-default
     }

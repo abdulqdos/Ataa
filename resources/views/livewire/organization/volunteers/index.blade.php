@@ -1,11 +1,22 @@
 <div>
 
     <x-layouts.header title="المتطوعون"
-                      :breadcrumbs="[['الرئيسية', route('organization.dashboard')], ['الفرص التطوعية']]">
-
+                      :breadcrumbs="[
+                      ['الرئيسية', route('organization.dashboard')],
+                      ['إدارة المتطوعون', route('organization.opportunities-volunteers')],
+                      ['المتطوعون']]">
     </x-layouts.header>
+    <div id="top" class="rounded-md p-5  duration-300" dir="rtl">
+        <div class="flex flex-col gap-4">
+            <!-- Search and Filter Row -->
+            <div class="flex flex-col md:flex-row gap-4 items-stretch">
+              <button class="px-4 py-1 btn-red text-sm">تحميل قائمة المتطوعين PDF</button>
+              <button class="px-4 py-1 btn-green text-sm">تحميل قائمة المتطوعين Excel</button>
+            </div>
+        </div>
+    </div>
 
-    <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-1 bg-white mx-2 md:mx-5">
+    <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-4 bg-white mx-2 md:mx-5">
         <div class="py-4 bg-white flex flex-col md:flex-row items-start md:items-center justify-start gap-4">
             <!-- Search box -->
             <div class="w-full md:w-auto">
@@ -49,9 +60,11 @@
                                         <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                             الجنس
                                         </th>
-                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
-                                            العملية
-                                        </th>
+                                        @if($status == 'completed')
+                                            <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
+                                                العملية
+                                            </th>
+                                        @endif
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200">
@@ -85,15 +98,24 @@
                                                 {{ $volunteer->gender }}
                                             </td>
 
-                                            <td class="px-3 py-4 flex flex-row gap-2 md:gap-4 items-center justify-center md:px-6">
-                                                @if($status == 'upcoming')
-                                                    <p> قريبا </p>
-                                                @elseif($status == 'active')
-                                                    <p> نشط </p>
-                                                @else
-                                                    <p> اكتملت</p>
-                                                @endif
-                                            </td>
+                                            @if($status == 'completed')
+                                                <td class="px-3 py-4 flex flex-row gap-2 md:gap-4 items-center justify-center md:px-6">
+                                                    <button class="group flex flex-col items-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600 group-hover:text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                        <span class="text-blue-600 group-hover:text-blue-700 group-hover:cursor-pointer">توثيق</span>
+                                                    </button>
+
+                                                    <button class="group flex flex-col items-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 group-hover:text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                                        </svg>
+                                                        <span class="text-yellow-400 group-hover:text-yellow-600 group-hover:cursor-pointer">تقييم</span>
+                                                    </button>
+
+                                                </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -130,8 +152,10 @@
                         <p class="mt-1 text-sm text-gray-600">لا يوجد متطوعون لي هاذي الفرصة . يمكنك تحقق من طلبات .</p>
                         <div class="mt-4">
                             <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md btn-primary">
+
                                 <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                 </svg>
                                 <span class="mr-2"> عرض طلبات </span>
                             </a>

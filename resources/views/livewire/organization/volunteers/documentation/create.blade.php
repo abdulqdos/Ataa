@@ -100,7 +100,7 @@
 
             <button type="submit" class="text-sm px-6 py-2 btn-primary focus:outline-none flex items-center justify-center gap-2">
                 <div role="status" wire:loading class="mt-1">
-                    <svg aria-hidden="true" class="w-3 h-3 text-gray-200 animate-spin fill-white" viewBox="0 0 100 101">
+                    <svg   aria-hidden="true" class="w-3 h-3 text-white animate-spin fill-white" viewBox="0 0 100 101">
                         <path d="..." fill="currentColor" />
                         <path d="..." fill="currentFill" />
                     </svg>

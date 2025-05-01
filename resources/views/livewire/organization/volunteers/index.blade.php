@@ -102,7 +102,12 @@
                                                 <td class="px-3 py-4 flex flex-row gap-2 md:gap-4 items-center justify-center md:px-6">
 
                                                     @if($volunteer->pivot->hours !== null)
-                                                        <span> تم توثيق</span>
+                                                        <div class="flex flex-row gap-2 bg-green-50 text-green-500 items-center px-3 py-1 rounded-full">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                            </svg>
+                                                            <span> تم توثيق</span>
+                                                        </div>
                                                     @else
 
                                                     <a href="{{ route('organization.volunteers.documentation.create' , ['opportunity' => $opportunity->id , 'volunteer' => $volunteer->id]) }}" class="group flex flex-col items-center justify-center cursor-pointer">

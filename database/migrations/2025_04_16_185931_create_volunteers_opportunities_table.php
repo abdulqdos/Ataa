@@ -12,11 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('volunteer_opportunities', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('volunteer_id')->constrained('volunteers');
-            $table->foreignId('opportunity_id')->constrained('opportunities');
-            $table->timestamps();
-        });
+                $table->id();
+                $table->foreignId('volunteer_id')->constrained()->onDelete('cascade');
+                $table->foreignId('opportunity_id')->constrained()->onDelete('cascade');
+                $table->text('description')->nullable();
+                $table->integer('hours')->nullable();
+                $table->date('participation_date')->nullable();
+                $table->text('report')->nullable();
+                $table->tinyInteger('eval_commitment')->nullable();
+                $table->tinyInteger('eval_teamwork')->nullable();
+                $table->tinyInteger('eval_leadership')->nullable();
+                $table->float('eval_total')->nullable();
+                $table->string('certificate_path')->nullable();
+                $table->timestamps();
+            });
     }
 
     /**

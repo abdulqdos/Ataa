@@ -11,6 +11,7 @@ use App\Models\Sector;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Volunteer;
+use Carbon\Carbon;
 use Database\Factories\NotificationFactory;
 use Database\Factories\OpportunityFactory;
 use Illuminate\Database\Seeder;
@@ -52,10 +53,19 @@ class DatabaseSeeder extends Seeder
         // Opportunity For Selected Organization
         Opportunity::factory(100)->recycle($organizations)->create();
 
-        // Opportunity For Selected Organization
+        // Opportunity For Selected volunteer
         $opportunitiesVolunteer = Opportunity::factory(10)->create();
         $volunteer->opportunities()->attach($opportunitiesVolunteer->pluck('id'));
 
+        // Volunteers for selected Opportunity
+        $opVolunteer = Volunteer::factory(10)->create();
+        $op  = Opportunity::find(1);
+        $op->update([
+            'start_date' => Carbon::createFromDate(Carbon::now()->year, 4, 1)->subMonth(),
+            'end_date' => Carbon::createFromDate(Carbon::now()->year, 4, 15)->subMonth(),
+            'accepted_count' => 10,
+        ]);
+        $op->volunteers()->attach($opVolunteer->pluck('id'));
         // Requests
         Request::factory(10)->recycle($opportunity)->recycle($organization)->create();
 

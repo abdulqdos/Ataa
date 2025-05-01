@@ -6,7 +6,6 @@ use App\Livewire\OrganizationComponent;
 use App\Models\Opportunity;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
-use Livewire\Component;
 use Livewire\WithPagination;
 
 #[Title('إدارة المتطوعون - قائمة المتطوعون')]
@@ -34,7 +33,7 @@ class Index extends organizationComponent
 
     public function getVolunteers()
     {
-        $query = $this->opportunity->volunteers();
+        $query = $this->opportunity->volunteers()->withPivot('hours');
 
         if(!empty($this->searchText))
         {
@@ -50,6 +49,7 @@ class Index extends organizationComponent
         $volunteers = $this->getVolunteers();
         return view('livewire.organization.volunteers.index' , [
             'volunteers' => $volunteers->latest()->paginate(10),
+            'opportunity' => $this->opportunity,
             'status' =>  $this->status
         ]);
     }

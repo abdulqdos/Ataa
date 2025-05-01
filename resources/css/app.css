@@ -20,7 +20,7 @@
     }
 
     .btn-secondary {
-        @apply bg-darkGray hover:bg-lightGray rounded-md text-white cursor-pointer transition duration-300 disabled:opacity-50 disabled:hover:bg-darkGray disabled:cursor-default
+        @apply border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none disabled:cursor-default ;
     }
 
     .btn-blue {

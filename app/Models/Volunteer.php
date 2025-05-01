@@ -19,6 +19,8 @@ class Volunteer extends Model
 
     public function opportunities()
     {
-        return $this->belongsToMany(Opportunity::class, 'volunteer_opportunities', 'volunteer_id' , 'opportunity_id');
+        return
+            $this->belongsToMany(Opportunity::class, 'volunteer_opportunities', 'volunteer_id' , 'opportunity_id')
+                ->withPivot('description', 'hours', 'participation_date', 'eval_commitment' , 'eval_teamwork' , 'eval_leadership' , 'report' ,'certificate_path');
     }
 }

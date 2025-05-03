@@ -3,7 +3,7 @@
         <h1 class="text-2xl font-bold text-gray-800 mb-6">لوحة التحكم</h1>
 
         <!-- Summary Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mb-6">
             <div class="bg-white rounded-lg shadow p-5">
                 <div class="flex items-center">
                     <div class="p-3 rounded-full bg-primary/10 text-primary">
@@ -11,7 +11,7 @@
                     </div>
                     <div class="mr-4">
                         <h2 class="text-sm font-medium text-gray-600">الفرص التطوعية</h2>
-                        <p class="text-2xl font-bold text-primary">15</p>
+                        <p class="text-2xl font-bold text-primary">{{ $opportunities->count() }}</p>
                     </div>
                 </div>
             </div>
@@ -22,8 +22,8 @@
                         <i class="fas fa-users text-xl"></i>
                     </div>
                     <div class="mr-4">
-                        <h2 class="text-sm font-medium text-gray-600">المتطوعون النشطون</h2>
-                        <p class="text-2xl font-bold text-secondary">48</p>
+                        <h2 class="text-sm font-medium text-gray-600">المتطوعون المسجلون</h2>
+                        <p class="text-2xl font-bold text-secondary">{{ $volunteers->count() }}</p>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="mr-4">
                         <h2 class="text-sm font-medium text-gray-600">طلبات الانضمام</h2>
-                        <p class="text-2xl font-bold text-blue-500">7</p>
+                        <p class="text-2xl font-bold text-blue-500">{{ $requests->count() }}</p>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
         <div class="bg-white rounded-lg shadow mb-6">
             <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                 <h2 class="text-lg font-medium">أحدث الفرص التطوعية</h2>
-                <a href="#" class="text-primary hover:text-primaryLight text-sm transition duration-300">عرض الكل</a>
+                <a href="{{ route('organization.opportunity') }}" class="text-primary hover:text-primaryLight text-sm transition duration-300">عرض الكل</a>
             </div>
             <div class="p-4">
                 <table class="w-full text-right">
@@ -70,30 +70,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="border-b border-gray-100">
-                        <td class="py-3 pr-4">توزيع المساعدات الرمضانية</td>
-                        <td class="py-3 hidden md:table-cell">12/20</td>
-                        <td class="py-3 hidden md:table-cell">20-03-2025</td>
-                        <td class="py-3"><span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">نشطة</span></td>
-                    </tr>
-                    <tr class="border-b border-gray-100">
-                        <td class="py-3 pr-4">تنظيم فعالية اليوم العالمي للتطوع</td>
-                        <td class="py-3 hidden md:table-cell">5/15</td>
-                        <td class="py-3 hidden md:table-cell">05-12-2025</td>
-                        <td class="py-3"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full">قريباً</span></td>
-                    </tr>
-                    <tr class="border-b border-gray-100">
-                        <td class="py-3 pr-4">حملة التشجير المحلية</td>
-                        <td class="py-3 hidden md:table-cell">18/25</td>
-                        <td class="py-3 hidden md:table-cell">10-03-2025</td>
-                        <td class="py-3"><span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">نشطة</span></td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 pr-4">دعم المسنين</td>
-                        <td class="py-3 hidden md:table-cell">7/10</td>
-                        <td class="py-3 hidden md:table-cell">01-03-2025</td>
-                        <td class="py-3"><span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">مكتملة</span></td>
-                    </tr>
+                    @foreach($opportunities as $opportunity)
+                        <tr class="border-b border-gray-100">
+                            <td class="py-3 pr-4"> {{ $opportunity->title }} </td>
+                            <td class="py-3 hidden md:table-cell">{{ $opportunity->accepted_count }}/ {{ $opportunity->count }}</td>
+                            <td class="py-3 hidden md:table-cell"> {{ \Carbon\Carbon::parse($opportunity->start_date)->format('d M Y') }}</td>
+                            <td class="py-3"><div>
+                                    <x-layouts.status-opportunity :opportunity="$opportunity" />
+                                </div></td>
+                        </tr>
+                    @endforeach
+
+
                     </tbody>
                 </table>
             </div>

@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Opportunity;
 use App\Models\Request;
 use App\Models\VolunteerOpportunity;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -35,6 +36,7 @@ class Show extends OrganizationComponent
         $this->requestId = $requestId;
     }
 
+    #[on('updateRequestStatus')]
     public function updateRequestStatus($status)
     {
         // Find Request

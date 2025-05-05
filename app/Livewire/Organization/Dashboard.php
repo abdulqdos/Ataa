@@ -9,8 +9,7 @@ class Dashboard extends OrganizationComponent
 {
     #[Title('لوحة التحكم')]
 
-    public $organization;
-    public $opportunities;
+    public $organization , $opportunities , $modalType , $requestId ;
 
     public function mount()
     {
@@ -21,18 +20,34 @@ class Dashboard extends OrganizationComponent
             ->take(4)
             ->get();
     }
+    public function setModel($type  , $requestId = null)
+    {
+        $this->modalType = $type;
+        $this->requestId = $requestId;
+    }
 
+    public function updateRequestStatus()
+    {
+
+    }
     public function render()
     {
         return view('livewire.organization.dashboard', [
             'opportunities' => $this->opportunities,
 
             'requests' => $this->opportunities->flatMap(function ($opportunity) {
+                return $opportunity->requests()->where('status' , 'pending')->latest()->take(4)->get();
+            }),
+
+            'requests_count' => $this->opportunities->flatMap(function ($opportunity) {
                 return $opportunity->requests;
             }),
 
-            'volunteers' => $this->opportunities->flatMap(function ($opportunity) {
+            'volunteers_count' => $this->opportunities->flatMap(function ($opportunity) {
                 return $opportunity->volunteers;
+            }),
+            'volunteers' => $this->opportunities->flatMap(function ($opportunity) {
+                return $opportunity->volunteers()->latest()->take(4)->get();
             }),
         ]);
     }

@@ -9,7 +9,7 @@ class Dashboard extends OrganizationComponent
 {
     #[Title('لوحة التحكم')]
 
-    public $organization , $opportunities , $modalType , $requestId ;
+    public $organization , $opportunities  ;
 
     public function mount()
     {
@@ -20,16 +20,7 @@ class Dashboard extends OrganizationComponent
             ->take(4)
             ->get();
     }
-    public function setModel($type  , $requestId = null)
-    {
-        $this->modalType = $type;
-        $this->requestId = $requestId;
-    }
 
-    public function updateRequestStatus()
-    {
-
-    }
     public function render()
     {
         return view('livewire.organization.dashboard', [

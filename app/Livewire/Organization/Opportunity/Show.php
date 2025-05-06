@@ -12,14 +12,16 @@ use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 
+#[Title('الفرصة التطوعية')]
 class Show extends OrganizationComponent
 {
     use WithPagination;
-    #[Url(as: 'q', except: '')]
-    #[title('الفرصة التطوعية')]
 
-    public ?Opportunity $opportunity ;
-    public $filterStatus  , $modalType = false ,  $requestId = null , $currentRequest = null ;
+    #[Url(as: 'q', except: '')]
+    public ?Opportunity $opportunity;
+    public $filterStatus, $modalType = false, $requestId = null, $currentRequest = null;
+    public $activeTab = 'requests';
+
     public function mount(Opportunity $opportunity)
     {
         $this->opportunity = $opportunity;
@@ -30,75 +32,69 @@ class Show extends OrganizationComponent
         $this->resetPage();
     }
 
-    public function setModel($type  , $requestId = null)
+    public function setModel($type, $requestId = null)
     {
         $this->modalType = $type;
         $this->requestId = $requestId;
     }
 
-    #[on('updateRequestStatus')]
+    public function setActiveTab($tab)
+    {
+        $this->activeTab = $tab;
+    }
+
+    #[On('updateRequestStatus')]
     public function updateRequestStatus($status)
     {
-        // Find Request
         $this->currentRequest = Request::findOrFail($this->requestId);
 
-        // change Status
         $this->changeStatus($status);
+        $this->sendNotification($status, $this->currentRequest);
 
-        // Send Notification
-        $this->sendNotification($status , $this->currentRequest );
+        if ($status === 'accepted') {
+            VolunteerOpportunity::create([
+                'volunteer_id' => $this->currentRequest->volunteer_id,
+                'opportunity_id' => $this->opportunity->id,
+            ]);
+        }
 
-        VolunteerOpportunity::create([
-            'volunteer_id' => $this->currentRequest->volunteer_id,
-            'opportunity_id' => $this->opportunity->id,
-        ]);
+        session()->flash('success', $status === 'accepted' ? 'تم قبول الطلب بنجاح.' : 'تم رفض الطلب بنجاح.');
 
-        // Set Session message
-        $message = $status === 'accepted' ? 'تم قبول الطلب بنجاح.' : ($status === 'declined' ? 'تم رفض الطلب بنجاح.' : 'حالة غير معروفة');
-        session()->flash('success', $message);
-
-        // Redirect To Show Page
         return redirect()->route('organization.opportunity.show', $this->opportunity);
     }
 
     public function changeStatus($status)
     {
-        $this->currentRequest->update([
-            'status' => $status,
-        ]);
+        $this->currentRequest->update(['status' => $status]);
 
         if ($status === 'accepted') {
-            $this->opportunity->update([
-                'accepted_count' =>$this->opportunity->accepted_count + 1,
-            ]);
+            $this->opportunity->increment('accepted_count');
         }
     }
 
-    public function sendNotification($status , $request )
+    public function sendNotification($status, $request)
     {
         if ($status === 'accepted') {
             Notification::create([
                 'title' => $this->opportunity->title,
-                'message' => 'مبروك لقد تم قبولك في فرصة تطوعية , نرجى منك حضور في موعد محدد .',
-                'read_at' => null,
+                'message' => 'مبروك لقد تم قبولك في فرصة تطوعية، نرجو حضورك في الموعد المحدد.',
                 'user_id' => $request->volunteer->user->id,
             ]);
         }
-
-        return ;
     }
 
     public function render()
     {
-        $query = Request::where('opportunity_id' , $this->opportunity->id);
+        $query = Request::where('opportunity_id', $this->opportunity->id);
 
         if (!empty($this->filterStatus)) {
             $query->where('status', $this->filterStatus);
         }
 
-        return view('livewire.organization.opportunity.show' , [
+        return view('livewire.organization.opportunity.show', [
             'opportunity' => $this->opportunity,
-            'requests' => $query->orderBy('status' , 'desc')->paginate(5),
+            'volunteers' => $this->opportunity->volunteers(),
+            'requests' => $query->orderBy('status', 'desc')->paginate(5),
         ]);
     }
 }

@@ -110,9 +110,9 @@
                                         <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                             الحالة
                                         </th>
-                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
-                                            العملية
-                                        </th>
+                                            <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
+                                                العملية
+                                            </th>
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200">
@@ -148,21 +148,33 @@
                                                 </div>
                                             </td>
 
-                                            <td class="px-3 py-4 flex flex-row gap-2 md:gap-4 items-center justify-center md:px-6">
-                                                <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="group font-medium px-2 md:px-4 py-1 flex flex-col items-center gap-1 cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 md:h-6 w-5 md:w-6 text-green-500 group-hover:text-green-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6H9v-3z" />
-                                                    </svg>
-                                                    <span class="text-xs text-green-500 group-hover:text-green-600 transition">Edit</span>
-                                                </a>
+                                                <td class="px-3 py-4 flex flex-row gap-2 md:gap-4 items-center justify-center md:px-6">
+                                                @if($opportunity->getStatus() !== 'completed')
+                                                    <a href="{{ route('organization.opportunity.edit' , $opportunity->id) }}" class="group font-medium px-2 md:px-4 py-1 flex flex-col items-center gap-1 cursor-pointer">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 md:h-6 w-5 md:w-6 text-green-500 group-hover:text-green-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6H9v-3z" />
+                                                        </svg>
+                                                        <span class="text-xs text-green-500 group-hover:text-green-600 transition">Edit</span>
+                                                    </a>
 
-                                                <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="group font-medium px-2 md:px-4 py-1 flex flex-col gap-1 items-center cursor-pointer">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 group-hover:text-red-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0a2 2 0 00-2-2H9a2 2 0 00-2 2m12 0H5" />
-                                                    </svg>
-                                                    <span class="text-xs text-red-500 group-hover:text-red-600 transition">Delete</span>
-                                                </button>
-                                            </td>
+                                                    <button wire:click="toggleShowDeleteBox({{ $opportunity->id }})" class="group font-medium px-2 md:px-4 py-1 flex flex-col gap-1 items-center cursor-pointer">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 group-hover:text-red-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m2 0a2 2 0 00-2-2H9a2 2 0 00-2 2m12 0H5" />
+                                                        </svg>
+                                                        <span class="text-xs text-red-500 group-hover:text-red-600 transition">Delete</span>
+                                                    </button>
+                                                    @endif
+                                                    <a href="{{ route('organization.opportunity.show', $opportunity->id) }}" class="group font-medium px-2 md:px-4 py-1 flex flex-col items-center gap-1 cursor-pointer">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 md:h-6 w-5 md:w-6 text-blue-500 group-hover:text-blue-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                        </svg>
+                                                        <span class="text-xs text-blue-500 group-hover:text-blue-600 transition">View</span>
+                                                    </a>
+
+                                                </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

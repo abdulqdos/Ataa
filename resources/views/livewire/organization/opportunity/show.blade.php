@@ -1,10 +1,25 @@
 <div>
-    <x-layouts.header title="الطلبات"
+    <x-layouts.header title="تفاصيل الفرصة"
                       :breadcrumbs="[
                       ['الرئيسية', route('organization.dashboard')],
                       ['الفرص التطوعية', route('organization.opportunity')],
-                      ['الطلبات']]">
+                      ['الفرصة التطوعية']]">
     </x-layouts.header>
+
+
+    <div class="flex justify-center items-center w-2/3">
+        <div class="flex hover:bg-gray-200 rounded-lg transition p-1 bg-white">
+            <nav class="flex gap-x-1" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
+                <button type="button" class="hs-tab-active:text-primary  hs-tab-active:bg-gray-300  py-3 px-4 inline-flex items-center gap-x-2 bg-transparent text-sm text-gray-500 hover:text-gray-700 focus:outline-hidden focus:text-primary focus:bg-gray-50 font-medium rounded-lg hover:hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none active" id="segment-item-1" aria-selected="true" data-hs-tab="#segment-1" aria-controls="segment-1" role="tab">
+                    طلبات
+                </button>
+                <button type="button" class="hs-tab-active:text-primary  hs-tab-active:bg-gray-300  py-3 px-4 inline-flex items-center gap-x-2 bg-transparent text-sm text-gray-500 hover:text-gray-700 focus:outline-hidden focus:text-gray-700 font-medium rounded-lg hover:hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none active" id="segment-item-1" aria-selected="true" data-hs-tab="#segment-1" aria-controls="segment-1" role="tab">
+                    المتطوعون المقبولون
+                </button>
+            </nav>
+        </div>
+    </div>
+
 
     <div class="w-full flex flex-col lg:flex-row gap-4 md:gap-6 my-2">
         @if($modalType)
@@ -55,54 +70,60 @@
 
             <!-- Requests Table -->
             @if($requests->count() > 0)
-                <div class="w-full bg-white rounded-md shadow-md overflow-x-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-900">
-                        <thead class="text-xs bg-gray-900 uppercase text-white">
-                        <tr>
-                            <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">إسم المتطوع</th>
-                            <th scope="col" class="px-4 py-3 text-center hidden sm:table-cell">وصف الفرصة</th>
-                            <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">الحالة</th>
-                            <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">العملية</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($requests as $request)
-                            <tr class="bg-white hover:bg-gray-50 border-b">
-                                <td class="px-4 py-3 max-w-[120px] text-xs text-center sm:text-right">
-                                    <a href="#" class="font-medium"> {{ $request->volunteer->first_name . ' ' . $request->volunteer->last_name }} </a>
-                                </td>
-                                <td class="px-4 py-3 text-xs max-w-[150px] hidden sm:table-cell">
-                                    <p class="truncate"> {{ $request->reason }} </p>
-                                </td>
+                <div class="flex flex-col bg-white">
+                    <div class="-m-1.5 overflow-x-auto">
+                        <div class="p-1.5 min-w-full inline-block align-middle">
+                            <div class="overflow-hidden">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="text-xs uppercase">
+                                    <tr>
+                                        <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">إسم المتطوع</th>
+                                        <th scope="col" class="px-4 py-3 text-center hidden sm:table-cell">وصف الفرصة</th>
+                                        <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">الحالة</th>
+                                        <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">العملية</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($requests as $request)
+                                        <tr class="bg-white hover:bg-gray-50 border-b">
+                                            <td class="px-4 py-3 max-w-[120px] text-xs text-center sm:text-right">
+                                                <a href="#" class="font-medium"> {{ $request->volunteer->first_name . ' ' . $request->volunteer->last_name }} </a>
+                                            </td>
+                                            <td class="px-4 py-3 text-xs max-w-[150px] hidden sm:table-cell">
+                                                <p class="truncate"> {{ $request->reason }} </p>
+                                            </td>
 
-                                <td class="px-2 py-3 text-center">
-                                    <span class="px-2 py-1 text-xs font-semibold rounded-md whitespace-nowrap
-                                        @if($request->status == 'accepted') bg-green-100 text-green-600
-                                        @elseif($request->status == 'pending') bg-yellow-100 text-yellow-600
-                                        @else bg-red-100 text-red-600 @endif">
-                                        @if($request->status === 'accepted')
-                                            مقبول
-                                        @elseif($request->status === 'pending')
-                                            قيد الانتظار
-                                        @elseif($request->status === 'declined')
-                                            مرفوض
-                                        @endif
-                                    </span>
-                                </td>
+                                            <td class="px-2 py-3 text-center">
+                                                <span class="px-2 py-1 text-xs font-semibold rounded-md whitespace-nowrap
+                                                    @if($request->status == 'accepted') bg-green-100 text-green-600
+                                                    @elseif($request->status == 'pending') bg-yellow-100 text-yellow-600
+                                                    @else bg-red-100 text-red-600 @endif">
+                                                    @if($request->status === 'accepted')
+                                                        مقبول
+                                                    @elseif($request->status === 'pending')
+                                                        قيد الانتظار
+                                                    @elseif($request->status === 'declined')
+                                                        مرفوض
+                                                    @endif
+                                                </span>
+                                            </td>
 
-                                <td class="px-2 py-3 flex flex-col sm:flex-row gap-2 text-sm justify-center items-center">
-                                    @if($request->status == 'accepted' || $request->status == 'declined')
-                                        <a href="#" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">عرض بيانات المتطوع</a>
-                                    @else
-                                        <a href="{{ route('organization.requests.show' , $request->id) }}" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">مراجعة</a>
-                                        <button type="button" class="w-full sm:w-auto text-center px-2 py-1 btn-primary text-xs sm:text-sm" wire:click="setModel('accepted' , {{ $request->id }})">قبول</button>
-                                        <button type="button" class="w-full sm:w-auto text-center px-2 py-1 btn-secondary text-xs sm:text-sm" wire:click="setModel('declined',{{ $request->id }})">رفض</button>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                                            <td class="px-2 py-3 flex flex-col sm:flex-row gap-2 text-sm justify-center items-center">
+                                                @if($request->status == 'accepted' || $request->status == 'declined')
+                                                    <a href="#" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">عرض بيانات المتطوع</a>
+                                                @else
+                                                    <a href="{{ route('organization.requests.show' , $request->id) }}" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">مراجعة</a>
+                                                    <button type="button" class="w-full sm:w-auto text-center px-2 py-1 btn-primary text-xs sm:text-sm" wire:click="setModel('accepted' , {{ $request->id }})">قبول</button>
+                                                    <button type="button" class="w-full sm:w-auto text-center px-2 py-1 btn-secondary text-xs sm:text-sm" wire:click="setModel('declined',{{ $request->id }})">رفض</button>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Pagination -->

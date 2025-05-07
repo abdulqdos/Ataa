@@ -66,7 +66,7 @@ it('accepts a volunteer request and updates status correctly', function () {
     $this->assertDatabaseHas('notifications', [
         'user_id' => $volunteer->user->id,
         'title' => $this->opportunity->title,
-        'message' => 'مبروك لقد تم قبولك في فرصة تطوعية , نرجى منك حضور في موعد محدد .'
+        'message' =>  'مبروك لقد تم قبولك في فرصة تطوعية، نرجو حضورك في الموعد المحدد .'
     ]);
 
     // Assert Volunteer opportunity

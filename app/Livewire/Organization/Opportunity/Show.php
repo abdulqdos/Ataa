@@ -77,7 +77,7 @@ class Show extends OrganizationComponent
         if ($status === 'accepted') {
             Notification::create([
                 'title' => $this->opportunity->title,
-                'message' => 'مبروك لقد تم قبولك في فرصة تطوعية، نرجو حضورك في الموعد المحدد.',
+                'message' => 'مبروك لقد تم قبولك في فرصة تطوعية، نرجو حضورك في الموعد المحدد .',
                 'user_id' => $request->volunteer->user->id,
             ]);
         }
@@ -93,8 +93,9 @@ class Show extends OrganizationComponent
 
         return view('livewire.organization.opportunity.show', [
             'opportunity' => $this->opportunity,
-            'volunteers' => $this->opportunity->volunteers(),
+            'volunteers' => $this->opportunity->volunteers()->paginate(10),
             'requests' => $query->orderBy('status', 'desc')->paginate(5),
+            'status' => $this->opportunity->getStatus()
         ]);
     }
 }

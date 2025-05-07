@@ -32,6 +32,7 @@
 </head>
 <body class="bg-gray-100">
 <div class="flex h-screen overflow-hidden">
+
     <!-- Sidebar (Desktop) -->
     <div id="sidebar" class="sidebar  bg-white text-gray-600 w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
         <div class="p-4 flex items-center justify-center border-b border-secondary">
@@ -45,7 +46,7 @@
         <nav class="mt-2">
 
             <x-layouts.organiations.nav i="fas fa-tachometer-alt w-6" href="{{ route('organization.dashboard') }}"  :active="request()->is('organization/dashboard')" wire:navigate>لوحة التحكم</x-layouts.organiations.nav>
-            <x-layouts.organiations.nav i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}"  :active="request()->is('organization/opportunity')" wire:navigate>الفرص التطوعية</x-layouts.organiations.nav>
+            <x-layouts.organiations.nav i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}"  :active="request()->is('organization/opportunities')" wire:navigate>الفرص التطوعية</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-users w-6" href="{{ route('organization.opportunities-volunteers') }}" :active="request()->is('organization/opportunities-volunteers')">المتطوعون</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات</x-layouts.organiations.nav>
 
@@ -70,7 +71,7 @@
         </div>
         <nav class="mt-2">
             <x-layouts.organiations.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('organization/dashboard')" wire:navigate.keep> لوحة التحكم </x-layouts.organiations.nav-mobile>
-            <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunity')" wire:navigate.keep>الفرص التطوعية </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunities')" wire:navigate.keep>الفرص التطوعية </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-users w-6" href="#" :active="false">المتطوعون </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-clipboard-list w-6" href="#" :active="false">الطلبات </x-layouts.organiations.nav-mobile>
 

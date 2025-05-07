@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
 });
 
+
+
 // Pages
 Route::middleware('volunteerOrGuest')->group(function () {
     Route::get('/', function () {
@@ -51,6 +53,7 @@ Route::middleware('volunteerOrGuest')->group(function () {
     })->name('home');
     Route::get('/opportunity', index::class )->name('opportunities');
     Route::get('/opportunities/{opportunity}', Show::class)->name('opportunities.show');
+    Route::get('volunteers' , function () { return 'yeah' ;})->name('volunteers');
 });
 
 // Volunteer

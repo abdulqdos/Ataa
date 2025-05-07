@@ -19,6 +19,9 @@ class volunteerOrGuest
             return $next($request);
         }
 
+        if (auth()->user()->role === 'organization') {
+            return redirect('/organization/dashboard');
+        }
         return redirect()->back();
     }
 }

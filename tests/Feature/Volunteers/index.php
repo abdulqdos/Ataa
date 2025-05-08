@@ -6,13 +6,13 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
 
 beforeEach(function () {
-   $this->users = User::factory(10)->create(
-       [
+    $this->users = User::factory(10)->create(
+        [
             'role' => 'volunteer',
-       ]
-   );
+        ]
+    );
 
-   $this->volunteers = Volunteer::factory(10)->recycle($this->users)->create();
+    $this->volunteers = Volunteer::factory(10)->recycle($this->users)->create();
 });
 it('must be guest or volunteer' , function ($badRole) {
     $user = User::factory()->create([
@@ -27,11 +27,11 @@ it('must be guest or volunteer' , function ($badRole) {
 ]);
 
 it('return a correct component' , function () {
-    Livewire::test('volunteers')
+    Livewire::test('volunteers.index')
         ->assertSeeLivewire('volunteers');
 });
 
 it('return a correct Data' , function () {
-    Livewire::test('volunteers')
+    Livewire::test('volunteers.index')
         ->assertSee( $this->volunteers->first()->first_name);
 });

@@ -11,6 +11,7 @@ use App\Livewire\Authentication\Signup;
 // Pages
 use App\Livewire\Opportunity\Index;
 use App\Livewire\Opportunity\Show ;
+use App\Livewire\Volunteers\Index as Volunteers ;
 
 // Volunteer
 use App\Livewire\Volunteer\Profile\Update as VolunteerUpdateProfile ;
@@ -44,8 +45,6 @@ Route::middleware('auth')->group(function () {
     })->name('logout');
 });
 
-
-
 // Pages
 Route::middleware('volunteerOrGuest')->group(function () {
     Route::get('/', function () {
@@ -53,7 +52,7 @@ Route::middleware('volunteerOrGuest')->group(function () {
     })->name('home');
     Route::get('/opportunity', index::class )->name('opportunities');
     Route::get('/opportunities/{opportunity}', Show::class)->name('opportunities.show');
-    Route::get('volunteers' , function () { return 'yeah' ;})->name('volunteers');
+    Route::get('volunteers' , Volunteers::class)->name('volunteers');
 });
 
 // Volunteer

@@ -33,8 +33,8 @@
                         <div class="hidden sm:gap-6 sm:flex  sm:space-x-reverse sm:mr-6">
                             <x-layouts.volunteers.nav href="/" :active="request()->is('/')" wire:navigate.keep>الرئيسية</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate.keep>فرص التطوع</x-layouts.volunteers.nav>
+                            <x-layouts.volunteers.nav href="{{ route('volunteers') }}" :active="request()->is('volunteers')" wire:navigate.keep> المتطوعون</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="/" :active="false" wire:navigate>المؤسسات</x-layouts.volunteers.nav>
-                            <x-layouts.volunteers.nav href="/" :active="false" wire:navigate> المتطوعون</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="/" :active="false" wire:navigate>عن عطاء</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="/" :active="false" wire:navigate >تواصل معنا</x-layouts.volunteers.nav>
                         </div>
@@ -97,8 +97,8 @@
                 <div class="pt-2 pb-3 space-y-1 bg-gray-50">
                     <x-layouts.volunteers.nav-mobile href="/" :active="request()->is('/')" wire:navigate.keep> الرئيسية </x-layouts.volunteers.nav-mobile>
                     <x-layouts.volunteers.nav-mobile href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate.keep> فرص التطوع </x-layouts.volunteers.nav-mobile>
+                    <x-layouts.volunteers.nav-mobile href="{{ route('volunteers') }}" :active="request()->is('volunteers')" wire:navigate.keep>المتطوعون </x-layouts.volunteers.nav-mobile>
                     <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate.keep>المؤسسات </x-layouts.volunteers.nav-mobile>
-                    <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate.keep>المتطوعون </x-layouts.volunteers.nav-mobile>
                     <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate.keep>عن عطاء </x-layouts.volunteers.nav-mobile>
                     <x-layouts.volunteers.nav-mobile href="#" :active="false" wire:navigate.keep>تواصل معنا </x-layouts.volunteers.nav-mobile>
                 </div>

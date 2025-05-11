@@ -12,6 +12,7 @@ use App\Livewire\Authentication\Signup;
 use App\Livewire\Opportunity\Index;
 use App\Livewire\Opportunity\Show ;
 use App\Livewire\Volunteers\Index as Volunteers ;
+use App\Livewire\Volunteers\Profile as VolunteersProfile ;
 
 // Volunteer
 use App\Livewire\Volunteer\Profile\Update as VolunteerUpdateProfile ;
@@ -53,12 +54,13 @@ Route::middleware('volunteerOrGuest')->group(function () {
     Route::get('/opportunity', index::class )->name('opportunities');
     Route::get('/opportunities/{opportunity}', Show::class)->name('opportunities.show');
     Route::get('volunteers' , Volunteers::class)->name('volunteers');
+    Route::get('/volunteers/{volunteer}/profile' , VolunteersProfile::class )->name('volunteers.profile');
 });
 
 // Volunteer
 Route::middleware('volunteer')->group(function () {
-   Route::get('/volunteer/profile', VolunteerUpdateProfile::class)->name('volunteer.profile');
-   Route::get('/volunteer/myOpportunity', myOpportunity::class)->name('volunteer.myOpportunity');
+   Route::get('/volunteers/{volunteer}/edit', VolunteerUpdateProfile::class)->name('volunteers.edit');
+   Route::get('/volunteers/myOpportunity', myOpportunity::class)->name('volunteers.myOpportunity');
 });
 
 // Organization

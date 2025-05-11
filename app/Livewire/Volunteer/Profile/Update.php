@@ -129,7 +129,7 @@ class Update extends Component
         ]);
 
         session()->flash('success' , 'تم تعديل بياناتك بنجاح .');
-        return redirect(route('volunteer.profile'));
+        return redirect(route('volunteers.profile' , $this->user->volunteer->id));
 
     }
 
@@ -161,7 +161,7 @@ class Update extends Component
 
         $this->reset(['old_password', 'new_password', 'new_password_confirmation']);
 
-        return redirect(route('volunteer.profile'));
+        return redirect(route('volunteers.profile' , $this->user->volunteer->id));
     }
     public function removeImage()
     {

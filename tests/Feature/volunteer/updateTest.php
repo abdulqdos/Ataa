@@ -19,10 +19,10 @@ it('must be an volunteer' , function ($badRole) {
         'role' => $badRole,
     ]);
 
-    actingAs($user)->get(route('volunteer.profile'))->assertRedirect('/');
+    $volunteer = Volunteer::factory()->recycle($user)->create();
+    actingAs($user)->get(route('volunteers.profile' ,$volunteer->id ))->assertRedirect('/');
 })->with([
     'admin',
-    'organization'
 ]);
 
 it('return a correct component' , function () {

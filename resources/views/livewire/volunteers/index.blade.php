@@ -77,7 +77,7 @@
                             </h5>
                             <span class="text-sm text-gray-500">{{ $volunteer->user->user_name }}</span>
                             <div class="flex mt-4">
-                                <a href="#" class="inline-flex items-center px-4 py-2  rounded-lg btn-primary">
+                                <a href="{{ route('volunteers.profile' , $volunteer->id) }}" class="inline-flex items-center px-4 py-2  rounded-lg btn-primary">
                                     الملف الشخصي
                                 </a>
                             </div>
@@ -88,7 +88,7 @@
         @else
             @if(!empty($searchText))
                 <!-- Empty State: Search Result -->
-                <div class="bg-primary/20 border border-secondaryLight rounded-xl p-6 text-center">
+                <div class="bg-primary/20 border border-secondaryLight rounded-xl p-6 text-center flex flex-col gap-4 justify-center items-center">
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-secondaryLight/20">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -96,10 +96,11 @@
                     </div>
                     <h3 class="mt-3 text-lg font-medium text-gray-800">لا يوجد متطوعون بهذا الاسم</h3>
                     <p class="mt-1 text-sm text-gray-600">لم يتم العثور على متطوعين حسب نتائج البحث. جرّب تعديل الاسم .</p>
+                    <button class="btn-primary px-4 py-2 max-w-fit" wire:click="clear"> عرض كل المتطوعون </button>
                 </div>
             @else
                 <!-- Empty State: No Volunteers at All -->
-                <div class="bg-primary/20 border border-secondaryLight rounded-xl p-6 text-center">
+                <div class="bg-primary/20 border border-secondaryLight rounded-xl p-6 text-center flex flex-col gap-4 justify-center items-center">
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -107,6 +108,7 @@
                     </div>
                     <h3 class="mt-3 text-lg font-medium text-gray-800">لا يوجد متطوعون مسجلون</h3>
                     <p class="mt-1 text-sm text-gray-600">لم يتم تسجيل أي متطوع حتى الآن. يمكنك دعوة أشخاص للتسجيل عبر الموقع.</p>
+                    <button class="btn-primary px-4 py-2 max-w-fit" wire:click="clear"> عرض كل المتطوعون </button>
                 </div>
             @endif
         @endif

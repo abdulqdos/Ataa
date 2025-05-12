@@ -41,7 +41,7 @@
 
             <!-- الأزرار -->
             <div class="mt-6 flex space-x-4">
-                @if($opportunity->status === 'completed')
+                @if($opportunity->getStatus() === 'completed')
                     <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
                         هاذي فرصة مكتملة .
                     </button>
@@ -65,7 +65,7 @@
                     @endguest
                 @endif
 
-                <a href="{{ route('opportunities') }}" wire:navigate.keep class="px-4 py-2 btn-secondary text-white text-sm font-semibold  shadow-md ">
+                <a href="{{ route('opportunities') }}" wire:navigate.keep class="px-4 py-2 btn-secondary text-white text-sm font-semibold">
                     العودة
                 </a>
             </div>

@@ -53,7 +53,7 @@ class MyOpportunity extends Component
                 'accepted_count' => $this->selectedOpportunity->accepted_count - 1,
             ]);
             $this->resetDeleteBox();
-            return redirect()->route('volunteer.myOpportunity')->with('success', 'تم إلغاء تسجيلك بنجاح .');
+            return redirect()->route('volunteers.myOpportunity')->with('success', 'تم إلغاء تسجيلك بنجاح .');
         }
 
         session()->flash('error', 'لا توجد فرصة تطوعية محددة للحذف.');
@@ -70,8 +70,7 @@ class MyOpportunity extends Component
         $query = $this->user->volunteer->opportunities()
             ->when($this->searchText, function ($query) {
                 $query->where(function ($q) {
-                    $q->where('title', 'like', '%' . $this->searchText . '%')
-                        ->orWhere('description', 'like', '%' . $this->searchText . '%');
+                    $q->where('title', 'like', '%' . $this->searchText . '%');
                 });
             })
             ->when($this->status, function ($query) {

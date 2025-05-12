@@ -83,7 +83,7 @@
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                             التواريخ
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                             الحالة
                         </th>
                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -131,15 +131,15 @@
                             </td>
 
                             <!-- Status -->
-                            <td class="px-6 py-4 text-center">
+                            <td class="px-8 py-4 text-center whitespace-nowrap">
                                 <x-layouts.status-opportunity :opportunity="$opportunity" />
                             </td>
 
 
                             <!-- Actions -->
                             <td class="px-6 py-4 text-center">
-                                <div class="flex justify-center gap-3">
-                                    @if($opportunity->status === 'upcoming')
+                                <div class="flex justify-center items-center gap-3">
+                                    @if($opportunity->getStatus() === 'upcoming')
                                         <button class="text-red-500 hover:text-red-700 transition-colors group flex flex-col items-center cursor-pointer"
                                                 wire:click="toggleShowDeleteBox({{ $opportunity->id }})">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -147,6 +147,14 @@
                                             </svg>
                                             <span class="text-xs mt-1">إلغاء التسجيل</span>
                                         </button>
+                                    @elseif($opportunity->getStatus() === 'completed')
+                                        <a href="{{ route('volunteers.myOpportunity.documentation' , $opportunity->id) }}" class="text-green-500 hover:text-green-700 transition-colors group flex flex-col items-center cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                            </svg>
+
+                                            <span class="text-xs mt-1">عرض التوثيق</span>
+                                        </a>
                                     @endif
                                     <a href="{{ route('opportunities.show', $opportunity->id) }}"
                                        class="text-blue-500 hover:text-blue-700 transition-colors group flex flex-col items-center">

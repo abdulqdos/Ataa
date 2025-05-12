@@ -17,6 +17,7 @@ use App\Livewire\Volunteers\Ranking as VolunteersRanking ;
 
 // Volunteer
 use App\Livewire\Volunteer\Profile\Update as VolunteerUpdateProfile ;
+use App\Livewire\Volunteer\Profile\Documentation as myDocumentation ;
 
 // Organization
 use App\Livewire\Organization\Dashboard;
@@ -63,6 +64,7 @@ Route::middleware('volunteerOrGuest')->group(function () {
 Route::middleware('volunteer')->group(function () {
    Route::get('/volunteers/{volunteer}/edit', VolunteerUpdateProfile::class)->name('volunteers.edit');
    Route::get('/volunteers/myOpportunity', myOpportunity::class)->name('volunteers.myOpportunity');
+   Route::get('/volunteers/myOpportunity/{opportunity}/documentation', myDocumentation::class)->name('volunteers.myOpportunity.documentation');
 });
 
 // Organization

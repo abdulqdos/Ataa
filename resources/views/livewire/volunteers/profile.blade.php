@@ -17,7 +17,7 @@
         <div class="p-6 flex flex-col md:flex-row gap-6">
             <!-- صورة الملف الشخصي الدائرية -->
             <div class="flex-shrink-0 mx-auto md:mx-0 flex flex-col items-center">
-                <img class="h-32 w-32 rounded-full object-cover border-4 border-gray-200"
+                <img class="h-32 w-32 rounded-full object-cover"
                      src="{{ $volunteer->user->img_url ??  'https://ui-avatars.com/api/?name=' . urlencode($volunteer->first_name . ' ' . $volunteer->last_name) . '&background=random&color=fff' }}"
                      alt="{{ $volunteer->first_name }} صورة الملف الشخصي">
 

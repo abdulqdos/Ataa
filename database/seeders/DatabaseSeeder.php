@@ -29,16 +29,19 @@ class DatabaseSeeder extends Seeder
             'email' => 'volunteer@example.com',
             'role' => 'volunteer',
         ]);
+
         $organization = User::factory()->create([
             'user_name' => 'Test User',
             'email' => 'organization@example.com',
             'role' => 'organization',
         ]);
+
         User::factory()->create([
             'user_name' => 'Test User',
             'email' => 'test@example.com',
             'role' => 'admin',
         ]);
+
         $volunteer = Volunteer::factory()->recycle($user)->create();
 
         // Opportunities
@@ -66,6 +69,7 @@ class DatabaseSeeder extends Seeder
             'accepted_count' => 10,
         ]);
         $op->volunteers()->attach($opVolunteer->pluck('id'));
+
         // Requests
         Request::factory(10)->recycle($opportunity)->recycle($organization)->create();
 
@@ -77,5 +81,18 @@ class DatabaseSeeder extends Seeder
 
         // Sectors
         Sector::factory(10)->create();
+
+
+        $lastYear = Carbon::now()->subYear()->year;
+        $startDay = rand(1, 15);
+        $endDay = rand($startDay + 1, 28);
+
+        $completed = Opportunity::factory(10)->recycle($organization)->create([
+            'start_date' => Carbon::create($lastYear, 4 , 1),
+            'end_date'   => Carbon::create($lastYear, 4, 10),
+        ]);
+
+        $volunteer->opportunities()->attach($completed->pluck('id'));
+
     }
 }

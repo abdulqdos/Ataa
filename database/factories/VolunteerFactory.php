@@ -25,6 +25,7 @@ class VolunteerFactory extends Factory
             'phone_number' => $this->faker->phoneNumber(),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'bio'  => str(fake()->realText(120)),
+            'eval_avg' => rand(1,5),
             'user_id' => User::factory(),
         ];
     }

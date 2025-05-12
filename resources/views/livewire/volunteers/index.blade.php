@@ -24,10 +24,10 @@
                     نَحْتَضِنُ الْإِنْسَانَ وَالْأَمَلَ فِي كُلِّ مَشْرُوعٍ تَطَوُّعِيّ
                 </p>
 
-                <button class="btn-primary px-10 py-4 rounded-lg
+                <a href="{{ route('volunteers.ranking') }}" class="btn-primary px-10 py-4 rounded-lg
                       font-semibold text-lg transition-all duration-300 transform">
                     عرض أبرز المتطوعون
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -43,7 +43,7 @@
         <div class="bg-white p-4 rounded-lg shadow-sm mb-6">
             <div class="flex flex-row items-center justify-between my-3">
                 <h3 class=" text-sm font-medium text-gray-700 mb-1"> بحث بالأسم </h3>
-                <span class="text-primary hover:underline"> عرض أبرز المتطوعون</span>
+                <a href="{{ route('volunteers.ranking') }}" class="text-primary hover:underline"> عرض أبرز المتطوعون</a>
             </div>
             <div class="flex flex-col md:flex-row gap-4">
                 <!-- Combined Name Search -->

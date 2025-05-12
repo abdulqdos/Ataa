@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Volunteer\Profile ;
 
+use App\Models\Volunteer;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -27,13 +29,10 @@ class Update extends Component
             'bio' => 'nullable|string|min:10|max:300',
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'email' => 'required|email|max:255|unique:users,email,' . $this->user->id,
-            'old_password' => ['nullable'], // انت تتحكم فيها في changePassword()
-            'new_password' => ['nullable'], // انت تتحكم فيها في changePassword()
+            'old_password' => ['nullable'],
+            'new_password' => ['nullable'],
         ];
     }
-
-
-
     protected $messages = [
         // first_name
         'first_name.required' => 'الاسم الأول مطلوب.',
@@ -90,8 +89,9 @@ class Update extends Component
         'img.max' => 'حجم الصورة يجب ألا يتجاوز 2 ميغابايت.',
     ];
 
-    public function mount()
+    public function mount(Volunteer $volunteer)
     {
+        Gate::authorize('update', $volunteer);
         $this->user = auth()->user();
         $this->user_name = $this->user->user_name;
         $this->email = $this->user->email;

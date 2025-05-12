@@ -44,8 +44,9 @@ class DatabaseSeeder extends Seeder
 
         $volunteer = Volunteer::factory()->recycle($user)->create();
 
+        $org = Organization::factory()->recycle($organization)->create();
         // Opportunities
-        $opportunity = Opportunity::factory(30)->recycle(Organization::factory()->recycle($organization)->create())->create();
+        $opportunity = Opportunity::factory(30)->recycle($org)->create();
 
         // Organizations
         $orgs = User::factory(20)->create([
@@ -71,7 +72,7 @@ class DatabaseSeeder extends Seeder
         $op->volunteers()->attach($opVolunteer->pluck('id'));
 
         // Requests
-        Request::factory(10)->recycle($opportunity)->recycle($organization)->create();
+        Request::factory(10)->recycle($opportunity)->recycle($volunteer)->create();
 
         // Notifications
         Notification::factory(5)->recycle($volunteer)->create();
@@ -87,7 +88,7 @@ class DatabaseSeeder extends Seeder
         $startDay = rand(1, 15);
         $endDay = rand($startDay + 1, 28);
 
-        $completed = Opportunity::factory(10)->recycle($organization)->create([
+        $completed = Opportunity::factory(10)->recycle($org)->create([
             'start_date' => Carbon::create($lastYear, 4 , 1),
             'end_date'   => Carbon::create($lastYear, 4, 10),
         ]);

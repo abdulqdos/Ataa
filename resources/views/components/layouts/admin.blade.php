@@ -38,13 +38,13 @@
 <body class="bg-gray-100">
 <div class="flex h-screen overflow-hidden">
     <!-- Sidebar (Desktop) -->
-    <div id="sidebar" class="sidebar bg-[var(--primary)] text-white w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
+    <div id="sidebar" class="sidebar  bg-white text-gray-600 w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
         <div class="p-4 flex items-center justify-center border-b border-[var(--secondary)]">
-            <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=عطاء&background=ffffff&color=106665&bold=true" alt="شعار عطاء">
+            <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=عطاء&background=106665&color=ffffff&bold=true" alt="شعار عطاء">
             <div class="text-xl font-bold mr-2">مشروع عطاء</div>
         </div>
         <div class="p-2">
-            <div class="text-sm text-gray-300 px-4 py-2">المشرف</div>
+            <div class="text-sm text-primary px-4 py-2">المشرف</div>
             <div class="text-md font-bold px-4 pb-4">أدمن النظام</div>
         </div>
         <nav class="mt-2">
@@ -63,8 +63,8 @@
     </div>
 
     <!-- Mobile Sidebar (Hidden by default) -->
-    <div id="mobileSidebar" class="sidebar fixed top-0 right-0 h-full bg-[var(--primary)] text-white w-64 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
-        <div class="p-4 flex items-center justify-between border-b border-[var(--secondary)]">
+    <div id="mobileSidebar" class="sidebar fixed top-0 right-0 h-full bg-white text-gray-600 w-64 z-30 transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="p-4 flex items-center justify-between border-b border-secondary">
             <div class="flex items-center">
                 <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=عطاء&background=ffffff&color=106665&bold=true" alt="شعار عطاء">
                 <div class="text-xl font-bold mr-2">مشروع عطاء</div>
@@ -98,7 +98,7 @@
         <header class="bg-white shadow-sm z-10">
             <div class="flex items-center justify-between h-16 px-4">
                 <div>
-                    <button id="toggleSidebar" class="text-gray-500 hover:text-[var(--primary)] md:hidden">
+                    <button id="toggleSidebar" class="text-gray-500 hover:text-primary md:hidden">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -110,7 +110,7 @@
                         </button>
                     </div>
                     <div class="flex items-center">
-                        <div class="h-8 w-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center">
+                        <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center">
                             <span class="text-sm font-medium">أد</span>
                         </div>
                         <span class="mr-2 text-sm font-medium text-gray-700">أدمن النظام</span>
@@ -128,24 +128,24 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                     <div class="bg-white rounded-lg shadow p-5">
                         <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-[var(--primary)]/10 text-[var(--primary)]">
+                            <div class="p-3 rounded-full bg-primary/10 text-primary">
                                 <i class="fas fa-users text-xl"></i>
                             </div>
                             <div class="mr-4">
                                 <h2 class="text-sm font-medium text-gray-600">إجمالي المتطوعين</h2>
-                                <p class="text-2xl font-bold text-[var(--primary)]">5,320</p>
+                                <p class="text-2xl font-bold text-primary">5,320</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-lg shadow p-5">
                         <div class="flex items-center">
-                            <div class="p-3 rounded-full bg-[var(--secondary)]/10 text-[var(--secondary)] ">
+                            <div class="p-3 rounded-full bg-secondary/10 text-secondary ">
                                 <i class="fas fa-building text-xl"></i>
                             </div>
                             <div class="mr-4">
                                 <h2 class="text-sm font-medium text-gray-600">إجمالي المؤسسات</h2>
-                                <p class="text-2xl font-bold text-[var(--secondary)]">128</p>
+                                <p class="text-2xl font-bold text-secondary">128</p>
                             </div>
                         </div>
                     </div>
@@ -244,7 +244,7 @@
                                         </div>
                                     </div>
                                     <div class="flex gap-2  space-x-reverse">
-                                        <button class="px-3 py-1 bg-[var(--primary)] text-white text-xs rounded-lg hover:bg-[var(--primaryLight)] transition duration-300 cursor-pointer">قبول</button>
+                                        <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg hover:bg-primaryLight transition duration-300 cursor-pointer">قبول</button>
                                         <button class="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded-lg hover:bg-gray-300  transition duration-300 cursor-pointer">رفض</button>
                                     </div>
                                 </li>
@@ -257,7 +257,7 @@
                                         </div>
                                     </div>
                                     <div class="flex space-x-2 space-x-reverse">
-                                        <button class="px-3 py-1 bg-[var(--primary)] text-white text-xs rounded-lg">استعراض</button>
+                                        <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg">استعراض</button>
                                     </div>
                                 </li>
                                 <li class="flex items-center justify-between pb-4 border-b border-gray-100">
@@ -271,7 +271,7 @@
                                         </div>
                                     </div>
                                     <div class="flex gap-2  space-x-reverse">
-                                        <button class="px-3 py-1 bg-[var(--primary)] text-white text-xs rounded-lg hover:bg-[var(--primaryLight)] transition duration-300 cursor-pointer">قبول</button>
+                                        <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg hover:bg-primaryLight transition duration-300 cursor-pointer">قبول</button>
                                         <button class="px-3 py-1 bg-gray-200 text-gray-700 text-xs rounded-lg hover:bg-gray-300  transition duration-300 cursor-pointer">رفض</button>
                                     </div>
                                 </li>
@@ -286,7 +286,7 @@
                                         </div>
                                     </div>
                                     <div class="flex space-x-2 space-x-reverse">
-                                        <button class="px-3 py-1 bg-[var(--primary)] text-white text-xs rounded-lg">استعراض</button>
+                                        <button class="px-3 py-1 bg-primary text-white text-xs rounded-lg">استعراض</button>
                                     </div>
                                 </li>
                             </ul>
@@ -300,7 +300,7 @@
                     <div class="bg-white rounded-lg shadow">
                         <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                             <h2 class="text-lg font-medium">أحدث المؤسسات</h2>
-                            <a href="#" class="text-[var(--primary)] hover:text-[var(--primaryLight)] text-sm">عرض الكل</a>
+                            <a href="#" class="text-primary hover:text-primaryLight text-sm">عرض الكل</a>
                         </div>
                         <div class="p-4">
                             <table class="w-full text-right">
@@ -346,7 +346,7 @@
                     <div class="bg-white rounded-lg shadow">
                         <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                             <h2 class="text-lg font-medium">أحدث المتطوعين</h2>
-                            <a href="#" class="text-[var(--primary)] hover:text-[var(--primary)] text-sm">عرض الكل</a>
+                            <a href="#" class="text-primary hover:text-primary text-sm">عرض الكل</a>
                         </div>
                         <div class="p-4">
                             <table class="w-full text-right">
@@ -360,7 +360,7 @@
                                 <tbody>
                                 <tr class="border-b border-gray-100">
                                     <td class="py-3 pr-4 flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center mr-2">
+                                        <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center mr-2">
                                             <span class="text-xs font-medium">أم</span>
                                         </div>
                                         <span>أحمد محمد</span>
@@ -380,7 +380,7 @@
                                 </tr>
                                 <tr class="border-b border-gray-100">
                                     <td class="py-3 pr-4 flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-[var(--primary)] text-white flex items-center justify-center mr-2">
+                                        <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center mr-2">
                                             <span class="text-xs font-medium">مع</span>
                                         </div>
                                         <span>محمد علي</span>
@@ -400,7 +400,7 @@
                                 </tr>
                                 <tr>
                                     <td class="py-3 pr-4 flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-[var(--primary)]  text-white flex items-center justify-center mr-2">
+                                        <div class="h-8 w-8 rounded-full bg-primary  text-white flex items-center justify-center mr-2">
                                             <span class="text-xs font-medium">عخ</span>
                                         </div>
                                         <span>عمر خالد</span>
@@ -418,7 +418,7 @@
                 <div class="bg-white rounded-lg shadow">
                     <div class="p-4 border-b border-gray-200 flex justify-between items-center">
                         <h2 class="text-lg font-medium">أحدث الإبلاغات</h2>
-                        <a href="#" class="text-[var(--primary)]  hover:text-[var(--primaryLight)]  text-sm">عرض الكل</a>
+                        <a href="#" class="text-primary  hover:text-primaryLight  text-sm">عرض الكل</a>
                     </div>
                     <div class="p-4">
                         <table class="w-full text-right">
@@ -438,7 +438,7 @@
                                 <td class="py-3 hidden md:table-cell">15-03-2025</td>
                                 <td class="py-3 hidden md:table-cell"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full">قيد المراجعة</span></td>
                                 <td class="py-3">
-                                    <button class="px-3 py-1 bg-[var(--primary)]  text-white text-xs rounded-lg">استعراض</button>
+                                    <button class="px-3 py-1 bg-primary  text-white text-xs rounded-lg">استعراض</button>
                                 </td>
                             </tr>
                             <tr class="border-b border-gray-100">
@@ -456,7 +456,7 @@
                                 <td class="py-3 hidden md:table-cell">12-03-2025</td>
                                 <td class="py-3 hidden md:table-cell"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs rounded-full">قيد المراجعة</span></td>
                                 <td class="py-3">
-                                    <button class="px-3 py-1 bg-[var(--primary)]  text-white text-xs rounded-lg">استعراض</button>
+                                    <button class="px-3 py-1 bg-primary  text-white text-xs rounded-lg">استعراض</button>
                                 </td>
                             </tr>
                             <tr>

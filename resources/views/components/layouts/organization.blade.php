@@ -39,7 +39,7 @@
             <div class="text-xl font-bold">مشروع عطاء</div>
         </div>
         <div class="p-2">
-            <div class="text-sm text-gray-300 px-4 py-2">المؤسسة</div>
+            <div class="text-sm text-primary px-4 py-2">المؤسسة</div>
             <div class="text-md font-bold px-4 pb-4"> {{  auth()->user()->organization?->name }}</div>
         </div>
 
@@ -66,7 +66,7 @@
             </button>
         </div>
         <div class="p-2">
-            <div class="text-sm text-gray-300 px-4 py-2">المؤسسة</div>
+            <div class="text-sm text-primary px-4 py-2">المؤسسة</div>
             <div class="text-md font-bold px-4 pb-4">{{ auth()->user()->organization?->name  }}</div>
         </div>
         <nav class="mt-2">

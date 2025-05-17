@@ -30,6 +30,7 @@ use App\Livewire\Organization\Requests\Show as RequestShow;
 use App\Livewire\Volunteer\MyOpportunity;
 use App\Livewire\Organization\Volunteers\OpportunitiesVolunteers as OrganizationOpportunitiesVolunteers ;
 use App\Livewire\Organization\Volunteers\Index as OrganizationVolunteers ;
+use App\Livewire\Organization\Volunteers\Show as OrganizationVolunteersShow ;
 use App\Livewire\Organization\Volunteers\Documentation\Create as DocumentationCreate ;
 
 // Guest
@@ -81,6 +82,7 @@ Route::middleware('organization')->group(function () {
     // Volunteers
     Route::get('/organization/opportunities-volunteers' , OrganizationOpportunitiesVolunteers::class)->name('organization.opportunities-volunteers');
     Route::get('/organization/opportunities-volunteers/{opportunity}/volunteers' ,OrganizationVolunteers::class )->name('organization.volunteers');
+    Route::get('/organization/volunteers/{volunteer}' ,OrganizationVolunteersShow::class )->name('organization.volunteers.show');
     Route::get('/organization/opportunities-volunteers/{opportunity}/documentation/{volunteer}' ,DocumentationCreate::class )->name('organization.volunteers.documentation.create');
 
     // Requests

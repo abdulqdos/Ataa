@@ -19,7 +19,7 @@
         </style>
         @livewireStyles
     </head>
-    <body class="bg-gray-50">
+    <body class="bg-gray-50 selection:bg-primary/80 selection:text-white">
 
         <!-- Navbar -->
         <nav class="bg-white shadow-sm">

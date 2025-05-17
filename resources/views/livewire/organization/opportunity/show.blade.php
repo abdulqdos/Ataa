@@ -3,7 +3,7 @@
                       :breadcrumbs="[
                       ['الرئيسية', route('organization.dashboard')],
                       ['الفرص التطوعية', route('organization.opportunity')],
-                      ['الفرصة التطوعية']]">
+                      ['تفاصيل الفرصة']]">
     </x-layouts.header>
 
 
@@ -65,7 +65,7 @@
                     </div>
                 @else
                 <!-- Requests Header with Filter -->
-                <div class="w-full bg-white rounded-md shadow-md flex flex-col md:flex-row justify-between items-center p-4 gap-4 md:gap-0">
+                <div class="w-full bg-white rounded-md shadow-sm flex flex-col md:flex-row justify-between items-center p-4 gap-4 md:gap-0">
                     <div class="w-full md:w-auto flex flex-col md:flex-row gap-4 items-center justify-between">
                         <!-- Status Filter -->
                         <select
@@ -123,7 +123,7 @@
 
                                                     <td class="px-2 py-3 flex flex-col sm:flex-row gap-2 text-sm justify-center items-center">
                                                         @if($request->status == 'accepted' || $request->status == 'declined')
-                                                            <a href="#" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">عرض بيانات المتطوع</a>
+                                                            <a href="{{ route('organization.volunteers.show' , $request->volunteer->id) }}" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">عرض بيانات المتطوع</a>
                                                         @else
                                                             <a href="{{ route('organization.requests.show' , $request->id) }}" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">مراجعة</a>
                                                             <button type="button" class="w-full sm:w-auto text-center px-2 py-1 btn-primary text-xs sm:text-sm" wire:click="setModel('accepted' , {{ $request->id }})">قبول</button>
@@ -168,7 +168,6 @@
                     @endif
                 @endif
             @else
-
                 <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-1 bg-white mx-2 md:mx-5">
                     <div class="py-4 bg-white flex flex-col md:flex-row items-start md:items-center justify-start gap-4">
                         <!-- Search box -->
@@ -202,9 +201,6 @@
                                                     <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                                         اسم مستخدم
                                                     </th>
-                                                    <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6 hidden sm:table-cell">
-                                                        اسم المتطوع بالكامل
-                                                    </th>
                                                     <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                                         رقم الهاتف
                                                     </th>
@@ -231,13 +227,10 @@
                                                                 @else
                                                                     <img class="h-6 w-6 rounded-md" src="{{ \Illuminate\Support\Facades\Storage::url($volunteer->img_url) }}" alt="صورة المؤسسة">
                                                                 @endif
-                                                                <a href="#" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
-                                                                    {{ $volunteer->user->user_name }}
+                                                                <a href="{{ route('organization.volunteers.show' , $volunteer->id) }}" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
+                                                                    {{ $volunteer->first_name . ' ' . $volunteer->last_name }}
                                                                 </a>
                                                             </div>
-                                                        </td>
-                                                        <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 truncate max-w-[150px] hidden sm:table-cell md:px-6">
-                                                            {{ $volunteer->first_name . ' ' . $volunteer->last_name }}
                                                         </td>
 
                                                         <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 md:px-6">
@@ -308,14 +301,14 @@
                                     <h3 class="mt-3 text-lg font-medium text-gray-800">لا يوجد متطوعون مسجلون حاليا</h3>
                                     <p class="mt-1 text-sm text-gray-600">لا يوجد متطوعون لي هاذي الفرصة . يمكنك تحقق من طلبات .</p>
                                     <div class="mt-4">
-                                        <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md btn-primary">
+                                        <button wire:click="setActiveTab('requests')" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md btn-primary">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                             </svg>
                                             <span class="mr-2"> عرض طلبات </span>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             @endif

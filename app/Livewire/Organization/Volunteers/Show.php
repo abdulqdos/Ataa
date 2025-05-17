@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Organization\Volunteers;
 
+use App\Livewire\AdminComponent;
+use App\Livewire\OrganizationComponent;
 use App\Models\Volunteer;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Title('المتطوع')]
-class Show extends Component
+class Show extends OrganizationComponent
 {
     public $volunteer ;
 

@@ -6,6 +6,7 @@ use App\Livewire\OrganizationComponent;
 use App\Models\Notification;
 use App\Models\Opportunity;
 use App\Models\Request;
+use App\Models\Volunteer;
 use App\Models\VolunteerOpportunity;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
@@ -21,13 +22,18 @@ class Show extends OrganizationComponent
     public ?Opportunity $opportunity;
     public $filterStatus, $modalType = false, $requestId = null, $currentRequest = null;
     public $activeTab = 'requests';
-
+    public $searchText;
     public function mount(Opportunity $opportunity)
     {
         $this->opportunity = $opportunity;
     }
 
     public function updatedFilterStatus()
+    {
+        $this->resetPage();
+    }
+
+    public function updatedSearchText()
     {
         $this->resetPage();
     }
@@ -83,7 +89,7 @@ class Show extends OrganizationComponent
         }
     }
 
-    public function render()
+    public function getRequests()
     {
         $query = Request::where('opportunity_id', $this->opportunity->id);
 
@@ -91,10 +97,31 @@ class Show extends OrganizationComponent
             $query->where('status', $this->filterStatus);
         }
 
+        return $query;
+    }
+
+
+    public function getVolunteers()
+    {
+        $query  = $this->opportunity->volunteers();
+
+        if (!empty($this->searchText)) {
+            $query  = $query ->where(function ($q) {
+                $q->where('first_name', 'like', '%' . $this->searchText . '%')
+                    ->orWhere('last_name', 'like', '%' . $this->searchText . '%');
+            });
+        }
+
+        return $query ;
+    }
+    public function render()
+    {
+        $requests = $this->getRequests();
+        $volunteers = $this->getVolunteers();
         return view('livewire.organization.opportunity.show', [
             'opportunity' => $this->opportunity,
-            'volunteers' => $this->opportunity->volunteers()->paginate(10),
-            'requests' => $query->orderBy('status', 'desc')->paginate(5),
+            'volunteers' => $volunteers->paginate(10),
+            'requests' => $requests->orderBy('status', 'desc')->paginate(5),
             'status' => $this->opportunity->getStatus()
         ]);
     }

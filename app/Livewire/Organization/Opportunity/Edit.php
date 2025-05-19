@@ -4,6 +4,7 @@ namespace App\Livewire\Organization\Opportunity;
 
 use App\Livewire\OrganizationComponent;
 use App\Models\Opportunity;
+use App\Models\Sector;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Title;
@@ -17,12 +18,11 @@ class Edit extends OrganizationComponent
     #[Title('تعديل بيانات الفرصة')]
 
     // Inputs
-    public $title, $description, $start_date, $end_date , $location , $location_url , $count ;
+    public $title, $description, $start_date, $end_date , $location , $location_url , $count , $sector , $has_certificate ;
     public $img, $img_url;
 
     // Object
     public $opportunity;
-
     protected $rules = [
         'title' => 'required|min:3|max:20|string|regex:/^[^<>\/]*$/',
         'description' => 'required|min:10|max:255|string|regex:/^[^<>\/]*$/',
@@ -32,8 +32,9 @@ class Edit extends OrganizationComponent
         'location' => 'required|min:3|max:255|string|regex:/^[^<>\/]*$/',
         'location_url' => 'nullable|url',
         'count' => 'required|integer|min:1|regex:/^[^<>\/]*$/',
+        'has_certificate' => 'nullable|boolean',
+        'sector' => 'required',
     ];
-
     protected $messages = [
         // title
         'title.required' => 'العنوان مطلوب.',
@@ -80,6 +81,12 @@ class Edit extends OrganizationComponent
         'count.integer' => 'العدد يجب أن يكون عدد صحيح.',
         'count.min' => 'العدد يجب أن يكون على الأقل 1.',
         'count.regex' => 'العدد لا يجب أن يحتوي على أحرف خاصة مثل < > /.',
+
+        // Certificate
+        'has_certificate.boolean' => 'يجب أن تكون القيمة نعم أو لا',
+
+        // Sector
+        'sector.required' => 'يجب اختيار القطاع.',
     ];
 
     public function mount(Opportunity $opportunity)
@@ -92,6 +99,8 @@ class Edit extends OrganizationComponent
         $this->location = $opportunity->location;
         $this->location_url = $opportunity->location_url;
         $this->count = $opportunity->count;
+        $this->has_certificate = $opportunity->has_certificate ;
+        $this->sector  = $opportunity->sector_id ;
         $this->opportunity = $opportunity;
     }
 
@@ -131,14 +140,19 @@ class Edit extends OrganizationComponent
             'location' => $this->location,
             'location_url' => $this->location_url,
             'count' => $this->count,
+            'has_certificate' => $this->has_certificate,
+            'sector_id' => $this->sector,
             'organization_id' => $organizationId,
         ]);
+
         session()->flash('success' , 'تمت تحديث الفرصة بنجاح');
         return $this->redirect(route('organization.opportunity'));
     }
 
     public function render()
     {
-        return view('livewire.organization.opportunity.edit');
+        return view('livewire.organization.opportunity.edit' , [
+            'sectors' => Sector::all(),
+        ]);
     }
 }

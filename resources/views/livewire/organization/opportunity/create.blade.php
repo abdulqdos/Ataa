@@ -100,7 +100,7 @@
         @enderror
 
         <div class="flex items-center mb-4">
-            <input id="default-checkbox" type="checkbox" value="{{ true }}" wire:model="has_certificate" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm focus:ring-primary">
+            <input id="default-checkbox" type="checkbox" value="{{ true }}"  wire:model.boolean="has_certificate" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm focus:ring-primary" >
             <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900"> هل تحتوي على شهادة ؟</label>
         </div>
 

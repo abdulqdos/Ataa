@@ -1,4 +1,4 @@
-<div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg">
+<div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-sm">
     <h2 class="text-3xl font-bold text-gray-800 mb-5 text-center">تعديل فرصة تطوعية</h2>
 
     <form wire:submit.prevent="update" class="space-y-5">
@@ -6,7 +6,7 @@
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">العنوان</label>
             <div class="relative">
-                <input type="text" wire:model="title" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('title') border-red-500 @enderror" placeholder="مثال: حملة تنظيف الشواطئ">
+                <input type="text" wire:model="title" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('title') border-red-500 @enderror" placeholder="مثال: حملة تنظيف الشواطئ">
 
             </div>
         </div>
@@ -18,7 +18,7 @@
         <!-- الوصف -->
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">الوصف</label>
-            <textarea wire:model="description" rows="3" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('description') border-red-500 @enderror" placeholder="وصف مختصر للفرصة التطوعية"></textarea>
+            <textarea wire:model="description" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('description') border-red-500 @enderror" placeholder="وصف مختصر للفرصة التطوعية"></textarea>
         </div>
 
         @error('description')
@@ -30,13 +30,13 @@
             <!-- تاريخ البداية -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">تاريخ البداية</label>
-                <input type="date" wire:model="start_date" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('start_date') border-red-500 @enderror">
+                <input type="date" wire:model="start_date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('start_date') border-red-500 @enderror">
             </div>
 
             <!-- تاريخ النهاية -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">تاريخ النهاية</label>
-                <input type="date" wire:model="end_date" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('end_date') border-red-500 @enderror">
+                <input type="date" wire:model="end_date" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-[var(--secondaryLight)] focus:border-[var(--secondaryLight)] focus:outline-none transition @error('end_date') border-red-500 @enderror">
             </div>
 
         </div>
@@ -54,7 +54,7 @@
         <!-- Location -->
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">المكان   <span class="text-xs text-gray-500"> (وصف المكان)  </span></label>
-            <input type="text" wire:model="location" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('location') border-red-500 @enderror" placeholder="طرابلس , سيدي خليفة بجانب مسجد أبوغرارة">
+            <input type="text" wire:model="location" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('location') border-red-500 @enderror" placeholder="طرابلس , سيدي خليفة بجانب مسجد أبوغرارة">
         </div>
 
         @error('location')
@@ -64,7 +64,7 @@
         <!-- Location -->
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1"> رابط المكان   </label>
-            <input type="url" wire:model="location_url" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('location_url') border-red-500 @enderror" placeholder="أدخل رابط المكان الخاص بك هنا (إنسخ و إلصق الرابط)">
+            <input type="url" wire:model="location_url" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('location_url') border-red-500 @enderror" placeholder="أدخل رابط المكان الخاص بك هنا (إنسخ و إلصق الرابط)">
         </div>
 
         @error('location_url')
@@ -73,11 +73,36 @@
 
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">ادخل عدد متطوعون  </label>
-            <input type="text" wire:model="count" class="w-full p-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-1 focus:ring-secondaryLight focus:border-secondaryLight focus:outline-none transition @error('count') border-red-500 @enderror" placeholder="أدخل أقصى عدد متطوعون (يجب أن يكون رقم)">
+            <label for="sectors" class="block mb-2 text-sm font-medium text-gray-900 ">إختر القطاع</label>
+            <select id="sectors" wire:model="sector" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5">
+                <option selected>إختر القطاع الخاص بالفرصة</option>
+                @foreach($sectors as $sector)
+                    <option value="{{ $sector->id }}"> {{ $sector->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+
+        @error('sector')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">ادخل عدد متطوعون  <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="count"> * </span></label>
+            <input type="text" wire:model="count" class="input focus:ring-secondaryLight focus:border-secondaryLight @error('count') border-red-500 @enderror" placeholder="أدخل أقصى عدد متطوعون (يجب أن يكون رقم)">
         </div>
 
         @error('count')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
+        <div class="flex items-center mb-4">
+            <input id="default-checkbox" type="checkbox" @if($has_certificate) checked @endif wire:model.boolean="has_certificate" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm focus:ring-primary">
+            <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900"> هل تحتوي على شهادة ؟</label>
+        </div>
+
+        @error('has_certificate')
             <x-layouts.x-error-messge :message="$message" />
         @enderror
 
@@ -87,10 +112,10 @@
             <label class="block text-md font-semibold text-gray-700 mb-2">صورة الفرصة</label>
             <label for="img" class="cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-6 bg-gray-50 hover:bg-gray-100 transition duration-300 @error('img') border-red-500 @enderror">
                 @if ($img)
-                    <img class="w-full h-40 object-cover rounded-lg shadow-md" src="{{ $img->temporaryUrl() }}" />
+                    <img class="w-full h-40 object-cover rounded-lg " src="{{ $img->temporaryUrl() }}" />
                     <button type="button" wire:click="removeImage" class="mt-2 text-red-600 text-sm hover:underline">إزالة الصورة</button>
                 @elseif($img_url)
-                    <img class="w-full h-40 object-cover rounded-lg shadow-md" src="{{ \Illuminate\Support\Facades\Storage::url($img_url) }}" />
+                    <img class="w-full h-40 object-cover rounded-lg " src="{{ \Illuminate\Support\Facades\Storage::url($img_url) }}" />
                     <button type="button" wire:click="removeImage" class="mt-2 text-red-600 text-sm hover:underline">إزالة الصورة</button>
                 @else
                     <span class="text-gray-400 text-sm">اضغط لإضافة صورة</span>

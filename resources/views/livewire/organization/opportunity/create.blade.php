@@ -75,11 +75,36 @@
 
 
         <div>
+            <label for="sectors" class="block mb-2 text-sm font-medium text-gray-900 ">إختر القطاع</label>
+            <select id="sectors" wire:model="sector" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5">
+                <option selected>إختر القطاع الخاص بالفرصة</option>
+                @foreach($sectors as $sector)
+                    <option value="{{ $sector->id }}"> {{ $sector->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+
+        @error('sector')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
+
+        <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">ادخل عدد متطوعون  <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="count"> * </span></label>
             <input type="text" wire:model="count" class="input focus:ring-secondaryLight focus:border-secondaryLight @error('count') border-red-500 @enderror" placeholder="أدخل أقصى عدد متطوعون (يجب أن يكون رقم)">
         </div>
 
         @error('count')
+            <x-layouts.x-error-messge :message="$message" />
+        @enderror
+
+        <div class="flex items-center mb-4">
+            <input id="default-checkbox" type="checkbox" value="{{ true }}" wire:model="has_certificate" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded-sm focus:ring-primary">
+            <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900"> هل تحتوي على شهادة ؟</label>
+        </div>
+
+        @error('has_certificate')
             <x-layouts.x-error-messge :message="$message" />
         @enderror
 

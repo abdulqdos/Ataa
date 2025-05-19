@@ -18,11 +18,13 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('img_url')->nullable();
-            $table->foreignId('organization_id')->constrained('organizations');
             $table->string('location');
             $table->string('location_url', 2048)->nullable();
             $table->integer('count');
             $table->integer('accepted_count')->default(0);
+            $table->boolean('has_certificate')->default(false);
+            $table->foreignId('organization_id')->constrained('organizations')->cascadeOnDelete();
+            $table->foreignId('sector_id')->constrained('sectors');
             $table->softDeletes();
             $table->timestamps();
         });

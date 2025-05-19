@@ -187,7 +187,7 @@
                             </li>
                             <li>
                                 <a href="#" class="text-base text-gray-300 hover:text-white">
-                                    <i class="fas fa-phone mr-2"></i> +123 456 7890
+                                    <i class="fas fa-phone mr-2"></i> 0916050468
                                 </a>
                             </li>
                             <li>

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Organization;
+use App\Models\Sector;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -27,8 +28,10 @@ class OpportunityFactory extends Factory
             'end_date' => $endDate,
             'location' => $this->faker->city(),
             'location_url' => "https://www.google.com/maps/search/?api=1&query=" . fake()->latitude . "," . fake()->longitude,
+            'has_certificate' => $this->faker->boolean(),
             'count' => $this->faker->numberBetween(20, 100),
             'organization_id' => Organization::factory(),
+            'sector_id' => Sector::factory(),
         ];
     }
 }

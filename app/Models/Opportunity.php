@@ -12,7 +12,7 @@ class Opportunity extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = [ 'title' , 'description' , 'start_date' , 'end_date' , 'img_url' , 'location' , 'location_url' , 'count' , 'accepted_count', 'organization_id' ];
+    protected $guarded = ['id'];
 
     protected $casts = [
         'start_date' => 'date:Y-m-d',

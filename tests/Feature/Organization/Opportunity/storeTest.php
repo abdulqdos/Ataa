@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Organization;
+use App\Models\Sector;
 use App\Models\User;
 use Carbon\Carbon;
 use function Pest\Laravel\actingAs;
@@ -48,6 +49,8 @@ it('can store an Opportunity', function () {
         ->set('location' , 'شارع زاوية مقابل مستشفى')
         ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
         ->set('count' , 200)
+        ->set('has_certificate' , true)
+        ->set('sector' , 1)
         ->call('store');
 
     $this->assertDatabaseHas('opportunities', [
@@ -58,6 +61,8 @@ it('can store an Opportunity', function () {
         'location' => 'شارع زاوية مقابل مستشفى',
         'location_url' => 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA',
         'count' => 200,
+        'has_certificate' => true,
+        'sector_id' => 1,
     ]);
 });
 
@@ -70,12 +75,14 @@ it('Redirect to correct page', function () {
     Livewire::test('organization.opportunity.create')
         ->set('title' , 'فرصة التعاونية')
         ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
-        ->set('start_date' , '12-5-2025')
-        ->set('end_date' , '15-6-2025')
+        ->set('start_date' , '2025-05-25')
+        ->set('end_date' , '2025-06-15')
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->set('location' , 'شارع زاوية مقابل مستشفى')
         ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
         ->set('count' , 200)
+        ->set('has_certificate' , true)
+        ->set('sector' , 1)
         ->call('store')
         ->assertRedirect(route('organization.opportunity'));
 });

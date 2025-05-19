@@ -92,6 +92,7 @@ class Update extends Component
     public function mount(Volunteer $volunteer)
     {
         Gate::authorize('update', $volunteer);
+
         $this->user = auth()->user();
         $this->user_name = $this->user->user_name;
         $this->email = $this->user->email;

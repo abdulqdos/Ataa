@@ -46,6 +46,11 @@ class Opportunity extends Model
         return $this->hasMany(Request::class);
     }
 
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class);
+    }
+
     public function volunteers()
     {
         return

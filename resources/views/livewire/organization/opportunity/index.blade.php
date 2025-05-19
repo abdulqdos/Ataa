@@ -101,6 +101,9 @@
                                         <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6 hidden sm:table-cell">
                                             وصف الفرصة
                                         </th>
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6 hidden sm:table-cell">
+                                            القطاع
+                                        </th>
                                         <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                             تاريخ البداية
                                         </th>
@@ -110,9 +113,12 @@
                                         <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
                                             الحالة
                                         </th>
-                                            <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
-                                                العملية
-                                            </th>
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6 whitespace-nowrap">
+                                            مع شهادة
+                                        </th>
+                                        <th scope="col" class="px-3 py-3 text-center text-xs font-medium text-gray-500 md:px-6">
+                                            العملية
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200">
@@ -133,6 +139,9 @@
                                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 truncate max-w-[150px] hidden sm:table-cell md:px-6">
                                                 {{ Str::limit($opportunity->description, 30) }}
                                             </td>
+                                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 truncate max-w-[150px] hidden sm:table-cell md:px-6">
+                                                {{ $opportunity->sector->name }}
+                                            </td>
 
                                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 md:px-6">
                                                 {{ \Carbon\Carbon::parse($opportunity->start_date)->format('d M Y') }}
@@ -146,6 +155,22 @@
                                                 <div>
                                                     <x-layouts.status-opportunity :opportunity="$opportunity" />
                                                 </div>
+                                            </td>
+
+                                            <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-800 md:px-6">
+                                                @if($opportunity->has_certificate)
+                                                    <span class="flex items-center text-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
+                                                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                        </svg>
+                                                    </span>
+                                                @else
+                                                    <span class="flex items-center text-center justify-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-600">
+                                                          <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                        </svg>
+                                                    </span>
+                                                @endif
                                             </td>
 
                                                 <td class="px-3 py-4 flex flex-row gap-2 md:gap-4 items-center justify-center md:px-6">

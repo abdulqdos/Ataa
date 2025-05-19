@@ -33,3 +33,4 @@ it('must be an organization', function ($badRole) {
 it('must be return a correct component' , function () {
     actingAs($this->organization)->get(route('organization.opportunity.edit', $this->opportunity->id))->assertSeeLivewire('organization.opportunity.edit');
 });
+

@@ -55,7 +55,7 @@ class Index extends OrganizationComponent
         $this->selectedOpportunity = null;
     }
 
-    public function render()
+    public function getOpportunities()
     {
         $query = Opportunity::where('organization_id', auth()->user()->organization?->id);
 
@@ -84,6 +84,12 @@ class Index extends OrganizationComponent
             }
         }
 
+        return $query ;
+    }
+
+    public function render()
+    {
+        $query = $this->getOpportunities();
 
         return view('livewire.organization.opportunity.index', [
             'opportunities' => $query->latest()->paginate(10),

@@ -32,6 +32,7 @@
     </x-layouts.header>
 
     <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-1 bg-white mx-2 md:mx-5">
+
         <div class="py-4 bg-white flex flex-col md:flex-row items-start md:items-center justify-start gap-4">
             <!-- Search box -->
             <div class="w-full md:w-auto">

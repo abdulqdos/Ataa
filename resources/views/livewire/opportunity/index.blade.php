@@ -78,6 +78,7 @@
                     </div>
                 </div>
             </div>
+
             @if($opportunities->count() > 0)
 
                 <!-- عرض الفرص التطوعية -->
@@ -127,6 +128,11 @@
                                            target="_blank">
                                             {{ $opportunity->location }}
                                         </a>
+                                    </div>
+
+                                    <div class="text-base text-gray-700">
+                                        <span class="font-semibold">النطاق:</span>
+                                        <span>{{ $opportunity->sector->name }}</span>
                                     </div>
 
                                     <div class="text-base text-gray-700">

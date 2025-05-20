@@ -3,6 +3,7 @@
 namespace App\Livewire\Opportunity;
 
 use App\Models\Opportunity;
+use App\Models\Sector;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
@@ -15,8 +16,9 @@ class index extends Component
     #[Title('الفرص التطوعية')]
     #[Url(as: 'q', except: '')]
     public $searchText;
-    public $start_date, $end_date, $status;
+    public $start_date, $end_date, $status , $with_certificate , $sector;
     public $header ;
+    public $pageName = 'opportunities';
 
     public function mount($header = 'none')
     {
@@ -26,7 +28,7 @@ class index extends Component
     #[On('search:clear')]
     public function clear()
     {
-        $this->reset('searchText', 'start_date', 'end_date' , 'status');
+        $this->reset('searchText', 'start_date', 'end_date' , 'status' , 'with_certificate' , 'sector');
     }
 
     public function updated()
@@ -34,8 +36,7 @@ class index extends Component
         $this->resetPage();
     }
 
-    public $pageName = 'opportunities';
-    public function render()
+    public function getOpportunities()
     {
         $query = Opportunity::query();
 
@@ -64,10 +65,24 @@ class index extends Component
             }
         }
 
+        if (!empty($this->with_certificate || $this->with_certificate === '0' )){
+            $query->where('has_certificate' , $this->with_certificate);
+        }
+
+        if(!empty($this->sector)) {
+            $query->where('sector_id' , $this->sector);
+        }
+
+        return $query ;
+    }
+    public function render()
+    {
+        $query = $this->getOpportunities();
 
         return view('livewire.opportunity.index' ,
             [
                 'opportunities' => $query->latest()->with('organization')->paginate(12),
+                'sectors' => Sector::all(),
             ]
         );
     }

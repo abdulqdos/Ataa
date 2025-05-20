@@ -22,14 +22,53 @@ class OpportunityFactory extends Factory
         $startDate = Carbon::now()->addDays(rand(0, 1));
         $endDate = $startDate->copy()->addDays(rand(1, 20));
         return [
-            'title' => $this->faker->firstName(),
-            'description' =>  str(fake()->realText(120)),
-            'start_date' =>$startDate,
+            'title' => $this->faker->randomElement([
+                'حملة تنظيف شاطئ',
+                'توزيع سلال غذائية',
+                'ورشة توعوية عن البيئة',
+                'حملة تبرع بالدم',
+                'فعالية للأطفال الأيتام',
+                'صيانة مرافق عامة',
+                'مساعدة كبار السن',
+                'دعم ذوي الاحتياجات الخاصة',
+                'تنظيم معرض خيري',
+                'حملة تشجير في الأحياء'
+            ]),
+
+            'description' => $this->faker->randomElement([
+                'فرصة للمشاركة في تنظيف الشواطئ المحلية ورفع الوعي البيئي.',
+                'نقوم بتوزيع سلال غذائية على الأسر المحتاجة بمساعدة المتطوعين.',
+                'ورشة تهدف إلى توعية المجتمع بأهمية حماية البيئة والمحافظة عليها.',
+                'حملة تهدف إلى جمع تبرعات دم لإنقاذ أرواح المرضى والمحتاجين.',
+                'تنظيم يوم ترفيهي وثقافي للأطفال في دار الأيتام.',
+                'مبادرة لصيانة وإصلاح المرافق العامة في المدينة.',
+                'تقديم المساعدة والرعاية اليومية لكبار السن في منازلهم.',
+                'فعالية ترفيهية وتعليمية موجهة لذوي الاحتياجات الخاصة.',
+                'نقوم بتنظيم معرض خيري لبيع منتجات حرفية لصالح المحتاجين.',
+                'المشاركة في زراعة الأشجار وتحسين المساحات الخضراء في الأحياء السكنية.'
+            ]),
+
+            'start_date' => $startDate,
             'end_date' => $endDate,
-            'location' => $this->faker->city(),
-            'location_url' => "https://www.google.com/maps/search/?api=1&query=" . fake()->latitude . "," . fake()->longitude,
-            'has_certificate' => $this->faker->boolean(),
-            'count' => $this->faker->numberBetween(20, 100),
+
+            'location' => $this->faker->randomElement([
+                'طرابلس - حي الأندلس',
+                'بنغازي - شارع دبي',
+                'مصراتة - وسط المدينة',
+                'سبها - القرضة',
+                'الزاوية - السوق الشعبي',
+                'زليتن - الساحة العامة',
+                'درنة - حي الساحل',
+                'البيضاء - شارع الجمهورية',
+                'الخمس - الكورنيش',
+                'غريان - المدينة القديمة'
+            ]),
+
+            'location_url' => "https://www.google.com/maps/search/?api=1&query=" .
+                $this->faker->latitude . "," . $this->faker->longitude,
+
+            'has_certificate' => $this->faker->boolean(60),
+            'count' => $this->faker->numberBetween(10, 50),
             'organization_id' => Organization::factory(),
             'sector_id' => Sector::factory(),
         ];

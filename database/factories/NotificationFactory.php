@@ -18,8 +18,14 @@ class NotificationFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->title(),
-            'message' => $this->faker->realText(),
+            'title' => $this->faker->randomElement([
+                'تم قبولك في الفرصة',
+                'تم رفض طلبك',
+                'موعد الفرصة اقترب',
+                'تم تعديل بيانات الفرصة',
+                'شكراً لمشاركتك'
+            ]),
+            'message' => $this->faker->realText(100),
             'user_id' => User::factory(),
         ];
     }

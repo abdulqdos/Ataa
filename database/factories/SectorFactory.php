@@ -17,7 +17,21 @@ class SectorFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->firstName(),
+            'name' => $this->faker->randomElement([
+                'الصحة',
+                'التعليم',
+                'البيئة',
+                'التنمية المجتمعية',
+                'ريادة الأعمال',
+                'التقنية',
+                'الديني',
+                'الثقافة والفنون',
+                'الرياضة',
+                'الإغاثة الإنسانية',
+                'الطفولة',
+                'حقوق الإنسان',
+                'العمل الخيري'
+            ]),
         ];
     }
 }

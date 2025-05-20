@@ -21,10 +21,21 @@ class VolunteerFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'age' => $this->faker->numberBetween(18, 99),
-            'phone_number' => $this->faker->phoneNumber(),
+            'age' => $this->faker->numberBetween(18, 50),
             'gender' => $this->faker->randomElement(['male', 'female']),
-            'bio'  => str(fake()->realText(120)),
+            'phone_number' => $this->faker->numerify('09#########'),
+            'bio' => $this->faker->randomElement([
+                'طالب جامعي مهتم بالمجال الإنساني والتنموي.',
+                'شغوف بالعمل التطوعي وخدمة المجتمع.',
+                'أحب المشاركة في المبادرات البيئية والاجتماعية.',
+                'أهدف لاكتساب الخبرات من خلال الأنشطة التطوعية.',
+                'أشارك بانتظام في حملات التوعية والعمل الخيري.',
+                'أعمل على دعم الفئات المحتاجة من خلال الجهود الفردية.',
+                'أؤمن بأن التغيير يبدأ من المبادرة المجتمعية.',
+                'أنشط في مجال التعليم والتدريب التطوعي.',
+                'أهتم بتنمية مهاراتي من خلال التطوع الفعّال.',
+                'منخرط في الأنشطة الشبابية والمجتمعية منذ سنوات.'
+            ]),
             'eval_avg' => rand(1,5),
             'user_id' => User::factory(),
         ];

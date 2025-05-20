@@ -9,6 +9,7 @@ class Sector extends Model
 {
     /** @use HasFactory<\Database\Factories\SectorFactory> */
     use HasFactory;
+    protected $fillable = ['name'];
 
     public function opportunities()
     {

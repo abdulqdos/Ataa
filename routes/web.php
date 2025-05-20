@@ -35,6 +35,7 @@ use App\Livewire\Organization\Volunteers\Documentation\Create as DocumentationCr
 
 // Admin Route
 use App\Livewire\Admin\Sectors\Index as AdminSectorIndex ;
+use App\Livewire\Admin\Sectors\Create as AdminSectorCreate ;
 
 // Guest
 Route::middleware('guest')->group(function () {
@@ -99,5 +100,7 @@ Route::middleware('organization')->group(function () {
 Route::middleware('admin')->group(function () {
     Route::get('/admin/dashboard' , AdminDashboard::class)->name('admin.dashboard');
 
+    // Sectors
     Route::get('/admin/sectors' , AdminSectorIndex::class )->name('admin.sectors');
+    Route::get('/admin/sectors/create' , AdminSectorCreate::class )->name('admin.sectors.create');
 });

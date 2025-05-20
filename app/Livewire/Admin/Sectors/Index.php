@@ -34,7 +34,7 @@ class Index extends AdminComponent
             $query->where('name', 'like', '%' . $this->searchText . '%');
         }
         return view('livewire.admin.sectors.index' , [
-            'sectors' => $query->paginate(10),
+            'sectors' => $query->paginate(12),
         ]);
     }
 }

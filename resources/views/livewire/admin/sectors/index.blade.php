@@ -2,7 +2,7 @@
     {{-- Stop trying to control. --}}
     <x-layouts.header title="القطاعات"
                       :breadcrumbs="[['الرئيسية', route('admin.dashboard')], ['إدارة القطاعات']]">
-        <a href="#" wire:navigate class="px-4 py-1 btn-primary">
+        <a href="{{ route('admin.sectors.create') }}" wire:navigate class="px-4 py-1 btn-primary">
             + إضافة قطاع جديد
         </a>
     </x-layouts.header>

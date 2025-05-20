@@ -9,4 +9,14 @@ class Sector extends Model
 {
     /** @use HasFactory<\Database\Factories\SectorFactory> */
     use HasFactory;
+
+    public function opportunities()
+    {
+        return $this->hasMany(Opportunity::class);
+    }
+
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class);
+    }
 }

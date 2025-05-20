@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم المشرف | مشروع عطاء</title>
+    <title>{{$title  ?? "لوحة تحكم المشرف | مشروع عطاء "}}</title>
     @vite(['resources/js/app.js' , 'resources/css/app.css'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -101,7 +101,35 @@
 
     <!-- Main Content -->
     <div class="flex-1 flex flex-col overflow-hidden">
-      {{ $slot }}
+        <!-- Top Bar -->
+        <header class="bg-white shadow-sm z-10">
+            <div class="flex items-center justify-between h-16 px-4">
+                <div>
+                    <button id="toggleSidebar" class="text-gray-500 hover:text-primary md:hidden">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <div class="flex items-center">
+                    <div class="relative mx-4">
+                        <button class="flex items-center text-gray-700">
+                            <i class="far fa-bell"></i>
+                            <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">5</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center">
+                            <span class="text-sm font-medium">أد</span>
+                        </div>
+                        <span class="mr-2 text-sm font-medium text-gray-700">أدمن النظام</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto p-4 bg-gray-100">
+            {{ $slot }}
+        </main>
     </div>
 
 </div>

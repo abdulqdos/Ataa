@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        // Sectors
+       $sectors =  Sector::factory(10)->create();
+
         // Accounts
         $user = User::factory()->create([
             'user_name' => 'Test User',
@@ -44,21 +48,22 @@ class DatabaseSeeder extends Seeder
 
         $volunteer = Volunteer::factory()->recycle($user)->create();
 
-        $org = Organization::factory()->recycle($organization)->create();
+        $org = Organization::factory()->recycle($organization)->recycle($sectors)->create();
+
         // Opportunities
-        $opportunity = Opportunity::factory(30)->recycle($org)->create();
+        $opportunity = Opportunity::factory(30)->recycle($org)->recycle($sectors)->create();
 
         // Organizations
         $orgs = User::factory(20)->create([
             'role' => 'organization',
         ]);
-        $organizations = Organization::factory(20)->recycle($orgs)->create();
+        $organizations = Organization::factory(20)->recycle($orgs)->recycle($sectors)->create();
 
         // Opportunity For Selected Organization
-        Opportunity::factory(100)->recycle($organizations)->create();
+        Opportunity::factory(100)->recycle($organizations)->recycle($sectors)->create();
 
         // Opportunity For Selected volunteer
-        $opportunitiesVolunteer = Opportunity::factory(10)->create();
+        $opportunitiesVolunteer = Opportunity::factory(10)->recycle($sectors)->create();
         $volunteer->opportunities()->attach($opportunitiesVolunteer->pluck('id'));
 
         // Volunteers for selected Opportunity
@@ -80,15 +85,13 @@ class DatabaseSeeder extends Seeder
         // Cities
         City::factory(10)->create();
 
-        // Sectors
-        Sector::factory(10)->create();
 
 
         $lastYear = Carbon::now()->subYear()->year;
         $startDay = rand(1, 15);
         $endDay = rand($startDay + 1, 28);
 
-        $completed = Opportunity::factory(10)->recycle($org)->create([
+        $completed = Opportunity::factory(10)->recycle($org)->recycle($sectors)->create([
             'start_date' => Carbon::create($lastYear, 4 , 1),
             'end_date'   => Carbon::create($lastYear, 4, 10),
         ]);

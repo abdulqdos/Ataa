@@ -111,7 +111,7 @@
 
                             <!-- Certificate Badge -->
                             @if($opportunity->has_certificate)
-                                <div class="absolute top-2 right-2 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm flex items-center gap-1 shadow-md">
+                                <div class="absolute top-2 right-2 bg-green-100 text-green-800 px-3 py-1 rounded-md text-sm flex items-center gap-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
                                     </svg>

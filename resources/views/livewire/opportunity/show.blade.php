@@ -13,14 +13,28 @@
 
         <!-- بيانات الفرصة -->
         <div class="p-6 flex-1">
-            <!-- حالة الفرصة -->
-            <x-layouts.status-opportunity :opportunity="$opportunity" />
+            <div class="flex items-center justify-between">
+                <!-- حالة الفرصة -->
+                <x-layouts.status-opportunity :opportunity="$opportunity" />
+
+                @if($opportunity->has_certificate)
+                    <div class="bg-green-100 text-green-800 px-3 py-1 rounded-md text-sm flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                        </svg>
+                        <span>شهادة</span>
+                    </div>
+                @endif
+            </div>
+
 
             <!-- العنوان -->
             <h2 class="mt-4 text-2xl font-bold text-gray-900">{{ $opportunity->title }}</h2>
 
             <!-- الوصف -->
             <p class="mt-2 text-gray-700">{{ $opportunity->description }}</p>
+
+
 
             <!-- التواريخ -->
             <p class="mt-3 text-sm text-gray-600">
@@ -30,10 +44,17 @@
 
             <!-- الموقع -->
             <div class="mt-3 text-sm text-gray-600">
-                📍 <strong>الموقع:</strong> {{ $opportunity->location }}
+                 <strong>الموقع:</strong> {{ $opportunity->location }}
                 @if($opportunity->location_url)
-                    <br>🔗 <a href="{{ $opportunity->location_url }}" target="_blank" class="text-blue-600 hover:underline">عرض على الخريطة</a>
+                    <br> <a href="{{ $opportunity->location_url }}" target="_blank" class="text-blue-600 hover:underline">عرض على الخريطة</a>
                 @endif
+            </div>
+
+            <!-- Sector -->
+            <div class="mt-3 text-sm text-gray-600">
+                <strong> النطاق : </strong>
+                <span> {{ $opportunity->sector->name }} </span>
+
             </div>
 
             <!-- العدد المطلوب -->

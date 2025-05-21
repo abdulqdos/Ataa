@@ -1,7 +1,7 @@
 <div>
     <x-layouts.header title="المدن"
                       :breadcrumbs="[['الرئيسية', route('admin.dashboard')], ['إدارة المدن']]">
-        <a href="#" wire:navigate class="px-4 py-1 btn-primary">
+        <a href="{{ route('admin.cities.create') }}" wire:navigate class="px-4 py-1 btn-primary">
             + إضافة مدينة جديد
         </a>
     </x-layouts.header>

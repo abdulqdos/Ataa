@@ -39,6 +39,7 @@ use App\Livewire\Admin\Sectors\Create as AdminSectorCreate ;
 use App\Livewire\Admin\Sectors\Edit as AdminSectorEdit ;
 use App\Livewire\Admin\Sectors\Show as AdminSectorShow ;
 use App\Livewire\Admin\Cities\Index as AdminCitiesIndex ;
+use App\Livewire\Admin\Cities\Create as AdminCitiesCreate ;
 
 // Guest
 Route::middleware('guest')->group(function () {
@@ -111,4 +112,5 @@ Route::middleware('admin')->group(function () {
 
     // Cities
     Route::get('/admin/cities' , AdminCitiesIndex::class)->name('admin.cities');
+    Route::get('/admin/cities/create' , AdminCitiesCreate::class)->name('admin.cities.create');
 });

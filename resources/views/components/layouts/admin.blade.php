@@ -36,7 +36,7 @@
         </style>
         @livewireStyles
     </head>
-    <body class="bg-gray-100">
+    <body class="bg-gray-100 selection:text-white selection:bg-primary">
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar (Desktop) -->
         <div id="sidebar" class="sidebar  bg-white text-gray-600 w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">

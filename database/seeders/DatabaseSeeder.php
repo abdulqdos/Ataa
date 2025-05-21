@@ -27,6 +27,10 @@ class DatabaseSeeder extends Seeder
         // Sectors
        $sectors =  Sector::factory(10)->create();
 
+
+        // Cities
+        $cities = City::factory(10)->create();
+
         // Accounts
         $user = User::factory()->create([
             'user_name' => 'Test User',
@@ -48,22 +52,22 @@ class DatabaseSeeder extends Seeder
 
         $volunteer = Volunteer::factory()->recycle($user)->create();
 
-        $org = Organization::factory()->recycle($organization)->recycle($sectors)->create();
+        $org = Organization::factory()->recycle($organization)->recycle($sectors)->recycle($cities)->create();
 
         // Opportunities
-        $opportunity = Opportunity::factory(30)->recycle($org)->recycle($sectors)->create();
+        $opportunity = Opportunity::factory(30)->recycle($org)->recycle($sectors)->recycle($cities)->create();
 
         // Organizations
         $orgs = User::factory(20)->create([
             'role' => 'organization',
         ]);
-        $organizations = Organization::factory(20)->recycle($orgs)->recycle($sectors)->create();
+        $organizations = Organization::factory(20)->recycle($orgs)->recycle($sectors)->recycle($cities)->create();
 
         // Opportunity For Selected Organization
-        Opportunity::factory(100)->recycle($organizations)->recycle($sectors)->create();
+        Opportunity::factory(100)->recycle($organizations)->recycle($sectors)->recycle($cities)->create();
 
         // Opportunity For Selected volunteer
-        $opportunitiesVolunteer = Opportunity::factory(10)->recycle($sectors)->create();
+        $opportunitiesVolunteer = Opportunity::factory(10)->recycle($sectors)->recycle($cities)->create();
         $volunteer->opportunities()->attach($opportunitiesVolunteer->pluck('id'));
 
         // Volunteers for selected Opportunity
@@ -82,8 +86,6 @@ class DatabaseSeeder extends Seeder
         // Notifications
         Notification::factory(5)->recycle($volunteer)->create();
 
-        // Cities
-        City::factory(10)->create();
 
 
 
@@ -91,7 +93,7 @@ class DatabaseSeeder extends Seeder
         $startDay = rand(1, 15);
         $endDay = rand($startDay + 1, 28);
 
-        $completed = Opportunity::factory(10)->recycle($org)->recycle($sectors)->create([
+        $completed = Opportunity::factory(10)->recycle($org)->recycle($sectors)->recycle($cities)->create([
             'start_date' => Carbon::create($lastYear, 4 , 1),
             'end_date'   => Carbon::create($lastYear, 4, 10),
         ]);

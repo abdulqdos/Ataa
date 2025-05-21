@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Livewire\Admin\Sectors;
+namespace App\Livewire\Admin\Cities;
 
 use App\Livewire\AdminComponent;
-use App\Models\Sector;
+use App\Models\City;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 
-#[Title('إدارة القطاعات')]
+#[Title('المدن')]
 class Index extends AdminComponent
 {
-    use withPagination;
+    use withPagination ;
     #[Url(as: 'q', except: '')]
     public $searchText ;
 
@@ -27,15 +27,15 @@ class Index extends AdminComponent
 
     public function render()
     {
-        $query = Sector::query();
+        $query = City::query();
 
         if(!empty($this->searchText))
         {
             $query->where('name', 'like', '%' . $this->searchText . '%');
         }
 
-        return view('livewire.admin.sectors.index' , [
-            'sectors' => $query->paginate(12),
+        return view('livewire.admin.cities.index' , [
+            'cities' => $query->latest()->paginate(10),
         ]);
     }
 }

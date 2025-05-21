@@ -29,6 +29,7 @@
     <!-- Content Sections -->
     <div class="space-y-8">
         @if($activeTab === 'organizations')
+            <!-- organizations -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($organizations as $organization)
                     <div class="bg-white rounded-lg shadow-sm p-6">
@@ -57,6 +58,7 @@
                 {{ $organizations->links('vendor.pagination.custom' , data: ['scrollTo' => '#top']) }}
             </div>
         @elseif($activeTab === 'opportunities')
+            <!-- opportunities -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($opportunities as $opportunity)
                     <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300">
@@ -101,7 +103,6 @@
             <div class="my-2 mx-auto flex flex-col md:flex-row justify-center items-center max-w-[992px] gap-6">
                 {{ $opportunities->links('vendor.pagination.custom' , data: ['scrollTo' => '#top']) }}
             </div>
-
         @endif
     </div>
 </div>

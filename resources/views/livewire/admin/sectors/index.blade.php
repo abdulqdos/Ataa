@@ -1,5 +1,4 @@
 <div class="container my-4">
-    {{-- Stop trying to control. --}}
     <x-layouts.header title="القطاعات"
                       :breadcrumbs="[['الرئيسية', route('admin.dashboard')], ['إدارة القطاعات']]">
         <a href="{{ route('admin.sectors.create') }}" wire:navigate class="px-4 py-1 btn-primary">

@@ -9,4 +9,14 @@ class City extends Model
 {
     /** @use HasFactory<\Database\Factories\CityFactory> */
     use HasFactory;
+
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class);
+    }
+
+    public function opportunities()
+    {
+        return $this->hasMany(Organization::class);
+    }
 }

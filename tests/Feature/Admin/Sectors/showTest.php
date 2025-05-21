@@ -1,11 +1,15 @@
 <?php
 
+use App\Models\Organization;
 use App\Models\Sector;
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {
     $this->sector = Sector::factory()->create();
+
+    Organization::factory(10)->recycle($this->sector)->create();
 });
 
 it('must be an admin' ,  function ($badRole) {
@@ -30,4 +34,18 @@ it('return a correct component' ,  function () {
 it('set a correct data' ,  function () {
     Livewire::test('admin.sectors.show', ['sector' => $this->sector])
         ->assertSet('sector' , $this->sector);
+});
+
+it('assert a correct organizations' ,  function () {
+    Livewire::test('admin.sectors.show', ['sector' => $this->sector])
+        ->assertViewHas('organizations', function ($value) {
+            return $value instanceof LengthAwarePaginator;
+        });
+});
+
+it('assert a correct opportunities' ,  function () {
+    Livewire::test('admin.sectors.show', ['sector' => $this->sector])
+        ->assertViewHas('opportunities', function ($value) {
+            return $value instanceof LengthAwarePaginator;
+        });
 });

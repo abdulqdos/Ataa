@@ -32,9 +32,9 @@ it('can update a sector', function () {
         ->set('name','الخارجية')
         ->call('update');
 
-   $this->assertDatabaseHas('sectors', [
-       'name' => 'الخارجية'
-   ]);
+    $this->assertDatabaseHas('sectors', [
+        'name' => 'الخارجية'
+    ]);
 });
 
 it('Redirect to correct page' , function () {

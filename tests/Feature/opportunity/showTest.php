@@ -14,7 +14,7 @@ beforeEach(function () {
 
 it('must be a correct component', function () {
     actingAs($this->user);
-    get(route('opportunities.show' , $this->opportunity))->assertSeeLivewire('opportunity.show');
+    Livewire::test('opportunity.show' , ['opportunity' => $this->opportunity])->assertSeeLivewire('opportunity.show');
 });
 
 it('sent a data', function () {

@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Models\Organization;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
@@ -10,6 +11,8 @@ beforeEach(function () {
     $this->user = User::factory()->create([
         'role' => 'organization',
     ]);
+
+    Organization::factory()->recycle($this->user)->create();
 });
 it('must be an organization' , function ($badRole) {
 
@@ -24,6 +27,7 @@ it('must be an organization' , function ($badRole) {
 ]);
 
 it('return a correct component' , function () {
-    \Livewire\Livewire::test('organization.profile.update')
+    actingAs($this->user);
+    Livewire::test('organization.profile.update' , ['user' => $this->user])
         ->assertSeeLivewire('organization.profile.update');
 });

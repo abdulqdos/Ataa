@@ -31,12 +31,12 @@ it('must be a organization' , function($badRole){
 
 
 it('return a correct component' , function(){
+    actingAs($this->organization);
   Livewire::test('organization.volunteers.opportunities-volunteers')
       ->assertSeeLivewire('organization.volunteers.opportunities-volunteers');
 });
 
 it('See a correct opportunity' , function(){
-    $this->withoutExceptionHandling();
     actingAs($this->organization);
     Livewire::test('organization.volunteers.opportunities-volunteers')
         ->assertSee($this->org->opportunities()->first()->title);

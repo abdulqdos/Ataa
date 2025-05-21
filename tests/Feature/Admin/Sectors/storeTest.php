@@ -9,7 +9,7 @@ it('must be an admin' , function ($badRole) {
     ]);
 
     actingAs($user)
-    ->get(route('admin.sectors.create'))->assertRedirect(route('home'));
+        ->get(route('admin.sectors.create'))->assertRedirect(route('home'));
 })->with([
     'volunteer',
     'organization',

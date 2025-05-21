@@ -15,6 +15,7 @@ it('must be a volunteer or guest', function ($badRole) {
 
 
 it('return a correct component', function () {
+    Volunteer::factory(30)->create();
     Livewire::test('volunteers.ranking')
         ->assertSeeLivewire('volunteers.ranking');
 });
@@ -25,3 +26,4 @@ it('send a Data' , function () {
     Livewire::test('volunteers.ranking')
         ->assertSee($volunteers->first()->first_name);
 });
+

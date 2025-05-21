@@ -7,12 +7,12 @@ use App\Models\Volunteer;
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {
-    $user = User::factory()->create([
+    $this->user = User::factory()->create([
         'role' => 'volunteer',
     ]);
 
-    Volunteer::factory()->recycle($user)->create();
-
+    Volunteer::factory()->recycle($this->user)->create();
+    Opportunity::factory()->create();
 });
 
 it('must be volunteer' , function ($badRole) {
@@ -21,7 +21,7 @@ it('must be volunteer' , function ($badRole) {
     ]);
 
     actingAs($user)
-        ->get(route('volunteer.myOpportunity'))->assertRedirect('/');
+        ->get(route('volunteers.myOpportunity' , 1))->assertRedirect('/');
 })->with([
     'admin',
     'organization'
@@ -47,7 +47,7 @@ it('can cancel Registration', function () {
     $opportunity->update([
         'accepted_count' => 1,
     ]);
-    
+
     actingAs($user);
 
     Livewire::test('volunteer.my-opportunity')

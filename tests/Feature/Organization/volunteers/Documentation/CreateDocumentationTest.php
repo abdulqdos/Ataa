@@ -19,7 +19,7 @@ it('must be an organization', function ($badRole) {
     ]);
 
     actingAs($user);
-    get(route('organization.volunteers.documentation.create'))->assertRedirect('/');
+    get(route('organization.volunteers.documentation.create' , ['opportunity' => $this->op , 'volunteer' => $this->v]))->assertRedirect('/');
 })->with([
     'admin',
     'volunteer',
@@ -28,7 +28,7 @@ it('must be an organization', function ($badRole) {
 
 
 it('assert a correct component', function () {
-    Livewire::test('organization.volunteers.documentation.create')
+    Livewire::test('organization.volunteers.documentation.create'  , ['opportunity' => $this->op , 'volunteer' => $this->v] )
         ->assertSeeLivewire('organization.volunteers.documentation.create');
 });
 

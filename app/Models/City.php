@@ -14,9 +14,4 @@ class City extends Model
     {
         return $this->hasMany(Organization::class);
     }
-
-    public function opportunities()
-    {
-        return $this->hasMany(Organization::class);
-    }
 }

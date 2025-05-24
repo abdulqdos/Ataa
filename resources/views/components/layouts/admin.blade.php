@@ -60,6 +60,10 @@
                 <x-layouts.admin.nav href="{{ route('admin.cities') }}" :active="request()->is('admin/cities')" i="fa-solid fa-city w-6">المدن</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="#" :active="false" i="fas fa-building w-6">المؤسسات</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="#" :active="false" i="fas fa-users w-6">المتطوعون</x-layouts.admin.nav>
+
+                @can('viewAny', App\Models\User::class )
+                    <x-layouts.admin.nav href="{{ route('admin.admins') }}" :active="request()->is('admin/admins')" i="fa-solid fa-user-tie w-6">المسؤولين</x-layouts.admin.nav>
+                @endcan
                 <x-layouts.admin.nav href="#" :active="false" i="fas fa-clipboard-list w-6">الطلبات</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="#" :active="false" i="fas fa-flag w-6">الإبلاغات</x-layouts.admin.nav>
 

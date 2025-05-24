@@ -45,9 +45,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'user_name' => 'Test User',
+            'user_name' => 'TestUser',
             'email' => 'test@example.com',
             'role' => 'admin',
+        ]);
+
+        User::factory()->create([
+            'user_name' => 'TestUser',
+            'email' => 'manager@example.com',
+            'role' => 'manager',
         ]);
 
         $volunteer = Volunteer::factory()->recycle($user)->create();

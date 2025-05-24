@@ -43,6 +43,9 @@ use App\Livewire\Admin\Cities\Create as AdminCitiesCreate ;
 use App\Livewire\Admin\Cities\Show as AdminCitiesShow ;
 use App\Livewire\Admin\Cities\Edit as AdminCitiesEdit ;
 
+// Manager Route
+use App\Livewire\Admin\Admins\Index as AdminAdminsIndex ;
+
 // Guest
 Route::middleware('guest')->group(function () {
     Route::get('/login' , Login::class)->name('login');
@@ -117,4 +120,10 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/cities/create' , AdminCitiesCreate::class)->name('admin.cities.create');
     Route::get('/admin/cities/{city}' , AdminCitiesShow::class)->name('admin.cities.show');
     Route::get('/admin/cities/{city}/edit' , AdminCitiesEdit::class)->name('admin.cities.edit');
+});
+
+// Manager
+Route::middleware('manager')->group(function () {
+    // Admins
+    Route::get('/admin/admins' ,AdminAdminsIndex::class )->name('admin.admins');
 });

@@ -2,7 +2,7 @@
     {{-- Nothing in the world is as soft and yielding as water. --}}
     <x-layouts.header title="المشرفون"
                       :breadcrumbs="[['الرئيسية', route('admin.dashboard')], ['إدارة المشرفون']]">
-        <a href="#" wire:navigate class="px-4 py-1 btn-primary">
+        <a href="{{ route('admin.admins.create') }}" wire:navigate class="px-4 py-1 btn-primary">
             + إضافة مشرف جديد
         </a>
     </x-layouts.header>

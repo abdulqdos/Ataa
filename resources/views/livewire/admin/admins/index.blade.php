@@ -108,7 +108,7 @@
 
                                             <td class="px-3 py-4 flex flex-row gap-2 md:gap-4 items-center justify-center md:px-6">
 
-                                                <a href="#" class="group font-medium px-2 md:px-4 py-1 flex flex-col items-center gap-1 cursor-pointer">
+                                                <a href="{{ route('admin.admins.edit' , $admin->id) }}" class="group font-medium px-2 md:px-4 py-1 flex flex-col items-center gap-1 cursor-pointer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 md:h-6 w-5 md:w-6 text-green-500 group-hover:text-green-600 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6H9v-3z" />
                                                     </svg>

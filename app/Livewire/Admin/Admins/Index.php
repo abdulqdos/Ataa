@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Admins;
 
 use App\Livewire\AdminComponent;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 
@@ -19,6 +20,10 @@ class Index extends AdminComponent
     public $selectedAdmin = null;
 
 
+    public function mount()
+    {
+        Gate::authorize('view-any', User::class);
+    }
     public function toggleShowDeleteBox(User $admin)
     {
         $this->selectedAdmin = $admin;

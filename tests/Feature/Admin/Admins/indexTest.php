@@ -22,10 +22,20 @@ it('must be an admin', function ($badRole) {
     'admin',
 ]);
 it('correct component' , function () {
+    $user = User::factory()->create([
+        'role' => 'manager'
+    ]);
+
+    actingAs($user);
     Livewire::test('admin.admins.index')
         ->assertSeeLivewire('admin.admins');
 });
 it('send a correct data' , function () {
+    $user = User::factory()->create([
+        'role' => 'manager'
+    ]);
+
+    actingAs($user);
     Livewire::test('admin.admins.index')
         ->assertViewHas('admins' , function ($value) {
             return $value instanceof LengthAwarePaginator ;

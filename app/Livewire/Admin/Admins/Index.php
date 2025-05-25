@@ -15,7 +15,33 @@ class Index extends AdminComponent
      use WithPagination ;
     #[Url(as: 'q', except: '')]
     public $searchText ;
+    public $showDeleteBox = false;
+    public $selectedAdmin = null;
 
+
+    public function toggleShowDeleteBox(User $admin)
+    {
+        $this->selectedAdmin = $admin;
+        $this->showDeleteBox = true;
+    }
+
+    public function confirmDelete()
+    {
+        if (!$this->selectedAdmin) {
+            session()->flash('error', 'لا توجد فرصة تطوعية محددة للحذف.');
+            return;
+        }
+
+        $this->selectedAdmin->delete();
+        $this->reset(['selectedAdmin']);
+        return redirect()->route('admin.admins')->with('success', 'تم حذف المشرف بنجاح');
+    }
+
+    public function resetDeleteBox()
+    {
+        $this->showDeleteBox = false;
+        $this->selectedAdmin = null;
+    }
     public function getAdmins()
     {
         $query = User::where('role' ,'admin');

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('volunteer_id')->constrained('volunteers');
             $table->foreignId('opportunity_id')->constrained('opportunities');
+            $table->string('type')->nullable();
             $table->string('reason');
             $table->enum('status' , ['pending' , 'accepted' , 'declined'])->default('pending');
             $table->timestamps();

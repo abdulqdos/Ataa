@@ -10,7 +10,7 @@ class Request extends Model
     /** @use HasFactory<\Database\Factories\RequestFactory> */
     use HasFactory;
 
-    protected $fillable = ['reason' , 'status' , 'volunteer_id' , 'opportunity_id'];
+    protected $guarded = ['id'];
 
     public function volunteer()
     {

@@ -1,4 +1,29 @@
 <div class="max-w-4xl mx-auto my-10">
+    @if($showDeleteBox)
+        <div class="bg-black/10 fixed top-0 right-0 left-0 z-50 flex items-center justify-center w-full h-screen">
+            <div class="relative p-4 w-full max-w-md">
+                <div class="relative bg-white rounded-lg shadow-sm">
+                    <button type="button" wire:click="resetDeleteBox" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center cursor-pointer" data-modal-hide="popup-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-gray-700 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                        </svg>
+                        <h3 class="mb-5 text-lg font-normal text-gray-700">هل تود فعلا إرسال طلب توثيق الفرصة التطوعية ؟</h3>
+                        <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 text-sm btn-secondary" wire:click="resetDeleteBox">لا , إلغاء </button>
+                        <button data-modal-hide="popup-modal" type="button" class="text-sm  px-5 py-2.5  btn-primary" wire:click="makeRequest">
+                            نعم , أنا متأكد
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     @if($opportunity->hours !== null)
         <!-- بطاقة توثيق النشاط -->
         <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
@@ -119,17 +144,27 @@
                 </div>
             </div>
         </div>
+    @elseif($flag)
+            <div class="bg-secondaryLight/20 border border-secondaryLight rounded-xl p-8 text-center flex flex-col gap-4 justify-center items-center max-w-md mx-auto my-10">
+                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-secondary/10">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-8 w-8 text-primaryLight/80">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                </div>
+                <h3 class="mt-3 text-xl font-medium text-gray-800">تم إرسال طلبك لي توثيق بنجاح . </h3>
+                <p class="mt-2 text-gray-600">تم إرسال طلب توثيقك. سوف تقوم مؤسسة بمراجعة طلبك وتوثيق نشاطك في اقرب فرصة ممكنة.</p>
+            </div>
     @else
         <!-- حالة عدم التوثيق -->
-        <div class="bg-primary/20 border border-secondaryLight rounded-xl p-8 text-center flex flex-col gap-4 justify-center items-center max-w-md mx-auto my-10">
+        <div class="bg-secondaryLight/20 border border-secondaryLight rounded-xl p-8 text-center flex flex-col gap-4 justify-center items-center max-w-md mx-auto my-10">
             <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-secondary/10">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primaryLight/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </div>
             <h3 class="mt-3 text-xl font-medium text-gray-800">لم يتم التوثيق بعد</h3>
             <p class="mt-2 text-gray-600">لم يتم توثيق نشاطك حتى الآن. يمكنك طلب التوثيق من المؤسسة.</p>
-            <button class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition">
+            <button wire:click="toggleShowBox" class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition">
                 طلب التوثيق
             </button>
         </div>

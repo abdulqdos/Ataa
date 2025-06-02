@@ -164,7 +164,7 @@
             </div>
             <h3 class="mt-3 text-xl font-medium text-gray-800">لم يتم التوثيق بعد</h3>
             <p class="mt-2 text-gray-600">لم يتم توثيق نشاطك حتى الآن. يمكنك طلب التوثيق من المؤسسة.</p>
-            <button wire:click="toggleShowBox" class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition">
+            <button wire:click="toggleShowBox" class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition cursor-pointer">
                 طلب التوثيق
             </button>
         </div>

@@ -26,6 +26,7 @@ use App\Livewire\Organization\Opportunity\Edit as OpportunityEdit;
 use App\Livewire\Organization\Opportunity\Show as OpportunityShow;
 use App\Livewire\Organization\Opportunity\Index as Opportunity;
 use App\Livewire\Organization\Profile\Update as  OrganizationUpdateProfile ;
+use App\Livewire\Organization\Requests\RequestsOpportunities as RequestIndex;
 use App\Livewire\Organization\Requests\Show as RequestShow;
 use App\Livewire\Volunteer\MyOpportunity;
 use App\Livewire\Organization\Volunteers\OpportunitiesVolunteers as OrganizationOpportunitiesVolunteers ;
@@ -101,6 +102,7 @@ Route::middleware('organization')->group(function () {
     Route::get('/organization/opportunities-volunteers/{opportunity}/documentation/{volunteer}' ,DocumentationCreate::class )->name('organization.volunteers.documentation.create');
 
     // Requests
+    Route::get('/organization/requests' , RequestIndex::class)->name('organization.requests');
     Route::get('/organization/requests/{request}' , RequestShow::class)->name('organization.requests.show');
 
     // Profile

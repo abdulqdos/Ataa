@@ -20,6 +20,7 @@ class RequestFactory extends Factory
     {
         return [
             'reason' => $this->faker->realText(30),
+            'type' => $this->faker->randomElement([ 'document' , 'join']),
             'volunteer_id' => Volunteer::factory(),
             'opportunity_id' => Opportunity::factory(),
         ];

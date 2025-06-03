@@ -34,7 +34,7 @@
                             <x-layouts.volunteers.nav href="/" :active="request()->is('/')" wire:navigate.keep>الرئيسية</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="{{ route('opportunities') }}" :active="request()->is('opportunity')" wire:navigate.keep>فرص التطوع</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="{{ route('volunteers') }}" :active="request()->is('volunteers')" wire:navigate.keep> المتطوعون</x-layouts.volunteers.nav>
-                            <x-layouts.volunteers.nav href="/" :active="false" wire:navigate>المؤسسات</x-layouts.volunteers.nav>
+                            <x-layouts.volunteers.nav href="{{ route('organizations') }}" :active="request()->is('organizations')" wire:navigate>المؤسسات</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="/" :active="false" wire:navigate>عن عطاء</x-layouts.volunteers.nav>
                             <x-layouts.volunteers.nav href="/" :active="false" wire:navigate >تواصل معنا</x-layouts.volunteers.nav>
                         </div>

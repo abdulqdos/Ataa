@@ -14,6 +14,7 @@ use App\Livewire\Opportunity\Show ;
 use App\Livewire\Volunteers\Index as Volunteers ;
 use App\Livewire\Volunteers\Profile as VolunteersProfile ;
 use App\Livewire\Volunteers\Ranking as VolunteersRanking ;
+use App\Livewire\Organizations\Index as Organizations ;
 
 // Volunteer
 use App\Livewire\Volunteer\Profile\Update as VolunteerUpdateProfile ;
@@ -71,11 +72,13 @@ Route::middleware('volunteerOrGuest')->group(function () {
     Route::get('/', function () {
         return view('index');
     })->name('home');
+
     Route::get('/opportunity', index::class )->name('opportunities');
     Route::get('/opportunities/{opportunity}', Show::class)->name('opportunities.show');
     Route::get('volunteers' , Volunteers::class)->name('volunteers');
     Route::get('/volunteers/{volunteer}/profile' , VolunteersProfile::class )->name('volunteers.profile');
     Route::get('/volunteers/ranking' ,VolunteersRanking::class )->name('volunteers.ranking');
+    Route::get('/organizations' ,Organizations::class )->name('organizations');
 });
 
 // Volunteer

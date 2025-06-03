@@ -177,17 +177,20 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
-                    <h3 class="mt-3 text-lg font-medium text-gray-800">لا توجد فرص مسجلة</h3>
-                    <p class="mt-1 text-sm text-gray-600">لا يوجد فرص لي مؤسستك حاليا . يمكنك انشاء فرصة الان .</p>
+                    <h3 class="mt-3 text-lg font-medium text-gray-800">لا يوجد متطوعون مسجلون حاليا</h3>
+                    <p class="mt-1 text-sm text-gray-600">لا يوجد متطوعون لي هاذي الفرصة . يمكنك تحقق من طلبات .</p>
                     <div class="mt-4">
-                        <a href="{{ route('organization.opportunity.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md btn-primary">
+                        <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md btn-primary">
+
                             <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             </svg>
-                            <span class="mr-2"> انشاء فرصة </span>
+                            <span class="mr-2"> عرض ا </span>
                         </a>
                     </div>
                 </div>
+            @endif
             @endif
         @endif
     </div>

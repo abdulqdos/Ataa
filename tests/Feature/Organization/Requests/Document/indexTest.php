@@ -2,6 +2,8 @@
 
 use App\Models\Organization;
 use App\Models\User;
+use App\Models\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use function Pest\Laravel\actingAs;
 
 beforeEach(function () {
@@ -22,3 +24,13 @@ it('must be an organization', function ($badRole) {
     'admin',
     'user'
 ]);
+it('return a correct data' , function () {
+   Livewire::test('organization.requests.document.index')
+        ->assertSeeLivewire('organization.requests.document');
+});
+it('it send a correct data' , function () {
+    Livewire::test('organization.requests.document.index')
+        ->assertViewHas('requests', function ($value) {
+            return $value instanceof LengthAwarePaginator;
+        });
+});

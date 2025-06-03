@@ -18,7 +18,7 @@ it('must be an organization ', function ($badRole) {
         'role' => $badRole,
     ]);
     actingAs($user)
-        ->get(route('organization.requests'))->assertRedirect(route('home'));
+        ->get(route('organization.opportunities-requests'))->assertRedirect(route('home'));
 })->with([
     'admin',
     'manager',

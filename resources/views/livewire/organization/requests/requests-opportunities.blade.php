@@ -22,23 +22,6 @@
                             class="w-full pr-10 py-2.5 px-4 text-sm rounded-lg border border-gray-200  focus:ring-1 focus:ring-secondary focus:outline-none placeholder-gray-400 transition"
                         />
                     </div>
-
-                    <!-- Status Filter -->
-                    <div class="relative min-w-[160px]">
-                        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
-                            </svg>
-                        </div>
-                        <select
-                            class="w-full text-sm appearance-none pr-10 py-2.5 px-4 rounded-lg border border-gray-200 focus:ring-1 focus:ring-secondary focus:outline-none bg-white cursor-pointer transition"
-                            wire:model.live="status">
-                            <option value="">كل الحالات</option>
-                            <option value="upcoming">قريباً</option>
-                            <option value="active">نشطة</option>
-                            <option value="completed">مكتملة</option>
-                        </select>
-                    </div>
                 </div>
             </div>
         </div>
@@ -117,24 +100,11 @@
                                         {{ $opportunity->location }}
                                     </a>
                                 </div>
-
-                                <!-- Volunteers Progress -->
-                                <div class="pt-3">
-                                    <div class="flex justify-between text-sm text-gray-600 mb-1.5">
-                                        <span class="text-gray-500">المتطوعين المسجلين</span>
-                                        <span class="font-medium">{{ $opportunity->accepted_count }}/{{ $opportunity->count }}</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                        <div class="bg-primary h-2.5 rounded-full"
-                                             style="width: {{ ($opportunity->accepted_count/$opportunity->count)*100 }}%">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Button -->
                             <div class="pt-5 mt-auto">
-                                <a href="#"
+                                <a href="{{ route('organization.opportunities-requests.requests' , $opportunity->id) }}"
                                    wire:navigate.keep
                                    class="block w-full text-center px-4 py-3 text-sm font-medium rounded-lg
                                    shadow-sm text-white bg-primary hover:bg-primary/90 transition-all

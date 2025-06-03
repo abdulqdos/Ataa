@@ -44,18 +44,6 @@ class RequestsOpportunities extends OrganizationComponent
             $query->where('title', 'LIKE', '%' . $this->searchText . '%');
         }
 
-        if (!empty($this->status)) {
-            $now = now();
-
-            if ($this->status === 'upcoming') {
-                $query->where('start_date', '>', $now);
-            } elseif ($this->status === 'active') {
-                $query->where('start_date', '<=', $now)
-                    ->where('end_date', '>=', $now);
-            } elseif ($this->status === 'completed') {
-                $query->where('end_date', '<', $now);
-            }
-        }
 
         return $query ;
     }
@@ -64,7 +52,7 @@ class RequestsOpportunities extends OrganizationComponent
     public function render()
     {
         return view('livewire.organization.requests.requests-opportunities' , [
-            'opportunities' => $this->getOpportunities()->paginate(12),
+            'opportunities' => $this->getOpportunities()->where('end_date', '<', now())->paginate(12),
         ]);
     }
 }

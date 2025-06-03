@@ -15,9 +15,7 @@ it('must be an organization', function ($badRole) {
     $user = User::factory()->create([
         'role' => $badRole,
     ]);
-
-    actingAs($user)
-    ->get(route('organization.requests.show' , [ 'request' => $this->request ]))
+    actingAs($user)->get(route('organization.opportunities-requests' , [ 'request' => $this->request ]))
     ->assertRedirect('/');
 })->with([
     'admin',
@@ -25,14 +23,10 @@ it('must be an organization', function ($badRole) {
 ]);
 
 it('return a correct component', function () {
-
-    Livewire::test('organization.requests.show' , ['request' => $this->request])
-        ->assertSeeLivewire('organization.requests.show');
+    Livewire::test('organization.requests.show' , ['request' => $this->request])->assertSeeLivewire('organization.requests.show');
 });
 
 
 it('return a correct request', function () {
-
-    Livewire::test('organization.requests.show' , ['request' => $this->request])
-        ->assertSet('request' , $this->request);
+    Livewire::test('organization.requests.show' , ['request' => $this->request])->assertSet('request' , $this->request);
 });

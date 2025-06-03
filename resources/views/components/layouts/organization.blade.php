@@ -48,7 +48,7 @@
             <x-layouts.organiations.nav i="fas fa-tachometer-alt w-6" href="{{ route('organization.dashboard') }}"  :active="request()->is('organization/dashboard')" wire:navigate>لوحة التحكم</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}"  :active="request()->is('organization/opportunities')" wire:navigate>الفرص التطوعية</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-users w-6" href="{{ route('organization.opportunities-volunteers') }}" :active="request()->is('organization/opportunities-volunteers')">المتطوعون</x-layouts.organiations.nav>
-            <x-layouts.organiations.nav i="fas fa-clipboard-list w-6" href="{{ route('organization.requests') }}" :active="request()->is('organization/requests')">الطلبات</x-layouts.organiations.nav>
+            <x-layouts.organiations.nav i="fas fa-clipboard-list w-6" href="{{ route('organization.opportunities-requests') }}" :active="request()->is('organization/opportunities-requests')">طلبات التوثيق</x-layouts.organiations.nav>
 
             <div class="border-t border-secondary mt-4 pt-4">
                 <x-layouts.organiations.nav i="fas fa-user w-6" href="{{ route('organization.update-profile') }}" :active="false">الملف الشخصي</x-layouts.organiations.nav>
@@ -73,7 +73,7 @@
             <x-layouts.organiations.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('organization/dashboard')" wire:navigate.keep> لوحة التحكم </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}" :active="request()->is('organization/opportunities')" wire:navigate.keep>الفرص التطوعية </x-layouts.organiations.nav-mobile>
             <x-layouts.organiations.nav-mobile i="fas fa-users w-6" href="#" :active="false">المتطوعون </x-layouts.organiations.nav-mobile>
-            <x-layouts.organiations.nav-mobile i="fas fa-clipboard-list w-6" href="{{ route('organization.requests') }}" :active="request()->is('organization/requests')">الطلبات </x-layouts.organiations.nav-mobile>
+            <x-layouts.organiations.nav-mobile i="fas fa-clipboard-list w-6" href="{{ route('organization.opportunities-requests') }}" :active="request()->is('organization/opportunities-requests')">طلبات التوثيق </x-layouts.organiations.nav-mobile>
 
             <div class="border-t border-secondary mt-4 pt-4">
                 <x-layouts.organiations.nav-mobile i="fas fa-user w-6" href="{{ route('organization.update-profile') }}" :active="false">الملف الشخصي</x-layouts.organiations.nav-mobile>

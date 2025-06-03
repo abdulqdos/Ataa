@@ -125,7 +125,6 @@
                                                         @if($request->status == 'accepted' || $request->status == 'declined')
                                                             <a href="{{ route('organization.volunteers.show' , $request->volunteer->id) }}" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">عرض بيانات المتطوع</a>
                                                         @else
-                                                            <a href="{{ route('organization.requests.show' , $request->id) }}" class="w-full sm:w-auto text-center px-2 py-1 btn-yellow text-xs sm:text-sm">مراجعة</a>
                                                             <button type="button" class="w-full sm:w-auto text-center px-2 py-1 btn-primary text-xs sm:text-sm" wire:click="setModel('accepted' , {{ $request->id }})">قبول</button>
                                                             <button type="button" class="w-full sm:w-auto text-center px-2 py-1 btn-secondary text-xs sm:text-sm" wire:click="setModel('declined',{{ $request->id }})">رفض</button>
                                                         @endif

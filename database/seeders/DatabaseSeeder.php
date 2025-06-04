@@ -23,9 +23,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        activity()->disableLogging();
 
         // Sectors
-       $sectors =  Sector::factory(10)->create();
+        $sectors =  Sector::factory(10)->create();
 
 
         // Cities
@@ -106,5 +107,6 @@ class DatabaseSeeder extends Seeder
 
         $volunteer->opportunities()->attach($completed->pluck('id'));
 
+        activity()->enableLogging();
     }
 }

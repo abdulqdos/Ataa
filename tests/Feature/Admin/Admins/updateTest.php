@@ -22,7 +22,7 @@ it('must be a manager' , function ($badRole) {
 ]);
 it('return a correct data' , function () {
     Livewire::test('admin.admins.edit')
-        ->assertSeeLivewire('admin.admins.edit' , $this->admin);
+        ->assertSet('admin' , $this->admin);
 });
 it('can update an admin' , function () {
     Livewire::test('admin.admins.edit' , ['admin' => $this->admin])

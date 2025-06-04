@@ -58,6 +58,7 @@
                 </x-layouts.admin.nav>
 
                 <x-layouts.admin.nav href="{{ route('admin.cities') }}" :active="request()->is('admin/cities')" i="fa-solid fa-city w-6">المدن</x-layouts.admin.nav>
+                <x-layouts.admin.nav href="{{ route('admin.activityLogs')  }}" :active="request()->is('admin/activity_logs')" i="fas fa-tasks w-6">سجل النشاط</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="#" :active="false" i="fas fa-building w-6">المؤسسات</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="#" :active="false" i="fas fa-users w-6">المتطوعون</x-layouts.admin.nav>
 

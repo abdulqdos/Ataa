@@ -12,6 +12,10 @@ beforeEach(function () {
    ]);
 
     Organization::factory()->recycle($this->user)->create();
+
+    $this->start_date =  Carbon::now()->format('Y-m-d');
+    $this->end_date = Carbon::now()->addDays(3)->format('Y-m-d');
+
 });
 
 
@@ -39,31 +43,32 @@ it('can store an Opportunity', function () {
 
     actingAs($this->user);
 
-    $this->withoutExceptionHandling();
     Livewire::test('organization.opportunity.create')
         ->set('title' , 'فرصة التعاونية')
         ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
-        ->set('start_date' , '2025-05-25')
-        ->set('end_date' , '2025-06-15')
+        ->set('start_date' , $this->start_date)
+        ->set('end_date' , $this->end_date)
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->set('location' , 'شارع زاوية مقابل مستشفى')
         ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
         ->set('count' , 200)
-        ->set('has_certificate' , true)
+        ->set('has_certificate' , 1)
         ->set('sector' , 1)
         ->call('store');
 
     $this->assertDatabaseHas('opportunities', [
         'title' => 'فرصة التعاونية',
         'description' => 'فرصة التعاونية لي بناء مجتمع افضل',
-        'start_date' => '2025-05-25',
-        'end_date' => '2025-06-15',
+        'start_date' => $this->start_date,
+        'end_date' => $this->end_date,
         'location' => 'شارع زاوية مقابل مستشفى',
         'location_url' => 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA',
         'count' => 200,
-        'has_certificate' => true,
+        'has_certificate' => 1,
         'sector_id' => 1,
     ]);
+
+    $this->assertDatabaseCount('activity_log' , 1);
 });
 
 
@@ -75,8 +80,8 @@ it('Redirect to correct page', function () {
     Livewire::test('organization.opportunity.create')
         ->set('title' , 'فرصة التعاونية')
         ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
-        ->set('start_date' , '2025-05-25')
-        ->set('end_date' , '2025-06-15')
+        ->set('start_date' , $this->start_date)
+        ->set('end_date' , $this->end_date)
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->set('location' , 'شارع زاوية مقابل مستشفى')
         ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
@@ -94,8 +99,8 @@ it('invalid title', function ($badTitle) {
     Livewire::test('organization.opportunity.create')
         ->set('title' , $badTitle)
         ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
-        ->set('start_date' , '12-4-2025')
-        ->set('end_date' , '15-4-2025')
+        ->set('start_date' , $this->start_date)
+        ->set('end_date' , $this->end_date)
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->call('store')
         ->assertHasErrors(['title']);
@@ -114,8 +119,8 @@ it('invalid Description', function ($badDescription) {
     Livewire::test('organization.opportunity.create')
         ->set('title' , 'فرصة تطوعية')
         ->set('description' , $badDescription)
-        ->set('start_date' , '12-4-2025')
-        ->set('end_date' , '15-4-2025')
+        ->set('start_date' , $this->start_date)
+        ->set('end_date' , $this->end_date)
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->call('store')
         ->assertHasErrors(['description']);
@@ -135,7 +140,7 @@ it('invalid start date', function ($badStartDate) {
         ->set('title', 'فرصة تطوعية')
         ->set('description', 'وصف قصير')
         ->set('start_date', $badStartDate)
-        ->set('end_date', '15-4-2025')
+        ->set('end_date', $this->end_date)
         ->set('img', \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->call('store')
         ->assertHasErrors(['start_date']);
@@ -153,7 +158,7 @@ it('invalid end date', function ($badEndDate) {
     Livewire::test('organization.opportunity.create')
         ->set('title', 'فرصة تطوعية')
         ->set('description', 'وصف قصير')
-        ->set('start_date', '12-4-2025')
+        ->set('start_date', $this->start_date)
         ->set('end_date', $badEndDate)
         ->set('img', \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->call('store')

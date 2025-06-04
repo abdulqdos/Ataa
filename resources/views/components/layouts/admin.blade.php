@@ -50,26 +50,16 @@
             </div>
             <nav class="mt-2">
                 <x-layouts.admin.nav href="{{ route('admin.dashboard') }}" :active="request()->is('admin/dashboard')" i="fas fa-tachometer-alt w-6">لوحة التحكم</x-layouts.admin.nav>
-                <x-layouts.admin.nav
-                    href="{{ route('admin.sectors') }}"
-                    :active="request()->is('admin/sectors')"
-                    i="fas fa-layer-group w-6">
-                    إدارة القطاعات
-                </x-layouts.admin.nav>
-
+                <x-layouts.admin.nav href="{{ route('admin.sectors') }}" :active="request()->is('admin/sectors')" i="fas fa-layer-group w-6">إدارة القطاعات</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="{{ route('admin.cities') }}" :active="request()->is('admin/cities')" i="fa-solid fa-city w-6">المدن</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="{{ route('admin.activityLogs')  }}" :active="request()->is('admin/activity_logs')" i="fas fa-tasks w-6">سجل النشاط</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="#" :active="false" i="fas fa-building w-6">المؤسسات</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="#" :active="false" i="fas fa-users w-6">المتطوعون</x-layouts.admin.nav>
 
-                @can('viewAny', App\Models\User::class )
-                    <x-layouts.admin.nav href="{{ route('admin.admins') }}" :active="request()->is('admin/admins')" i="fa-solid fa-user-tie w-6">المسؤولين</x-layouts.admin.nav>
-                @endcan
-                <x-layouts.admin.nav href="#" :active="false" i="fas fa-clipboard-list w-6">الطلبات</x-layouts.admin.nav>
-                <x-layouts.admin.nav href="#" :active="false" i="fas fa-flag w-6">الإبلاغات</x-layouts.admin.nav>
-
-
                 <div class="border-t border-secondary mt-4 pt-4">
+                    @can('viewAny', App\Models\User::class )
+                        <x-layouts.admin.nav href="{{ route('admin.admins') }}" :active="request()->is('admin/admins')" i="fa-solid fa-user-tie w-6">المسؤولين</x-layouts.admin.nav>
+                    @endcan
                     <x-layouts.admin.nav href="#" :active="false" i="fas fa-cog w-6">الإعدادات</x-layouts.admin.nav>
                     <x-layouts.admin.nav href="{{ route('logout') }}" :active="false" i="fas fa-sign-out-alt w-6">تسجيل خروج</x-layouts.admin.nav>
                 </div>
@@ -93,13 +83,16 @@
             </div>
             <nav class="mt-2">
                 <x-layouts.admin.nav-mobile i="fas fa-tachometer-alt w-6" href="/" :active="request()->is('/')"> لوحة التحكم </x-layouts.admin.nav-mobile>
+                <x-layouts.admin.nav-mobile href="{{ route('admin.sectors') }}" :active="request()->is('admin/sectors')" i="fas fa-layer-group w-6">إدارة القطاعات</x-layouts.admin.nav-mobile>
+                <x-layouts.admin.nav-mobile href="{{ route('admin.cities') }}" :active="request()->is('admin/cities')" i="fa-solid fa-city w-6">المدن</x-layouts.admin.nav-mobile>
+                <x-layouts.admin.nav-mobile href="{{ route('admin.activityLogs')  }}" :active="request()->is('admin/activity_logs')" i="fas fa-tasks w-6">سجل النشاط</x-layouts.admin.nav-mobile>
                 <x-layouts.admin.nav-mobile i="fas fa-building w-6" href="#" :active="false"> المؤسسات </x-layouts.admin.nav-mobile>
                 <x-layouts.admin.nav-mobile i="fas fa-users w-6" href="#" :active="false"> المتطوعون </x-layouts.admin.nav-mobile>
-                <x-layouts.admin.nav-mobile i="fas fa-clipboard-list w-6" href="#" :active="false"> الطلبات </x-layouts.admin.nav-mobile>
-                <x-layouts.admin.nav-mobile i="fas fa-flag w-6" href="#" :active="false"> الإبلاغات </x-layouts.admin.nav-mobile>
-
 
                 <div class="border-t border-secondary mt-4 pt-4">
+                    @can('viewAny', App\Models\User::class )
+                        <x-layouts.admin.nav-mobile href="{{ route('admin.admins') }}" :active="request()->is('admin/admins')" i="fa-solid fa-user-tie w-6">المسؤولين</x-layouts.admin.nav-mobile>
+                    @endcan
                     <x-layouts.admin.nav-mobile i="fas fa-cog w-6" href="#" :active="false"> الإعدادات </x-layouts.admin.nav-mobile>
                     <x-layouts.admin.nav-mobile i="fas fa-sign-out-alt w-6" href="/logout" :active="false"> تسجيل خروج </x-layouts.admin.nav-mobile>
                 </div>

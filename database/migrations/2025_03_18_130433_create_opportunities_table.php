@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('count');
             $table->integer('accepted_count')->default(0);
             $table->boolean('has_certificate')->default(false);
-            $table->foreignId('organization_id')->constrained('organizations')->cascadeOnDelete();
+            $table->foreignId('organization_id')->constrained('organizations')->OnDelete('cascade');
             $table->foreignId('sector_id')->constrained('sectors');
             $table->softDeletes();
             $table->timestamps();

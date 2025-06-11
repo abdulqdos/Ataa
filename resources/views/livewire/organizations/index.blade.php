@@ -126,7 +126,7 @@
                             @endif
 
                             <div class="pt-4 flex space-x-3">
-                                <a href="#"
+                                <a href="{{ route('organizations.show' , $organization->id) }}"
                                    wire:navigate.keep
                                    class="flex-1 text-center px-4 py-2 btn-primary cursor-pointer">
                                     عرض التفاصيل

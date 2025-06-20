@@ -132,6 +132,19 @@
                                     <span class="mr-2">{{ $opportunity->organization->name }}</span>
                                 </div>
 
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="text-base text-gray-700">
+                                            <p class="font-semibold">زمن البداية</p>
+                                            <p>{{ \Carbon\Carbon::parse( $opportunity->start_time)->format('H:i') }}</p>
+                                        </div>
+
+                                        <div class="text-base text-gray-700">
+                                            <p class="font-semibold">زمن النهاية</p>
+                                            <p>{{ \Carbon\Carbon::parse($opportunity->end_time)->format('H:i') }}</p>
+                                        </div>
+                                    </div>
+
+
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="text-base text-gray-700">
                                         <p class="font-semibold">البداية</p>

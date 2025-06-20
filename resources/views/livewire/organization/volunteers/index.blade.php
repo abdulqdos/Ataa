@@ -82,11 +82,6 @@
     @endif
     <div id="top" class="rounded-md p-5  duration-300" dir="rtl">
         <div class="flex flex-row gap-4">
-            <!-- Search and Filter Row -->
-            <div class="flex flex-col md:flex-row gap-4 items-stretch">
-              <button class="px-4 py-1 btn-green text-sm">تحميل قائمة المتطوعين Excel</button>
-            </div>
-
             <div class="flex flex-col md:flex-row gap-4 items-stretch">
               <button class="px-4 py-1 btn-yellow text-sm" wire:click="toggleShowBox">إرسال إشعار </button>
             </div>

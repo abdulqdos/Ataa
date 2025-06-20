@@ -34,13 +34,25 @@
             <!-- الوصف -->
             <p class="mt-2 text-gray-700">{{ $opportunity->description }}</p>
 
-
-
             <!-- التواريخ -->
-            <p class="mt-3 text-sm text-gray-600">
-                🗓 **البداية:** {{ \Carbon\Carbon::parse($opportunity->start_date)->translatedFormat('d M Y') }}
-                | 🏁 **النهاية:** {{ \Carbon\Carbon::parse($opportunity->end_date)->translatedFormat('d M Y') }}
-            </p>
+            <!-- التواريخ -->
+            <div class="mt-3 text-sm text-gray-600 space-y-1">
+                @if($opportunity->start_time && $opportunity->end_time)
+                    <p>
+                        ⏰ <strong>الوقت:</strong> من {{ \Carbon\Carbon::parse($opportunity->start_time)->format('H:i') }}
+                        إلى {{ \Carbon\Carbon::parse($opportunity->end_time)->format('H:i') }}
+                    </p>
+                @endif
+
+                <p>
+                    🗓 <strong>تاريخ البداية:</strong> {{ \Carbon\Carbon::parse($opportunity->start_date)->translatedFormat('d M Y') }}
+                </p>
+
+                <p>
+                    🏁 <strong>تاريخ النهاية:</strong> {{ \Carbon\Carbon::parse($opportunity->end_date)->translatedFormat('d M Y') }}
+                </p>
+            </div>
+
 
             <!-- الموقع -->
             <div class="mt-3 text-sm text-gray-600">
@@ -54,7 +66,6 @@
             <div class="mt-3 text-sm text-gray-600">
                 <strong> النطاق : </strong>
                 <span> {{ $opportunity->sector->name }} </span>
-
             </div>
 
             <!-- العدد المطلوب -->

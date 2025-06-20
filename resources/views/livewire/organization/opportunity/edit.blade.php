@@ -41,6 +41,26 @@
 
         </div>
 
+        <div class="grid grid-cols-2 gap-4">
+            <!-- زمن البداية -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">زمن البداية <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="start_time"> * </span></label>
+                <input type="time" wire:model="start_time" class="input focus:ring-secondaryLight focus:border-secondaryLight @error('start_time') border-red-500 @enderror">
+                @error('start_time')
+                <x-layouts.x-error-messge :message="$message" />
+                @enderror
+            </div>
+
+            <!-- زمن النهاية -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">زمن النهاية <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="end_time"> * </span></label>
+                <input type="time" wire:model="end_time" class="input focus:ring-secondaryLight focus:border-secondaryLight @error('end_time') border-red-500 @enderror">
+                @error('end_time')
+                <x-layouts.x-error-messge :message="$message" />
+                @enderror
+            </div>
+        </div>
+
         <div class="flex flex-row justify-start items-center gap-x-8">
             @error('start_date')
                 <x-layouts.x-error-messge :message="$message" />

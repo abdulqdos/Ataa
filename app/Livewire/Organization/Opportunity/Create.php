@@ -14,6 +14,7 @@ class Create extends OrganizationComponent
     #[title('إضافة فرصة تطوعية')]
     public $title  , $description , $start_date , $end_date , $location , $location_url , $count , $sector ,$has_certificate = false;
     public $img , $img_url ;
+    public $start_time, $end_time;
 
     protected $rules = [
         'title' => 'required|min:3|max:20|string|regex:/^[^<>\/]*$/',
@@ -26,6 +27,9 @@ class Create extends OrganizationComponent
         'img' => 'required|image|max:1024',
         'has_certificate' => 'nullable|boolean',
         'sector' => 'required',
+        'start_time' => 'required|date_format:H:i',
+        'end_time' => 'required|date_format:H:i|after:start_time',
+
     ];
 
     protected $messages = [
@@ -80,6 +84,12 @@ class Create extends OrganizationComponent
 
         // Sector
         'sector.required' => 'يجب اختيار القطاع.',
+
+        'start_time.required' => 'زمن البداية مطلوب.',
+        'start_time.date_format' => 'زمن البداية يجب أن يكون بتنسيق صحيح (مثال: 14:00).',
+        'end_time.required' => 'زمن النهاية مطلوب.',
+        'end_time.date_format' => 'زمن النهاية يجب أن يكون بتنسيق صحيح (مثال: 15:30).',
+        'end_time.after' => 'زمن النهاية يجب أن يكون بعد زمن البداية.',
     ];
 
     public function store()
@@ -103,7 +113,9 @@ class Create extends OrganizationComponent
             'count' => $this->count,
             'organization_id' => $organizationId,
             'has_certificate' => $this->has_certificate,
-            'sector_id' => $this->sector
+            'sector_id' => $this->sector,
+            'start_time' => $this->start_time,
+            'end_time' => $this->end_time,
         ]);
 
         session()->flash('success' , 'تمت إضافة الفرصة بنجاح');

@@ -21,6 +21,10 @@ class OpportunityFactory extends Factory
     {
         $startDate = Carbon::now()->addDays(rand(0, 1));
         $endDate = $startDate->copy()->addDays(rand(1, 20));
+
+        $startTime = $this->faker->time('H:i:s');
+        $startTimeCarbon = Carbon::createFromFormat('H:i:s', $startTime);
+        $endTimeCarbon = (clone $startTimeCarbon)->addHours(rand(1, 4));
         return [
             'title' => $this->faker->randomElement([
                 'حملة تنظيف شاطئ',
@@ -71,6 +75,8 @@ class OpportunityFactory extends Factory
             'count' => $this->faker->numberBetween(10, 50),
             'organization_id' => Organization::factory(),
             'sector_id' => Sector::factory(),
+            'start_time' => $startTimeCarbon,
+            'end_time' => $endTimeCarbon,
         ];
     }
 }

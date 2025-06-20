@@ -20,6 +20,8 @@ class Edit extends OrganizationComponent
     // Inputs
     public $title, $description, $start_date, $end_date , $location , $location_url , $count , $sector , $has_certificate ;
     public $img, $img_url;
+    public $start_time, $end_time;
+
 
     // Object
     public $opportunity;
@@ -34,6 +36,9 @@ class Edit extends OrganizationComponent
         'count' => 'required|integer|min:1|regex:/^[^<>\/]*$/',
         'has_certificate' => 'nullable|boolean',
         'sector' => 'required',
+        'start_time' => 'required|date_format:H:i',
+        'end_time' => 'required|date_format:H:i|after:start_time',
+
     ];
     protected $messages = [
         // title
@@ -87,6 +92,14 @@ class Edit extends OrganizationComponent
 
         // Sector
         'sector.required' => 'يجب اختيار القطاع.',
+
+        'start_time.required' => 'زمن البداية مطلوب.',
+        'start_time.date_format' => 'زمن البداية يجب أن يكون بتنسيق صحيح (مثال: 14:00).',
+
+        'end_time.required' => 'زمن النهاية مطلوب.',
+        'end_time.date_format' => 'زمن النهاية يجب أن يكون بتنسيق صحيح (مثال: 15:30).',
+        'end_time.after' => 'زمن النهاية يجب أن يكون بعد زمن البداية.',
+
     ];
 
     public function mount(Opportunity $opportunity)
@@ -102,6 +115,8 @@ class Edit extends OrganizationComponent
         $this->has_certificate = $opportunity->has_certificate ;
         $this->sector  = $opportunity->sector_id ;
         $this->opportunity = $opportunity;
+        $this->start_time = $opportunity->start_time;
+        $this->end_time = $opportunity->end_time;
     }
 
     public function removeImage()
@@ -142,6 +157,8 @@ class Edit extends OrganizationComponent
             'count' => $this->count,
             'has_certificate' => $this->has_certificate,
             'sector_id' => $this->sector,
+            'start_time' => $this->start_time,
+            'end_time' => $this->end_time,
             'organization_id' => $organizationId,
         ]);
 

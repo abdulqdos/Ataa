@@ -1,17 +1,94 @@
 <div>
-
     <x-layouts.header title="المتطوعون"
                       :breadcrumbs="[
                       ['الرئيسية', route('organization.dashboard')],
                       ['إدارة المتطوعون', route('organization.opportunities-volunteers')],
                       ['المتطوعون']]">
     </x-layouts.header>
+
+    @if($showBox)
+        <div class="bg-black/10 fixed inset-0 z-50 flex items-center justify-center">
+            <div class="relative w-full max-w-md p-4">
+                <div class="relative bg-white rounded-xl shadow-lg">
+                    <!-- زر الإغلاق -->
+                    <button type="button"
+                            wire:click="toggleShowBox"
+                            class="absolute top-3 right-3 text-gray-400 hover:bg-gray-100 hover:text-gray-900 rounded-full w-8 h-8 flex items-center justify-center">
+                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M1 1l12 12M13 1L1 13" />
+                        </svg>
+                        <span class="sr-only">إغلاق</span>
+                    </button>
+
+                    <!-- محتوى المودال -->
+                    <form wire:submit.prevent="sendNotification" class="px-6 py-8 text-center">
+                        <!-- أيقونة -->
+                        <div class="flex justify-center mb-4">
+                            <svg class="text-gray-600 w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 9v2m0 4h.01M21 12A9 9 0 1 1 3 12a9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </div>
+
+                        <!-- العنوان -->
+                        <h3 class="text-lg font-semibold text-gray-800 mb-6">
+                            هل تريد إرسال هذا الإشعار؟
+                        </h3>
+
+                        <!-- الحقول -->
+                        <div class="space-y-4 mb-6 flex flex-col items-center justify-center">
+                            <div class="w-full max-w-sm text-right">
+                                <label for="title" class="block mb-1 text-sm font-medium text-gray-700">عنوان الإشعار</label>
+                                <input type="text" id="title" wire:model="title"
+                                       class="w-full px-4 py-2 input focus:ring focus:ring-primary/80" />
+                            </div>
+
+                            @error('title')
+                                <x-layouts.x-error-messge :message="$message" />
+                            @enderror
+
+                            <div class="w-full max-w-sm text-right">
+                                <label for="message" class="block mb-1 text-sm font-medium text-gray-700">محتوى الإشعار</label>
+                                <input type="text" id="message" wire:model="message"
+                                       class="w-full px-4 py-2 input focus:ring focus:ring-primary/80" />
+                            </div>
+
+                            @error('message')
+                                <x-layouts.x-error-messge :message="$message" />
+                            @enderror
+                        </div>
+
+                        <!-- أزرار الإجراءات -->
+                        <div class="flex gap-4 justify-center space-x-3 rtl:space-x-reverse">
+                            <button type="button"
+                                    wire:click="toggleShowBox"
+                                    class="btn-secondary px-4 py-2 text-sm rounded-md focus:outline-none">
+                                إلغاء
+                            </button>
+
+                            <button type="submit"
+                                    class="btn-yellow px-4 py-2 text-sm rounded-md focus:outline-none">
+                                إرسال الإشعار
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    @endif
     <div id="top" class="rounded-md p-5  duration-300" dir="rtl">
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-row gap-4">
             <!-- Search and Filter Row -->
             <div class="flex flex-col md:flex-row gap-4 items-stretch">
-              <button class="px-4 py-1 btn-red text-sm">تحميل قائمة المتطوعين PDF</button>
               <button class="px-4 py-1 btn-green text-sm">تحميل قائمة المتطوعين Excel</button>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-4 items-stretch">
+              <button class="px-4 py-1 btn-yellow text-sm" wire:click="toggleShowBox">إرسال إشعار </button>
             </div>
         </div>
     </div>

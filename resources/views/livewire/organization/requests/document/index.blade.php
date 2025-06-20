@@ -1,6 +1,6 @@
 <div>
 
-    <x-layouts.header title="المتطوعون"
+    <x-layouts.header title="الطلبات"
                       :breadcrumbs="[
                       ['الرئيسية', route('organization.dashboard')],
                       ['إدارة الطلبات', route('organization.opportunities-requests')],

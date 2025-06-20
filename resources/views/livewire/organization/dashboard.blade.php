@@ -115,7 +115,7 @@
             <!-- Pending Requests -->
             <div class="bg-white rounded-lg shadow">
                 <div class="p-4 border-b border-gray-200">
-                    <h2 class="text-lg font-medium">طلبات الانضمام المعلقة</h2>
+                    <h2 class="text-lg font-medium">طلبات  المعلقة</h2>
                 </div>
                 <div class="p-4">
                     <ul>
@@ -129,7 +129,7 @@
                                     </p>
                                 </div>
                                 <div>
-                                    <a href="{{  route('organization.requests.show' ,  $request->id ) }}" class="px-3 py-1 btn-secondary  text-xs"> عرض </a>
+                                    <a href="#" class="px-3 py-1 btn-secondary  text-xs"> عرض </a>
                                 </div>
                             </li>
                         @endforeach

@@ -1,39 +1,15 @@
 <div class="container mx-auto px-4 py-8">
     <div class="flex flex-col lg:flex-row gap-8">
-        <!-- الجانب الأيسر - الفرص التطوعية -->
-        <div class="lg:w-1/2">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">الفرص التطوعية التي قدمتها مؤسسة</h2>
-
-            @foreach($organization->opportunities as $opportunity)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6 border-l-4 border-primaryLight">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $opportunity->title }}</h3>
-                        <p class="text-gray-600 mb-4">{{ Str::limit($opportunity->description, 200) }}</p>
-                        <div class="flex flex-row justify-between items-center">
-                            <a href="{{ route('opportunities.show', $opportunity->id) }}" class="inline-block bg-primary hover:bg-primaryLight text-white font-medium py-2 px-6 rounded transition duration-300">
-                                عرض تفاصيل الفرصة
-                            </a>
-                            <x-layouts.status-opportunity :opportunity="$opportunity" />
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-
-            @if(count($organization->opportunities) == 0)
-                <div class="bg-white rounded-lg shadow-md p-6 text-center">
-                    <p class="text-gray-500">لا توجد فرص تطوعية قدمتها المؤسسةً</p>
-                </div>
-            @endif
-        </div>
-
         <!-- الجانب الأيمن - معلومات المؤسسة -->
-        <div class="lg:w-1/2 sticky">
+        <div class="lg:w-1/2 sticky top-4">
             <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                 <!-- صورة المؤسسة -->
                 <div class="h-48 bg-gray-200 overflow-hidden">
-                    @if($organization->user && $organization->user->img_url)
+                    @if($organization->user->img_url)
                         <img src="{{ $organization->user->img_url }}" alt="{{ $organization->name }}" class="w-full h-full object-cover">
                     @else
+                        <img  src="https://ui-avatars.com/api/?name={{ urlencode($organization->name) }}&background=random&color=fff" class="w-full h-full object-cover">
+
                         <div class="w-full h-full flex items-center justify-center bg-gray-100">
                             <span class="text-gray-400">لا توجد صورة</span>
                         </div>
@@ -74,6 +50,35 @@
                             <span class="text-gray-700">{{ $organization->sector->name }}</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الجانب الأيسر - الفرص التطوعية -->
+        <div class="lg:w-1/2">
+            <div class="sticky top-4">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">الفرص التطوعية التي قدمتها مؤسسة</h2>
+                <div class="max-h-[calc(100vh-150px)] overflow-y-auto pr-2">
+                    @foreach($organization->opportunities as $opportunity)
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6 border-l-4 border-primaryLight">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $opportunity->title }}</h3>
+                                <p class="text-gray-600 mb-4">{{ Str::limit($opportunity->description, 200) }}</p>
+                                <div class="flex flex-row justify-between items-center">
+                                    <a href="{{ route('opportunities.show', $opportunity->id) }}" class="inline-block bg-primary hover:bg-primaryLight text-white font-medium py-2 px-6 rounded transition duration-300">
+                                        عرض تفاصيل الفرصة
+                                    </a>
+                                    <x-layouts.status-opportunity :opportunity="$opportunity" />
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    @if(count($organization->opportunities) == 0)
+                        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                            <p class="text-gray-500">لا توجد فرص تطوعية قدمتها المؤسسةً</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

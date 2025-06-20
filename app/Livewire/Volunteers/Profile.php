@@ -18,6 +18,7 @@ class Profile extends Component
     {
         return view('livewire.volunteers.profile' , [
             'volunteer' => $this->volunteer,
+            'opportunities' => $this->volunteer->opportunities,
         ]);
     }
 }

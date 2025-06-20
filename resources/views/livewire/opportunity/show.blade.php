@@ -35,7 +35,6 @@
             <p class="mt-2 text-gray-700">{{ $opportunity->description }}</p>
 
             <!-- التواريخ -->
-            <!-- التواريخ -->
             <div class="mt-3 text-sm text-gray-600 space-y-1">
                 @if($opportunity->start_time && $opportunity->end_time)
                     <p>

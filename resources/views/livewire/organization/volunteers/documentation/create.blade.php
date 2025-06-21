@@ -1,7 +1,7 @@
 <div class="max-w-lg mx-auto bg-white p-6 rounded-md">
     <h2 class="text-2xl font-bold text-gray-800 mb-5 text-center text-primary">توثيق المشاركة التطوعية</h2>
 
-    <form wire:submit.prevent="store" class="space-y-5">
+    <form wire:submit.prevent="store" class="space-y-5" enctype="multipart/form-data" >
         <!-- وصف النشاط -->
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">وصف النشاط <span class="text-xs text-red-500" wire:dirty.class="hidden" wire:target="description"> * </span></label>
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-        <div class="flex items-center mb-4 gap-3">
+        <div class="flex items-center mb-4 gap-3" wire:ignore>
             <label class="label">أضف شهادة الحضور<span class="text-gray-500 tet-sm">(إختياري)</span></label>
             <div>
                 <input type="file" id="certificate" class="hidden" wire:model="certificate">

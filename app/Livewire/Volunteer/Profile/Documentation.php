@@ -6,8 +6,10 @@ use App\Models\Opportunity;
 use App\Models\Request;
 use App\Models\VolunteerOpportunity;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 #[Title('مشاركتي')]
 class Documentation extends Component
@@ -36,8 +38,6 @@ class Documentation extends Component
             return;
         }
 
-
-
         Request::create([
             'opportunity_id' => $this->id,
             'volunteer_id' => auth()->user()?->volunteer->id,
@@ -51,6 +51,16 @@ class Documentation extends Component
     public function resetDeleteBox()
     {
         $this->showDeleteBox = false;
+    }
+
+    public function downloadCertificate()
+    {
+        $filename = 'certificate.pdf';
+
+        return response()->download(
+            Storage::disk('public')->path($this->opportunity->certificate_path),
+            $filename
+        );
     }
     public function render()
     {

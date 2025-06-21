@@ -80,6 +80,7 @@ class Create extends OrganizationComponent
             $this->certificate_path = $this->certificate->storePublicly('certificates_images', ['disk' => 'public']);
         }
 
+//        @dd($this->certificate_path);
         $this->opportunity->volunteers()->updateExistingPivot($this->volunteer->id, [
             'description' => $this->description,
             'hours' => $this->hours,

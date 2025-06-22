@@ -44,7 +44,6 @@
         </div>
 
         <nav class="mt-2">
-
             <x-layouts.organiations.nav i="fas fa-tachometer-alt w-6" href="{{ route('organization.dashboard') }}"  :active="request()->is('organization/dashboard')" wire:navigate>لوحة التحكم</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-hands-helping w-6" href="{{ route('organization.opportunity') }}"  :active="request()->is('organization/opportunities')" wire:navigate>الفرص التطوعية</x-layouts.organiations.nav>
             <x-layouts.organiations.nav i="fas fa-users w-6" href="{{ route('organization.opportunities-volunteers') }}" :active="request()->is('organization/opportunities-volunteers')">المتطوعون</x-layouts.organiations.nav>
@@ -52,7 +51,7 @@
 
             <div class="border-t border-secondary mt-4 pt-4">
                 <x-layouts.organiations.nav i="fas fa-user w-6" href="{{ route('organization.update-profile') }}" :active="false">الملف الشخصي</x-layouts.organiations.nav>
-                <x-layouts.organiations.nav i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تجيل الخروج</x-layouts.organiations.nav>
+                <x-layouts.organiations.nav i="fas fa-sign-out-alt w-6" href="/logout" :active="false">تسجيل الخروج</x-layouts.organiations.nav>
             </div>
         </nav>
     </div>

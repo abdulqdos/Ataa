@@ -9,6 +9,7 @@ use App\Livewire\Authentication\ResetPassword;
 use App\Livewire\Authentication\Signup;
 
 // Pages
+use App\Livewire\Index as Home;
 use App\Livewire\Opportunity\Index;
 use App\Livewire\Opportunity\Show ;
 use App\Livewire\Volunteers\Index as Volunteers ;
@@ -71,9 +72,10 @@ Route::middleware('auth')->group(function () {
 
 // Pages
 Route::middleware('volunteerOrGuest')->group(function () {
-    Route::get('/', function () {
-        return view('index');
-    })->name('home');
+    Route::get('/', Home::class)->name('home');
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
     Route::get('/opportunity', index::class )->name('opportunities');
     Route::get('/opportunities/{opportunity}', Show::class)->name('opportunities.show');
     Route::get('volunteers' , Volunteers::class)->name('volunteers');

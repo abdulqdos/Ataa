@@ -15,10 +15,7 @@ class Dashboard extends OrganizationComponent
     {
         $this->organization = auth()->user()?->organization;
         $this->opportunities = $this->organization
-            ->opportunities()
-            ->latest()
-            ->take(4)
-            ->get();
+            ->opportunities()->latest()->get();
     }
 
     public function render()

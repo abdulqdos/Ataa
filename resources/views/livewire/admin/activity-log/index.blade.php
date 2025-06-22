@@ -42,6 +42,13 @@
                                         </div>
                                         <div class="text-sm text-center font-medium text-gray-800">
                                             {{ $activity->description }}
+                                            بإسم
+                                            {{
+                                                  $activity->subject?->name
+                                                  ?? $activity->subject?->title
+                                                  ?? data_get($activity->properties, 'data.data.attributes.title')
+                                                  ?? data_get($activity->properties, 'data.data.old.title')
+                                            }}
                                         </div>
                                     </div>
                                 </td>

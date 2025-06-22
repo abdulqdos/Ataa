@@ -60,7 +60,6 @@
                     @can('viewAny', App\Models\User::class )
                         <x-layouts.admin.nav href="{{ route('admin.admins') }}" :active="request()->is('admin/admins')" i="fa-solid fa-user-tie w-6">المسؤولين</x-layouts.admin.nav>
                     @endcan
-                    <x-layouts.admin.nav href="#" :active="false" i="fas fa-cog w-6">الإعدادات</x-layouts.admin.nav>
                     <x-layouts.admin.nav href="{{ route('logout') }}" :active="false" i="fas fa-sign-out-alt w-6">تسجيل خروج</x-layouts.admin.nav>
                 </div>
             </nav>
@@ -93,7 +92,6 @@
                     @can('viewAny', App\Models\User::class )
                         <x-layouts.admin.nav-mobile href="{{ route('admin.admins') }}" :active="request()->is('admin/admins')" i="fa-solid fa-user-tie w-6">المسؤولين</x-layouts.admin.nav-mobile>
                     @endcan
-                    <x-layouts.admin.nav-mobile i="fas fa-cog w-6" href="#" :active="false"> الإعدادات </x-layouts.admin.nav-mobile>
                     <x-layouts.admin.nav-mobile i="fas fa-sign-out-alt w-6" href="/logout" :active="false"> تسجيل خروج </x-layouts.admin.nav-mobile>
                 </div>
             </nav>

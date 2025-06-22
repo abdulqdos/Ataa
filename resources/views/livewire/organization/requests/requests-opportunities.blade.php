@@ -2,6 +2,25 @@
     <x-layouts.header title="إدارة الطلبات"
                       :breadcrumbs="[['الرئيسية', route('organization.dashboard')], ['إدارة الطلبات']]">
     </x-layouts.header>
+
+    <div class="container lg:px-24 py-3">
+        <!-- Explanation Box -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <div class="flex items-start">
+                <svg class="w-5 h-5 text-blue-600 mt-0.5 ml-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                    <h3 class="text-blue-800 font-medium">كيفية إدارة طلبات التوثيق</h3>
+                    <p class="text-blue-700 text-sm mt-1">
+                        يمكنك عرض طلبات التوثيق للمتطوعين في كل فرصة تطوعية عن طريق النقر على زر "عرض طلبات" الموجود في بطاقة الفرصة أدناه.
+                        ستظهر لك قائمة بجميع الطلبات حيث يمكنك مراجعة وتوثيق ساعات التطوع أو رفضها.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container lg:px-24 py-3">
         <!-- Search && Filter Section -->
         <div id="top" class="bg-white rounded-xl shadow-sm p-5 transition-all duration-300 rtl" dir="rtl">

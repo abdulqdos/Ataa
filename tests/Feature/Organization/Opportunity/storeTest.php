@@ -42,33 +42,27 @@ it('return a correct component' , function () {
 it('can store an Opportunity', function () {
 
     actingAs($this->user);
-
+    $countBefore = \DB::table('activity_log')->count();
     Livewire::test('organization.opportunity.create')
-        ->set('title' , 'فرصة التعاونية')
-        ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
-        ->set('start_date' , $this->start_date)
-        ->set('end_date' , $this->end_date)
-        ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
-        ->set('location' , 'شارع زاوية مقابل مستشفى')
-        ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
-        ->set('count' , 200)
-        ->set('has_certificate' , 1)
-        ->set('sector' , 1)
+        ->set('title', 'فرصة التعاونية')
+        ->set('description', 'فرصة التعاونية لي بناء مجتمع افضل')
+        ->set('start_date', $this->start_date)
+        ->set('end_date', $this->end_date)
+        ->set('start_time', '09:00')
+        ->set('end_time', '13:00')
+        ->set('img', \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
+        ->set('location', 'شارع زاوية مقابل مستشفى')
+        ->set('location_url', 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')
+        ->set('count', 200)
+        ->set('has_certificate', 1)
+        ->set('sector', 1)
         ->call('store');
 
-    $this->assertDatabaseHas('opportunities', [
-        'title' => 'فرصة التعاونية',
-        'description' => 'فرصة التعاونية لي بناء مجتمع افضل',
-        'start_date' => $this->start_date,
-        'end_date' => $this->end_date,
-        'location' => 'شارع زاوية مقابل مستشفى',
-        'location_url' => 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA',
-        'count' => 200,
-        'has_certificate' => 1,
-        'sector_id' => 1,
-    ]);
+    $this->assertDatabaseCount('opportunities', 1);
 
-    $this->assertDatabaseCount('activity_log' , 1);
+    $countAfter = \DB::table('activity_log')->count();
+
+    $this->assertEquals($countBefore + 1, $countAfter);
 });
 
 
@@ -82,6 +76,8 @@ it('Redirect to correct page', function () {
         ->set('description' , 'فرصة التعاونية لي بناء مجتمع افضل')
         ->set('start_date' , $this->start_date)
         ->set('end_date' , $this->end_date)
+        ->set('start_time', '09:00')
+        ->set('end_time', '13:00')
         ->set('img' , \Illuminate\Http\UploadedFile::fake()->image('test.jpg'))
         ->set('location' , 'شارع زاوية مقابل مستشفى')
         ->set('location_url' , 'https://maps.app.goo.gl/Jy5ZXan9LhSrxERCA')

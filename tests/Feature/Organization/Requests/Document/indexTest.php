@@ -19,10 +19,10 @@ it('must be an organization', function ($badRole) {
         'role' => $badRole,
     ]);
     actingAs($user)
-        ->get(route('organization.opportunities-requests'));
+        ->get(route('organization.opportunities-requests'))->assertRedirect(route('home'));
 })->with([
     'admin',
-    'user'
+    'volunteer'
 ]);
 it('return a correct data' , function () {
    Livewire::test('organization.requests.document.index')

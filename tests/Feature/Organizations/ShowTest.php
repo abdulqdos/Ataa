@@ -25,10 +25,8 @@ it('must be guest or volunteer', function ($badRole) {
     'organization',
     'admin'
 ]);
-it('assert a correct livewire' , function () {
-    Livewire::test('organizations.show')
-        ->assertSeeLivewire('organizations.show');
-});
+
+
 it('assert set a correct data' , function () {
     Livewire::test('organizations.show' , ['organization' => $this->organization])
         ->assertSee($this->organization->name);

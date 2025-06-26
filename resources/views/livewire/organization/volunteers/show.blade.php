@@ -76,4 +76,30 @@
             </div>
         </div>
     </div>
+
+    <!-- فرص شارك فيها المتطوع -->
+    <div class="container my-8">
+        <div class="max-w-2xl mx-auto space-y-6">
+            <h2 class="text-xl font-bold text-primary mb-4">
+                الفرص التي شارك فيها المتطوع
+            </h2>
+
+            @forelse($opportunities as $opportunity)
+                <div class="bg-white rounded-lg shadow-md overflow-hidden border-l-4 border-primaryLight">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ $opportunity->title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ Str::limit($opportunity->description, 200) }}</p>
+                        <div class="flex flex-row justify-between items-center">
+                            <x-layouts.status-opportunity :opportunity="$opportunity" />
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="text-gray-600 text-sm text-center bg-gray-50 p-4 rounded">
+                    لم يشارك هذا المتطوع في أي فرصة حتى الآن.
+                </div>
+            @endforelse
+        </div>
+    </div>
+
 </div>

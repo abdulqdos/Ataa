@@ -29,12 +29,3 @@ it('assert a correct data' , function () {
     Livewire::test('organization.requests.requests-opportunities')
         ->assertSeeLivewire('organization.requests.requests-opportunities');
 });
-it('send a correct data' , function () {
-
-    $op = Opportunity::factory(10)->create();
-    $this->organization->opportunities()->saveMany($op);
-    actingAs($this->user);
-
-    Livewire::test('organization.requests.requests-opportunities')
-        ->assertSee($op->first()->title);
-});

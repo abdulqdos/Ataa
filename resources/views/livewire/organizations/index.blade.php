@@ -31,50 +31,71 @@
     <!-- قسم المؤسسات -->
     <div class="flex flex-col my-4 mx-8 gap-4">
         <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-            <!-- Search Section -->
-            <div class="space-y-2">
-                <label for="organization-search" class="block text-sm font-medium text-gray-700">
-                    بحث المؤسسات
-                </label>
-
-                <div class="relative">
-                    <!-- Search Icon -->
-                    <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                        </svg>
-                    </div>
-
-                    <!-- Search Input -->
-                    <input
-                        id="organization-search"
-                        type="text"
-                        placeholder="ابحث باسم المؤسسة..."
-                        wire:model.live.debounce.300ms="searchText"
-                        class="w-full pr-10 py-2 px-3 text-sm rounded-md border border-gray-300  focus:ring-1 focus:ring-secondary/30 focus:outline-none placeholder-gray-400 transition-all"
-                    />
-
-                    <!-- Clear Button (appears when there's text) -->
-                    @if($searchText)
-                        <button
-                            wire:click="$set('searchText', '')"
-                            class="absolute left-3 inset-y-0 flex items-center text-gray-400 hover:text-gray-600 transition cursor-pointer"
+            <div class="flex flex-col md:flex-row md:items-end md:space-x-4 space-y-4 md:space-y-0">
+                <!-- فلترة حسب القطاع -->
+                <div class="w-full md:w-1/3 space-y-1">
+                    <label for="organization-sector-filter" class="block text-sm font-medium text-gray-700">
+                        فلترة حسب القطاع
+                    </label>
+                    <div class="relative">
+                        <select
+                            id="organization-sector-filter"
+                            wire:model.live="selectedSector"
+                            class="w-full py-2 px-3 text-sm rounded-md border border-gray-300 focus:ring-1 focus:ring-secondary/30 focus:outline-none text-gray-700 bg-white transition-all"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    @endif
+                            <option value="">كل القطاعات</option>
+                            @foreach($sectors as $sector)
+                                <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Helper Text -->
-                <p class="text-xs text-gray-500">
-                    ابدأ بكتابة اسم المؤسسة  للبحث المباشر
-                </p>
-            </div>
-        </div>
+                <!-- بحث المؤسسات -->
+                <div class="w-full md:w-2/3 space-y-1">
+                    <label for="organization-search" class="block text-sm font-medium text-gray-700">
+                        بحث المؤسسات
+                    </label>
+                    <div class="relative">
+                        <!-- Search Icon -->
+                        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </div>
 
-        @if($organizations->count() > 0)
+                        <!-- Search Input -->
+                        <input
+                            id="organization-search"
+                            type="text"
+                            placeholder="ابحث باسم المؤسسة..."
+                            wire:model.live.debounce.300ms="searchText"
+                            class="w-full pr-10 py-2 px-3 text-sm rounded-md border border-gray-300 focus:ring-1 focus:ring-secondary/30 focus:outline-none placeholder-gray-400 transition-all"
+                        />
+
+                        <!-- Clear Button -->
+                        @if($searchText)
+                            <button
+                                wire:click="$set('searchText', '')"
+                                class="absolute left-3 inset-y-0 flex items-center text-gray-400 hover:text-gray-600 transition cursor-pointer"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- Helper Text -->
+            <p class="text-xs text-gray-500 mt-2">
+                يمكنك البحث باسم المؤسسة أو تحديد القطاع لتصفية النتائج
+            </p>
+        </div>
+    </div>
+
+    @if($organizations->count() > 0)
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
                 @foreach($organizations as $organization)
                     <div class="bg-white shadow-sm rounded-md overflow-hidden border border-gray-100 transition-shadow duration-300">

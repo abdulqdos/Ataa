@@ -53,13 +53,13 @@
                 <x-layouts.admin.nav href="{{ route('admin.sectors') }}" :active="request()->is('admin/sectors')" i="fas fa-layer-group w-6">إدارة القطاعات</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="{{ route('admin.cities') }}" :active="request()->is('admin/cities')" i="fa-solid fa-city w-6">المدن</x-layouts.admin.nav>
                 <x-layouts.admin.nav href="{{ route('admin.activityLogs')  }}" :active="request()->is('admin/activity_logs')" i="fas fa-tasks w-6">سجل النشاط</x-layouts.admin.nav>
-                <x-layouts.admin.nav href="#" :active="false" i="fas fa-building w-6">المؤسسات</x-layouts.admin.nav>
-                <x-layouts.admin.nav href="#" :active="false" i="fas fa-users w-6">المتطوعون</x-layouts.admin.nav>
+
 
                 <div class="border-t border-secondary mt-4 pt-4">
                     @can('viewAny', App\Models\User::class )
                         <x-layouts.admin.nav href="{{ route('admin.admins') }}" :active="request()->is('admin/admins')" i="fa-solid fa-user-tie w-6">المسؤولين</x-layouts.admin.nav>
                     @endcan
+                        <x-layouts.admin.nav href="{{ route('admin.profile') }}" :active="request()->is('admin/profile')" i="fa-solid fa-user-tie w-6">ملف شخصي </x-layouts.admin.nav>
                     <x-layouts.admin.nav href="{{ route('logout') }}" :active="false" i="fas fa-sign-out-alt w-6">تسجيل خروج</x-layouts.admin.nav>
                 </div>
             </nav>
@@ -85,8 +85,6 @@
                 <x-layouts.admin.nav-mobile href="{{ route('admin.sectors') }}" :active="request()->is('admin/sectors')" i="fas fa-layer-group w-6">إدارة القطاعات</x-layouts.admin.nav-mobile>
                 <x-layouts.admin.nav-mobile href="{{ route('admin.cities') }}" :active="request()->is('admin/cities')" i="fa-solid fa-city w-6">المدن</x-layouts.admin.nav-mobile>
                 <x-layouts.admin.nav-mobile href="{{ route('admin.activityLogs')  }}" :active="request()->is('admin/activity_logs')" i="fas fa-tasks w-6">سجل النشاط</x-layouts.admin.nav-mobile>
-                <x-layouts.admin.nav-mobile i="fas fa-building w-6" href="#" :active="false"> المؤسسات </x-layouts.admin.nav-mobile>
-                <x-layouts.admin.nav-mobile i="fas fa-users w-6" href="#" :active="false"> المتطوعون </x-layouts.admin.nav-mobile>
 
                 <div class="border-t border-secondary mt-4 pt-4">
                     @can('viewAny', App\Models\User::class )
@@ -126,15 +124,16 @@
 
             <!-- Main Content -->
             <main class="flex-1 overflow-y-auto p-4 bg-gray-100">
+
                 @if(session('success'))
-                    <div id="alert" class="flex items-center p-4 mb-4 mx-5 text-green-800 border-t-4 border-green-300 bg-green-50" role="alert">
+                    <div id="alert" class="flex items-center p-4 mb-4 mx-5 text-green-800 border-t-4 border-green-300 bg-green-50 transition-opacity duration-500" role="alert">
                         <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M16.707 5.293a1 1 0 0 0-1.414 0L8 12.586l-3.293-3.293a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l8-8a1 1 0 0 0 0-1.414z"/>
                         </svg>
                         <div class="ms-3 text-sm font-medium">
                             {{ session('success') }}
                         </div>
-                        <button type="button"  class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 cursor-pointer transition duration-300 close-alert" aria-label="Close">
+                        <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 cursor-pointer transition duration-300 close-alert" aria-label="Close">
                             <span class="sr-only">Dismiss</span>
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -142,6 +141,7 @@
                         </button>
                     </div>
                 @endif
+
                 {{ $slot }}
             </main>
         </div>
@@ -149,21 +149,23 @@
     </div>
 
     <script>
-        // Toggle sidebar on mobile
+        // ✅ Sidebar toggle
         const toggleBtn = document.getElementById('toggleSidebar');
         const closeBtn = document.getElementById('closeSidebar');
         const mobileSidebar = document.getElementById('mobileSidebar');
 
+        if (toggleBtn && mobileSidebar) {
+            toggleBtn.addEventListener('click', () => {
+                mobileSidebar.classList.toggle('translate-x-full');
+            });
+        }
 
-        toggleBtn.addEventListener('click', () => {
-            mobileSidebar.classList.toggle('translate-x-full');
-        });
+        if (closeBtn && mobileSidebar) {
+            closeBtn.addEventListener('click', () => {
+                mobileSidebar.classList.add('translate-x-full');
+            });
+        }
 
-        closeBtn.addEventListener('click', () => {
-            mobileSidebar.classList.add('translate-x-full');
-        });
-
-        // Close sidebar when clicking outside on mobile
         document.addEventListener('click', (e) => {
             if (window.innerWidth < 768) {
                 if (!mobileSidebar.contains(e.target) && e.target !== toggleBtn && !toggleBtn.contains(e.target)) {
@@ -172,18 +174,20 @@
             }
         });
 
+        // ✅ Alert close with fade out
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".close-alert").forEach(function (btn) {
                 btn.addEventListener("click", function () {
                     const alertBox = btn.closest("[role='alert']");
                     if (alertBox) {
-                        alertBox.style.display = "none";
+                        alertBox.classList.add("opacity-0"); // Hide smoothly
+                        setTimeout(() => {
+                            alertBox.remove(); // Remove after transition
+                        }, 500); // match duration-500
                     }
                 });
             });
         });
-
-
     </script>
     @livewireScripts
     </body>

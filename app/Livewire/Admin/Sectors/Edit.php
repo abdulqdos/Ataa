@@ -12,7 +12,8 @@ class Edit extends AdminComponent
     public $sector , $name ;
 
     protected $rules = [
-        'name' => 'required|min:3|max:50|string|regex:/^[\pL\s\-]+$/u',
+        'name' => 'required|min:3|max:50|string|regex:/^[\pL\s\-]+$/u|unique:sectors,name',
+        'name.unique' => 'هذا الاسم مستخدم من قبل، الرجاء اختيار اسم آخر.',
     ];
     protected $messages = [
         'name.required' => 'حقل الاسم مطلوب .',
@@ -20,6 +21,7 @@ class Edit extends AdminComponent
         'name.max' => 'اكبر عدد لخروف 50 .',
         'name.string' => 'يحب أن يكون الاسم حروف .',
         'name.regex' => 'يحب أن يكون الاسم حروف .',
+        'name.unique' => 'هذا القطاع موجود من قبل.',
     ];
 
     public function mount(Sector $sector)

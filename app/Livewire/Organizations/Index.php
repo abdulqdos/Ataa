@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Organizations;
 
+use App\Models\City;
 use App\Models\Organization;
+use App\Models\Sector;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
@@ -14,7 +16,7 @@ class Index extends Component
 {
     use withPagination ;
     #[Url(as: 'q', except: '')]
-    public $searchText ;
+    public $searchText , $selectedSector;
     #[On('search:clear')]
     public function clear()
     {
@@ -35,6 +37,10 @@ class Index extends Component
             $query->where('name', 'like', '%' . $this->searchText . '%');
         }
 
+        if(!empty($this->selectedSector)) {
+            $query->where('sector_id', $this->selectedSector);
+        }
+
         return $query ;
     }
     public function render()
@@ -42,6 +48,8 @@ class Index extends Component
         $query = $this->getOrganizations();
         return view('livewire.organizations.index' , [
             'organizations' => $query->paginate(9),
+            'sectors' => Sector::all(),
+            'cities' => City::all(),
         ]);
     }
 }

@@ -12,7 +12,7 @@ class Edit extends AdminComponent
 {
     public  $city  , $name ;
     protected $rules = [
-        'name' => 'required|min:3|max:50|string|regex:/^[\pL\s\-]+$/u',
+        'name' => 'required|min:3|max:50|string|regex:/^[\pL\s\-]+$/u|unique:cities,name',
     ];
     protected $messages = [
         'name.required' => 'حقل الاسم مطلوب .',
@@ -20,6 +20,7 @@ class Edit extends AdminComponent
         'name.max' => 'اكبر عدد لخروف 50 .',
         'name.string' => 'يحب أن يكون الاسم حروف .',
         'name.regex' => 'يحب أن يكون الاسم حروف .',
+        'name.unique' => 'هذا المدينة موجود من قبل.',
     ];
 
     public function mount(City $city)

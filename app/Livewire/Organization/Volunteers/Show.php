@@ -21,7 +21,8 @@ class Show extends OrganizationComponent
     public function render()
     {
         return view('livewire.organization.volunteers.show' , [
-            'volunteer' => $this->volunteer
+            'volunteer' => $this->volunteer,
+            'opportunities' => $this->volunteer->opportunities,
         ]);
     }
 }

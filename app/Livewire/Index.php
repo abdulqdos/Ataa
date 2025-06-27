@@ -3,8 +3,8 @@
 namespace App\Livewire;
 
 use App\Models\Opportunity;
+use App\Models\Organization;
 use App\Models\Volunteer;
-use App\Models\VolunteerOpportunity;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
@@ -17,19 +17,18 @@ class Index extends Component
         $opportunities = Opportunity::latest()->take(3)->get();
 
 
-        $volunteersCount = \App\Models\Volunteer::count();
+        $volunteersCount = Volunteer::count();
 
 
         $opportunitiesCount = Opportunity::count();
 
-
-        $totalHours = VolunteerOpportunity::sum('hours');
+        $organization = Organization::all();
 
         return view('livewire.index', [
             'opportunities' => $opportunities,
             'volunteersCount' => $volunteersCount,
             'opportunitiesCount' => $opportunitiesCount,
-            'totalHours' => $totalHours,
+            'organizationCount' => $organization->count(),
         ]);
     }
 }

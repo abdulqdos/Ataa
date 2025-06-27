@@ -1,8 +1,18 @@
 <div>
     <!-- Hero Section -->
     <div class="relative">
-        <div class="hero-gradient absolute inset-0" style="background: linear-gradient(135deg, var(--color-primary), var(--color-secondaryLight)); opacity: 0.85;"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center text-white">
+        <!-- الخلفية الجديدة مع الصورة -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('{{ asset('images/index.jpeg') }}');"></div>
+
+        <!-- الطبقة الشفافة فوق الصورة -->
+        <div class="absolute inset-0 bg-primary/80"></div>
+
+        <!-- صورة الـ layer -->
+        <div class="relative flex justify-center pt-12">
+            <img class="h-32 w-auto opacity-80" src="{{ asset('images/layer.svg') }}" alt="Layer Icon">
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center text-white">
             <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
                 <span class="block">ساهم في تغيير المجتمع</span>
                 <span class="block text-2xl mt-3 font-semibold">منصة عطاء للأعمال التطوعية</span>
@@ -88,15 +98,15 @@
             <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden sm:grid sm:grid-cols-3">
                 <div class="p-6 text-center border-b sm:border-0 sm:border-l">
                     <dt class="text-lg font-medium text-gray-500">متطوع</dt>
-                    <dd class="text-5xl font-extrabold text-[var(--color-primary)] mt-2">{{ number_format($volunteersCount) }}+</dd>
+                    <dd class="text-5xl font-extrabold text--primary mt-2">{{ number_format($volunteersCount) }}+</dd>
                 </div>
                 <div class="p-6 text-center border-t border-b sm:border-0 sm:border-l sm:border-r">
                     <dt class="text-lg font-medium text-gray-500">فرصة تطوعية</dt>
-                    <dd class="text-5xl font-extrabold text-[var(--color-primary)] mt-2">{{ number_format($opportunitiesCount) }}+</dd>
+                    <dd class="text-5xl font-extrabold text-primary mt-2">{{ number_format($opportunitiesCount) }}+</dd>
                 </div>
                 <div class="p-6 text-center border-t sm:border-0">
-                    <dt class="text-lg font-medium text-gray-500">ساعة تطوع</dt>
-                    <dd class="text-5xl font-extrabold text-[var(--color-primary)] mt-2">{{ number_format($totalHours) }}+</dd>
+                    <dt class="text-lg font-medium text-gray-500">عدد المؤسسات</dt>
+                    <dd class="text-5xl font-extrabold text-primary mt-2">{{ $organizationCount }}+</dd>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ class VolunteerFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'age' => $this->faker->numberBetween(18, 50),
+            'age' => $this->faker->numberBetween(18, 30),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'phone_number' => $this->faker->numerify('09#########'),
             'bio' => $this->faker->randomElement([
@@ -36,7 +36,7 @@ class VolunteerFactory extends Factory
                 'أهتم بتنمية مهاراتي من خلال التطوع الفعّال.',
                 'منخرط في الأنشطة الشبابية والمجتمعية منذ سنوات.'
             ]),
-            'eval_avg' => rand(1,5),
+            'eval_avg' => rand(3,5),
             'user_id' => User::factory(),
         ];
     }

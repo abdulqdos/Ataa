@@ -72,7 +72,7 @@ class OpportunityFactory extends Factory
                 $this->faker->latitude . "," . $this->faker->longitude,
 
             'has_certificate' => $this->faker->boolean(60),
-            'count' => $this->faker->numberBetween(10, 50),
+            'count' => $this->faker->numberBetween(30, 50),
             'organization_id' => Organization::factory(),
             'sector_id' => Sector::factory(),
             'start_time' => $startTimeCarbon,

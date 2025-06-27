@@ -42,9 +42,15 @@
                 <div class="flex flex-col md:flex-row">
                     <!-- الصورة المربعة -->
                     <div class="md:w-1/6 p-4 flex flex-col items-center justify-center bg-gray-50">
-                        <img class="h-16 w-16 rounded-lg object-cover border-2 border-gray-200 shadow-sm"
-                             src="{{ $volunteer->user->img_url ??  'https://ui-avatars.com/api/?name=' . urlencode($volunteer->first_name . ' ' . $volunteer->last_name) . '&background=random&color=fff' }}"
-                             alt="صورة المتطوع"/>
+                        @if($volunteer->user->img_url !== null)
+                            <img class="h-16 w-16 rounded-lg object-cover border-2 border-gray-200 shadow-sm"
+                                 src="{{   \Illuminate\Support\Facades\Storage::url($volunteer->user->img_url)  }}"
+                                 alt="صورة المتطوع"/>
+                        @else
+                            <img class="h-16 w-16 rounded-lg object-cover border-2 border-gray-200 shadow-sm"
+                                 src="https://ui-avatars.com/api/?name={{ urlencode($volunteer->user->user_name) }}&background=random&color=fff"
+                                 alt="صورة المتطوع"/>
+                        @endif
 
                         <!-- زر عرض الملف الشخصي -->
                         <a href="{{ route('volunteers.profile', $volunteer->id) }}"

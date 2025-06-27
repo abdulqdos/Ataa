@@ -26,10 +26,10 @@ class Signup extends Component
 
     // Volunteer Fields
     protected $volunteerRules = [
-        'first_name' => 'required|string|min:2|regex:/^[a-zA-Z]+$/u|max:50',
-        'last_name' => 'required|string|min:2|regex:/^[a-zA-Z]+$/u|max:50',
+        'first_name' => 'required|string|min:2|regex:/^[\p{Arabic}a-zA-Z]+$/u|max:50',
+        'last_name' => 'required|string|min:2|regex:/^[\p{Arabic}a-zA-Z]+$/u|max:50',
         'gender' => 'required|in:male,female',
-        'phone_number' => 'required|integer|digits:10',
+        'phone_number' => 'required|regex:/^[0-9]+$/',
         'age' => 'integer|min:8|max:90',
     ];
 
@@ -39,7 +39,7 @@ class Signup extends Component
         'city' => 'required',
         'sector' => 'required',
         'contact_email' => 'required|email|unique:organizations',
-        'phone_number_organization' => 'required|integer|digits:10',
+        'phone_number_organization' => 'required|regex:/^[0-9]+$/',
     ];
 
     // Define variables
@@ -87,7 +87,7 @@ class Signup extends Component
         'age.max' => 'يجب أن يكون العمر اصغر من 91.',
 
         'phone_number.required' => 'العمر مطلوب.',
-        'phone_number.integer' => 'يجب أن يكون العمر رقمًا صحيحًا.',
+        'phone_number.regx' => 'يجب أن يكون  رقمًا صحيحًا.',
         'phone_number.digits' => 'يجب أن يكون  عدد  خانات 10 .',
 
         'name.required' => 'اسم المؤسسة مطلوب.',
@@ -95,8 +95,8 @@ class Signup extends Component
         'name.min' => 'يجب أن يتكون اسم المؤسسة من حرفين على الأقل.',
         'name.max' => 'يجب ألا يزيد اسم المؤسسة عن 50 حرفًا.',
 
-        'phone_number_organization.required' => 'العمر مطلوب.',
-        'phone_number_organization.integer' => 'يجب أن يكون العمر رقمًا صحيحًا.',
+        'phone_number_organization.required' => 'رقم مطلوب.',
+        'phone_number_organization.regx' => 'يجب أن يكون  رقمًا صحيحًا.',
         'phone_number_organization.digits' => 'يجب أن يكون  عدد  خانات 10 .',
 
         'contact_email.required' => 'البريد الإلكتروني مطلوب.',

@@ -18,6 +18,7 @@ class Create extends OrganizationComponent
     {
         $this->opportunity = $opportunity;
         $this->volunteer = $volunteer;
+        $this->participation_date = $opportunity->start_date->toDateString();
     }
 
     protected $rules = [

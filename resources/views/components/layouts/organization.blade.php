@@ -92,16 +92,13 @@
                     </button>
                 </div>
                 <div class="flex items-center justify-center gap-2">
-                    <div class="relative mt-2">
-                        <livewire:notifications />
-                    </div>
                     <div class="flex items-center">
-                        @if(auth()->user()->organization?->img_url === null)
-                            <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{auth()->user()->organization?->name}}&background=2d8c8a&color=fff" alt="صورة المؤسسة">
+                        @if(auth()->user()->img_url === null)
+                            <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{auth()->user()->user_name}}&background=2d8c8a&color=fff" alt="صورة المؤسسة">
                         @else
-                            <img class="h-8 w-8 rounded-full object-cover" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->organization?->img_url) }}" alt="صورة المؤسسة">
+                            <img class="h-8 w-8 rounded-full object-cover" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->img_url) }}" alt="صورة المؤسسة">
                         @endif
-                            <span class="mr-2 text-sm font-medium text-gray-700 hidden lg:inline"> {{ auth()->user()->organization?->name }}</span>
+                        <span class="mr-2 text-sm font-medium text-gray-700 hidden lg:inline"> {{ auth()->user()->organization?->name }}</span>
                     </div>
                 </div>
             </div>

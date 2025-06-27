@@ -32,24 +32,6 @@
     <div class="flex flex-col my-4 mx-8 gap-4">
         <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
             <div class="flex flex-col md:flex-row md:items-end md:space-x-4 space-y-4 md:space-y-0">
-                <!-- فلترة حسب القطاع -->
-                <div class="w-full md:w-1/3 space-y-1">
-                    <label for="organization-sector-filter" class="block text-sm font-medium text-gray-700">
-                        فلترة حسب القطاع
-                    </label>
-                    <div class="relative">
-                        <select
-                            id="organization-sector-filter"
-                            wire:model.live="selectedSector"
-                            class="w-full py-2 px-3 text-sm rounded-md border border-gray-300 focus:ring-1 focus:ring-secondary/30 focus:outline-none text-gray-700 bg-white transition-all"
-                        >
-                            <option value="">كل القطاعات</option>
-                            @foreach($sectors as $sector)
-                                <option value="{{ $sector->id }}">{{ $sector->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
 
                 <!-- بحث المؤسسات -->
                 <div class="w-full md:w-2/3 space-y-1">
@@ -86,6 +68,25 @@
                         @endif
                     </div>
                 </div>
+
+                <!-- فلترة حسب القطاع -->
+                <div class="w-full md:w-1/3 space-y-1">
+                    <label for="organization-sector-filter" class="block text-sm font-medium text-gray-700">
+                        فلترة حسب القطاع
+                    </label>
+                    <div class="relative">
+                        <select
+                            id="organization-sector-filter"
+                            wire:model.live="selectedSector"
+                            class="w-full py-2 px-3 text-sm rounded-md border border-gray-300 focus:ring-1 focus:ring-secondary/30 focus:outline-none text-gray-700 bg-white transition-all"
+                        >
+                            <option value="">كل القطاعات</option>
+                            @foreach($sectors as $sector)
+                                <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <!-- Helper Text -->
@@ -96,7 +97,7 @@
     </div>
 
     @if($organizations->count() > 0)
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mx-8 ">
                 @foreach($organizations as $organization)
                     <div class="bg-white shadow-sm rounded-md overflow-hidden border border-gray-100 transition-shadow duration-300">
                         <!-- Organization Image -->

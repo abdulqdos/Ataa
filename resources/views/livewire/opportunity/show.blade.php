@@ -76,10 +76,15 @@
                     <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
                         هاذي فرصة مكتملة .
                     </button>
-
                 @else
                     @auth
                         @if($submitted)
+                            @if($submitted->status !== 'accepted')
+                                <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
+                                    لقد قدمت طلب بنجاح .
+                                </button>
+                            @endif
+                        @elseif($is_accepted)
                             <button disabled class="px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg shadow-md disabled:bg-primaryLight cursor-default">
                                 لقد سجلت بنجاح .
                             </button>
@@ -88,6 +93,7 @@
                                 التسجيل في الفرصة
                             </button>
                         @endif
+
                     @endauth
                     @guest
                         <a href="/login" wire:navigate.keep class="px-4 py-2 btn-primary text-white text-sm font-semibold  shadow-md cursor-pointer">

@@ -5,10 +5,10 @@
             <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                 <!-- صورة المؤسسة -->
                 <div class="h-48 bg-gray-200 overflow-hidden">
-                    @if($organization->user->img_url)
-                        <img src="{{ $organization->user->img_url }}" alt="{{ $organization->name }}" class="w-full h-full object-cover">
+                    @if($organization->user->img_url !== null)
+                        <img src="{{ Storage::url($organization->user->img_url) }}" alt="{{ $organization->name }}" class="w-full h-full object-cover">
                     @else
-                        <img  src="https://ui-avatars.com/api/?name={{ urlencode($organization->name) }}&background=random&color=fff" class="w-full h-full object-cover">
+                        <img  src="https://ui-avatars.com/api/?name={{ urlencode($organization->user->user_name) }}&background=random&color=fff" class="w-full h-full object-cover">
 
                         <div class="w-full h-full flex items-center justify-center bg-gray-100">
                             <span class="text-gray-400">لا توجد صورة</span>

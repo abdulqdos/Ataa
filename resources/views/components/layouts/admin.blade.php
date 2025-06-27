@@ -41,12 +41,12 @@
         <!-- Sidebar (Desktop) -->
         <div id="sidebar" class="sidebar  bg-white text-gray-600 w-64 flex-shrink-0 hidden md:block overflow-y-auto transition-all duration-300">
             <div class="p-4 flex items-center justify-center border-b border-secondary">
-                <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=عطاء&background=106665&color=ffffff&bold=true" alt="شعار عطاء">
+                <img class="h-8 w-8 rounded-full" src="{{ asset('images/logo.svg') }}" alt="شعار عطاء">
                 <div class="text-xl font-bold mr-2">مشروع عطاء</div>
             </div>
             <div class="p-2">
                 <div class="text-sm text-primary px-4 py-2">المشرف</div>
-                <div class="text-md font-bold px-4 pb-4">أدمن النظام</div>
+                <div class="text-md font-bold px-4 pb-4">{{ auth()->user()->user_name }}</div>
             </div>
             <nav class="mt-2">
                 <x-layouts.admin.nav href="{{ route('admin.dashboard') }}" :active="request()->is('admin/dashboard')" i="fas fa-tachometer-alt w-6">لوحة التحكم</x-layouts.admin.nav>
@@ -106,17 +106,9 @@
                         </button>
                     </div>
                     <div class="flex items-center">
-                        <div class="relative mx-4">
-                            <button class="flex items-center text-gray-700">
-                                <i class="far fa-bell"></i>
-                                <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">5</span>
-                            </button>
-                        </div>
                         <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center">
-                                <span class="text-sm font-medium">أد</span>
-                            </div>
-                            <span class="mr-2 text-sm font-medium text-gray-700">أدمن النظام</span>
+                            <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name={{ auth()->user()->user_name }}&background=106665&color=ffffff&bold=true" alt="شعار عطاء">
+                            <span class="mr-2 text-sm font-medium text-gray-700">{{ auth()->user()->user_name }}</span>
                         </div>
                     </div>
                 </div>

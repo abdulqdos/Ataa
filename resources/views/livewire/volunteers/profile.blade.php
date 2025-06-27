@@ -19,10 +19,15 @@
                 <div class="p-6 flex flex-col md:flex-row gap-6">
                     <!-- صورة الملف الشخصي الدائرية -->
                     <div class="flex-shrink-0 mx-auto md:mx-0 flex flex-col items-center">
-                        <img class="h-32 w-32 rounded-full object-cover"
-                             src="{{ $volunteer->user->img_url ??  'https://ui-avatars.com/api/?name=' . urlencode($volunteer->first_name . ' ' . $volunteer->last_name) . '&background=random&color=fff' }}"
-                             alt="{{ $volunteer->first_name }} صورة الملف الشخصي">
-
+                        @if($volunteer->user->img_url !== null)
+                            <img class="h-32 w-32 rounded-full object-cover"
+                                 src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->img_url) }}"
+                                 alt="{{ $volunteer->first_name }} صورة الملف الشخصي">
+                        @else
+                            <img class="h-32 w-32 rounded-full object-cover"
+                                 src="https://ui-avatars.com/api/?name={{ urlencode($volunteer->user->user_name) }}&background=random&color=fff"
+                                 alt="{{ $volunteer->first_name }} صورة الملف الشخصي">
+                        @endif
                         <!-- تقييم المتطوع -->
                         @if($volunteer->eval_avg != 0)
                             <div class="mt-4 flex items-center justify-center bg-yellow-50 px-3 py-1 rounded-full gap-2">

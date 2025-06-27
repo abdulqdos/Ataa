@@ -21,7 +21,7 @@ class Show extends Component
         $requests = Request::where('opportunity_id' , $opportunity->id)->get();
 
         if ($requests->contains('volunteer_id', auth()->user()?->volunteer->id)) {
-            $this->submitted = true;
+            $this->submitted = $requests->firstWhere('volunteer_id', auth()->user()?->volunteer->id);
         } else {
             $this->submitted = false;
         }
@@ -46,6 +46,7 @@ class Show extends Component
     {
         return view('livewire.opportunity.show' , [
             'opportunity' => $this->opportunity,
+            'is_accepted' => $this->opportunity->volunteers()->find(auth()->user()->volunteer?->id),
         ]);
     }
 }

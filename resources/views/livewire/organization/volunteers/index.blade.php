@@ -68,10 +68,13 @@
                                 إلغاء
                             </button>
 
+
+
                             <button type="submit"
                                     class="btn-yellow px-4 py-2 text-sm rounded-md focus:outline-none">
                                 إرسال الإشعار
                             </button>
+
                         </div>
                     </form>
 
@@ -80,13 +83,17 @@
         </div>
 
     @endif
-    <div id="top" class="rounded-md p-5  duration-300" dir="rtl">
-        <div class="flex flex-row gap-4">
-            <div class="flex flex-col md:flex-row gap-4 items-stretch">
-              <button class="px-4 py-1 btn-yellow text-sm" wire:click="toggleShowBox">إرسال إشعار </button>
+    @if($status != 'completed')
+        <div id="top" class="rounded-md p-5  duration-300" dir="rtl">
+            <div class="flex flex-row gap-4">
+                <div class="flex flex-col md:flex-row gap-4 items-stretch">
+                    <button class="px-4 py-1 btn-yellow text-sm" wire:click="toggleShowBox">إرسال إشعار </button>
+                </div>
             </div>
         </div>
-    </div>
+    @endif
+
+
 
     <div class="relative overflow-x-auto shadow-sm sm:rounded-lg px-3 py-4 bg-white mx-2 md:mx-5">
         <div class="py-4 bg-white flex flex-col md:flex-row items-start md:items-center justify-start gap-4">
@@ -149,7 +156,7 @@
                                                     @else
                                                         <img class="h-6 w-6 rounded-md" src="{{ \Illuminate\Support\Facades\Storage::url($volunteer->img_url) }}" alt="صورة المؤسسة">
                                                     @endif
-                                                    <a href="#" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
+                                                    <a href="{{ route('organization.volunteers.show' , $volunteer->id) }}" class="font-medium text-gray-900 hover:text-primaryLight transition duration-300">
                                                         {{ $volunteer->user->user_name }}
                                                     </a>
                                                 </div>

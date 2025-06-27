@@ -70,7 +70,7 @@ class Index extends organizationComponent
         foreach ($volunteers as $volunteer) {
             Notification::create([
                 'user_id' => $volunteer->user->id,
-                'title' => $this->title,
+                'title' => $this->title . "من فرصة تطوعية باسم" . $this->opportunity->title ,
                 'message' => $this->message,
             ]);
         }

@@ -70,7 +70,7 @@
                             <img class="w-24 h-24 mb-3 rounded-full"
                                  src="{{ $volunteer->user->img_url !== null
                                 ? $volunteer->user->img_url
-                                : 'https://ui-avatars.com/api/?name=' . urlencode($volunteer->first_name . ' ' . $volunteer->last_name) . '&background=random&color=fff' }}"
+                                : 'https://ui-avatars.com/api/?name=' . urlencode($volunteer->user->user_name) . '&background=random&color=fff' }}"
                                  alt="Volunteer image"/>
                             <h5 class="mb-1 text-xl font-medium text-gray-900">
                                 {{ $volunteer->first_name . ' ' . $volunteer->last_name }}

@@ -62,7 +62,7 @@
                                             @if(auth()->user()->img_url !== null)
                                                 <img class="h-8 w-8 rounded-full object-cover" src="{{ \Illuminate\Support\Facades\Storage::url(auth()->user()->img_url) }}" alt="صورة المؤسسة">
                                             @else
-                                                <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{auth()->user()->volunteer?->first_name}}&background=2d8c8a&color=fff" alt="صورة المؤسسة">
+                                                <img class="h-8 w-8 rounded-full object-cover" src="https://ui-avatars.com/api/?name={{auth()->user()->user_name}}&background=2d8c8a&color=fff" >
                                             @endif
                                         </button>
                                     </div>
